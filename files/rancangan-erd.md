@@ -309,14 +309,12 @@ Petugas Operasional bertanggung jawab terhadap kegiatan operasional utama, yaitu
 | Atribut | Tipe Data | Key | Keterangan |
 |---|---|---|---|
 | `id_pegawai` | INT | PK, FK | ID Pegawai sekaligus identitas Petugas Operasional |
-| `kode_petugas_operasional` | VARCHAR(20) | UNIQUE | Kode khusus Petugas Operasional |
 | `area_tugas` | VARCHAR(100) | - | Area penugasan operasional |
 | `shift_kerja` | ENUM('PAGI','SIANG','MALAM') | - | Shift kerja Petugas Operasional |
 
 Contoh:
 
 ```text
-Kode Petugas : OPS-001
 Area Tugas   : Pit A
 Shift Kerja  : PAGI
 ```
@@ -456,13 +454,11 @@ Manager dapat melihat:
 | Atribut | Tipe Data | Key | Keterangan |
 |---|---|---|---|
 | `id_pegawai` | INT | PK, FK | ID Pegawai sekaligus identitas Manager |
-| `kode_manager` | VARCHAR(20) | UNIQUE | Kode khusus Manager |
 | `divisi_tanggung_jawab` | VARCHAR(100) | - | Divisi/bagian yang menjadi tanggung jawab Manager |
 
 Contoh:
 
 ```text
-Kode Manager           : MGR-001
 Divisi Tanggung Jawab  : Operasional Pertambangan
 ```
 
