@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="C09B12FA-77BB-812D-D8E3-780A4596110A" name="jenis_material">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>30BFF8CD-B42E-AB75-C481-A0E4DD33D64F</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_material" id="141F174D-75DF-5121-DCC6-3811546042CD">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>5C9C7AB0-F142-EB16-26FA-985A4C92D828</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nama_material" id="743A4CC9-F3E2-061E-AB79-CD94426990C3">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>F1E43315-AE5E-AC2A-BEF3-14DB179D7BCB</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="satuan" id="B3AF22DB-A9E1-4629-51E7-F573E287C780">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>27B7E5D7-D651-8E2E-FA17-B04D94CC96F8</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="deskripsi" id="5A0A76A8-832B-199E-D3EC-DDF91BB830C8">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>2B22DD11-9076-0188-54F9-5432C4AFDD94</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7F26F194-5C6D-560C-B3D9-4C22FF6B7E5C" name="jenis_material_PK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>28215721-D7CE-FBE3-71D2-6CC4211C3D02</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="141F174D-75DF-5121-DCC6-3811546042CD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

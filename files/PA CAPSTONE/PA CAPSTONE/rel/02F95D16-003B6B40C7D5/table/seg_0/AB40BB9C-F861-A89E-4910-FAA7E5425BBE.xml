@@ -1,0 +1,127 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="AB40BB9C-F861-A89E-4910-FAA7E5425BBE" name="detail_monitoring">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>D1DD7835-DC0B-8221-3722-DB4E8D8A7236</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_detail" id="D42FDD7D-8D1F-F297-F7F5-9EDC8037D177">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>E988A0FD-EF03-6087-E4EA-1BD2523620CF</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nilai_pengukuran" id="40EA3DF8-6D6D-9315-5D06-026C67F5A8BE">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>16C992E0-6A9B-A91C-C837-D747465E1542</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<dataTypePrecision>12</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,12,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="status_detail" id="889A8E98-1371-E46B-93A7-D928E68338BF">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>861AD841-7782-D01E-D40A-9A21D30B25D3</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="catatan" id="E00E1AD4-4B9D-872F-133D-E50CCD6D1C41">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>D521C4C3-F71E-4190-89C4-BF4D7516419C</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="monitoring_lingkungan_id_monitoring" id="E1442112-E1DC-E250-050D-73E1C9162F4A">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>477A2D5E-8695-B811-870B-9B69988A678A</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="387C4FAD-7DFE-C46F-44CD-A067C0A4B5D8" referredColumn="43707BAE-1926-DB7F-6F0A-39D5FDBED56C"/>
+</associations>
+</Column>
+<Column name="parameter_lingkungan_id_parameter" id="D22D3A47-6625-789C-F071-C322A2C75085">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>4ED7CD87-CA10-D8E8-01CD-610714F54A55</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="991B486B-4AE6-707C-AEEE-B0E496788819" referredColumn="12A54DC5-F103-B8DB-200F-11ED62A3A7DB"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7B7AD977-4790-B2D7-1E2A-AA0BF69F3318" name="detail_monitoring_PK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>7908A98C-27DC-F0C1-1AF5-544BA209EFBA</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D42FDD7D-8D1F-F297-F7F5-9EDC8037D177"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D0CE103F-E61A-F718-9157-3F3E3DC871CC" name="detail_monitoring_monitoring_lingkungan_FK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>FB84CBF2-E902-D61E-5236-80C1B0A10F4E</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E1442112-E1DC-E250-050D-73E1C9162F4A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="CDCDBB45-4E5D-8277-12F4-83DAC4D98C9A" name="detail_monitoring_parameter_lingkungan_FK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>C4401ABE-D001-9AF9-FAB7-C8DE4DDDD305</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D22D3A47-6625-789C-F071-C322A2C75085"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

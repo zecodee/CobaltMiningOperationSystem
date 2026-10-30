@@ -1,0 +1,100 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E6DCEB58-9631-40A2-1E7B-4A5B528BCFF8" name="Pegawai">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>27C9885A-8C71-7E8C-F0FA-C2372B175AB8</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_pegawai" id="EDD83871-D2C7-998D-F0D4-C5520C05D736">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>40E02C8D-CA5A-E480-B59A-5BC44FB957DB</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="nama_pegawai" id="B15F3A9C-75DB-9549-C5F5-4617A700D521">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>FD56B1DD-1DE3-86D3-3968-0FAD4B546076</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="no_hp" id="96A59590-66E4-223D-6431-22814FF3958A">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>33BAF442-3CC0-4BF0-C7FC-B78B2085FDDA</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tanggal_masuk" id="52C50C22-F8C8-179A-AFEB-A463E5E6927F">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>A00130C4-A45B-C9DD-9E04-C63135C546C2</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="status_pegawai" id="C74C451F-240E-CD07-E51C-61C4609C7334">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>314559EC-DD9A-C69F-A00B-3202C2EEC0EB</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="2D76E0A2-B661-810E-DF75-1D79AABD8741" name="Pegawai_PK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>B8BA2265-14C2-CF8C-A910-F6AE31278D33</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EDD83871-D2C7-998D-F0D4-C5520C05D736"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="9CAB0529-8F9A-4B1E-2AA9-F1F66E82749A" name="Pegawai__IDXv1">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 16:35:28 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>CDE4DA19-5A0C-68AE-0A2C-8283BE2A1E83</relationGeneratorID>
+</ind_PK_UK>
+<ind_PK_UK id="7A3DFEBD-DFF7-C62C-8197-9611A139F509" name="Pegawai__IDX">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 16:41:10 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>2A691BC2-C734-2695-E82E-6ADF04CEE943</relationGeneratorID>
+</ind_PK_UK>
+</indexes>
+</Table>

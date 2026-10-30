@@ -4,53 +4,36 @@
  */
 package model;
 
-import enums.ShiftKerja;
-import enums.StatusPegawai;
-import java.time.LocalDate;
-
 /**
  *
  * @author zefrialrizkullah
  */
 
 public class PetugasOperasional extends Pegawai {
-    private String kodePetugasOperasional;
-    private String areaTugas;
-    private ShiftKerja shiftKerja;
-
-    public PetugasOperasional(int idPegawai, String namaPegawai, String noHp, LocalDate tanggalMasuk, StatusPegawai statusPegawai, String kodePetugasOperasional, String areaTugas, ShiftKerja shiftKerja) {
+    private enums.ShiftKerja shiftKerja;
+    
+    public PetugasOperasional(int idPegawai, String namaPegawai, String noHp,
+            java.time.LocalDate tanggalMasuk, enums.StatusPegawai statusPegawai,
+            enums.ShiftKerja shiftKerja) {
         super(idPegawai, namaPegawai, noHp, tanggalMasuk, statusPegawai);
-        this.kodePetugasOperasional = kodePetugasOperasional;
-        this.areaTugas = areaTugas;
         this.shiftKerja = shiftKerja;
     }
-
-    public String getKodePetugasOperasional() {
-        return kodePetugasOperasional;
-    }
-
-    public void setKodePetugasOperasional(String kodePetugasOperasional) {
-        this.kodePetugasOperasional = kodePetugasOperasional;
-    }
-
-    public String getAreaTugas() {
-        return areaTugas;
-    }
-
-    public void setAreaTugas(String areaTugas) {
-        this.areaTugas = areaTugas;
-    }
-
-    public ShiftKerja getShiftKerja() {
+    
+    public enums.ShiftKerja getShiftKerja() {
         return shiftKerja;
     }
-
-    public void setShiftKerja(ShiftKerja shiftKerja) {
-        this.shiftKerja = shiftKerja;
+    
+    public void setShiftKerja(enums.ShiftKerja value) {
+        this.shiftKerja = value;
     }
-
+    
     @Override
     public String getJenisPegawai() {
-        return "PETUGAS OPERASIONAL";
+        return "PETUGASOPERASIONAL";
+    }
+    
+    @Override
+    public String toString() {
+        return "PetugasOperasional #" + getIdPegawai();
     }
 }

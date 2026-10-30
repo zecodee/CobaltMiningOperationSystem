@@ -4,8 +4,7 @@
  */
 package repository;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  *
@@ -13,7 +12,7 @@ import java.util.Optional;
  */
  
 public interface CrudRepository<T> {
-    void save(T data);
+    T save(T data);
     void update(T data);
     void delete(int id);
     Optional<T> findById(int id);

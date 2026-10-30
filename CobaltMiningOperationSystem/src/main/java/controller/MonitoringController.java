@@ -4,126 +4,67 @@
  */
 package controller;
 
+import service.*;
+import model.*;
 import enums.StatusLokasi;
-import exception.ValidationException;
-import model.DetailMonitoring;
-import model.MonitoringLingkungan;
-import model.Pegawai;
-import model.PetugasHSE;
-import service.AuthService;
-import service.MonitoringService;
 import java.time.LocalDateTime;
-import java.util.List;
+import java.util.*;
 
 /**
  *
  * @author zefrialrizkullah
  */
 
-public class MonitoringController {
-    private final MonitoringService monitoringService;
-    private final AuthService authService;
-
-    public MonitoringController(
-            MonitoringService monitoringService,
-            AuthService authService) {
-
-        this.monitoringService = monitoringService;
-        this.authService = authService;
+public final class MonitoringController {
+    private final MonitoringService service;
+    private final AuthService auth;
+    public MonitoringController(MonitoringService service, AuthService a) {
+        this.service = service;
+        auth = a;
     }
-
-    public MonitoringLingkungan buatMonitoring(
-            int idMonitoring,
-            int idLokasi,
-            LocalDateTime tanggalMonitoring,
-            String catatan) {
-
-        PetugasHSE petugas = getPetugasHSELogin();
-
-        return monitoringService
-                .buatMonitoring(
-                        idMonitoring,
-                        idLokasi,
-                        petugas,
-                        tanggalMonitoring,
-                        catatan
-                );
+    
+    public MonitoringLingkungan buatMonitoring(int lokasi, LocalDateTime tanggal, String catatan) {
+        auth.requirePetugasHSE();
+        return service.buatMonitoring(lokasi, (PetugasHSE)auth.getCurrentPegawai(), tanggal, catatan);
     }
-
-    public DetailMonitoring tambahDetail(
-            int idMonitoring,
-            int idDetail,
-            int idParameter,
-            double nilaiPengukuran,
-            String catatan) {
-
-        getPetugasHSELogin();
-
-        return monitoringService
-                .tambahDetail(
-                        idMonitoring,
-                        idDetail,
-                        idParameter,
-                        nilaiPengukuran,
-                        catatan
-                );
+    
+    public DetailMonitoring tambahDetail(int id, int parameter, double nilai, String catatan) {
+        auth.requirePetugasHSE();
+        return service.tambahDetail(id, parameter, nilai, catatan);
     }
-
-    public void aturTindakLanjut(
-            int idMonitoring,
-            String tindakLanjut) {
-
-        getPetugasHSELogin();
-
-        monitoringService
-                .aturTindakLanjut(
-                        idMonitoring,
-                        tindakLanjut
-                );
+    
+    public void aturTindakLanjut(int id, String tindak) {
+        auth.requirePetugasHSE();
+        service.aturTindakLanjut(id, tindak);
     }
-
-    public void mulaiPenanganan(int idMonitoring) {
-        getPetugasHSELogin();
-        monitoringService.mulaiPenanganan(idMonitoring);
+    
+    public void mulaiPenanganan(int id) {
+        auth.requirePetugasHSE();
+        service.mulaiPenanganan(id);
     }
-
-    public void selesaikanPenanganan(int idMonitoring) {
-        getPetugasHSELogin();
-        monitoringService.selesaikanPenanganan(idMonitoring);
+    
+    public void selesaikanPenanganan(int id) {
+        auth.requirePetugasHSE();
+        service.selesaikanPenanganan(id);
     }
-
-    public void ubahStatusLokasi(int idMonitoring, StatusLokasi statusLokasi) {
-        getPetugasHSELogin();
-        monitoringService.ubahStatusLokasi(idMonitoring, statusLokasi);
+    
+    public void ubahStatusLokasi(int id, StatusLokasi status) {
+        auth.requirePetugasHSE();
+        service.ubahStatusLokasi(id, status);
     }
-
-    public MonitoringLingkungan cariMonitoringById(int idMonitoring) {
-        return monitoringService.cariMonitoringById(idMonitoring);
+    
+    public MonitoringLingkungan cariMonitoringById(int id) {
+        auth.requirePetugasHSE();
+        return service.cariMonitoringById(id);
     }
-
+    
     public List<MonitoringLingkungan> tampilkanSemuaMonitoring() {
-        return monitoringService.tampilkanSemuaMonitoring();
+        auth.requirePetugasHSE();
+        return service.tampilkanSemuaMonitoring();
     }
-
-    public List<MonitoringLingkungan> tampilkanMonitoringByLokasi(int idLokasi) {
-        return monitoringService.tampilkanMonitoringByLokasi(idLokasi);
-    }
-
-    private PetugasHSE getPetugasHSELogin() {
-        if (!authService.isLoggedIn()) {
-            throw new ValidationException(
-                    "Silakan login terlebih dahulu."
-            );
-        }
-
-        Pegawai pegawai = authService.getCurrentPegawai();
-
-        if (!(pegawai instanceof PetugasHSE)) {
-            throw new ValidationException(
-                    "Fitur monitoring hanya dapat digunakan oleh Petugas HSE."
-            );
-        }
-
-        return (PetugasHSE) pegawai;
+    
+    public List<MonitoringLingkungan> tampilkanMonitoringByLokasi(int id) {
+        auth.requirePetugasHSE();
+        return service.tampilkanMonitoringByLokasi(id);
     }
 }

@@ -4,8 +4,6 @@
  */
 package model;
 
-import enums.StatusDetail;
-
 /**
  *
  * @author zefrialrizkullah
@@ -16,17 +14,11 @@ public class DetailMonitoring {
     private MonitoringLingkungan monitoring;
     private ParameterLingkungan parameter;
     private double nilaiPengukuran;
-    private StatusDetail statusDetail;
+    private enums.StatusDetail statusDetail;
     private String catatan;
-
-    public DetailMonitoring(
-            int idDetail,
-            MonitoringLingkungan monitoring,
-            ParameterLingkungan parameter,
-            double nilaiPengukuran,
-            StatusDetail statusDetail,
-            String catatan) {
-
+    
+    public DetailMonitoring(int idDetail, MonitoringLingkungan monitoring, ParameterLingkungan parameter,
+            double nilaiPengukuran, enums.StatusDetail statusDetail, String catatan) {
         this.idDetail = idDetail;
         this.monitoring = monitoring;
         this.parameter = parameter;
@@ -34,71 +26,57 @@ public class DetailMonitoring {
         this.statusDetail = statusDetail;
         this.catatan = catatan;
     }
-
+    
     public int getIdDetail() {
         return idDetail;
     }
-
-    public void setIdDetail(int idDetail) {
-        this.idDetail = idDetail;
+    
+    public void setIdDetail(int value) {
+        this.idDetail = value;
     }
-
+    
     public MonitoringLingkungan getMonitoring() {
         return monitoring;
     }
-
-    public void setMonitoring(
-            MonitoringLingkungan monitoring) {
-
-        this.monitoring = monitoring;
+    
+    public void setMonitoring(MonitoringLingkungan value) {
+        this.monitoring = value;
     }
-
+    
     public ParameterLingkungan getParameter() {
         return parameter;
     }
-
-    public void setParameter(
-            ParameterLingkungan parameter) {
-
-        this.parameter = parameter;
+    
+    public void setParameter(ParameterLingkungan value) {
+        this.parameter = value;
     }
-
+    
     public double getNilaiPengukuran() {
         return nilaiPengukuran;
     }
-
-    public void setNilaiPengukuran(
-            double nilaiPengukuran) {
-
-        this.nilaiPengukuran = nilaiPengukuran;
+    
+    public void setNilaiPengukuran(double value) {
+        this.nilaiPengukuran = value;
     }
-
-    public StatusDetail getStatusDetail() {
+    
+    public enums.StatusDetail getStatusDetail() {
         return statusDetail;
     }
-
-    public void setStatusDetail(
-            StatusDetail statusDetail) {
-
-        this.statusDetail = statusDetail;
+    
+    public void setStatusDetail(enums.StatusDetail value) {
+        this.statusDetail = value;
     }
-
+    
     public String getCatatan() {
         return catatan;
     }
-
-    public void setCatatan(String catatan) {
-        this.catatan = catatan;
+    
+    public void setCatatan(String value) {
+        this.catatan = value;
     }
-
+    
     @Override
     public String toString() {
-        return parameter.getNamaParameter()
-                + " = "
-                + nilaiPengukuran
-                + " "
-                + parameter.getSatuan()
-                + " - "
-                + statusDetail;
+        return "DetailMonitoring #" + idDetail;
     }
 }

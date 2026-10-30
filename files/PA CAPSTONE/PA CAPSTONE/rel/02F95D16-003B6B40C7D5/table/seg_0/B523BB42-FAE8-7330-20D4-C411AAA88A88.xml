@@ -1,0 +1,98 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B523BB42-FAE8-7330-20D4-C411AAA88A88" name="User">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>3F98C12B-70BB-C398-E67E-7B6A9077FFF3</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_user" id="87E8EA6E-1BBD-4006-E796-62DB097F9D66">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>EBA37424-3623-F288-5599-2FFDAFB6EF54</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="username" id="46E20B13-4EDB-8D62-E958-0A0476EC3FCA">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>7C8CBB51-65B3-927B-BD85-D2532E17B59B</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="password" id="D56446DF-C00E-D375-196B-3B89E866E2C9">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>33DE14F6-569C-2E8F-439E-57CA6C59002D</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Pegawai_id_pegawai" id="D192F9B9-ECC9-02B9-3A48-BCAA41F0D1DD">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 16:43:11 UTC</createdTime>
+<generatorID>193CAF21-F2FE-5CD2-252D-0BAAA563D4C2</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B9A8FFFB-30F0-ED52-CFC9-9763C35069CC" referredColumn="EDD83871-D2C7-998D-F0D4-C5520C05D736"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="646175BA-D152-DDC5-E390-0106D2CC42D1" name="User_PK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>6411A2AD-0973-F0B5-98A6-EB756ABCA7F3</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="87E8EA6E-1BBD-4006-E796-62DB097F9D66"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2C14E97D-19F6-AA30-C2E9-7531A9CE650D" name="User__IDX">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 16:43:11 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Unique Plain Index</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<relationGeneratorID>8191BA73-6E1A-50B6-46C3-9690914F44E5</relationGeneratorID>
+<indexColumnUsage>
+<colUsage columnID="D192F9B9-ECC9-02B9-3A48-BCAA41F0D1DD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="AB5982B8-EEB1-7206-23E9-5B20C43BD72D" name="User_Pegawai_FK">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 16:43:11 UTC</createdTime>
+<generatorID>8191BA73-6E1A-50B6-46C3-9690914F44E5</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="D192F9B9-ECC9-02B9-3A48-BCAA41F0D1DD"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

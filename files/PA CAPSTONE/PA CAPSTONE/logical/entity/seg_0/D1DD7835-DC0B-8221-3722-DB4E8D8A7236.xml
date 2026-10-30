@@ -1,0 +1,114 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="D1DD7835-DC0B-8221-3722-DB4E8D8A7236" name="detail_monitoring">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-18 15:07:23 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_detail" id="E988A0FD-EF03-6087-E4EA-1BD2523620CF">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-18 15:07:32 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="nilai_pengukuran" id="16C992E0-6A9B-A91C-C837-D747465E1542">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-18 15:07:52 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<dataTypePrecision>12</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,12,2</ownDataTypeParameters>
+</Attribute>
+<Attribute name="status_detail" id="861AD841-7782-D01E-D40A-9A21D30B25D3">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-18 15:08:43 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15</dataTypeSize>
+<ownDataTypeParameters>15,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="catatan" id="D521C4C3-F71E-4190-89C4-BF4D7516419C">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-18 15:09:09 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_monitoring" id="A34B9950-9711-121A-3893-0B5311D215A6">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 12:26:13 UTC</createdTime>
+<generatorID>BE0DCD57-B2B0-DDF1-F785-54A964DFB084</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<referedAttribute>D74E132A-5CD3-075F-64A9-91B61F6E651B</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_parameter" id="7AE3594F-C89B-D042-C75D-DC9AC9CAA4A1">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 12:27:05 UTC</createdTime>
+<generatorID>2D73F3F5-0871-7E23-9B9A-6625A4F4AC91</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<referedAttribute>B4E190C3-E240-672E-6D2E-1A6CE3BDE19A</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="7908A98C-27DC-F0C1-1AF5-544BA209EFBA" name="detail_monitoring PK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-18 15:07:51 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>E988A0FD-EF03-6087-E4EA-1BD2523620CF</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

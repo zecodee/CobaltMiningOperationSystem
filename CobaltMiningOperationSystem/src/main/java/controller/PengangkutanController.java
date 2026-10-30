@@ -4,155 +4,59 @@
  */
 package controller;
 
-import exception.DataNotFoundException;
-import exception.ValidationException;
-import model.Driver;
-import model.Pegawai;
-import model.Pengangkutan;
-import model.PetugasOperasional;
+import service.*;
+import model.*;
 import repository.PegawaiRepository;
-import service.AuthService;
-import service.PengangkutanService;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import enums.StatusDriver;
-import enums.StatusPegawai;
+import java.util.*;
 
 /**
  *
  * @author zefrialrizkullah
  */
 
-public class PengangkutanController {
-    private final PengangkutanService pengangkutanService;
-    private final AuthService authService;
-    private final PegawaiRepository pegawaiRepository;
-
-    public PengangkutanController(
-            PengangkutanService pengangkutanService,
-            AuthService authService,
-            PegawaiRepository pegawaiRepository) {
-
-        this.pengangkutanService = pengangkutanService;
-        this.authService = authService;
-        this.pegawaiRepository = pegawaiRepository;
+public final class PengangkutanController {
+    private final PengangkutanService service;
+    private final AuthService auth;
+    private final PegawaiRepository pegawai;
+    
+    public PengangkutanController(PengangkutanService service, AuthService a, PegawaiRepository p) {
+        this.service = service;
+        auth = a;
+        pegawai = p;
     }
-
-    public Pengangkutan buatPengangkutan(
-            int idPengangkutan,
-            int idProduksi,
-            int idKendaraan,
-            int idDriver,
-            int idLokasiAsal,
-            int idLokasiTujuan,
-            LocalDate tanggalPengangkutan,
-            double jumlahMuatan) {
-
-        PetugasOperasional petugas = getPetugasOperasionalLogin();
-        Driver driver = getDriverOrThrow(idDriver);
-
-        return pengangkutanService
-                .buatPengangkutan(
-                        idPengangkutan,
-                        idProduksi,
-                        petugas,
-                        idKendaraan,
-                        driver,
-                        idLokasiAsal,
-                        idLokasiTujuan,
-                        tanggalPengangkutan,
-                        jumlahMuatan
-                );
+    
+    public Pengangkutan buatPengangkutan(int produksi, int kendaraan, int driver, int asal, int tujuan,
+            LocalDate tanggal, double jumlah) {
+        auth.requirePetugasOperasional();
+        Pegawai p = pegawai.findById(driver).orElseThrow(()->new exception.DataNotFoundException("Driver tidak ditemukan."));
+        if (!(p instanceof Driver))throw new exception.ValidationException("Pegawai bukan driver.");
+        return service.buatPengangkutan(produksi, (PetugasOperasional)auth.getCurrentPegawai(), kendaraan,
+                (Driver)p, asal, tujuan, tanggal, jumlah);
     }
-
-    public void mulaiPengangkutan(int idPengangkutan) {
-        getPetugasOperasionalLogin();
-        pengangkutanService.mulaiPengangkutan(idPengangkutan);
+    
+    public void mulaiPengangkutan(int id) {
+        auth.requirePetugasOperasional();
+        service.mulaiPengangkutan(id);
     }
-
-    public void selesaikanPengangkutan(int idPengangkutan) {
-        getPetugasOperasionalLogin();
-        pengangkutanService.selesaikanPengangkutan(idPengangkutan);
+    
+    public void selesaikanPengangkutan(int id) {
+        auth.requirePetugasOperasional();
+        service.selesaikanPengangkutan(id);
     }
-
-    public void batalkanPengangkutan(int idPengangkutan) {
-        getPetugasOperasionalLogin();
-        pengangkutanService.batalkanPengangkutan(idPengangkutan);
+    
+    public void batalkanPengangkutan(int id) {
+        auth.requirePetugasOperasional();
+        service.batalkanPengangkutan(id);
     }
-
-    public Pengangkutan cariPengangkutanById(int idPengangkutan) {
-        return pengangkutanService.cariPengangkutanById(idPengangkutan);
+   
+    public Pengangkutan cariPengangkutanById(int id) {
+        auth.requirePetugasOperasional();
+        return service.cariPengangkutanById(id);
     }
-
-    public List<Pengangkutan>tampilkanSemuaPengangkutan() {
-        return pengangkutanService.tampilkanSemuaPengangkutan();
-    }
-
-    public List<Driver> tampilkanDriverTersedia() {
-        List<Driver> hasil = new ArrayList<Driver>();
-
-        for (Pegawai pegawai : pegawaiRepository.findAll()) {
-            if (!(pegawai instanceof Driver)) {
-                continue;
-            }
-
-            Driver driver = (Driver) pegawai;
-
-            if (driver.getStatusPegawai()
-                    != StatusPegawai.AKTIF) {
-                continue;
-            }
-
-            if (driver.getStatusDriver()
-                    != StatusDriver.TERSEDIA) {
-                continue;
-            }
-
-            if (!driver.isSimAktif(LocalDate.now())) {
-                continue;
-            }
-
-            hasil.add(driver);
-        }
-
-        return hasil;
-    }
-
-    private Driver getDriverOrThrow(int idDriver) {
-        Optional<Pegawai> data = pegawaiRepository.findById(idDriver);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "Driver tidak ditemukan."
-            );
-        }
-
-        if (!(data.get() instanceof Driver)) {
-            throw new ValidationException(
-                    "Pegawai yang dipilih bukan Driver."
-            );
-        }
-
-        return (Driver) data.get();
-    }
-
-    private PetugasOperasional getPetugasOperasionalLogin() {
-        if (!authService.isLoggedIn()) {
-            throw new ValidationException(
-                    "Silakan login terlebih dahulu."
-            );
-        }
-
-        Pegawai pegawai = authService.getCurrentPegawai();
-
-        if (!(pegawai instanceof PetugasOperasional)) {
-            throw new ValidationException(
-                    "Fitur pengangkutan hanya dapat digunakan oleh Petugas Operasional."
-            );
-        }
-
-        return (PetugasOperasional) pegawai;
+    
+    public List<Pengangkutan> tampilkanSemuaPengangkutan() {
+        auth.requirePetugasOperasional();
+        return service.tampilkanSemuaPengangkutan();
     }
 }

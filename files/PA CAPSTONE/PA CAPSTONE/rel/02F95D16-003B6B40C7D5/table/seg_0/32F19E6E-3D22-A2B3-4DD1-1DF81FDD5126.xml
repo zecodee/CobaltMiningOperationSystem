@@ -1,0 +1,163 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="32F19E6E-3D22-A2B3-4DD1-1DF81FDD5126" name="Produksi_Tambang">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>ED9EFF3B-D06A-3335-A37C-AE36372E20C1</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_produksi" id="EC52168B-7D3E-8B0B-03DF-8DF8F2E3E0D9">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>D13EA867-2700-9C22-1DDE-B00629D25C70</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tanggal_produksi" id="BAC2EFEA-5C9C-DE71-A84B-FEC0218ABD2C">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>2DA3380B-0CA3-3ABA-041C-982FB1EFB4DF</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="jumlah_produksi" id="62314157-EC39-2ED5-B242-833369B0C445">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>EB962F53-492D-20E6-AFC2-F72D42DA9DAB</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<dataTypePrecision>12</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,12,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="jumlah_tersedia" id="D9DDFCF7-957B-FFD6-3486-2437421E4DEF">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>66A02470-D2F8-87F3-9C5A-4901FAA369F2</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT026</logicalDatatype>
+<dataTypePrecision>12</dataTypePrecision>
+<dataTypeScale>2</dataTypeScale>
+<ownDataTypeParameters>,12,2</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="status_produksi" id="90E429FC-2C30-EECF-2DBA-EF3094FB42A7">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>45F7D724-C94D-1398-FB95-324B31571140</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="jenis_material_id_material" id="5782E130-4E1B-6AB0-98D0-313F5DEB1011">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>EC63566D-81AF-430A-C7B8-79E1570E9F5C</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="0752160E-BB14-444D-4637-346959385814" referredColumn="141F174D-75DF-5121-DCC6-3811546042CD"/>
+</associations>
+</Column>
+<Column name="Lokasi_id_lokasi" id="7F96DE72-8E06-F5E3-1A31-3EBB65A98DC3">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 16:12:37 UTC</createdTime>
+<generatorID>43055591-0454-026E-A1FC-9A848787976D</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F5C0BDEF-FC24-17DA-0D94-07F5D17A1E8C" referredColumn="0A348C81-7920-3BFD-80A6-1045EC34F577"/>
+</associations>
+</Column>
+<Column name="petugas_operasional_id_pegawai" id="DC3FAFA5-B462-A358-4957-16DDED231057">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 17:03:32 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="208DA527-A3D2-B21F-8538-7DDC4874C410" referredColumn="C6C92BD7-4B47-610B-198A-6AD895141D7D"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="DEADCE0C-3C31-DE5C-D6A5-4157135A81E2" name="Produksi_Tambang_PK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>9B4D2CA1-6AB9-1474-0359-121F0E83F228</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EC52168B-7D3E-8B0B-03DF-8DF8F2E3E0D9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5ECD81BE-C01B-5689-074F-9F917F749CA1" name="Produksi_Tambang_jenis_material_FK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>ABEEC434-5183-1454-4A76-836509184933</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5782E130-4E1B-6AB0-98D0-313F5DEB1011"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A8FC5CDB-7C5B-A6B1-638D-F2FC982FBDD3" name="Produksi_Tambang_petugas_operasional_FK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 13:08:07 UTC</createdTime>
+<generatorID>41AD5625-D05D-2F60-D478-1DE2A698C370</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DC3FAFA5-B462-A358-4957-16DDED231057"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7CA2D80C-7ADC-40EB-5DCA-2C7A7FE0C0D7" name="Produksi_Tambang_Lokasi_FK">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 16:12:37 UTC</createdTime>
+<generatorID>EE7ADAE9-62D2-46C5-59A4-6CD375F52867</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7F96DE72-8E06-F5E3-1A31-3EBB65A98DC3"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

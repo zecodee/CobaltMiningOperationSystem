@@ -9,8 +9,12 @@ package exception;
  * @author zefrialrizkullah
  */
 
-public class ValidationException extends BusinessException {
-    public ValidationException(String message) {
-        super(message);
+public class ValidationException extends RuntimeException {
+    public ValidationException(String m) {
+        super(m);
+    }
+    
+    public ValidationException(String m, Throwable e) {
+        super(m, e);
     }
 }

@@ -14,5 +14,6 @@ import java.util.List;
 
 public interface PegawaiRepository extends CrudRepository<Pegawai> {
     List<Pegawai> findByNama(String nama);
+    List<Pegawai> findByJenisPegawai(String jenisPegawai);
 }
 

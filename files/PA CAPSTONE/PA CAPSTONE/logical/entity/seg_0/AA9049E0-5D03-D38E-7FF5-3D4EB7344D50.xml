@@ -1,0 +1,148 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="AA9049E0-5D03-D38E-7FF5-3D4EB7344D50" name="Pengangkutan">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 11:12:44 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="id_pengangkutan" id="18F3733D-B205-8D16-2959-A14E778B71CC">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 11:12:55 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="tanggal_pengangkutan" id="0ADDFEE3-B4BD-8221-8B61-D1FA66E24A5C">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 11:13:06 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="waktu_mulai" id="734EB653-2E2E-2A91-C979-C556BDC9A20D">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 11:13:24 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="waktu_selesai" id="09206B3B-C338-99BF-9B11-E11F8B943DFC">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 11:14:20 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="jumlah_muatan" id="EA5D1DA2-E4C2-0811-5631-331823232CFA">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 11:14:29 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="status_pengangkutan" id="C1F13163-578E-26B7-5150-2F7AF3DA3968">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 11:15:05 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>100</dataTypeSize>
+<ownDataTypeParameters>100,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_produksi" id="D594B535-9855-D51C-A765-8F976AE84597">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 12:19:48 UTC</createdTime>
+<generatorID>A565CEA8-34E7-C938-ADB9-3C7C42869AA1</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<referedAttribute>D13EA867-2700-9C22-1DDE-B00629D25C70</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_kendaraan" id="531E8BCA-E7D0-43CD-9B73-EF8057F8B067">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 12:21:01 UTC</createdTime>
+<generatorID>192A88A9-9E05-6B72-CDD6-6D06DE5D9F82</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<referedAttribute>97A84EDB-D423-AE6A-F92F-958331FBD10C</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="id_lokasi" id="ECCF60BF-2D0D-EC65-3C4D-29FE6B658DF4">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 12:22:19 UTC</createdTime>
+<generatorID>30F176A7-CAFD-AE18-4BD4-7693465C9848</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<referedAttribute>9DDB6550-0E3C-130C-44DF-B5461268FD74</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="FA734301-39E5-BF8B-CA97-B5456C06603E" name="Pengangkutan PK">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 11:13:02 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>18F3733D-B205-8D16-2959-A14E778B71CC</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

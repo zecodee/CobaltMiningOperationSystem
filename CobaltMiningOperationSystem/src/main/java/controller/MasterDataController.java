@@ -4,191 +4,214 @@
  */
 package controller;
 
-import model.JenisMaterial;
-import model.Kendaraan;
-import model.Lokasi;
-import model.ParameterLingkungan;
-import model.Pegawai;
-import model.User;
-import service.MasterDataService;
-import java.util.List;
+import service.*;
+import model.*;
+import java.util.*;
 
 /**
  *
  * @author zefrialrizkullah
  */
 
-public class MasterDataController {
-    private final MasterDataService masterDataService;
-
-    public MasterDataController(MasterDataService masterDataService) {
-        this.masterDataService = masterDataService;
+public final class MasterDataController {
+    private final MasterDataService data;
+    private final AuthService auth;
+    public MasterDataController(MasterDataService data, AuthService a) {
+        this.data = data;
+        auth = a;
     }
-
-    // PEGAWAI
-
-    public void tambahPegawai(Pegawai pegawai) {
-        masterDataService.tambahPegawai(pegawai);
+    
+    private void guard() {
+        auth.requireAdmin();
     }
-
-    public void ubahPegawai(Pegawai pegawai) {
-        masterDataService.ubahPegawai(pegawai);
+    
+    public void tambahPegawai(Pegawai x) {
+        guard();
+        data.tambahPegawai(x);
     }
-
-    public void hapusPegawai(int idPegawai) {
-        masterDataService.hapusPegawai(idPegawai);
+    
+    public void ubahPegawai(Pegawai x) {
+        guard();
+        data.ubahPegawai(x);
     }
-
-    public Pegawai cariPegawaiById(int idPegawai) {
-        return masterDataService
-                .cariPegawaiById(idPegawai);
+    
+    public void hapusPegawai(int id) {
+        guard();
+        data.hapusPegawai(id);
     }
-
+    
+    public Pegawai cariPegawaiById(int id) {
+        guard();
+        return data.cariPegawaiById(id);
+    }
+    
     public List<Pegawai> tampilkanSemuaPegawai() {
-        return masterDataService
-                .tampilkanSemuaPegawai();
+        guard();
+        return data.tampilkanSemuaPegawai();
     }
-
-    public List<Pegawai> cariPegawaiByNama(String nama) {
-        return masterDataService.cariPegawaiByNama(nama);
+    
+    public List<Pegawai> cariPegawaiByNama(String n) {
+        guard();
+        return data.cariPegawaiByNama(n);
     }
-
-    // USER
-
-    public void tambahUser(User user) {
-        masterDataService.tambahUser(user);
+    
+    public void tambahUser(User x) {
+        guard();
+        data.tambahUser(x);
     }
-
-    public void ubahUser(User user) {
-        masterDataService.ubahUser(user);
+    
+    public void ubahUser(User x) {
+        guard();
+        data.ubahUser(x);
     }
-
-    public void hapusUser(int idUser) {
-        masterDataService.hapusUser(idUser);
+    
+    public void hapusUser(int id) {
+        guard();
+        data.hapusUser(id);
     }
-
-    public User cariUserById(int idUser) {
-        return masterDataService
-                .cariUserById(idUser);
+    
+    public User cariUserById(int id) {
+        guard();
+        return data.cariUserById(id);
     }
-
+    
+    public Optional<User> cariUserByPegawai(int id) {
+        guard();
+        return data.cariUserByPegawai(id);
+    }
+    
     public List<User> tampilkanSemuaUser() {
-        return masterDataService
-                .tampilkanSemuaUser();
+        guard();
+        return data.tampilkanSemuaUser();
     }
-
-    // LOKASI
-
-    public void tambahLokasi(Lokasi lokasi) {
-        masterDataService.tambahLokasi(lokasi);
+    
+    public void tambahLokasi(Lokasi x) {
+        guard();
+        data.tambahLokasi(x);
     }
-
-    public void ubahLokasi(Lokasi lokasi) {
-        masterDataService.ubahLokasi(lokasi);
+    
+    public void ubahLokasi(Lokasi x) {
+        guard();
+        data.ubahLokasi(x);
     }
-
-    public void hapusLokasi(int idLokasi) {
-        masterDataService.hapusLokasi(idLokasi);
+    
+    public void hapusLokasi(int id) {
+        guard();
+        data.hapusLokasi(id);
     }
-
-    public Lokasi cariLokasiById(int idLokasi) {
-        return masterDataService
-                .cariLokasiById(idLokasi);
+    
+    public Lokasi cariLokasiById(int id) {
+        guard();
+        return data.cariLokasiById(id);
     }
-
+    
     public List<Lokasi> tampilkanSemuaLokasi() {
-        return masterDataService
-                .tampilkanSemuaLokasi();
+        guard();
+        return data.tampilkanSemuaLokasi();
     }
-
-    public List<Lokasi> cariLokasiByNama(String nama) {
-
-        return masterDataService.cariLokasiByNama(nama);
+    
+    public List<Lokasi> cariLokasiByNama(String n) {
+        guard();
+        return data.cariLokasiByNama(n);
     }
-
-    // MATERIAL
-
-    public void tambahMaterial(JenisMaterial material) {
-        masterDataService.tambahMaterial(material);
+    
+    public void tambahMaterial(JenisMaterial x) {
+        guard();
+        data.tambahMaterial(x);
     }
-
-    public void ubahMaterial(JenisMaterial material) {
-        masterDataService.ubahMaterial(material);
+    
+    public void ubahMaterial(JenisMaterial x) {
+        guard();
+        data.ubahMaterial(x);
     }
-
-    public void hapusMaterial(int idMaterial) {
-        masterDataService.hapusMaterial(idMaterial);
+    
+    public void hapusMaterial(int id) {
+        guard();
+        data.hapusMaterial(id);
     }
-
-    public JenisMaterial cariMaterialById(int idMaterial) {
-        return masterDataService.cariMaterialById(idMaterial);
+    
+    public JenisMaterial cariMaterialById(int id) {
+        guard();
+        return data.cariMaterialById(id);
     }
-
+    
     public List<JenisMaterial> tampilkanSemuaMaterial() {
-        return masterDataService.tampilkanSemuaMaterial();
+        guard();
+        return data.tampilkanSemuaMaterial();
     }
-
-    public List<JenisMaterial> cariMaterialByNama(String nama) {
-        return masterDataService.cariMaterialByNama(nama);
+    
+    public List<JenisMaterial> cariMaterialByNama(String n) {
+        guard();
+        return data.cariMaterialByNama(n);
     }
-
-    // KENDARAAN
-
-    public void tambahKendaraan(Kendaraan kendaraan) {
-        masterDataService.tambahKendaraan(kendaraan);
+    
+    public void tambahKendaraan(Kendaraan x) {
+        guard();
+        data.tambahKendaraan(x);
     }
-
-    public void ubahKendaraan(Kendaraan kendaraan) {
-        masterDataService.ubahKendaraan(kendaraan);
+    
+    public void ubahKendaraan(Kendaraan x) {
+        guard();
+        data.ubahKendaraan(x);
     }
-
-    public void hapusKendaraan(int idKendaraan) {
-        masterDataService.hapusKendaraan(idKendaraan);
+    
+    public void hapusKendaraan(int id) {
+        guard();
+        data.hapusKendaraan(id);
     }
-
-    public Kendaraan cariKendaraanById(int idKendaraan) {
-        return masterDataService.cariKendaraanById(idKendaraan);
+    
+    public Kendaraan cariKendaraanById(int id) {
+        guard();
+        return data.cariKendaraanById(id);
     }
-
+    
     public List<Kendaraan> tampilkanSemuaKendaraan() {
-        return masterDataService.tampilkanSemuaKendaraan();
+        guard();
+        return data.tampilkanSemuaKendaraan();
     }
-
-    // PARAMETER
-
-    public void tambahParameter(ParameterLingkungan parameter) {
-        masterDataService.tambahParameter(parameter);
+    
+    public void tambahParameter(ParameterLingkungan x) {
+        guard();
+        data.tambahParameter(x);
     }
-
-    public void ubahParameter(ParameterLingkungan parameter) {
-        masterDataService.ubahParameter(parameter);
+    
+    public void ubahParameter(ParameterLingkungan x) {
+        guard();
+        data.ubahParameter(x);
     }
-
-    public void hapusParameter(int idParameter) {
-        masterDataService.hapusParameter(idParameter);
+    
+    public void hapusParameter(int id) {
+        guard();
+        data.hapusParameter(id);
     }
-
-    public ParameterLingkungan cariParameterById(int idParameter) {
-        return masterDataService.cariParameterById(idParameter);
+    
+    public ParameterLingkungan cariParameterById(int id) {
+        guard();
+        return data.cariParameterById(id);
     }
-
+    
     public List<ParameterLingkungan> tampilkanSemuaParameter() {
-        return masterDataService.tampilkanSemuaParameter();
+        guard();
+        return data.tampilkanSemuaParameter();
     }
-
-    public List<ParameterLingkungan> cariParameterByNama(String nama) {
-        return masterDataService.cariParameterByNama(nama);
+    
+    public List<ParameterLingkungan> cariParameterByNama(String n) {
+        guard();
+        return data.cariParameterByNama(n);
     }
     
     public List<Kendaraan> tampilkanKendaraanTersedia() {
-        return masterDataService.tampilkanKendaraanTersedia();
+        if (!auth.isAdmin() && !auth.isPetugasOperasional())throw new exception.ValidationException("Akses ditolak.");
+        return data.tampilkanKendaraanTersedia();
     }
     
     public List<Lokasi> tampilkanLokasiPitAktif() {
-        return masterDataService.tampilkanLokasiPitAktif();
+        if (!auth.isAdmin() && !auth.isPetugasOperasional())throw new exception.ValidationException("Akses ditolak.");
+        return data.tampilkanLokasiPitAktif();
     }
-
+    
     public List<Lokasi> tampilkanLokasiAktif() {
-        return masterDataService.tampilkanLokasiAktif();
+        if (!auth.isAdmin() && !auth.isPetugasOperasional() && !auth.isPetugasHSE())throw new exception.ValidationException("Akses ditolak.");
+        return data.tampilkanLokasiAktif();
     }
 }

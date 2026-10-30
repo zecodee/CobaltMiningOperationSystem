@@ -14,4 +14,6 @@ import model.Pengangkutan;
 
 public interface PengangkutanRepository extends CrudRepository<Pengangkutan> {
     List<Pengangkutan> findByProduksi(int idProduksi);
+    List<Pengangkutan> findByKendaraan(int idKendaraan);
+    List<Pengangkutan> findByDriver(int idDriver);
 }

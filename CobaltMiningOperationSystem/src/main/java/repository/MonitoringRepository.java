@@ -14,4 +14,5 @@ import model.MonitoringLingkungan;
 
 public interface MonitoringRepository extends CrudRepository<MonitoringLingkungan> {
     List<MonitoringLingkungan> findByLokasi(int idLokasi);
+    List<MonitoringLingkungan> findByPetugasHSE(int idPegawai);
 }

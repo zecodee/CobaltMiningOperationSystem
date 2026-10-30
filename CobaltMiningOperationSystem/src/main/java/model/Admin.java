@@ -4,9 +4,6 @@
  */
 package model;
 
-import enums.StatusPegawai;
-import java.time.LocalDate;
-
 /**
  *
  * @author zefrialrizkullah
@@ -14,32 +11,38 @@ import java.time.LocalDate;
 
 public class Admin extends Pegawai {
     private String kodeAdmin;
-    private LocalDate tanggalMulaiAkses;
-
-    public Admin(int idPegawai, String namaPegawai, String noHp, LocalDate tanggalMasuk, StatusPegawai statusPegawai, String kodeAdmin, LocalDate tanggalMulaiAkses) {
+    private java.time.LocalDate tanggalMulaiAkses;
+    
+    public Admin(int idPegawai, String namaPegawai, String noHp, java.time.LocalDate tanggalMasuk,
+            enums.StatusPegawai statusPegawai, String kodeAdmin, java.time.LocalDate tanggalMulaiAkses) {
         super(idPegawai, namaPegawai, noHp, tanggalMasuk, statusPegawai);
         this.kodeAdmin = kodeAdmin;
         this.tanggalMulaiAkses = tanggalMulaiAkses;
     }
-
+    
     public String getKodeAdmin() {
         return kodeAdmin;
     }
-
-    public void setKodeAdmin(String kodeAdmin) {
-        this.kodeAdmin = kodeAdmin;
+    
+    public void setKodeAdmin(String value) {
+        this.kodeAdmin = value;
     }
-
-    public LocalDate getTanggalMulaiAkses() {
+    
+    public java.time.LocalDate getTanggalMulaiAkses() {
         return tanggalMulaiAkses;
     }
-
-    public void setTanggalMulaiAkses(LocalDate tanggalMulaiAkses) {
-        this.tanggalMulaiAkses = tanggalMulaiAkses;
+    
+    public void setTanggalMulaiAkses(java.time.LocalDate value) {
+        this.tanggalMulaiAkses = value;
     }
-
+    
     @Override
     public String getJenisPegawai() {
         return "ADMIN";
+    }
+    
+    @Override
+    public String toString() {
+        return "Admin #" + getIdPegawai();
     }
 }

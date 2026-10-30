@@ -1,0 +1,74 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6ED88564-8F52-1D83-404D-A3E9BFB9FA53" name="petugas_operasional">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>5E762D3E-E258-D95F-3654-DEDBB2DC6D29</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_pegawai" id="C6C92BD7-4B47-610B-198A-6AD895141D7D">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>40E02C8D-CA5A-E480-B59A-5BC44FB957DB</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="79974A05-4704-37D8-F0F3-A89C4595CFE8" referredColumn="EDD83871-D2C7-998D-F0D4-C5520C05D736"/>
+</associations>
+</Column>
+<Column name="shift_kerja" id="AF3C76F8-CC77-B507-FECC-A84DA2DEBEB1">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>46FD0D49-1DE7-11CA-9EAF-480FB19BD247</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="A51147FB-A864-25B8-E808-766BD932FA4B" name="petugas_operasional_PK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>B8BA2265-14C2-CF8C-A910-F6AE31278D33</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C6C92BD7-4B47-610B-198A-6AD895141D7D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="0782C5FD-C0FD-8412-013F-2B30EC9E5934" name="petugas_operasional_PKv1">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>61EE5713-346E-C1F6-3A2E-1CEF0CC889B6</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C6C92BD7-4B47-610B-198A-6AD895141D7D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="54164E1B-E960-7F5F-B785-4E6E56805CE9" name="petugas_operasional_Pegawai_FK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>982C9DB0-5B89-B297-E343-38D1950ACEBF</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C6C92BD7-4B47-610B-198A-6AD895141D7D"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

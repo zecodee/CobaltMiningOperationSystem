@@ -4,8 +4,6 @@
  */
 package model;
 
-import enums.StatusKendaraan;
-
 /**
  *
  * @author zefrialrizkullah
@@ -17,11 +15,10 @@ public class Kendaraan {
     private String nomorPolisi;
     private double kapasitas;
     private int tahunKendaraan;
-    private StatusKendaraan statusKendaraan;
+    private enums.StatusKendaraan statusKendaraan;
     
-    public Kendaraan() {}
-    
-    public Kendaraan(int idKendaraan, String jenisKendaraan, String nomorPolisi, double kapasitas, int tahunKendaraan, StatusKendaraan statusKendaraan) {
+    public Kendaraan(int idKendaraan, String jenisKendaraan, String nomorPolisi, double kapasitas,
+            int tahunKendaraan, enums.StatusKendaraan statusKendaraan) {
         this.idKendaraan = idKendaraan;
         this.jenisKendaraan = jenisKendaraan;
         this.nomorPolisi = nomorPolisi;
@@ -34,52 +31,52 @@ public class Kendaraan {
         return idKendaraan;
     }
     
-    public void setIdKendaraan(int idKendaraan) {
-        this.idKendaraan = idKendaraan;
+    public void setIdKendaraan(int value) {
+        this.idKendaraan = value;
     }
     
     public String getJenisKendaraan() {
         return jenisKendaraan;
     }
     
-    public void setJenisKendaraan(String jenisKendaraan) {
-        this.jenisKendaraan = jenisKendaraan;
+    public void setJenisKendaraan(String value) {
+        this.jenisKendaraan = value;
     }
     
     public String getNomorPolisi() {
         return nomorPolisi;
     }
     
-    public void setNomorPolisi(String nomorPolisi) {
-        this.nomorPolisi = nomorPolisi;
+    public void setNomorPolisi(String value) {
+        this.nomorPolisi = value;
     }
     
     public double getKapasitas() {
         return kapasitas;
     }
     
-    public void setKapasitas(double kapasitas) {
-        this.kapasitas = kapasitas;
+    public void setKapasitas(double value) {
+        this.kapasitas = value;
     }
     
     public int getTahunKendaraan() {
         return tahunKendaraan;
     }
     
-    public void setTahunKendaraan(int tahunKendaraan) {
-        this.tahunKendaraan = tahunKendaraan;
+    public void setTahunKendaraan(int value) {
+        this.tahunKendaraan = value;
     }
     
-    public StatusKendaraan getStatusKendaraan() {
+    public enums.StatusKendaraan getStatusKendaraan() {
         return statusKendaraan;
     }
     
-    public void setStatusKendaraan(StatusKendaraan statusKendaraan) {
-        this.statusKendaraan = statusKendaraan;
+    public void setStatusKendaraan(enums.StatusKendaraan value) {
+        this.statusKendaraan = value;
     }
     
     @Override
     public String toString() {
-        return nomorPolisi + " - " + jenisKendaraan;
+        return "Kendaraan #" + idKendaraan;
     }
 }

@@ -4,205 +4,86 @@
  */
 package service;
 
-import enums.JenisLokasi;
-import enums.StatusLokasi;
-import enums.StatusPegawai;
-import enums.StatusProduksi;
-import exception.DataNotFoundException;
-import exception.ValidationException;
-import model.JenisMaterial;
-import model.Lokasi;
-import model.PetugasOperasional;
-import model.ProduksiTambang;
-import repository.MaterialRepository;
-import repository.LokasiRepository;
-import repository.ProduksiRepository;
+import enums.*;
+import exception.*;
+import model.*;
+import repository.*;
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 /**
  *
  * @author zefrialrizkullah
  */
 
-public class ProduksiService {
-    private final ProduksiRepository produksiRepository;
-    private final MaterialRepository materialRepository;
-    private final LokasiRepository lokasiRepository;
-
-    public ProduksiService(
-            ProduksiRepository produksiRepository,
-            MaterialRepository materialRepository,
-            LokasiRepository lokasiRepository) {
-
-        this.produksiRepository = produksiRepository;
-        this.materialRepository = materialRepository;
-        this.lokasiRepository = lokasiRepository;
+public final class ProduksiService {
+    private final ProduksiRepository prod;
+    private final MaterialRepository mat;
+    private final LokasiRepository loc;
+    private final PengangkutanRepository haul;
+    public ProduksiService(ProduksiRepository p, MaterialRepository m, LokasiRepository l,
+            PengangkutanRepository h) {
+        prod = p;
+        mat = m;
+        loc = l;
+        haul = h;
     }
-
-    public ProduksiTambang tambahProduksi(
-            int idProduksi,
-            int idMaterial,
-            int idLokasi,
-            PetugasOperasional petugasOperasional,
-            LocalDate tanggalProduksi,
-            double jumlahProduksi) {
-
-        if (idProduksi <= 0) {
-            throw new ValidationException(
-                    "ID produksi tidak valid."
-            );
-        }
-
-        if (produksiRepository.findById(idProduksi).isPresent()) {
-            throw new ValidationException(
-                    "ID produksi sudah digunakan."
-            );
-        }
-
-        if (petugasOperasional == null) {
-            throw new ValidationException(
-                    "Petugas Operasional tidak tersedia."
-            );
-        }
-
-        if (petugasOperasional.getStatusPegawai()
-                != StatusPegawai.AKTIF) {
-
-            throw new ValidationException(
-                    "Petugas Operasional tidak aktif."
-            );
-        }
-
-        if (tanggalProduksi == null) {
-            throw new ValidationException(
-                    "Tanggal produksi wajib diisi."
-            );
-        }
-
-        if (jumlahProduksi <= 0) {
-            throw new ValidationException(
-                    "Jumlah produksi harus lebih dari 0."
-            );
-        }
-
-        JenisMaterial material = getMaterialOrThrow(idMaterial);
-        Lokasi lokasi = getLokasiOrThrow(idLokasi);
-        validasiLokasiProduksi(lokasi);
-
-        ProduksiTambang produksi =
-                new ProduksiTambang(
-                        idProduksi,
-                        material,
-                        lokasi,
-                        petugasOperasional,
-                        tanggalProduksi,
-                        jumlahProduksi,
-                        jumlahProduksi,
-                        StatusProduksi.TERSEDIA
-                );
-
-        produksiRepository.save(produksi);
-        return produksi;
+    public ProduksiTambang tambahProduksi(int idProduksi, int idMaterial, int idLokasi,
+            PetugasOperasional petugas, LocalDate tanggal, double jumlah) {
+        if (idProduksi != 0)throw new ValidationException("ID baru harus 0.");
+        if (petugas == null || petugas.getStatusPegawai() != StatusPegawai.AKTIF)throw new ValidationException("Petugas tidak aktif.");
+        validasi(tanggal, jumlah);
+        JenisMaterial m = mat.findById(idMaterial).orElseThrow(()->new DataNotFoundException("Material tidak ditemukan."));
+        Lokasi l = lokasi(idLokasi);
+        validasiLokasi(l);
+        return prod.save(new ProduksiTambang(0, m, l, petugas, tanggal, jumlah, jumlah, StatusProduksi.TERSEDIA));
     }
-
-    public void ubahProduksi(
-            int idProduksi,
-            int idMaterial,
-            int idLokasi,
-            LocalDate tanggalProduksi,
-            double jumlahProduksi) {
-
-        ProduksiTambang produksi = getProduksiOrThrow(idProduksi);
-
-        if (Math.abs(produksi.getJumlahProduksi() - produksi.getJumlahTersedia()) > 0.000001) {
-            throw new ValidationException("Produksi tidak dapat diubah karena sebagian material sudah diangkut.");
-        }
-
-        if (tanggalProduksi == null) {
-            throw new ValidationException("Tanggal produksi wajib diisi.");
-        }
-
-        if (jumlahProduksi <= 0) {
-            throw new ValidationException("Jumlah produksi harus lebih dari 0.");
-        }
-
-        JenisMaterial material = getMaterialOrThrow(idMaterial);
-        Lokasi lokasi = getLokasiOrThrow(idLokasi);
-        validasiLokasiProduksi(lokasi);
-        produksi.setMaterial(material);
-        produksi.setLokasi(lokasi);
-        produksi.setTanggalProduksi(tanggalProduksi);
-        produksi.setJumlahProduksi(jumlahProduksi);
-        produksi.setJumlahTersedia(jumlahProduksi);
-        produksi.setStatusProduksi(StatusProduksi.TERSEDIA);
-        produksiRepository.update(produksi);
+    public ProduksiTambang tambahProduksi(int idMaterial, int idLokasi, PetugasOperasional p, LocalDate t,
+            double j) {
+        return tambahProduksi(0, idMaterial, idLokasi, p, t, j);
     }
-
-    public void hapusProduksi(int idProduksi) {
-        ProduksiTambang produksi = getProduksiOrThrow(idProduksi);
-
-        if (Math.abs(produksi.getJumlahProduksi() - produksi.getJumlahTersedia()) > 0.000001) {
-            throw new ValidationException("Produksi tidak dapat dihapus karena material sudah pernah diangkut.");
-        }
-
-        produksiRepository.delete(idProduksi);
+    public void ubahProduksi(int id, int idMaterial, int idLokasi, LocalDate t, double j) {
+        ProduksiTambang p = cariProduksiById(id);
+        checkHistory(id);
+        validasi(t, j);
+        JenisMaterial m = mat.findById(idMaterial).orElseThrow(()->new DataNotFoundException("Material tidak ditemukan."));
+        Lokasi l = lokasi(idLokasi);
+        validasiLokasi(l);
+        p.setMaterial(m);
+        p.setLokasi(l);
+        p.setTanggalProduksi(t);
+        p.setJumlahProduksi(j);
+        p.setJumlahTersedia(j);
+        p.setStatusProduksi(StatusProduksi.TERSEDIA);
+        prod.update(p);
     }
-
-    public ProduksiTambang cariProduksiById(int idProduksi) {
-        return getProduksiOrThrow(idProduksi);
+    public void hapusProduksi(int id) {
+        cariProduksiById(id);
+        checkHistory(id);
+        prod.delete(id);
     }
-
+    private void checkHistory(int id) {
+        if (!haul.findByProduksi(id).isEmpty())throw new ValidationException("Produksi sudah memiliki riwayat pengangkutan.");
+    }
+    private void validasi(LocalDate t, double j) {
+        if (t == null || t.isAfter(LocalDate.now()))throw new ValidationException("Tanggal produksi tidak valid.");
+        if (!Double.isFinite(j) || j <= 0
+ || Math.abs(j*100-Math.rint(j*100))>0.00001)throw new ValidationException("Jumlah produksi harus positif dengan maksimal 2 desimal.");
+    }
+    private void validasiLokasi(Lokasi l) {
+        if (l.getJenisLokasi() != JenisLokasi.PIT
+ || l.getStatusOperasional() != StatusLokasi.AKTIF)throw new ValidationException("Produksi hanya pada PIT aktif.");
+    }
+    private Lokasi lokasi(int id) {
+        return loc.findById(id).orElseThrow(()->new DataNotFoundException("Lokasi tidak ditemukan."));
+    }
+    public ProduksiTambang cariProduksiById(int id) {
+        return prod.findById(id).orElseThrow(()->new DataNotFoundException("Produksi tidak ditemukan."));
+    }
     public List<ProduksiTambang> tampilkanSemuaProduksi() {
-        return produksiRepository.findAll();
+        return prod.findAll();
     }
-
     public List<ProduksiTambang> tampilkanProduksiTersedia() {
-        return produksiRepository.findTersedia();
-    }
-
-    private ProduksiTambang getProduksiOrThrow(
-            int idProduksi) {
-
-        Optional<ProduksiTambang> produksi = produksiRepository.findById(idProduksi);
-
-        if (!produksi.isPresent()) {
-            throw new DataNotFoundException("Produksi tidak ditemukan.");
-        }
-
-        return produksi.get();
-    }
-
-    private JenisMaterial getMaterialOrThrow(
-            int idMaterial) {
-
-        Optional<JenisMaterial> material = materialRepository.findById(idMaterial);
-
-        if (!material.isPresent()) {
-            throw new DataNotFoundException("Jenis material tidak ditemukan.");
-        }
-
-        return material.get();
-    }
-
-    private Lokasi getLokasiOrThrow(int idLokasi) {
-        Optional<Lokasi> lokasi = lokasiRepository.findById(idLokasi);
-
-        if (!lokasi.isPresent()) {
-            throw new DataNotFoundException("Lokasi tidak ditemukan.");
-        }
-
-        return lokasi.get();
-    }
-
-    private void validasiLokasiProduksi(Lokasi lokasi) {
-        if (lokasi.getJenisLokasi() != JenisLokasi.PIT) {
-            throw new ValidationException("Produksi tambang hanya dapat dicatat pada lokasi PIT.");
-        }
-
-        if (lokasi.getStatusOperasional() != StatusLokasi.AKTIF) {
-            throw new ValidationException("Lokasi produksi harus berstatus AKTIF.");
-        }
+        return prod.findTersedia();
     }
 }

@@ -16,15 +16,9 @@ public class ParameterLingkungan {
     private Double batasMinimum;
     private Double batasMaksimum;
     private String keterangan;
-
-    public ParameterLingkungan(
-            int idParameter,
-            String namaParameter,
-            String satuan,
-            Double batasMinimum,
-            Double batasMaksimum,
-            String keterangan) {
-
+    
+    public ParameterLingkungan(int idParameter, String namaParameter, String satuan, Double batasMinimum,
+            Double batasMaksimum, String keterangan) {
         this.idParameter = idParameter;
         this.namaParameter = namaParameter;
         this.satuan = satuan;
@@ -32,57 +26,57 @@ public class ParameterLingkungan {
         this.batasMaksimum = batasMaksimum;
         this.keterangan = keterangan;
     }
-
+    
     public int getIdParameter() {
         return idParameter;
     }
-
-    public void setIdParameter(int idParameter) {
-        this.idParameter = idParameter;
+    
+    public void setIdParameter(int value) {
+        this.idParameter = value;
     }
-
+    
     public String getNamaParameter() {
         return namaParameter;
     }
-
-    public void setNamaParameter(String namaParameter) {
-        this.namaParameter = namaParameter;
+    
+    public void setNamaParameter(String value) {
+        this.namaParameter = value;
     }
-
+    
     public String getSatuan() {
         return satuan;
     }
-
-    public void setSatuan(String satuan) {
-        this.satuan = satuan;
+    
+    public void setSatuan(String value) {
+        this.satuan = value;
     }
-
+    
     public Double getBatasMinimum() {
         return batasMinimum;
     }
-
-    public void setBatasMinimum(Double batasMinimum) {
-        this.batasMinimum = batasMinimum;
+    
+    public void setBatasMinimum(Double value) {
+        this.batasMinimum = value;
     }
-
+    
     public Double getBatasMaksimum() {
         return batasMaksimum;
     }
-
-    public void setBatasMaksimum(Double batasMaksimum) {
-        this.batasMaksimum = batasMaksimum;
+    
+    public void setBatasMaksimum(Double value) {
+        this.batasMaksimum = value;
     }
-
+    
     public String getKeterangan() {
         return keterangan;
     }
-
-    public void setKeterangan(String keterangan) {
-        this.keterangan = keterangan;
+    
+    public void setKeterangan(String value) {
+        this.keterangan = value;
     }
-
+    
     @Override
     public String toString() {
-        return namaParameter+ " (" + satuan + ")";
+        return "ParameterLingkungan #" + idParameter;
     }
 }

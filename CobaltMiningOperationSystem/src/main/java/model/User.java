@@ -14,48 +14,48 @@ public class User {
     private Pegawai pegawai;
     private String username;
     private String password;
-
+    
     public User(int idUser, Pegawai pegawai, String username, String password) {
         this.idUser = idUser;
         this.pegawai = pegawai;
         this.username = username;
         this.password = password;
     }
-
+    
     public int getIdUser() {
         return idUser;
     }
-
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    
+    public void setIdUser(int value) {
+        this.idUser = value;
     }
-
+    
     public Pegawai getPegawai() {
         return pegawai;
     }
-
-    public void setPegawai(Pegawai pegawai) {
-        this.pegawai = pegawai;
+    
+    public void setPegawai(Pegawai value) {
+        this.pegawai = value;
     }
-
+    
     public String getUsername() {
         return username;
     }
-
-    public void setUsername(String username) {
-        this.username = username;
+    
+    public void setUsername(String value) {
+        this.username = value;
     }
-
+    
     public String getPassword() {
         return password;
     }
-
-    public void setPassword(String password) {
-        this.password = password;
+    
+    public void setPassword(String value) {
+        this.password = value;
     }
-
+    
     @Override
     public String toString() {
-        return username+" - "+(pegawai != null ? pegawai.getNamaPegawai() : "Tanpa Pegawai");
+        return "User #" + idUser;
     }
 }

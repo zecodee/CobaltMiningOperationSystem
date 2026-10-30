@@ -4,460 +4,143 @@
  */
 package service;
 
-import enums.StatusDetail;
-import enums.StatusLokasi;
-import enums.StatusMonitoring;
-import enums.StatusPegawai;
-import enums.StatusPenanganan;
-import exception.DataNotFoundException;
-import exception.ValidationException;
-import model.DetailMonitoring;
-import model.Lokasi;
-import model.MonitoringLingkungan;
-import model.ParameterLingkungan;
-import model.PetugasHSE;
-import repository.LokasiRepository;
-import repository.MonitoringRepository;
-import repository.ParameterRepository;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
+import config.DatabaseConfig;
+import enums.*;
+import exception.*;
+import java.sql.*;
+import java.time.*;
+import java.util.*;
+import model.*;
+import repository.*;
 
 /**
  *
  * @author zefrialrizkullah
  */
 
-public class MonitoringService {
-    private final MonitoringRepository monitoringRepository;
-    private final LokasiRepository lokasiRepository;
-    private final ParameterRepository parameterRepository;
-
-    public MonitoringService(
-            MonitoringRepository monitoringRepository,
-            LokasiRepository lokasiRepository,
-            ParameterRepository parameterRepository) {
-
-        this.monitoringRepository =
-                monitoringRepository;
-
-        this.lokasiRepository =
-                lokasiRepository;
-
-        this.parameterRepository =
-                parameterRepository;
+public final class MonitoringService {
+    private final MonitoringRepository mon;
+    private final LokasiRepository loc;
+    private final ParameterRepository par;
+    public MonitoringService(MonitoringRepository m, LokasiRepository l, ParameterRepository p) {
+        mon = m;
+        loc = l;
+        par = p;
     }
-
-    public MonitoringLingkungan buatMonitoring(
-            int idMonitoring,
-            int idLokasi,
-            PetugasHSE petugasHSE,
-            LocalDateTime tanggalMonitoring,
+    private MonitoringLingkungan find(int id) {
+        return mon.findById(id).orElseThrow(()->new DataNotFoundException("Monitoring tidak ditemukan."));
+    }
+    private ParameterLingkungan param(int id) {
+        return par.findById(id).orElseThrow(()->new DataNotFoundException("Parameter tidak ditemukan."));
+    }
+    private StatusDetail status(ParameterLingkungan p, double v) {
+        if (!Double.isFinite(v) || Math.abs(v*100-Math.rint(v*100))>0.00001)throw new ValidationException("Pengukuran harus angka dengan maksimal 2 desimal.");
+        return p.getBatasMinimum() != null && v<p.getBatasMinimum() || p.getBatasMaksimum() != null
+ && v>p.getBatasMaksimum()?StatusDetail.PERINGATAN:StatusDetail.NORMAL;
+    }
+    public MonitoringLingkungan buatMonitoring(int id, int lokasiId, PetugasHSE h, LocalDateTime t,
             String catatan) {
-
-        if (idMonitoring <= 0) {
-            throw new ValidationException(
-                    "ID monitoring tidak valid."
-            );
-        }
-
-        if (monitoringRepository
-                .findById(idMonitoring)
-                .isPresent()) {
-
-            throw new ValidationException(
-                    "ID monitoring sudah digunakan."
-            );
-        }
-
-        validasiPetugasHSE(petugasHSE);
-
-        Lokasi lokasi =
-                getLokasiOrThrow(idLokasi);
-
-        if (lokasi.getStatusOperasional()
-                == StatusLokasi.DITUTUP_SEMENTARA) {
-        }
-
-        if (tanggalMonitoring == null) {
-            tanggalMonitoring =
-                    LocalDateTime.now();
-        }
-
-        MonitoringLingkungan monitoring =
-                new MonitoringLingkungan(
-                        idMonitoring,
-                        lokasi,
-                        petugasHSE,
-                        tanggalMonitoring,
-                        StatusMonitoring.NORMAL,
-                        null,
-                        StatusPenanganan.TIDAK_DIPERLUKAN,
-                        catatan
-                );
-
-        monitoringRepository.save(monitoring);
-
-        return monitoring;
+        if (id != 0)throw new ValidationException("ID baru harus 0.");
+        if (t == null)t = LocalDateTime.now();
+        if (t.isAfter(LocalDateTime.now()))throw new ValidationException("Waktu monitoring di masa depan.");
+        if (h == null || h.getStatusPegawai() != StatusPegawai.AKTIF
+ || !h.isSertifikasiAktif(t.toLocalDate()))throw new ValidationException("Petugas HSE tidak aktif atau sertifikasi kedaluwarsa.");
+        Lokasi l = loc.findById(lokasiId).orElseThrow(()->new DataNotFoundException("Lokasi tidak ditemukan."));
+        return mon.save(new MonitoringLingkungan(0, l, h, t, StatusMonitoring.NORMAL, null,
+                StatusPenanganan.TIDAK_DIPERLUKAN, catatan));
     }
-
-    public DetailMonitoring tambahDetail(
-            int idMonitoring,
-            int idDetail,
-            int idParameter,
-            double nilaiPengukuran,
-            String catatan) {
-
-        MonitoringLingkungan monitoring =
-                getMonitoringOrThrow(idMonitoring);
-
-        if (idDetail <= 0) {
-            throw new ValidationException(
-                    "ID detail monitoring tidak valid."
-            );
-        }
-
-        for (DetailMonitoring detail :
-                monitoring.getDetailMonitoring()) {
-
-            if (detail.getIdDetail() == idDetail) {
-                throw new ValidationException(
-                        "ID detail monitoring sudah digunakan."
-                );
+    public MonitoringLingkungan buatMonitoring(int lokasiId, PetugasHSE h, LocalDateTime t, String catatan) {
+        return buatMonitoring(0, lokasiId, h, t, catatan);
+    }
+    public DetailMonitoring tambahDetail(int idMon, int idDetail, int idParam, double nilai, String catatan) {
+        if (idDetail != 0)throw new ValidationException("ID detail baru harus 0.");
+        ParameterLingkungan p = param(idParam);
+        StatusDetail st = status(p, nilai);
+        try(Connection c = DatabaseConfig.getConnection()) {
+            c.setAutoCommit(false);
+            try {
+                try(PreparedStatement ps = c.prepareStatement("SELECT id_monitoring FROM monitoring_lingkungan WHERE id_monitoring=? FOR UPDATE")) {
+                    ps.setInt(1, idMon);
+                    try(ResultSet rs = ps.executeQuery()) {
+                        if (!rs.next())throw new DataNotFoundException("Monitoring tidak ditemukan.");
+                    }
+                }
+                int generated;
+                try(PreparedStatement ps = c.prepareStatement("INSERT INTO detail_monitoring (nilai_pengukuran,status_detail,catatan,monitoring_lingkungan_id_monitoring,parameter_lingkungan_id_parameter) VALUES (?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS)) {
+                    ps.setBigDecimal(1, java.math.BigDecimal.valueOf(nilai));
+                    ps.setString(2, st.name());
+                    ps.setString(3, catatan);
+                    ps.setInt(4, idMon);
+                    ps.setInt(5, idParam);
+                    ps.executeUpdate();
+                    try(ResultSet rs = ps.getGeneratedKeys()) {
+                        if (!rs.next())throw new SQLException("ID detail tidak ditemukan.");
+                        generated = rs.getInt(1);
+                    }
+                }
+                try(PreparedStatement ps = c.prepareStatement("UPDATE monitoring_lingkungan SET status_monitoring=IF(EXISTS(SELECT 1 FROM detail_monitoring WHERE monitoring_lingkungan_id_monitoring=? AND status_detail='PERINGATAN'),'PERINGATAN','NORMAL'),status_penanganan=IF(EXISTS(SELECT 1 FROM detail_monitoring WHERE monitoring_lingkungan_id_monitoring=? AND status_detail='PERINGATAN'),IF(status_penanganan='TIDAK_DIPERLUKAN','BELUM_DITANGANI',status_penanganan),'TIDAK_DIPERLUKAN') WHERE id_monitoring=?")) {
+                    ps.setInt(1, idMon);
+                    ps.setInt(2, idMon);
+                    ps.setInt(3, idMon);
+                    ps.executeUpdate();
+                }
+                c.commit();
+                return new DetailMonitoring(generated, find(idMon), p, nilai, st, catatan);
             }
-
-            if (detail.getParameter() != null
-                    && detail.getParameter()
-                    .getIdParameter() == idParameter) {
-
-                throw new ValidationException(
-                        "Parameter tersebut sudah dicatat pada monitoring ini."
-                );
+            catch (Exception e) {
+                c.rollback();
+                throw e;
             }
         }
-
-        ParameterLingkungan parameter =
-                getParameterOrThrow(idParameter);
-
-        StatusDetail statusDetail =
-                tentukanStatusDetail(
-                        parameter,
-                        nilaiPengukuran
-                );
-
-        DetailMonitoring detail =
-                new DetailMonitoring(
-                        idDetail,
-                        monitoring,
-                        parameter,
-                        nilaiPengukuran,
-                        statusDetail,
-                        catatan
-                );
-
-        monitoring.tambahDetail(detail);
-
-        hitungUlangStatusMonitoring(
-                monitoring
-        );
-
-        monitoringRepository.update(
-                monitoring
-        );
-
-        return detail;
-    }
-
-    public void aturTindakLanjut(
-            int idMonitoring,
-            String tindakLanjut) {
-
-        MonitoringLingkungan monitoring =
-                getMonitoringOrThrow(idMonitoring);
-
-        if (monitoring.getStatusMonitoring()
-                != StatusMonitoring.PERINGATAN) {
-
-            throw new ValidationException(
-                    "Tindak lanjut hanya diperlukan untuk monitoring berstatus PERINGATAN."
-            );
-        }
-
-        if (tindakLanjut == null
-                || tindakLanjut.trim().isEmpty()) {
-
-            throw new ValidationException(
-                    "Tindak lanjut wajib diisi."
-            );
-        }
-
-        monitoring.setTindakLanjut(
-                tindakLanjut.trim()
-        );
-
-        if (monitoring.getStatusPenanganan()
-                == StatusPenanganan.TIDAK_DIPERLUKAN) {
-
-            monitoring.setStatusPenanganan(
-                    StatusPenanganan.BELUM_DITANGANI
-            );
-        }
-
-        monitoringRepository.update(
-                monitoring
-        );
-    }
-
-    public void mulaiPenanganan(
-            int idMonitoring) {
-
-        MonitoringLingkungan monitoring =
-                getMonitoringOrThrow(idMonitoring);
-
-        if (monitoring.getStatusMonitoring()
-                != StatusMonitoring.PERINGATAN) {
-
-            throw new ValidationException(
-                    "Monitoring NORMAL tidak memerlukan penanganan."
-            );
-        }
-
-        if (monitoring.getTindakLanjut() == null
-                || monitoring.getTindakLanjut()
-                .trim().isEmpty()) {
-
-            throw new ValidationException(
-                    "Tindak lanjut harus diisi sebelum penanganan dimulai."
-            );
-        }
-
-        if (monitoring.getStatusPenanganan()
-                != StatusPenanganan.BELUM_DITANGANI) {
-
-            throw new ValidationException(
-                    "Penanganan hanya dapat dimulai dari status BELUM_DITANGANI."
-            );
-        }
-
-        monitoring.setStatusPenanganan(
-                StatusPenanganan.DALAM_PENANGANAN
-        );
-
-        monitoringRepository.update(
-                monitoring
-        );
-    }
-
-    public void selesaikanPenanganan(
-            int idMonitoring) {
-
-        MonitoringLingkungan monitoring =
-                getMonitoringOrThrow(idMonitoring);
-
-        if (monitoring.getStatusPenanganan()
-                != StatusPenanganan.DALAM_PENANGANAN) {
-
-            throw new ValidationException(
-                    "Penanganan hanya dapat diselesaikan dari status DALAM_PENANGANAN."
-            );
-        }
-
-        monitoring.setStatusPenanganan(
-                StatusPenanganan.SELESAI
-        );
-
-        monitoringRepository.update(
-                monitoring
-        );
-    }
-
-    public void ubahStatusLokasi(
-            int idMonitoring,
-            StatusLokasi statusLokasi) {
-
-        MonitoringLingkungan monitoring =
-                getMonitoringOrThrow(idMonitoring);
-
-        if (statusLokasi == null) {
-            throw new ValidationException(
-                    "Status lokasi wajib dipilih."
-            );
-        }
-
-        Lokasi lokasi =
-                monitoring.getLokasi();
-
-        lokasi.setStatusOperasional(
-                statusLokasi
-        );
-
-        lokasiRepository.update(lokasi);
-    }
-
-    public MonitoringLingkungan
-            cariMonitoringById(int idMonitoring) {
-
-        return getMonitoringOrThrow(
-                idMonitoring
-        );
-    }
-
-    public List<MonitoringLingkungan>
-            tampilkanSemuaMonitoring() {
-
-        return monitoringRepository.findAll();
-    }
-
-    public List<MonitoringLingkungan>
-            tampilkanMonitoringByLokasi(
-                    int idLokasi) {
-
-        getLokasiOrThrow(idLokasi);
-
-        return monitoringRepository
-                .findByLokasi(idLokasi);
-    }
-
-    private StatusDetail tentukanStatusDetail(
-            ParameterLingkungan parameter,
-            double nilai) {
-
-        Double minimum =
-                parameter.getBatasMinimum();
-
-        Double maksimum =
-                parameter.getBatasMaksimum();
-
-        if (minimum != null
-                && nilai < minimum) {
-
-            return StatusDetail.PERINGATAN;
-        }
-
-        if (maksimum != null
-                && nilai > maksimum) {
-
-            return StatusDetail.PERINGATAN;
-        }
-
-        return StatusDetail.NORMAL;
-    }
-
-    private void hitungUlangStatusMonitoring(
-            MonitoringLingkungan monitoring) {
-
-        boolean adaPeringatan = false;
-
-        for (DetailMonitoring detail :
-                monitoring.getDetailMonitoring()) {
-
-            if (detail.getStatusDetail()
-                    == StatusDetail.PERINGATAN) {
-
-                adaPeringatan = true;
-                break;
-            }
-        }
-
-        if (adaPeringatan) {
-
-            monitoring.setStatusMonitoring(
-                    StatusMonitoring.PERINGATAN
-            );
-
-            if (monitoring.getStatusPenanganan()
-                    == StatusPenanganan.TIDAK_DIPERLUKAN) {
-
-                monitoring.setStatusPenanganan(
-                        StatusPenanganan.BELUM_DITANGANI
-                );
-            }
-
-        } else {
-
-            monitoring.setStatusMonitoring(
-                    StatusMonitoring.NORMAL
-            );
-
-            monitoring.setTindakLanjut(null);
-
-            monitoring.setStatusPenanganan(
-                    StatusPenanganan.TIDAK_DIPERLUKAN
-            );
+        catch (SQLException e) {
+            throw new IllegalStateException("Gagal menambah detail monitoring: "+e.getMessage(), e);
         }
     }
-
-    private void validasiPetugasHSE(
-            PetugasHSE petugasHSE) {
-
-        if (petugasHSE == null) {
-            throw new ValidationException(
-                    "Petugas HSE tidak tersedia."
-            );
+    public DetailMonitoring tambahDetail(int idMon, int idParam, double nilai, String catatan) {
+        return tambahDetail(idMon, 0, idParam, nilai, catatan);
+    }
+    public void aturTindakLanjut(int id, String tindak) {
+        MonitoringLingkungan m = find(id);
+        if (m.getStatusMonitoring() != StatusMonitoring.PERINGATAN || tindak == null
+ || tindak.trim().isEmpty())throw new ValidationException("Tindak lanjut hanya untuk PERINGATAN dan wajib diisi.");
+        statusUpdate(id,"tindak_lanjut", tindak.trim(),"status_monitoring='PERINGATAN'");
+    }
+    public void mulaiPenanganan(int id) {
+        MonitoringLingkungan m = find(id);
+        if (m.getStatusMonitoring() != StatusMonitoring.PERINGATAN
+ || m.getStatusPenanganan() != StatusPenanganan.BELUM_DITANGANI || m.getTindakLanjut() == null
+ || m.getTindakLanjut().trim().isEmpty())throw new ValidationException("Penanganan tidak dapat dimulai.");
+        statusUpdate(id,"status_penanganan","DALAM_PENANGANAN",
+                "status_penanganan='BELUM_DITANGANI' AND status_monitoring='PERINGATAN' AND tindak_lanjut IS NOT NULL AND TRIM(tindak_lanjut)<>''");
+    }
+    public void selesaikanPenanganan(int id) {
+        statusUpdate(id,"status_penanganan","SELESAI","status_penanganan='DALAM_PENANGANAN'");
+    }
+    private void statusUpdate(int id, String col, String value, String condition) {
+        String sql = "UPDATE monitoring_lingkungan SET "+col+"=? WHERE id_monitoring=? AND "+condition;
+        try(Connection c = DatabaseConfig.getConnection();PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, value);
+            ps.setInt(2, id);
+            if (ps.executeUpdate() != 1)throw new ValidationException("Status monitoring tidak sesuai.");
         }
-
-        if (petugasHSE.getStatusPegawai()
-                != StatusPegawai.AKTIF) {
-
-            throw new ValidationException(
-                    "Petugas HSE tidak aktif."
-            );
-        }
-
-        if (!petugasHSE.isSertifikasiAktif(
-                LocalDate.now())) {
-
-            throw new ValidationException(
-                    "Sertifikasi Petugas HSE sudah tidak berlaku."
-            );
+        catch (SQLException e) {
+            throw new IllegalStateException("Gagal memperbarui monitoring", e);
         }
     }
-
-    private MonitoringLingkungan
-            getMonitoringOrThrow(int idMonitoring) {
-
-        Optional<MonitoringLingkungan> data =
-                monitoringRepository
-                .findById(idMonitoring);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "Monitoring tidak ditemukan."
-            );
-        }
-
-        return data.get();
+    public void ubahStatusLokasi(int id, StatusLokasi status) {
+        if (status == null)throw new ValidationException("Status lokasi wajib dipilih.");
+        Lokasi l = find(id).getLokasi();
+        l.setStatusOperasional(status);
+        loc.update(l);
     }
-
-    private Lokasi getLokasiOrThrow(
-            int idLokasi) {
-
-        Optional<Lokasi> data =
-                lokasiRepository.findById(idLokasi);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "Lokasi tidak ditemukan."
-            );
-        }
-
-        return data.get();
+    public MonitoringLingkungan cariMonitoringById(int id) {
+        return find(id);
     }
-
-    private ParameterLingkungan
-            getParameterOrThrow(int idParameter) {
-
-        Optional<ParameterLingkungan> data =
-                parameterRepository
-                .findById(idParameter);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "Parameter lingkungan tidak ditemukan."
-            );
-        }
-
-        return data.get();
+    public List<MonitoringLingkungan> tampilkanSemuaMonitoring() {
+        return mon.findAll();
+    }
+    public List<MonitoringLingkungan> tampilkanMonitoringByLokasi(int id) {
+        if (!loc.findById(id).isPresent())throw new DataNotFoundException("Lokasi tidak ditemukan.");
+        return mon.findByLokasi(id);
     }
 }

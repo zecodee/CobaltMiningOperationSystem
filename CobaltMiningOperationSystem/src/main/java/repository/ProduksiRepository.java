@@ -14,4 +14,5 @@ import model.ProduksiTambang;
 
 public interface ProduksiRepository extends CrudRepository<ProduksiTambang> {
     List<ProduksiTambang> findTersedia();
+    List<ProduksiTambang> findByLokasi(int idLokasi);
 }

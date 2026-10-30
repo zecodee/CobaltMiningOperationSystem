@@ -1,0 +1,85 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="FB26F32C-5F5B-084B-A841-74D4B7E06D88" name="admin">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>14CE58E6-441F-BC4D-10B2-1814CD90383A</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_pegawai" id="B65FC41A-3772-763A-00A2-A7330A8C87A0">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>40E02C8D-CA5A-E480-B59A-5BC44FB957DB</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7032068A-835A-278C-6A3B-C61652B4275D" referredColumn="EDD83871-D2C7-998D-F0D4-C5520C05D736"/>
+</associations>
+</Column>
+<Column name="kode_admin" id="87DB3527-EDBB-4F75-5D1B-212CACFED766">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>7B317FA7-1B76-92D9-CB5D-84022FA016C0</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tanggal_mulai_akses" id="EC88C459-F377-902A-D6FF-B5577A1F96EE">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>0DE96641-1FE2-22AD-4B39-970BC2A816A8</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="88FDF206-4EF3-099A-8CB0-D5E19828FDA1" name="admin_PK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>B8BA2265-14C2-CF8C-A910-F6AE31278D33</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B65FC41A-3772-763A-00A2-A7330A8C87A0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="BD61518C-4BA6-A06A-8BB1-3720A62F8EDF" name="admin_PKv1">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>E1DB3B3C-BD83-6AA5-5437-1E89ADD02F3C</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B65FC41A-3772-763A-00A2-A7330A8C87A0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B2A2081E-D72B-68A7-160B-901507CBF9E8" name="admin_Pegawai_FK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>DDE5B830-30AF-E937-8711-26D04C725C22</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B65FC41A-3772-763A-00A2-A7330A8C87A0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

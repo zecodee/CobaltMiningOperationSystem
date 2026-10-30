@@ -1,0 +1,149 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="E16370DA-F3BD-27EE-47A5-E4B0767A6773" name="monitoring_lingkungan">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>999C1E35-F60C-FA59-9A05-69D35979AEFD</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_monitoring" id="43707BAE-1926-DB7F-6F0A-39D5FDBED56C">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>D74E132A-5CD3-075F-64A9-91B61F6E651B</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tanggal_monitoring" id="2ECB36B8-0197-48EE-41AC-E4793C3BCB5A">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>2C67D56E-3363-E82D-6F7A-71CD7BE58F35</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT008</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="status_monitoring" id="37399736-C09F-74A3-7ECC-2B33235BA0D4">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>72A3FE35-4663-17B8-B14E-4405F4744DF5</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="tindak_lanjut" id="84652011-5E78-4587-CCD9-7A259450BDDE">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>5D764982-6D2C-DD8F-E3B0-64F9111D03DC</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="status_penanganan" id="2104F89A-5AF9-5E6A-488D-998E8328E179">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>8C1CF830-A3EE-8AF9-564B-E7593DFA0E51</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="catatan" id="16322971-A8BB-6570-68D1-AD100486AD66">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>40C343A3-2E20-1453-54C4-22F8A790C502</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>255</dataTypeSize>
+<ownDataTypeParameters>255,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="Lokasi_id_lokasi" id="5CCE687E-C380-72DC-DBB5-06EA3EDB3D99">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 16:12:37 UTC</createdTime>
+<generatorID>A68F0D08-BC79-2876-5673-C25520FB72FB</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="17D0249F-A565-7692-A982-F3BF950F2301" referredColumn="0A348C81-7920-3BFD-80A6-1045EC34F577"/>
+</associations>
+</Column>
+<Column name="petugas_HSE_id_pegawai" id="1E856A51-43AE-B330-EBA1-35764CDB375A">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-21 00:26:18 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="C7942943-BD59-9E58-2A81-69E2CA973CC2" referredColumn="273FC1FF-BAE6-3CB5-87C0-65B757E7BA28"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="E77320BB-4666-98B2-95AB-54CE10301EFA" name="monitoring_lingkungan_PK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>B9EA52B6-C653-981A-050E-CB1F0877311C</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="43707BAE-1926-DB7F-6F0A-39D5FDBED56C"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="760C53E6-F897-87C7-7B5B-D56E7F0DADCC" name="monitoring_lingkungan_petugas_HSE_FK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 13:08:07 UTC</createdTime>
+<generatorID>10F64EA4-581B-070E-369B-1D7002BBAE4B</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="1E856A51-43AE-B330-EBA1-35764CDB375A"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A01D8E3E-3728-9C9A-D266-180B25F7305B" name="monitoring_lingkungan_Lokasi_FK">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 16:12:37 UTC</createdTime>
+<generatorID>EA118195-FB3A-C0DC-F95C-C02810FC0C40</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="5CCE687E-C380-72DC-DBB5-06EA3EDB3D99"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

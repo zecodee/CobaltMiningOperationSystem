@@ -4,562 +4,228 @@
  */
 package service;
 
-import enums.StatusDriver;
-import enums.StatusKendaraan;
-import enums.StatusLokasi;
-import enums.StatusPegawai;
-import enums.StatusPengangkutan;
-import enums.StatusProduksi;
-import exception.DataNotFoundException;
-import exception.ValidationException;
-import model.Driver;
-import model.Kendaraan;
-import model.Lokasi;
-import model.Pengangkutan;
-import model.PetugasOperasional;
-import model.ProduksiTambang;
-import repository.KendaraanRepository;
-import repository.LokasiRepository;
-import repository.PengangkutanRepository;
-import repository.ProduksiRepository;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
+import config.DatabaseConfig;
+import enums.*;
+import exception.*;
+import java.sql.*;
+import java.time.*;
+import java.util.*;
+import model.*;
+import repository.*;
 
 /**
  *
  * @author zefrialrizkullah
  */
 
-public class PengangkutanService {
-    private static final double EPSILON = 0.000001;
-    private final PengangkutanRepository pengangkutanRepository;
-    private final ProduksiRepository produksiRepository;
-    private final KendaraanRepository kendaraanRepository;
-    private final LokasiRepository lokasiRepository;
-
-    public PengangkutanService(
-            PengangkutanRepository pengangkutanRepository,
-            ProduksiRepository produksiRepository,
-            KendaraanRepository kendaraanRepository,
-            LokasiRepository lokasiRepository) {
-
-        this.pengangkutanRepository = pengangkutanRepository;
-        this.produksiRepository = produksiRepository;
-        this.kendaraanRepository = kendaraanRepository;
-        this.lokasiRepository = lokasiRepository;
+public final class PengangkutanService {
+    private final PengangkutanRepository haul;
+    private final ProduksiRepository prod;
+    private final KendaraanRepository vehicle;
+    private final LokasiRepository loc;
+    public PengangkutanService(PengangkutanRepository h, ProduksiRepository p, KendaraanRepository v,
+            LokasiRepository l) {
+        haul = h;
+        prod = p;
+        vehicle = v;
+        loc = l;
     }
-
-    public Pengangkutan buatPengangkutan(
-            int idPengangkutan,
-            int idProduksi,
-            PetugasOperasional petugasOperasional,
-            int idKendaraan,
-            Driver driver,
-            int idLokasiAsal,
-            int idLokasiTujuan,
-            LocalDate tanggalPengangkutan,
-            double jumlahMuatan) {
-
-        if (idPengangkutan <= 0) {
-            throw new ValidationException("ID pengangkutan tidak valid.");
-        }
-
-        if (pengangkutanRepository.findById(idPengangkutan).isPresent()) {
-            throw new ValidationException("ID pengangkutan sudah digunakan.");
-        }
-
-        validasiPetugasOperasional(petugasOperasional);
-        ProduksiTambang produksi = getProduksiOrThrow(idProduksi);
-        Kendaraan kendaraan = getKendaraanOrThrow(idKendaraan);
-        Lokasi lokasiAsal = getLokasiOrThrow(idLokasiAsal);
-        Lokasi lokasiTujuan = getLokasiOrThrow(idLokasiTujuan);
-
-        if (driver == null) {
-            throw new ValidationException("Driver wajib dipilih.");
-        }
-
-        if (tanggalPengangkutan == null) {
-            throw new ValidationException("Tanggal pengangkutan wajib diisi.");
-        }
-        
-        if (tanggalPengangkutan.isBefore(LocalDate.now())) {
-            throw new ValidationException(
-                    "Tanggal pengangkutan tidak boleh sebelum hari ini."
-            );
-        }
-
-        if (jumlahMuatan <= 0) {
-            throw new ValidationException("Jumlah muatan harus lebih dari 0.");
-        }
-
-        validasiProduksi(produksi, jumlahMuatan);
-        
-        if (produksi.getTanggalProduksi() != null && tanggalPengangkutan.isBefore(produksi.getTanggalProduksi())) {
-            throw new ValidationException(
-                    "Tanggal pengangkutan tidak boleh sebelum tanggal produksi."
-            );
-        }
-        
-        validasiKendaraan(kendaraan, jumlahMuatan);
-        validasiDriver(driver);
-        validasiLokasi(produksi, lokasiAsal, lokasiTujuan);
-        validasiKetersediaanJadwal(kendaraan, driver, tanggalPengangkutan);
-        double tersediaUntukDijadwalkan = hitungMaterialTersediaUntukDijadwalkan(produksi);
-
-        if (jumlahMuatan - tersediaUntukDijadwalkan > EPSILON) {
-            throw new ValidationException("Jumlah muatan melebihi material yang tersedia untuk dijadwalkan. Tersedia: " + tersediaUntukDijadwalkan);
-        }
-
-        Pengangkutan pengangkutan =
-                new Pengangkutan(
-                        idPengangkutan,
-                        produksi,
-                        petugasOperasional,
-                        kendaraan,
-                        driver,
-                        lokasiAsal,
-                        lokasiTujuan,
-                        tanggalPengangkutan,
-                        null,
-                        null,
-                        jumlahMuatan,
-                        StatusPengangkutan.DIJADWALKAN
-                );
-
-        pengangkutanRepository.save(pengangkutan);
-        return pengangkutan;
+    private static void require(boolean b, String msg) {
+        if (!b)throw new ValidationException(msg);
     }
-
-    public void mulaiPengangkutan(
-            int idPengangkutan) {
-
-        Pengangkutan pengangkutan = getPengangkutanOrThrow(idPengangkutan);
-
-        if (pengangkutan.getStatusPengangkutan()
-                != StatusPengangkutan.DIJADWALKAN) {
-
-            throw new ValidationException(
-                    "Hanya pengangkutan berstatus DIJADWALKAN yang dapat dimulai."
-            );
-        }
-
-        Kendaraan kendaraan = pengangkutan.getKendaraan();
-        Driver driver = pengangkutan.getDriver();
-
-        if (kendaraan.getStatusKendaraan()
-                != StatusKendaraan.TERSEDIA) {
-
-            throw new ValidationException(
-                    "Kendaraan sedang tidak tersedia."
-            );
-        }
-
-        if (driver.getStatusDriver()
-                != StatusDriver.TERSEDIA) {
-
-            throw new ValidationException(
-                    "Driver sedang tidak tersedia."
-            );
-        }
-
-        validasiDriver(driver);
-        kendaraan.setStatusKendaraan(StatusKendaraan.DIGUNAKAN);
-        driver.setStatusDriver(StatusDriver.BERTUGAS);
-        pengangkutan.setWaktuMulai(LocalDateTime.now());
-        pengangkutan.setStatusPengangkutan(StatusPengangkutan.DALAM_PERJALANAN);
-        kendaraanRepository.update(kendaraan);
-        pengangkutanRepository.update(pengangkutan);
+    private static boolean validAmount(double v) {
+        return Double.isFinite(v) && v>0 && Math.abs(v*100-Math.rint(v*100))<0.00001;
     }
-
-    public void selesaikanPengangkutan(
-            int idPengangkutan) {
-
-        Pengangkutan pengangkutan =
-                getPengangkutanOrThrow(
-                        idPengangkutan
-                );
-
-        if (pengangkutan.getStatusPengangkutan()
-                != StatusPengangkutan.DALAM_PERJALANAN) {
-
-            throw new ValidationException(
-                    "Hanya pengangkutan DALAM_PERJALANAN yang dapat diselesaikan."
-            );
-        }
-
-        ProduksiTambang produksi = pengangkutan.getProduksi();
-        Kendaraan kendaraan = pengangkutan.getKendaraan();
-        Driver driver = pengangkutan.getDriver();
-        double sisa = produksi.getJumlahTersedia() - pengangkutan.getJumlahMuatan();
-
-        if (sisa < -EPSILON) {
-            throw new ValidationException(
-                    "Jumlah material produksi tidak mencukupi."
-            );
-        }
-
-        if (Math.abs(sisa) <= EPSILON) {
-            sisa = 0;
-        }
-
-        produksi.setJumlahTersedia(sisa);
-
-        if (sisa <= EPSILON) {
-            produksi.setJumlahTersedia(0);
-            produksi.setStatusProduksi(
-                    StatusProduksi.HABIS
-            );
-        } else if (sisa
-                < produksi.getJumlahProduksi()) {
-
-            produksi.setStatusProduksi(
-                    StatusProduksi.SEBAGIAN_DIANGKUT
-            );
-        } else {
-            produksi.setStatusProduksi(
-                    StatusProduksi.TERSEDIA
-            );
-        }
-
-        kendaraan.setStatusKendaraan(StatusKendaraan.TERSEDIA);
-        driver.setStatusDriver(StatusDriver.TERSEDIA);
-        pengangkutan.setWaktuSelesai(LocalDateTime.now());
-        pengangkutan.setStatusPengangkutan(StatusPengangkutan.SELESAI);
-        produksiRepository.update(produksi);
-        kendaraanRepository.update(kendaraan);
-        pengangkutanRepository.update(pengangkutan);
+    private Pengangkutan get(int id) {
+        return haul.findById(id).orElseThrow(()->new DataNotFoundException("Pengangkutan tidak ditemukan."));
     }
-
-    public void batalkanPengangkutan(
-            int idPengangkutan) {
-
-        Pengangkutan pengangkutan =
-                getPengangkutanOrThrow(
-                        idPengangkutan
-                );
-
-        if (pengangkutan.getStatusPengangkutan()
-                != StatusPengangkutan.DIJADWALKAN) {
-
-            throw new ValidationException(
-                    "Hanya pengangkutan DIJADWALKAN yang dapat dibatalkan."
-            );
+    public Pengangkutan buatPengangkutan(int id, int idProd, PetugasOperasional ops, int idVehicle,
+            model.Driver driver, int idAsal, int idTujuan, LocalDate date, double amount) {
+        require(id == 0,"ID baru harus 0.");
+        require(ops != null && ops.getStatusPegawai() == StatusPegawai.AKTIF,"Petugas operasional tidak aktif.");
+        require(driver != null && driver.getStatusPegawai() == StatusPegawai.AKTIF
+ && driver.getStatusDriver() == StatusDriver.TERSEDIA,"Driver tidak tersedia.");
+        require(date != null && !date.isBefore(LocalDate.now()),"Tanggal pengangkutan tidak valid.");
+        require(driver.isSimAktif(date),"SIM driver tidak berlaku pada tanggal pengangkutan.");
+        require(validAmount(amount),"Muatan harus positif dengan maksimal 2 desimal.");
+        ProduksiTambang p = prod.findById(idProd).orElseThrow(()->new DataNotFoundException("Produksi tidak ditemukan."));
+        Kendaraan v = vehicle.findById(idVehicle).orElseThrow(()->new DataNotFoundException("Kendaraan tidak ditemukan."));
+        Lokasi a = loc.findById(idAsal).orElseThrow(()->new DataNotFoundException("Lokasi asal tidak ditemukan."));
+        Lokasi t = loc.findById(idTujuan).orElseThrow(()->new DataNotFoundException("Lokasi tujuan tidak ditemukan."));
+        require(!date.isBefore(p.getTanggalProduksi()),"Tanggal pengangkutan sebelum produksi.");
+        require(v.getStatusKendaraan() == StatusKendaraan.TERSEDIA && amount <= v.getKapasitas(),
+                "Kendaraan tidak tersedia atau kapasitas terlampaui.");
+        require(a.getIdLokasi() != t.getIdLokasi() && p.getLokasi().getIdLokasi() == a.getIdLokasi()
+ && a.getStatusOperasional() == StatusLokasi.AKTIF
+ && t.getStatusOperasional() == StatusLokasi.AKTIF && t.getJenisLokasi() == JenisLokasi.STOCKPILE,
+                "Lokasi asal/tujuan tidak valid.");
+        // Lock all shared scheduling resources in one transaction; insert in same transaction.
+        try(Connection c = DatabaseConfig.getConnection()) {
+            c.setAutoCommit(false);
+            try {
+                lock(c,"SELECT id_produksi FROM produksi_tambang WHERE id_produksi=? FOR UPDATE", idProd);
+                lock(c,"SELECT id_kendaraan FROM kendaraan WHERE id_kendaraan=? FOR UPDATE", idVehicle);
+                lock(c,"SELECT id_pegawai FROM driver WHERE id_pegawai=? FOR UPDATE", driver.getIdPegawai());
+                double available;
+                try(PreparedStatement ps = c.prepareStatement("SELECT jumlah_tersedia-(SELECT COALESCE(SUM(jumlah_muatan),0) FROM pengangkutan WHERE produksi_tambang_id_produksi=? AND status_pengangkutan IN ('DIJADWALKAN','DALAM_PERJALANAN')) AS available FROM produksi_tambang WHERE id_produksi=?")) {
+                    ps.setInt(1, idProd);
+                    ps.setInt(2, idProd);
+                    try(ResultSet rs = ps.executeQuery()) {
+                        if (!rs.next())throw new DataNotFoundException("Produksi tidak ditemukan.");
+                        available = rs.getDouble(1);
+                    }
+                }
+                require(amount <= available+0.000001,"Stok yang belum dipesan tidak mencukupi.");
+                try(PreparedStatement ps = c.prepareStatement("SELECT COUNT(*) FROM pengangkutan WHERE (kendaraan_id_kendaraan=? OR driver_id_pegawai=?) AND (status_pengangkutan='DALAM_PERJALANAN' OR (status_pengangkutan='DIJADWALKAN' AND tanggal_pengangkutan=?))")) {
+                    ps.setInt(1, idVehicle);
+                    ps.setInt(2, driver.getIdPegawai());
+                    ps.setDate(3, java.sql.Date.valueOf(date));
+                    try(ResultSet rs = ps.executeQuery()) {
+                        rs.next();
+                        require(rs.getInt(1) == 0,"Driver/kendaraan memiliki jadwal bentrok.");
+                    }
+                }
+                int newId;
+                String sql = "INSERT INTO pengangkutan (tanggal_pengangkutan,waktu_mulai,waktu_selesai,jumlah_muatan,status_pengangkutan,produksi_tambang_id_produksi,kendaraan_id_kendaraan,lokasi_id_lokasi,lokasi_tujuan_id_lokasi,petugas_operasional_id_pegawai,driver_id_pegawai) VALUES (?,NULL,NULL,?,'DIJADWALKAN',?,?,?,?,?,?)";
+                try(PreparedStatement ps = c.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+                    ps.setDate(1, java.sql.Date.valueOf(date));
+                    ps.setBigDecimal(2, java.math.BigDecimal.valueOf(amount));
+                    ps.setInt(3, idProd);
+                    ps.setInt(4, idVehicle);
+                    ps.setInt(5, idAsal);
+                    ps.setInt(6, idTujuan);
+                    ps.setInt(7, ops.getIdPegawai());
+                    ps.setInt(8, driver.getIdPegawai());
+                    ps.executeUpdate();
+                    try(ResultSet rs = ps.getGeneratedKeys()) {
+                        if (!rs.next())throw new SQLException("ID pengangkutan tidak ditemukan.");
+                        newId = rs.getInt(1);
+                    }
+                }
+                c.commit();
+                return get(newId);
+            }
+            catch (Exception e) {
+                c.rollback();
+                throw e;
+            }
         }
-
-        pengangkutan.setStatusPengangkutan(StatusPengangkutan.DIBATALKAN);
-
-        pengangkutanRepository.update(
-                pengangkutan
-        );
+        catch (SQLException e) {
+            throw new IllegalStateException("Gagal membuat pengangkutan: "+e.getMessage(), e);
+        }
     }
-
-    public double hitungMaterialTersediaUntukDijadwalkan(
-            ProduksiTambang produksi) {
-
-        if (produksi == null) {
-            return 0;
+    public Pengangkutan buatPengangkutan(int idProd, PetugasOperasional ops, int idVehicle, model.Driver d,
+            int asal, int tujuan, LocalDate date, double amount) {
+        return buatPengangkutan(0, idProd, ops, idVehicle, d, asal, tujuan, date, amount);
+    }
+    private static void lock(Connection c, String sql, int id)throws SQLException {
+        try(PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            try(ResultSet rs = ps.executeQuery()) {
+                if (!rs.next())throw new DataNotFoundException("Data terkait tidak ditemukan.");
+            }
         }
-
+    }
+    private static int update(Connection c, String sql, int id)throws SQLException {
+        try(PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, id);
+            return ps.executeUpdate();
+        }
+    }
+    public void mulaiPengangkutan(int id) {
+        try(Connection c = DatabaseConfig.getConnection()) {
+            c.setAutoCommit(false);
+            try {
+                int idVehicle, idDriver, idAsal, idTujuan;
+                LocalDate date;
+                try(PreparedStatement ps = c.prepareStatement("SELECT kendaraan_id_kendaraan,driver_id_pegawai,lokasi_id_lokasi,lokasi_tujuan_id_lokasi,tanggal_pengangkutan,status_pengangkutan FROM pengangkutan WHERE id_pengangkutan=? FOR UPDATE")) {
+                    ps.setInt(1, id);
+                    try(ResultSet rs = ps.executeQuery()) {
+                        if (!rs.next())throw new DataNotFoundException("Pengangkutan tidak ditemukan.");
+                        require("DIJADWALKAN".equals(rs.getString("status_pengangkutan")),
+                                "Pengangkutan bukan DIJADWALKAN.");
+                        idVehicle = rs.getInt(1);
+                        idDriver = rs.getInt(2);
+                        idAsal = rs.getInt(3);
+                        idTujuan = rs.getInt(4);
+                        date = rs.getDate(5).toLocalDate();
+                    }
+                }
+                require(date.equals(LocalDate.now()),
+                        "Pengangkutan hanya dapat dimulai pada tanggal jadwal.");
+                lock(c,"SELECT id_lokasi FROM lokasi WHERE id_lokasi=? AND status_operasional='AKTIF' FOR UPDATE", idAsal);
+                lock(c,"SELECT id_lokasi FROM lokasi WHERE id_lokasi=? AND status_operasional='AKTIF' FOR UPDATE", idTujuan);
+                require(update(c,"UPDATE kendaraan SET status_kendaraan='DIGUNAKAN' WHERE id_kendaraan=? AND status_kendaraan='TERSEDIA'", idVehicle) == 1,"Kendaraan tidak tersedia.");
+                require(update(c,"UPDATE driver SET status_driver='BERTUGAS' WHERE id_pegawai=? AND status_driver='TERSEDIA' AND masa_berlaku_sim>=CURRENT_DATE()", idDriver) == 1,"Driver tidak tersedia atau SIM kedaluwarsa.");
+                require(update(c,"UPDATE pengangkutan SET status_pengangkutan='DALAM_PERJALANAN',waktu_mulai=NOW() WHERE id_pengangkutan=? AND status_pengangkutan='DIJADWALKAN'", id) == 1,"Gagal memulai pengangkutan.");
+                c.commit();
+            }
+            catch (Exception e) {
+                c.rollback();
+                throw e;
+            }
+        }
+        catch (SQLException e) {
+            throw new IllegalStateException("Gagal memulai pengangkutan", e);
+        }
+    }
+    public void selesaikanPengangkutan(int id) {
+        try(Connection c = DatabaseConfig.getConnection()) {
+            c.setAutoCommit(false);
+            try {
+                int prodId, vId, dId;
+                double amount;
+                try(PreparedStatement ps = c.prepareStatement("SELECT produksi_tambang_id_produksi,kendaraan_id_kendaraan,driver_id_pegawai,jumlah_muatan,status_pengangkutan FROM pengangkutan WHERE id_pengangkutan=? FOR UPDATE")) {
+                    ps.setInt(1, id);
+                    try(ResultSet rs = ps.executeQuery()) {
+                        if (!rs.next())throw new DataNotFoundException("Pengangkutan tidak ditemukan.");
+                        require("DALAM_PERJALANAN".equals(rs.getString(5)),
+                                "Pengangkutan belum dalam perjalanan.");
+                        prodId = rs.getInt(1);
+                        vId = rs.getInt(2);
+                        dId = rs.getInt(3);
+                        amount = rs.getDouble(4);
+                    }
+                }
+                try(PreparedStatement ps = c.prepareStatement("UPDATE produksi_tambang SET status_produksi=CASE WHEN jumlah_tersedia-?<=0 THEN 'HABIS' WHEN jumlah_tersedia-?<jumlah_produksi THEN 'SEBAGIAN_DIANGKUT' ELSE 'TERSEDIA' END,jumlah_tersedia=jumlah_tersedia-? WHERE id_produksi=? AND jumlah_tersedia>=?")) {
+                    for (int i = 1;i <= 3;i++)ps.setBigDecimal(i, java.math.BigDecimal.valueOf(amount));
+                    ps.setInt(4, prodId);
+                    ps.setBigDecimal(5, java.math.BigDecimal.valueOf(amount));
+                    require(ps.executeUpdate() == 1,"Stok produksi tidak cukup.");
+                }
+                require(update(c,"UPDATE kendaraan SET status_kendaraan='TERSEDIA' WHERE id_kendaraan=? AND status_kendaraan='DIGUNAKAN'", vId) == 1,"Status kendaraan tidak sesuai.");
+                require(update(c,"UPDATE driver SET status_driver='TERSEDIA' WHERE id_pegawai=? AND status_driver='BERTUGAS'", dId) == 1,"Status driver tidak sesuai.");
+                require(update(c,"UPDATE pengangkutan SET status_pengangkutan='SELESAI',waktu_selesai=NOW() WHERE id_pengangkutan=? AND status_pengangkutan='DALAM_PERJALANAN'", id) == 1,"Gagal menyelesaikan pengangkutan.");
+                c.commit();
+            }
+            catch (Exception e) {
+                c.rollback();
+                throw e;
+            }
+        }
+        catch (SQLException e) {
+            throw new IllegalStateException("Gagal menyelesaikan pengangkutan", e);
+        }
+    }
+    public void batalkanPengangkutan(int id) {
+        try(Connection c = DatabaseConfig.getConnection();PreparedStatement ps = c.prepareStatement("UPDATE pengangkutan SET status_pengangkutan='DIBATALKAN' WHERE id_pengangkutan=? AND status_pengangkutan='DIJADWALKAN'")) {
+            ps.setInt(1, id);
+            require(ps.executeUpdate() == 1,"Hanya pengangkutan DIJADWALKAN yang dapat dibatalkan.");
+        }
+        catch (SQLException e) {
+            throw new IllegalStateException("Gagal membatalkan pengangkutan", e);
+        }
+    }
+    public double hitungMaterialTersediaUntukDijadwalkan(ProduksiTambang p) {
+        if (p == null)return 0;
         double reserved = 0;
-
-        List<Pengangkutan> daftar =
-                pengangkutanRepository
-                .findByProduksi(
-                        produksi.getIdProduksi()
-                );
-
-        for (Pengangkutan pengangkutan : daftar) {
-
-            if (pengangkutan.getStatusPengangkutan()
-                    == StatusPengangkutan.DIJADWALKAN
-                    || pengangkutan.getStatusPengangkutan()
-                    == StatusPengangkutan.DALAM_PERJALANAN) {
-
-                reserved +=
-                        pengangkutan.getJumlahMuatan();
-            }
-        }
-
-        double tersedia =
-                produksi.getJumlahTersedia()
-                        - reserved;
-
-        return tersedia < EPSILON
-                ? 0
-                : tersedia;
+        for (Pengangkutan x:haul.findByProduksi(p.getIdProduksi()))if (x.getStatusPengangkutan() == StatusPengangkutan.DIJADWALKAN || x.getStatusPengangkutan() == StatusPengangkutan.DALAM_PERJALANAN)reserved+=x.getJumlahMuatan();
+        return Math.max(0, p.getJumlahTersedia()-reserved);
     }
-
-    public Pengangkutan cariPengangkutanById(
-            int idPengangkutan) {
-
-        return getPengangkutanOrThrow(
-                idPengangkutan
-        );
+    public Pengangkutan cariPengangkutanById(int id) {
+        return get(id);
     }
-
-    public List<Pengangkutan>
-            tampilkanSemuaPengangkutan() {
-
-        return pengangkutanRepository.findAll();
-    }
-
-    private void validasiPetugasOperasional(
-            PetugasOperasional petugas) {
-
-        if (petugas == null) {
-            throw new ValidationException(
-                    "Petugas Operasional tidak tersedia."
-            );
-        }
-
-        if (petugas.getStatusPegawai()
-                != StatusPegawai.AKTIF) {
-
-            throw new ValidationException(
-                    "Petugas Operasional tidak aktif."
-            );
-        }
-    }
-
-    private void validasiProduksi(
-            ProduksiTambang produksi,
-            double jumlahMuatan) {
-
-        if (produksi.getStatusProduksi()
-                == StatusProduksi.HABIS) {
-
-            throw new ValidationException(
-                    "Produksi sudah habis."
-            );
-        }
-
-        if (produksi.getJumlahTersedia()
-                + EPSILON < jumlahMuatan) {
-
-            throw new ValidationException(
-                    "Jumlah muatan melebihi jumlah material tersedia."
-            );
-        }
-    }
-
-    private void validasiKendaraan(
-            Kendaraan kendaraan,
-            double jumlahMuatan) {
-
-        if (kendaraan.getStatusKendaraan()
-                != StatusKendaraan.TERSEDIA) {
-
-            throw new ValidationException(
-                    "Kendaraan tidak tersedia."
-            );
-        }
-
-        if (jumlahMuatan
-                - kendaraan.getKapasitas() > EPSILON) {
-
-            throw new ValidationException(
-                    "Jumlah muatan melebihi kapasitas kendaraan."
-            );
-        }
-    }
-
-    private void validasiDriver(Driver driver) {
-
-        if (driver.getStatusPegawai()
-                != StatusPegawai.AKTIF) {
-
-            throw new ValidationException(
-                    "Pegawai Driver tidak aktif."
-            );
-        }
-
-        if (driver.getStatusDriver()
-                != StatusDriver.TERSEDIA) {
-
-            throw new ValidationException(
-                    "Driver tidak tersedia."
-            );
-        }
-
-        if (!driver.isSimAktif(LocalDate.now())) {
-            throw new ValidationException(
-                    "SIM Driver sudah tidak berlaku."
-            );
-        }
-    }
-
-    private void validasiLokasi(
-            ProduksiTambang produksi,
-            Lokasi asal,
-            Lokasi tujuan) {
-
-        if (asal.getIdLokasi()
-                == tujuan.getIdLokasi()) {
-
-            throw new ValidationException(
-                    "Lokasi asal dan tujuan tidak boleh sama."
-            );
-        }
-
-        if (asal.getIdLokasi()
-                != produksi.getLokasi().getIdLokasi()) {
-
-            throw new ValidationException(
-                    "Lokasi asal harus sama dengan lokasi produksi."
-            );
-        }
-
-        if (asal.getStatusOperasional()
-                != StatusLokasi.AKTIF) {
-
-            throw new ValidationException(
-                    "Lokasi asal harus berstatus AKTIF."
-            );
-        }
-
-        if (tujuan.getStatusOperasional()
-                != StatusLokasi.AKTIF) {
-
-            throw new ValidationException(
-                    "Lokasi tujuan harus berstatus AKTIF."
-            );
-        }
-    }
-
-    private void validasiKetersediaanJadwal(
-        Kendaraan kendaraan,
-        Driver driver,
-        LocalDate tanggalPengangkutan) {
-
-        for (Pengangkutan existing :
-                pengangkutanRepository.findAll()) {
-
-            StatusPengangkutan status =
-                    existing.getStatusPengangkutan();
-
-            boolean aktif =
-                    status == StatusPengangkutan.DIJADWALKAN
-                    || status == StatusPengangkutan.DALAM_PERJALANAN;
-
-            if (!aktif) {
-                continue;
-            }
-
-            if (status == StatusPengangkutan.DALAM_PERJALANAN) {
-
-                if (existing.getKendaraan() != null
-                        && existing.getKendaraan()
-                        .getIdKendaraan()
-                        == kendaraan.getIdKendaraan()) {
-
-                    throw new ValidationException(
-                            "Kendaraan sedang digunakan pada pengangkutan lain."
-                    );
-                }
-
-                if (existing.getDriver() != null
-                        && existing.getDriver()
-                        .getIdPegawai()
-                        == driver.getIdPegawai()) {
-
-                    throw new ValidationException(
-                            "Driver sedang bertugas pada pengangkutan lain."
-                    );
-                }
-
-                continue;
-            }
-
-            if (existing.getTanggalPengangkutan() == null
-                    || !existing.getTanggalPengangkutan()
-                    .equals(tanggalPengangkutan)) {
-                continue;
-            }
-
-            if (existing.getKendaraan() != null
-                    && existing.getKendaraan()
-                    .getIdKendaraan()
-                    == kendaraan.getIdKendaraan()) {
-
-                throw new ValidationException(
-                        "Kendaraan sudah dijadwalkan pada tanggal tersebut."
-                );
-            }
-
-            if (existing.getDriver() != null
-                    && existing.getDriver()
-                    .getIdPegawai()
-                    == driver.getIdPegawai()) {
-
-                throw new ValidationException(
-                        "Driver sudah dijadwalkan pada tanggal tersebut."
-                );
-            }
-        }
-    }
-
-    private Pengangkutan getPengangkutanOrThrow(
-            int idPengangkutan) {
-
-        Optional<Pengangkutan> data =
-                pengangkutanRepository
-                .findById(idPengangkutan);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "Pengangkutan tidak ditemukan."
-            );
-        }
-
-        return data.get();
-    }
-
-    private ProduksiTambang getProduksiOrThrow(
-            int idProduksi) {
-
-        Optional<ProduksiTambang> data =
-                produksiRepository
-                .findById(idProduksi);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "Produksi tidak ditemukan."
-            );
-        }
-
-        return data.get();
-    }
-
-    private Kendaraan getKendaraanOrThrow(
-            int idKendaraan) {
-
-        Optional<Kendaraan> data =
-                kendaraanRepository
-                .findById(idKendaraan);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "Kendaraan tidak ditemukan."
-            );
-        }
-
-        return data.get();
-    }
-
-    private Lokasi getLokasiOrThrow(
-            int idLokasi) {
-
-        Optional<Lokasi> data =
-                lokasiRepository.findById(idLokasi);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "Lokasi tidak ditemukan."
-            );
-        }
-
-        return data.get();
+    public List<Pengangkutan> tampilkanSemuaPengangkutan() {
+        return haul.findAll();
     }
 }

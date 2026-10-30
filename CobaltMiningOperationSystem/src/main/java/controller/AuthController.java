@@ -4,8 +4,7 @@
  */
 package controller;
 
-import model.Pegawai;
-import model.User;
+import model.*;
 import service.AuthService;
 
 /**
@@ -13,46 +12,46 @@ import service.AuthService;
  * @author zefrialrizkullah
  */
 
-public class AuthController {
-    private final AuthService authService;
-
-    public AuthController(AuthService authService) {
-        this.authService = authService;
+public final class AuthController {
+    private final AuthService auth;
+    
+    public AuthController(AuthService auth) {
+        this.auth = auth;
     }
-
-    public User login(String username, String password) {
-        return authService.login(username, password);
+    
+    public User login(String u, String p) {
+        return auth.login(u, p);
     }
-
+    
     public void logout() {
-        authService.logout();
+        auth.logout();
     }
-
+    
     public boolean isLoggedIn() {
-        return authService.isLoggedIn();
+        return auth.isLoggedIn();
     }
-
+    
     public User getCurrentUser() {
-        return authService.getCurrentUser();
+        return auth.getCurrentUser();
     }
-
+    
     public Pegawai getCurrentPegawai() {
-        return authService.getCurrentPegawai();
+        return auth.getCurrentPegawai();
     }
-
+    
     public boolean isAdmin() {
-        return authService.isAdmin();
+        return auth.isAdmin();
     }
-
+    
     public boolean isPetugasOperasional() {
-        return authService.isPetugasOperasional();
+        return auth.isPetugasOperasional();
     }
-
+    
     public boolean isPetugasHSE() {
-        return authService.isPetugasHSE();
+        return auth.isPetugasHSE();
     }
-
+    
     public boolean isManager() {
-        return authService.isManager();
+        return auth.isManager();
     }
 }

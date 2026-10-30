@@ -1,0 +1,22 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="Relation_38" directorySegmentName="seg_0" id="2D73F3F5-0871-7E23-9B9A-6625A4F4AC91">
+<createdBy>zefrialrizkullah</createdBy>
+<createdTime>2026-10-20 12:27:05 UTC</createdTime>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<engineerTo>
+<item key="02F95D16-CEDF-3032-0A10-003B6B40C7D5" value="true"/>
+</engineerTo>
+<sourcePk>F417CC8A-829B-CC57-84E1-7E3355338FA4</sourcePk>
+<targetPk>7908A98C-27DC-F0C1-1AF5-544BA209EFBA</targetPk>
+<identifying>false</identifying>
+<nameOnSource>Dimiliki</nameOnSource>
+<nameOnTarget>Memiliki</nameOnTarget>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>914AB906-6538-5D71-C807-4E2F9761219A</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>D1DD7835-DC0B-8221-3722-DB4E8D8A7236</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

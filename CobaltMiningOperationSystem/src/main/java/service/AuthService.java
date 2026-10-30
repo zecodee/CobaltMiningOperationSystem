@@ -7,142 +7,69 @@ package service;
 
 import enums.StatusPegawai;
 import exception.ValidationException;
-import model.Admin;
-import model.Driver;
-import model.Manager;
-import model.Pegawai;
-import model.PetugasHSE;
-import model.PetugasOperasional;
-import model.User;
+import model.*;
 import repository.UserRepository;
-import java.util.Optional;
+import util.PasswordUtil;
 
 /**
  *
  * @author zefrialrizkullah
  */
 
-public class AuthService {
-    private final UserRepository userRepository;
-    private User currentUser;
-
-    public AuthService(UserRepository userRepository) {
-        this.userRepository = userRepository;
+public final class AuthService {
+    private final UserRepository users;
+    private User current;
+    public AuthService(UserRepository users) {
+        this.users = users;
     }
-
     public User login(String username, String password) {
-        if (username == null || username.trim().isEmpty()) {
-            throw new ValidationException(
-                    "Username wajib diisi."
-            );
-        }
-
-        if (password == null || password.trim().isEmpty()) {
-            throw new ValidationException(
-                    "Password wajib diisi."
-            );
-        }
-
-        Optional<User> data =
-                userRepository.findByUsername(
-                        username.trim()
-                );
-
-        if (!data.isPresent()) {
-            throw new ValidationException(
-                    "Username atau password salah."
-            );
-        }
-
-        User user = data.get();
-
-        if (!user.getPassword().equals(password)) {
-            throw new ValidationException(
-                    "Username atau password salah."
-            );
-        }
-
-        if (user.getPegawai() == null) {
-            throw new ValidationException(
-                    "Akun tidak terhubung dengan data Pegawai."
-            );
-        }
-
-        if (user.getPegawai().getStatusPegawai()
-                != StatusPegawai.AKTIF) {
-
-            throw new ValidationException(
-                    "Pegawai pemilik akun sudah tidak aktif."
-            );
-        }
-
-        if (user.getPegawai() instanceof Driver) {
-            throw new ValidationException(
-                    "Driver tidak memiliki akses login ke C-MOS."
-            );
-        }
-
-        if (!(user.getPegawai() instanceof Admin)
-                && !(user.getPegawai()
-                instanceof PetugasOperasional)
-                && !(user.getPegawai()
-                instanceof PetugasHSE)
-                && !(user.getPegawai()
-                instanceof Manager)) {
-
-            throw new ValidationException(
-                    "Jenis Pegawai tidak memiliki hak akses aplikasi."
-            );
-        }
-
-        currentUser = user;
-
-        return user;
+        if (username == null || username.trim().isEmpty() || password == null
+ || password.isEmpty())throw new ValidationException("Username dan password wajib diisi.");
+        User u = users.findByUsername(username.trim()).orElseThrow(()->new ValidationException("Username atau password salah."));
+        if (!PasswordUtil.verifyPassword(password,
+                u.getPassword()))throw new ValidationException("Username atau password salah.");
+        Pegawai p = u.getPegawai();
+        if (p == null || p.getStatusPegawai() != StatusPegawai.AKTIF)throw new ValidationException("Pegawai tidak aktif atau tidak ditemukan.");
+        if (!(p instanceof Admin || p instanceof PetugasOperasional || p instanceof PetugasHSE
+ || p instanceof Manager))throw new ValidationException("Tidak memiliki akses login.");
+        current = u;
+        return u;
     }
-
     public void logout() {
-        currentUser = null;
+        current = null;
     }
-
     public boolean isLoggedIn() {
-        return currentUser != null;
+        return current != null;
     }
-
     public User getCurrentUser() {
-        if (currentUser == null) {
-            throw new ValidationException(
-                    "Belum ada User yang login."
-            );
-        }
-
-        return currentUser;
+        if (current == null)throw new ValidationException("Belum login.");
+        return current;
     }
-
     public Pegawai getCurrentPegawai() {
         return getCurrentUser().getPegawai();
     }
-
     public boolean isAdmin() {
-        return isLoggedIn()
-                && currentUser.getPegawai()
-                instanceof Admin;
+        return isLoggedIn() && getCurrentPegawai() instanceof Admin;
     }
-
     public boolean isPetugasOperasional() {
-        return isLoggedIn()
-                && currentUser.getPegawai()
-                instanceof PetugasOperasional;
+        return isLoggedIn() && getCurrentPegawai() instanceof PetugasOperasional;
     }
-
     public boolean isPetugasHSE() {
-        return isLoggedIn()
-                && currentUser.getPegawai()
-                instanceof PetugasHSE;
+        return isLoggedIn() && getCurrentPegawai() instanceof PetugasHSE;
     }
-
     public boolean isManager() {
-        return isLoggedIn()
-                && currentUser.getPegawai()
-                instanceof Manager;
+        return isLoggedIn() && getCurrentPegawai() instanceof Manager;
+    }
+    public void requireAdmin() {
+        if (!isAdmin())throw new ValidationException("Hanya Admin.");
+    }
+    public void requirePetugasOperasional() {
+        if (!isPetugasOperasional())throw new ValidationException("Hanya Petugas Operasional.");
+    }
+    public void requirePetugasHSE() {
+        if (!isPetugasHSE())throw new ValidationException("Hanya Petugas HSE.");
+    }
+    public void requireManager() {
+        if (!isManager())throw new ValidationException("Hanya Manager.");
     }
 }

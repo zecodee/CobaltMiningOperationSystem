@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="EDC70817-752E-C591-13B9-9C3DBCF79281" containerWithKeyObject="75DF5FEA-B5CC-894D-BF3A-F5BBEBF87635" localFKIndex="187227D9-FC5B-DCFF-849D-DB8ED479912E" name="Pengangkutan_petugas_operasional_FK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 13:08:07 UTC</createdTime>
+<generatorID>298EF0D2-F81F-3F2F-865D-0BDC639581D8</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<referredTableLongName>petugas_operasional</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>6ED88564-8F52-1D83-404D-A3E9BFB9FA53</referredTableID>
+<keyObject>0782C5FD-C0FD-8412-013F-2B30EC9E5934</keyObject>
+<referredKeyID>0782C5FD-C0FD-8412-013F-2B30EC9E5934</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_pegawai2</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

@@ -9,8 +9,12 @@ package exception;
  * @author zefrialrizkullah
  */
 
-public class DataNotFoundException extends BusinessException {
-    public DataNotFoundException(String message) {
-        super(message);
+public class DataNotFoundException extends RuntimeException {
+    public DataNotFoundException(String m) {
+        super(m);
+    }
+    
+    public DataNotFoundException(String m, Throwable e) {
+        super(m, e);
     }
 }

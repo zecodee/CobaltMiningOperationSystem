@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="resizable" type="boolean" value="false"/>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="3"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+        <Group type="102" attributes="0">
+          <EmptySpace min="34" pref="34" max="34" attributes="0"/>
+          <Component id="lblTitle" min="650" pref="650" max="650" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="35" pref="35" max="35" attributes="0"/>
+          <Component id="lblHint" min="650" pref="650" max="650" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="35" pref="35" max="35" attributes="0"/>
+          <Component id="lblNama" min="260" pref="260" max="260" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="310" pref="310" max="310" attributes="0"/>
+          <Component id="txtNama" min="365" pref="365" max="365" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="35" pref="35" max="35" attributes="0"/>
+          <Component id="lblSatuan" min="260" pref="260" max="260" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="310" pref="310" max="310" attributes="0"/>
+          <Component id="txtSatuan" min="365" pref="365" max="365" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="35" pref="35" max="35" attributes="0"/>
+          <Component id="lblDeskripsi" min="260" pref="260" max="260" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="310" pref="310" max="310" attributes="0"/>
+          <Component id="txtDeskripsi" min="365" pref="365" max="365" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="310" pref="310" max="310" attributes="0"/>
+          <Component id="btnSimpan" min="173" pref="173" max="173" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="501" pref="501" max="501" attributes="0"/>
+          <Component id="btnBatal" min="174" pref="174" max="174" attributes="0"/>
+        </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+        <Group type="102" attributes="0">
+          <EmptySpace min="24" pref="24" max="24" attributes="0"/>
+          <Component id="lblTitle" min="43" pref="43" max="43" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="69" pref="69" max="69" attributes="0"/>
+          <Component id="lblHint" min="25" pref="25" max="25" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="115" pref="115" max="115" attributes="0"/>
+          <Component id="lblNama" min="32" pref="32" max="32" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="115" pref="115" max="115" attributes="0"/>
+          <Component id="txtNama" min="32" pref="32" max="32" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="162" pref="162" max="162" attributes="0"/>
+          <Component id="lblSatuan" min="32" pref="32" max="32" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="162" pref="162" max="162" attributes="0"/>
+          <Component id="txtSatuan" min="32" pref="32" max="32" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="209" pref="209" max="209" attributes="0"/>
+          <Component id="lblDeskripsi" min="32" pref="32" max="32" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="209" pref="209" max="209" attributes="0"/>
+          <Component id="txtDeskripsi" min="32" pref="32" max="32" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="271" pref="271" max="271" attributes="0"/>
+          <Component id="btnSimpan" min="42" pref="42" max="42" attributes="0"/>
+        </Group>
+        <Group type="102" attributes="0">
+          <EmptySpace min="271" pref="271" max="271" attributes="0"/>
+          <Component id="btnBatal" min="42" pref="42" max="42" attributes="0"/>
+        </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="lblTitle">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="FORM MATERIAL"/>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color red="1a" green="2b" blue="42" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SansSerif" size="22" style="1"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblHint">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Isi data sesuai ketentuan C-MOS."/>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color red="67" green="79" blue="8f" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SansSerif" size="12" style="1"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblNama">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Nama Material"/>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color red="1a" green="2b" blue="42" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtNama">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color red="ff" green="ff" blue="ff" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblSatuan">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Satuan"/>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color red="1a" green="2b" blue="42" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtSatuan">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color red="ff" green="ff" blue="ff" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="lblDeskripsi">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Deskripsi"/>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color red="1a" green="2b" blue="42" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="txtDeskripsi">
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color red="ff" green="ff" blue="ff" type="rgb"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnSimpan">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Simpan"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color red="2b" green="6a" blue="e6" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color red="ff" green="ff" blue="ff" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SansSerif" size="13" style="1"/>
+        </Property>
+        <Property name="focusPainted" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSimpanActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnBatal">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Batal"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color red="1a" green="2b" blue="42" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color red="ff" green="ff" blue="ff" type="rgb"/>
+        </Property>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SansSerif" size="13" style="1"/>
+        </Property>
+        <Property name="focusPainted" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBatalActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>

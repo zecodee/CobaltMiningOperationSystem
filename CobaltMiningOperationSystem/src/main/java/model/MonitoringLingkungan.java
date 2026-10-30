@@ -4,12 +4,6 @@
  */
 package model;
 
-import enums.StatusMonitoring;
-import enums.StatusPenanganan;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author zefrialrizkullah
@@ -19,14 +13,16 @@ public class MonitoringLingkungan {
     private int idMonitoring;
     private Lokasi lokasi;
     private PetugasHSE petugasHSE;
-    private LocalDateTime tanggalMonitoring;
-    private StatusMonitoring statusMonitoring;
+    private java.time.LocalDateTime tanggalMonitoring;
+    private enums.StatusMonitoring statusMonitoring;
     private String tindakLanjut;
-    private StatusPenanganan statusPenanganan;
+    private enums.StatusPenanganan statusPenanganan;
     private String catatan;
-    private List<DetailMonitoring> detailMonitoring;
-
-    public MonitoringLingkungan(int idMonitoring, Lokasi lokasi, PetugasHSE petugasHSE, LocalDateTime tanggalMonitoring, StatusMonitoring statusMonitoring, String tindakLanjut, StatusPenanganan statusPenanganan, String catatan) {
+    private final java.util.List<DetailMonitoring> detailMonitoring = new java.util.ArrayList<>();
+    
+    public MonitoringLingkungan(int idMonitoring, Lokasi lokasi, PetugasHSE petugasHSE,
+            java.time.LocalDateTime tanggalMonitoring, enums.StatusMonitoring statusMonitoring,
+            String tindakLanjut, enums.StatusPenanganan statusPenanganan, String catatan) {
         this.idMonitoring = idMonitoring;
         this.lokasi = lokasi;
         this.petugasHSE = petugasHSE;
@@ -35,89 +31,82 @@ public class MonitoringLingkungan {
         this.tindakLanjut = tindakLanjut;
         this.statusPenanganan = statusPenanganan;
         this.catatan = catatan;
-        this.detailMonitoring = new ArrayList<DetailMonitoring>();
     }
-
+    
     public int getIdMonitoring() {
         return idMonitoring;
     }
-
-    public void setIdMonitoring(int idMonitoring) {
-        this.idMonitoring = idMonitoring;
+    
+    public void setIdMonitoring(int value) {
+        this.idMonitoring = value;
     }
-
+    
     public Lokasi getLokasi() {
         return lokasi;
     }
-
-    public void setLokasi(Lokasi lokasi) {
-        this.lokasi = lokasi;
+    
+    public void setLokasi(Lokasi value) {
+        this.lokasi = value;
     }
-
+    
     public PetugasHSE getPetugasHSE() {
         return petugasHSE;
     }
-
-    public void setPetugasHSE(PetugasHSE petugasHSE) {
-        this.petugasHSE = petugasHSE;
+    
+    public void setPetugasHSE(PetugasHSE value) {
+        this.petugasHSE = value;
     }
-
-    public LocalDateTime getTanggalMonitoring() {
+    
+    public java.time.LocalDateTime getTanggalMonitoring() {
         return tanggalMonitoring;
     }
-
-    public void setTanggalMonitoring(LocalDateTime tanggalMonitoring) {
-        this.tanggalMonitoring = tanggalMonitoring;
+    
+    public void setTanggalMonitoring(java.time.LocalDateTime value) {
+        this.tanggalMonitoring = value;
     }
-
-    public StatusMonitoring getStatusMonitoring() {
+    
+    public enums.StatusMonitoring getStatusMonitoring() {
         return statusMonitoring;
     }
-
-    public void setStatusMonitoring(StatusMonitoring statusMonitoring) {
-        this.statusMonitoring = statusMonitoring;
+    
+    public void setStatusMonitoring(enums.StatusMonitoring value) {
+        this.statusMonitoring = value;
     }
-
+    
     public String getTindakLanjut() {
         return tindakLanjut;
     }
-
-    public void setTindakLanjut(String tindakLanjut) {
-        this.tindakLanjut = tindakLanjut;
+    
+    public void setTindakLanjut(String value) {
+        this.tindakLanjut = value;
     }
-
-    public StatusPenanganan getStatusPenanganan() {
+    
+    public enums.StatusPenanganan getStatusPenanganan() {
         return statusPenanganan;
     }
-
-    public void setStatusPenanganan(StatusPenanganan statusPenanganan) {
-        this.statusPenanganan = statusPenanganan;
+    
+    public void setStatusPenanganan(enums.StatusPenanganan value) {
+        this.statusPenanganan = value;
     }
-
+    
     public String getCatatan() {
         return catatan;
     }
-
-    public void setCatatan(String catatan) {
-        this.catatan = catatan;
+    
+    public void setCatatan(String value) {
+        this.catatan = value;
     }
-
-    public List<DetailMonitoring> getDetailMonitoring() {
-        return detailMonitoring;
+    
+    public java.util.List<DetailMonitoring> getDetailMonitoring() {
+        return java.util.Collections.unmodifiableList(detailMonitoring);
     }
-
-    public void setDetailMonitoring(List<DetailMonitoring> detailMonitoring) {
-        this.detailMonitoring = detailMonitoring;
+    
+    public void tambahDetail(DetailMonitoring d) {
+        detailMonitoring.add(d);
     }
-
-    public void tambahDetail(DetailMonitoring detail) {
-        if (detail != null) {
-            detailMonitoring.add(detail);
-        }
-    }
-
+    
     @Override
     public String toString() {
-        return "Monitoring #"+idMonitoring+" - "+lokasi.getNamaLokasi()+" - "+statusMonitoring;
+        return "MonitoringLingkungan #" + idMonitoring;
     }
 }

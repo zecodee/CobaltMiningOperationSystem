@@ -1,0 +1,97 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="6041DCBC-5D76-88D2-39AB-9DC561FF4EA4" name="Driver">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>E286E496-6586-A462-C2E0-5216CD79520B</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="id_pegawai" id="DE983782-237D-326D-0458-37EC1ED6720B">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>40E02C8D-CA5A-E480-B59A-5BC44FB957DB</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="1B1A0ABF-1A2E-B00B-0EC6-9C2F6056CFB8" referredColumn="EDD83871-D2C7-998D-F0D4-C5520C05D736"/>
+</associations>
+</Column>
+<Column name="no_SIM" id="5F3AF00B-FF6B-A1EA-2D0F-A3C835C993E3">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>FEF6C2FB-F66C-2392-941F-D354B4C45BCA</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="masa_berlaku_sim" id="CA4C9C18-D982-87CE-9968-D618EFB9B876">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>EF073E9A-DF1D-97EE-F8E2-6531DD4DFAD6</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="status_driver" id="05799007-D1D2-C35F-6E95-617F3F24BA9C">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>F42B7680-A40A-4038-27BF-E6F28B0DCCA7</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10</dataTypeSize>
+<ownDataTypeParameters>10,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="D03274BE-8D51-8DDF-A3BD-DC9BC074B5E8" name="Driver_PK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>B8BA2265-14C2-CF8C-A910-F6AE31278D33</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DE983782-237D-326D-0458-37EC1ED6720B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="B779FF99-3096-2C26-9179-765BD097C32F" name="Driver_PKv1">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>8B862D58-8309-3D49-7C9D-10BF02E3CC95</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DE983782-237D-326D-0458-37EC1ED6720B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="08A10492-3281-9BFB-CC4F-5850F67503D8" name="Driver_Pegawai_FK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>CFAAAD92-37D3-8EC3-D857-2BD91815EE0B</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="DE983782-237D-326D-0458-37EC1ED6720B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

@@ -14,4 +14,5 @@ import model.User;
 
 public interface UserRepository extends CrudRepository<User> {
     Optional<User> findByUsername(String username);
+    Optional<User> findByPegawai(int idPegawai);
 }

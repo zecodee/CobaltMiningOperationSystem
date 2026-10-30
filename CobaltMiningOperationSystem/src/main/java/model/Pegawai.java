@@ -4,9 +4,6 @@
  */
 package model;
 
-import java.time.LocalDate;
-import enums.StatusPegawai;
-
 /**
  *
  * @author zefrialrizkullah
@@ -16,61 +13,61 @@ public abstract class Pegawai {
     private int idPegawai;
     private String namaPegawai;
     private String noHp;
-    private LocalDate tanggalMasuk;
-    private StatusPegawai statusPegawai;
-
-    public Pegawai(int idPegawai, String namaPegawai, String noHp, LocalDate tanggalMasuk, StatusPegawai statusPegawai) {
+    private java.time.LocalDate tanggalMasuk;
+    private enums.StatusPegawai statusPegawai;
+    public Pegawai(int idPegawai, String namaPegawai, String noHp, java.time.LocalDate tanggalMasuk,
+            enums.StatusPegawai statusPegawai) {
         this.idPegawai = idPegawai;
         this.namaPegawai = namaPegawai;
         this.noHp = noHp;
         this.tanggalMasuk = tanggalMasuk;
         this.statusPegawai = statusPegawai;
     }
-
+    
     public int getIdPegawai() {
         return idPegawai;
     }
-
-    public void setIdPegawai(int idPegawai) {
-        this.idPegawai = idPegawai;
+    
+    public void setIdPegawai(int value) {
+        this.idPegawai = value;
     }
-
+    
     public String getNamaPegawai() {
         return namaPegawai;
     }
-
-    public void setNamaPegawai(String namaPegawai) {
-        this.namaPegawai = namaPegawai;
+    
+    public void setNamaPegawai(String value) {
+        this.namaPegawai = value;
     }
-
+    
     public String getNoHp() {
         return noHp;
     }
-
-    public void setNoHp(String noHp) {
-        this.noHp = noHp;
+    
+    public void setNoHp(String value) {
+        this.noHp = value;
     }
-
-    public LocalDate getTanggalMasuk() {
+    
+    public java.time.LocalDate getTanggalMasuk() {
         return tanggalMasuk;
     }
-
-    public void setTanggalMasuk(LocalDate tanggalMasuk) {
-        this.tanggalMasuk = tanggalMasuk;
+    
+    public void setTanggalMasuk(java.time.LocalDate value) {
+        this.tanggalMasuk = value;
     }
-
-    public StatusPegawai getStatusPegawai() {
+    
+    public enums.StatusPegawai getStatusPegawai() {
         return statusPegawai;
     }
-
-    public void setStatusPegawai(StatusPegawai statusPegawai) {
-        this.statusPegawai = statusPegawai;
+    
+    public void setStatusPegawai(enums.StatusPegawai value) {
+        this.statusPegawai = value;
     }
-
+    
     public abstract String getJenisPegawai();
-
+    
     @Override
     public String toString() {
-        return idPegawai+" - "+namaPegawai+" - "+getJenisPegawai();
+        return "Pegawai #" + idPegawai;
     }
 }

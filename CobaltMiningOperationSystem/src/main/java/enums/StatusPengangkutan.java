@@ -8,6 +8,7 @@ package enums;
  *
  * @author zefrialrizkullah
  */
+
 public enum StatusPengangkutan {
     DIJADWALKAN,
     DALAM_PERJALANAN,

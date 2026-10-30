@@ -4,95 +4,53 @@
  */
 package controller;
 
-import exception.ValidationException;
-import model.Pegawai;
-import model.PetugasOperasional;
-import model.ProduksiTambang;
-import service.AuthService;
-import service.ProduksiService;
+import service.*;
+import model.*;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.*;
 
 /**
  *
  * @author zefrialrizkullah
  */
 
-public class ProduksiController {
-    private final ProduksiService produksiService;
-    private final AuthService authService;
-
-    public ProduksiController(
-            ProduksiService produksiService,
-            AuthService authService) {
-
-        this.produksiService = produksiService;
-        this.authService = authService;
+public final class ProduksiController {
+    private final ProduksiService service;
+    private final AuthService auth;
+    
+    public ProduksiController(ProduksiService service, AuthService a) {
+        this.service = service;
+        auth = a;
     }
-
-    public ProduksiTambang tambahProduksi(
-            int idProduksi,
-            int idMaterial,
-            int idLokasi,
-            LocalDate tanggalProduksi,
-            double jumlahProduksi) {
-
-        PetugasOperasional petugas = getPetugasOperasionalLogin();
-
-        return produksiService.tambahProduksi(
-                idProduksi,
-                idMaterial,
-                idLokasi,
-                petugas,
-                tanggalProduksi,
-                jumlahProduksi
-        );
+    
+    public ProduksiTambang tambahProduksi(int material, int lokasi, LocalDate tanggal, double jumlah) {
+        auth.requirePetugasOperasional();
+        return service.tambahProduksi(material, lokasi, (PetugasOperasional)auth.getCurrentPegawai(), tanggal,
+                jumlah);
     }
-
-    public void ubahProduksi(
-            int idProduksi,
-            int idMaterial,
-            int idLokasi,
-            LocalDate tanggalProduksi,
-            double jumlahProduksi) {
-
-        getPetugasOperasionalLogin();
-        produksiService.ubahProduksi(idProduksi, idMaterial, idLokasi, tanggalProduksi, jumlahProduksi);
+    
+    public void ubahProduksi(int id, int material, int lokasi, LocalDate tanggal, double jumlah) {
+        auth.requirePetugasOperasional();
+        service.ubahProduksi(id, material, lokasi, tanggal, jumlah);
     }
-
-    public void hapusProduksi(int idProduksi) {
-        getPetugasOperasionalLogin();
-
-        produksiService.hapusProduksi(idProduksi);
+    
+    public void hapusProduksi(int id) {
+        auth.requirePetugasOperasional();
+        service.hapusProduksi(id);
     }
-
-    public ProduksiTambang cariProduksiById(int idProduksi) {
-        return produksiService.cariProduksiById(idProduksi);
+    
+    public ProduksiTambang cariProduksiById(int id) {
+        auth.requirePetugasOperasional();
+        return service.cariProduksiById(id);
     }
-
-    public List<ProduksiTambang>tampilkanSemuaProduksi() {
-        return produksiService.tampilkanSemuaProduksi();
+    
+    public List<ProduksiTambang> tampilkanSemuaProduksi() {
+        auth.requirePetugasOperasional();
+        return service.tampilkanSemuaProduksi();
     }
-
-    public List<ProduksiTambang>tampilkanProduksiTersedia() {
-        return produksiService.tampilkanProduksiTersedia();
-    }
-
-    private PetugasOperasional getPetugasOperasionalLogin() {
-        if (!authService.isLoggedIn()) {
-            throw new ValidationException(
-                    "Silakan login terlebih dahulu."
-            );
-        }
-
-        Pegawai pegawai = authService.getCurrentPegawai();
-
-        if (!(pegawai instanceof PetugasOperasional)) {
-            throw new ValidationException(
-                    "Fitur produksi hanya dapat digunakan oleh Petugas Operasional."
-            );
-        }
-
-        return (PetugasOperasional) pegawai;
+    
+    public List<ProduksiTambang> tampilkanProduksiTersedia() {
+        auth.requirePetugasOperasional();
+        return service.tampilkanProduksiTersedia();
     }
 }

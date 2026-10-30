@@ -14,7 +14,6 @@ public class JenisMaterial {
     private String namaMaterial;
     private String satuan;
     private String deskripsi;
-    public JenisMaterial() {}
     
     public JenisMaterial(int idMaterial, String namaMaterial, String satuan, String deskripsi) {
         this.idMaterial = idMaterial;
@@ -27,36 +26,36 @@ public class JenisMaterial {
         return idMaterial;
     }
     
-    public void setIdMaterial(int idMaterial) {
-        this.idMaterial = idMaterial;
+    public void setIdMaterial(int value) {
+        this.idMaterial = value;
     }
     
     public String getNamaMaterial() {
         return namaMaterial;
     }
     
-    public void setNamaMaterial(String namaMaterial) {
-        this.namaMaterial = namaMaterial;
+    public void setNamaMaterial(String value) {
+        this.namaMaterial = value;
     }
     
     public String getSatuan() {
         return satuan;
     }
     
-    public void setSatuan(String satuan) {
-        this.satuan = satuan;
+    public void setSatuan(String value) {
+        this.satuan = value;
     }
     
     public String getDeskripsi() {
         return deskripsi;
     }
     
-    public void setDeskripsi(String deskripsi) {
-        this.deskripsi = deskripsi;
+    public void setDeskripsi(String value) {
+        this.deskripsi = value;
     }
     
     @Override
     public String toString() {
-        return namaMaterial;
+        return "JenisMaterial #" + idMaterial;
     }
 }

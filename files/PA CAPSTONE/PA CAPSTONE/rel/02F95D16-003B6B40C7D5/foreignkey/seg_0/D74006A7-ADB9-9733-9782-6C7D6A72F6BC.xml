@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="D74006A7-ADB9-9733-9782-6C7D6A72F6BC" containerWithKeyObject="75DF5FEA-B5CC-894D-BF3A-F5BBEBF87635" localFKIndex="C9894BDA-364A-E66B-F6E6-A552A3CE59A2" name="Pengangkutan_Produksi_Tambang_FK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 04:37:12 UTC</createdTime>
+<generatorID>BC5ED994-890C-A411-3F50-EAE0A6478DE5</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<referredTableLongName>Produksi_Tambang</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>32F19E6E-3D22-A2B3-4DD1-1DF81FDD5126</referredTableID>
+<keyObject>DEADCE0C-3C31-DE5C-D6A5-4157135A81E2</keyObject>
+<referredKeyID>DEADCE0C-3C31-DE5C-D6A5-4157135A81E2</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_produksi</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

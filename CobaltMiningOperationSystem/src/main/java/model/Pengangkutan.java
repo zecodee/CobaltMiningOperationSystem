@@ -4,10 +4,6 @@
  */
 package model;
 
-import enums.StatusPengangkutan;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 /**
  *
  * @author zefrialrizkullah
@@ -21,13 +17,17 @@ public class Pengangkutan {
     private Driver driver;
     private Lokasi lokasiAsal;
     private Lokasi lokasiTujuan;
-    private LocalDate tanggalPengangkutan;
-    private LocalDateTime waktuMulai;
-    private LocalDateTime waktuSelesai;
+    private java.time.LocalDate tanggalPengangkutan;
+    private java.time.LocalDateTime waktuMulai;
+    private java.time.LocalDateTime waktuSelesai;
     private double jumlahMuatan;
-    private StatusPengangkutan statusPengangkutan;
-
-    public Pengangkutan(int idPengangkutan, ProduksiTambang produksi, PetugasOperasional petugasOperasional, Kendaraan kendaraan, Driver driver, Lokasi lokasiAsal, Lokasi lokasiTujuan, LocalDate tanggalPengangkutan, LocalDateTime waktuMulai, LocalDateTime waktuSelesai, double jumlahMuatan, StatusPengangkutan statusPengangkutan) {
+    private enums.StatusPengangkutan statusPengangkutan;
+    
+    public Pengangkutan(int idPengangkutan, ProduksiTambang produksi,
+            PetugasOperasional petugasOperasional, Kendaraan kendaraan, Driver driver, Lokasi lokasiAsal,
+            Lokasi lokasiTujuan, java.time.LocalDate tanggalPengangkutan,
+            java.time.LocalDateTime waktuMulai, java.time.LocalDateTime waktuSelesai, double jumlahMuatan,
+            enums.StatusPengangkutan statusPengangkutan) {
         this.idPengangkutan = idPengangkutan;
         this.produksi = produksi;
         this.petugasOperasional = petugasOperasional;
@@ -41,105 +41,105 @@ public class Pengangkutan {
         this.jumlahMuatan = jumlahMuatan;
         this.statusPengangkutan = statusPengangkutan;
     }
-
+    
     public int getIdPengangkutan() {
         return idPengangkutan;
     }
-
-    public void setIdPengangkutan(int idPengangkutan) {
-        this.idPengangkutan = idPengangkutan;
+    
+    public void setIdPengangkutan(int value) {
+        this.idPengangkutan = value;
     }
-
+    
     public ProduksiTambang getProduksi() {
         return produksi;
     }
-
-    public void setProduksi(ProduksiTambang produksi) {
-        this.produksi = produksi;
+    
+    public void setProduksi(ProduksiTambang value) {
+        this.produksi = value;
     }
-
+    
     public PetugasOperasional getPetugasOperasional() {
         return petugasOperasional;
     }
-
-    public void setPetugasOperasional(PetugasOperasional petugasOperasional) {
-        this.petugasOperasional = petugasOperasional;
+    
+    public void setPetugasOperasional(PetugasOperasional value) {
+        this.petugasOperasional = value;
     }
-
+    
     public Kendaraan getKendaraan() {
         return kendaraan;
     }
-
-    public void setKendaraan(Kendaraan kendaraan) {
-        this.kendaraan = kendaraan;
+    
+    public void setKendaraan(Kendaraan value) {
+        this.kendaraan = value;
     }
-
+    
     public Driver getDriver() {
         return driver;
     }
-
-    public void setDriver(Driver driver) {
-        this.driver = driver;
+    
+    public void setDriver(Driver value) {
+        this.driver = value;
     }
-
+    
     public Lokasi getLokasiAsal() {
         return lokasiAsal;
     }
-
-    public void setLokasiAsal(Lokasi lokasiAsal) {
-        this.lokasiAsal = lokasiAsal;
+    
+    public void setLokasiAsal(Lokasi value) {
+        this.lokasiAsal = value;
     }
-
+    
     public Lokasi getLokasiTujuan() {
         return lokasiTujuan;
     }
-
-    public void setLokasiTujuan(Lokasi lokasiTujuan) {
-        this.lokasiTujuan = lokasiTujuan;
+    
+    public void setLokasiTujuan(Lokasi value) {
+        this.lokasiTujuan = value;
     }
-
-    public LocalDate getTanggalPengangkutan() {
+    
+    public java.time.LocalDate getTanggalPengangkutan() {
         return tanggalPengangkutan;
     }
-
-    public void setTanggalPengangkutan(LocalDate tanggalPengangkutan) {
-        this.tanggalPengangkutan = tanggalPengangkutan;
+    
+    public void setTanggalPengangkutan(java.time.LocalDate value) {
+        this.tanggalPengangkutan = value;
     }
-
-    public LocalDateTime getWaktuMulai() {
+    
+    public java.time.LocalDateTime getWaktuMulai() {
         return waktuMulai;
     }
-
-    public void setWaktuMulai(LocalDateTime waktuMulai) {
-        this.waktuMulai = waktuMulai;
+    
+    public void setWaktuMulai(java.time.LocalDateTime value) {
+        this.waktuMulai = value;
     }
-
-    public LocalDateTime getWaktuSelesai() {
+    
+    public java.time.LocalDateTime getWaktuSelesai() {
         return waktuSelesai;
     }
-
-    public void setWaktuSelesai(LocalDateTime waktuSelesai) {
-        this.waktuSelesai = waktuSelesai;
+    
+    public void setWaktuSelesai(java.time.LocalDateTime value) {
+        this.waktuSelesai = value;
     }
-
+    
     public double getJumlahMuatan() {
         return jumlahMuatan;
     }
-
-    public void setJumlahMuatan(double jumlahMuatan) {
-        this.jumlahMuatan = jumlahMuatan;
+    
+    public void setJumlahMuatan(double value) {
+        this.jumlahMuatan = value;
     }
-
-    public StatusPengangkutan getStatusPengangkutan() {
+    
+    public enums.StatusPengangkutan getStatusPengangkutan() {
         return statusPengangkutan;
     }
-
-    public void setStatusPengangkutan(StatusPengangkutan statusPengangkutan) {
-        this.statusPengangkutan = statusPengangkutan;
+    
+    public void setStatusPengangkutan(enums.StatusPengangkutan value) {
+        this.statusPengangkutan = value;
     }
-
+    
     @Override
     public String toString() {
-        return "Pengangkutan #"+idPengangkutan+" - "+statusPengangkutan;
+        return "Pengangkutan #" + idPengangkutan;
     }
 }

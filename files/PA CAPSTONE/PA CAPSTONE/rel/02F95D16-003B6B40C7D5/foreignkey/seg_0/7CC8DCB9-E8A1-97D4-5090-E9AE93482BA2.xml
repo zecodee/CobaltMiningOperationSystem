@@ -1,0 +1,17 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="7CC8DCB9-E8A1-97D4-5090-E9AE93482BA2" containerWithKeyObject="75DF5FEA-B5CC-894D-BF3A-F5BBEBF87635" localFKIndex="D8B71AF0-39FE-08BE-241B-B931CEEF144F" name="Pengangkutan_Driver_FK">
+<createdBy>Lenovo</createdBy>
+<createdTime>2026-10-19 13:08:07 UTC</createdTime>
+<generatorID>D05720B4-3956-F070-CF3D-03FFD2F311B2</generatorID>
+<ownerDesignName>PA CAPSTONE</ownerDesignName>
+<referredTableLongName>Driver</referredTableLongName>
+<deleteRule>NO ACTION</deleteRule>
+<referredTableID>6041DCBC-5D76-88D2-39AB-9DC561FF4EA4</referredTableID>
+<keyObject>B779FF99-3096-2C26-9179-765BD097C32F</keyObject>
+<referredKeyID>B779FF99-3096-2C26-9179-765BD097C32F</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>id_pegawai2</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>

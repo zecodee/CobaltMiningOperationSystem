@@ -4,1005 +4,289 @@
  */
 package service;
 
-import enums.JenisLokasi;
-import enums.StatusKendaraan;
-import enums.StatusLokasi;
-import enums.StatusPegawai;
-import exception.DataNotFoundException;
-import exception.ValidationException;
-import model.Admin;
-import model.Driver;
-import model.JenisMaterial;
-import model.Kendaraan;
-import model.Lokasi;
-import model.Manager;
-import model.ParameterLingkungan;
-import model.Pegawai;
-import model.PetugasHSE;
-import model.PetugasOperasional;
-import model.User;
-import repository.KendaraanRepository;
-import repository.LokasiRepository;
-import repository.MaterialRepository;
-import repository.ParameterRepository;
-import repository.PegawaiRepository;
-import repository.UserRepository;
-import java.util.List;
-import java.util.Optional;
-import java.util.ArrayList;
+import enums.*;
+import exception.*;
+import java.util.*;
+import model.*;
+import repository.*;
+import util.PasswordUtil;
 
 /**
  *
  * @author zefrialrizkullah
  */
 
-public class MasterDataService {
-    private final PegawaiRepository pegawaiRepository;
-    private final UserRepository userRepository;
-    private final LokasiRepository lokasiRepository;
-    private final MaterialRepository materialRepository;
-    private final KendaraanRepository kendaraanRepository;
-    private final ParameterRepository parameterRepository;
-
-    public MasterDataService(
-            PegawaiRepository pegawaiRepository,
-            UserRepository userRepository,
-            LokasiRepository lokasiRepository,
-            MaterialRepository materialRepository,
-            KendaraanRepository kendaraanRepository,
-            ParameterRepository parameterRepository) {
-
-        this.pegawaiRepository = pegawaiRepository;
-        this.userRepository = userRepository;
-        this.lokasiRepository = lokasiRepository;
-        this.materialRepository = materialRepository;
-        this.kendaraanRepository = kendaraanRepository;
-        this.parameterRepository = parameterRepository;
+public final class MasterDataService {
+    private final PegawaiRepository pegawai;
+    private final UserRepository users;
+    private final LokasiRepository lokasi;
+    private final MaterialRepository material;
+    private final KendaraanRepository kendaraan;
+    private final ParameterRepository parameter;
+    public MasterDataService(PegawaiRepository p, UserRepository u, LokasiRepository l, MaterialRepository m,
+            KendaraanRepository k, ParameterRepository a) {
+        pegawai = p;
+        users = u;
+        lokasi = l;
+        material = m;
+        kendaraan = k;
+        parameter = a;
     }
-
-    // PEGAWAI
-
-    public void tambahPegawai(Pegawai pegawai) {
-        validasiPegawai(pegawai);
-        if (pegawaiRepository.findById(pegawai.getIdPegawai()).isPresent()) {
-            throw new ValidationException("ID Pegawai sudah digunakan.");
+    private static void check(boolean ok, String msg) {
+        if (!ok)throw new ValidationException(msg);
+    }
+    private static boolean filled(String s) {
+        return s != null && !s.trim().isEmpty();
+    }
+    private static boolean finite(double v) {
+        return Double.isFinite(v) && v>0 && Math.round(v*100.0)/100.0 == v;
+    }
+    private void validatePegawai(Pegawai p) {
+        check(p != null,"Pegawai wajib diisi.");
+        check(filled(p.getNamaPegawai()) && filled(p.getNoHp()) && p.getTanggalMasuk() != null
+ && p.getStatusPegawai() != null,"Data pegawai belum lengkap.");
+        if (p instanceof Admin) {
+            Admin a = (Admin)p;
+            check(filled(a.getKodeAdmin()) && a.getTanggalMulaiAkses() != null
+ && !a.getTanggalMulaiAkses().isBefore(a.getTanggalMasuk()),"Data Admin tidak valid.");
         }
-        validasiDataKhususPegawai(pegawai);
-        validasiKeunikanDataKhusus(pegawai);
-        pegawaiRepository.save(pegawai);
-    }
-
-    public void ubahPegawai(Pegawai pegawai) {
-        validasiPegawai(pegawai);
-        getPegawaiOrThrow(pegawai.getIdPegawai());
-
-        Pegawai lama = getPegawaiOrThrow(pegawai.getIdPegawai());
-
-        if (!lama.getClass().equals(pegawai.getClass())) {
-            throw new ValidationException(
-                    "Jenis Pegawai tidak dapat diubah melalui proses edit."
-            );
+        else if (p instanceof PetugasOperasional)check(((PetugasOperasional)p).getShiftKerja() != null,
+                "Shift kerja wajib dipilih.");
+        else if (p instanceof PetugasHSE) {
+            PetugasHSE h = (PetugasHSE)p;
+            check(filled(h.getNoSertifikasiHSE()) && h.getMasaBerlakuSertifikasi() != null,
+                    "Data HSE belum lengkap.");
         }
-
-        validasiDataKhususPegawai(pegawai);
-        validasiKeunikanDataKhusus(pegawai);
-        pegawaiRepository.update(pegawai);
-    }
-
-    public void hapusPegawai(int idPegawai) {
-        getPegawaiOrThrow(idPegawai);
-
-        Optional<User> user = cariUserByPegawai(idPegawai);
-
-        if (user.isPresent()) {
-            throw new ValidationException(
-                    "Pegawai tidak dapat dihapus karena masih memiliki akun User."
-            );
+        else if (p instanceof Manager)check(filled(((Manager)p).getDivisiTanggungJawab()),
+                "Divisi manager wajib diisi.");
+        else if (p instanceof Driver) {
+            Driver d = (Driver)p;
+            check(filled(d.getNoSim()) && d.getMasaBerlakuSim() != null && d.getStatusDriver() != null,
+                    "Data driver belum lengkap.");
         }
-
-        pegawaiRepository.delete(idPegawai);
+        else throw new ValidationException("Jenis pegawai tidak dikenali.");
+        for (Pegawai x:pegawai.findAll()) {
+            if (p.getIdPegawai()>0 && p.getIdPegawai() == x.getIdPegawai())continue;
+            if (p instanceof Admin && x instanceof Admin
+ && ((Admin)p).getKodeAdmin().equalsIgnoreCase(((Admin)x).getKodeAdmin()))throw new ValidationException("Kode Admin sudah digunakan.");
+            if (p instanceof PetugasHSE && x instanceof PetugasHSE
+ && ((PetugasHSE)p).getNoSertifikasiHSE().equalsIgnoreCase(((PetugasHSE)x).getNoSertifikasiHSE()))throw new ValidationException("Nomor sertifikasi sudah digunakan.");
+            if (p instanceof Driver && x instanceof Driver
+ && ((Driver)p).getNoSim().equalsIgnoreCase(((Driver)x).getNoSim()))throw new ValidationException("Nomor SIM sudah digunakan.");
+        }
     }
-
-    public Pegawai cariPegawaiById(int idPegawai) {
-        return getPegawaiOrThrow(idPegawai);
+    public void tambahPegawai(Pegawai p) {
+        validatePegawai(p);
+        check(p.getIdPegawai() == 0,"ID baru harus 0.");
+        if (p instanceof Driver)check(((Driver)p).getStatusDriver() != StatusDriver.BERTUGAS,
+                "Driver baru tidak boleh BERTUGAS.");
+        pegawai.save(p);
     }
-
+    public void ubahPegawai(Pegawai p) {
+        validatePegawai(p);
+        Pegawai old = cariPegawaiById(p.getIdPegawai());
+        check(old.getClass() == p.getClass(),"Jenis pegawai tidak dapat diubah.");
+        if (p instanceof Driver) {
+            Driver d = (Driver)p, o = (Driver)old;
+            check(d.getStatusDriver() != StatusDriver.BERTUGAS || o.getStatusDriver() == StatusDriver.BERTUGAS,
+                    "Status BERTUGAS hanya dari pengangkutan.");
+            check(o.getStatusDriver() != StatusDriver.BERTUGAS || d.getStatusDriver() == StatusDriver.BERTUGAS,
+                    "Driver sedang bertugas.");
+        }
+        pegawai.update(p);
+    }
+    public void hapusPegawai(int id) {
+        cariPegawaiById(id);
+        check(!users.findByPegawai(id).isPresent(),"Pegawai memiliki akun.");
+        pegawai.delete(id);
+    }
+    public Pegawai cariPegawaiById(int id) {
+        return pegawai.findById(id).orElseThrow(()->new DataNotFoundException("Pegawai tidak ditemukan."));
+    }
     public List<Pegawai> tampilkanSemuaPegawai() {
-        return pegawaiRepository.findAll();
+        return pegawai.findAll();
     }
-
-    public List<Pegawai> cariPegawaiByNama(String nama) {
-        if (nama == null || nama.trim().isEmpty()) {
-            return pegawaiRepository.findAll();
-        }
-        return pegawaiRepository.findByNama(nama.trim());
+    public List<Pegawai> cariPegawaiByNama(String n) {
+        return filled(n)?pegawai.findByNama(n.trim()):pegawai.findAll();
     }
-
-    // USER
-
-    public void tambahUser(User user) {
-        validasiUser(user);
-
-        if (userRepository.findById(user.getIdUser()).isPresent()) {
-            throw new ValidationException("ID User sudah digunakan.");
-        }
-
-        if (userRepository.findByUsername(user.getUsername()).isPresent()) {
-            throw new ValidationException("Username sudah digunakan.");
-        }
-
-        if (cariUserByPegawai(user.getPegawai().getIdPegawai()).isPresent()) {
-            throw new ValidationException(
-                    "Pegawai tersebut sudah memiliki akun User."
-            );
-        }
-
-        userRepository.save(user);
+    private void validateUser(User u) {
+        check(u != null && u.getPegawai() != null && filled(u.getUsername()),"Data user belum lengkap.");
+        Pegawai p = cariPegawaiById(u.getPegawai().getIdPegawai());
+        check(!(p instanceof Driver) && p.getStatusPegawai() == StatusPegawai.AKTIF,
+                "Pegawai tidak boleh memiliki akun.");
     }
-
-    public void ubahUser(User user) {
-        validasiUser(user);
-        getUserOrThrow(user.getIdUser());
-
-        Optional<User> usernameSama =
-                userRepository.findByUsername(user.getUsername());
-
-        if (usernameSama.isPresent()
-                && usernameSama.get().getIdUser() != user.getIdUser()) {
-            throw new ValidationException("Username sudah digunakan.");
-        }
-
-        Optional<User> akunPegawai =
-                cariUserByPegawai(user.getPegawai().getIdPegawai());
-
-        if (akunPegawai.isPresent()
-                && akunPegawai.get().getIdUser() != user.getIdUser()) {
-            throw new ValidationException(
-                    "Pegawai tersebut sudah memiliki akun User."
-            );
-        }
-
-        userRepository.update(user);
+    public void tambahUser(User u) {
+        validateUser(u);
+        check(u.getIdUser() == 0,"ID user baru harus 0.");
+        check(filled(u.getPassword()),"Password wajib diisi.");
+        check(!users.findByUsername(u.getUsername().trim()).isPresent(),"Username digunakan.");
+        check(!users.findByPegawai(u.getPegawai().getIdPegawai()).isPresent(),
+                "Pegawai sudah memiliki akun.");
+        u.setUsername(u.getUsername().trim());
+        u.setPassword(PasswordUtil.hashPassword(u.getPassword()));
+        users.save(u);
     }
-
-    public void hapusUser(int idUser) {
-        getUserOrThrow(idUser);
-        userRepository.delete(idUser);
+    public void ubahUser(User u) {
+        validateUser(u);
+        User old = cariUserById(u.getIdUser());
+        check(old.getPegawai().getIdPegawai() == u.getPegawai().getIdPegawai(),
+                "Pemilik akun tidak dapat diganti.");
+        Optional<User> same = users.findByUsername(u.getUsername().trim());
+        check(!same.isPresent() || same.get().getIdUser() == u.getIdUser(),"Username digunakan.");
+        String pwd = u.getPassword();
+        if (pwd == null || pwd.isEmpty() || pwd.equals(old.getPassword()))u.setPassword(old.getPassword());
+        else u.setPassword(PasswordUtil.hashPassword(pwd));
+        u.setUsername(u.getUsername().trim());
+        users.update(u);
     }
-
-    public User cariUserById(int idUser) {
-        return getUserOrThrow(idUser);
+    public void hapusUser(int id) {
+        cariUserById(id);
+        users.delete(id);
     }
-
-    public Optional<User> cariUserByPegawai(int idPegawai) {
-        for (User user : userRepository.findAll()) {
-            if (user.getPegawai() != null
-                    && user.getPegawai().getIdPegawai() == idPegawai) {
-                return Optional.of(user);
-            }
-        }
-        return Optional.empty();
+    public User cariUserById(int id) {
+        return users.findById(id).orElseThrow(()->new DataNotFoundException("User tidak ditemukan."));
     }
-
+    public Optional<User> cariUserByPegawai(int id) {
+        return users.findByPegawai(id);
+    }
     public List<User> tampilkanSemuaUser() {
-        return userRepository.findAll();
+        return users.findAll();
     }
-
-    // LOKASI
-
-    public void tambahLokasi(Lokasi lokasi) {
-        validasiLokasi(lokasi);
-
-        if (lokasiRepository.findById(lokasi.getIdLokasi()).isPresent()) {
-            throw new ValidationException("ID Lokasi sudah digunakan.");
-        }
-
-        validasiNamaLokasiUnik(lokasi);
-
-        lokasiRepository.save(lokasi);
+    private void validateLokasi(Lokasi l) {
+        check(l != null && filled(l.getNamaLokasi()) && l.getJenisLokasi() != null && l.getStatusOperasional() != null,
+                "Data lokasi belum lengkap.");
+        for (Lokasi x:lokasi.findAll())if (x.getIdLokasi() != l.getIdLokasi()
+ && x.getNamaLokasi().equalsIgnoreCase(l.getNamaLokasi().trim()))throw new ValidationException("Nama lokasi digunakan.");
     }
-
-    public void ubahLokasi(Lokasi lokasi) {
-        validasiLokasi(lokasi);
-        getLokasiOrThrow(lokasi.getIdLokasi());
-        validasiNamaLokasiUnik(lokasi);
-        lokasiRepository.update(lokasi);
+    public void tambahLokasi(Lokasi l) {
+        validateLokasi(l);
+        check(l.getIdLokasi() == 0,"ID baru harus 0.");
+        lokasi.save(l);
     }
-
-    public void hapusLokasi(int idLokasi) {
-        getLokasiOrThrow(idLokasi);
-        lokasiRepository.delete(idLokasi);
+    public void ubahLokasi(Lokasi l) {
+        validateLokasi(l);
+        cariLokasiById(l.getIdLokasi());
+        lokasi.update(l);
     }
-
-    public Lokasi cariLokasiById(int idLokasi) {
-        return getLokasiOrThrow(idLokasi);
+    public void hapusLokasi(int id) {
+        cariLokasiById(id);
+        lokasi.delete(id);
     }
-
+    public Lokasi cariLokasiById(int id) {
+        return lokasi.findById(id).orElseThrow(()->new DataNotFoundException("Lokasi tidak ditemukan."));
+    }
     public List<Lokasi> tampilkanSemuaLokasi() {
-        return lokasiRepository.findAll();
+        return lokasi.findAll();
     }
-
-    public List<Lokasi> cariLokasiByNama(String nama) {
-        if (nama == null || nama.trim().isEmpty()) {
-            return lokasiRepository.findAll();
-        }
-        return lokasiRepository.findByNama(nama.trim());
+    public List<Lokasi> cariLokasiByNama(String n) {
+        return filled(n)?lokasi.findByNama(n.trim()):lokasi.findAll();
     }
-
-    // JENIS MATERIAL
-
-    public void tambahMaterial(JenisMaterial material) {
-        validasiMaterial(material);
-
-        if (materialRepository.findById(material.getIdMaterial()).isPresent()) {
-            throw new ValidationException("ID Material sudah digunakan.");
-        }
-
-        validasiNamaMaterialUnik(material);
-
-        materialRepository.save(material);
+    private void validateMaterial(JenisMaterial m) {
+        check(m != null && filled(m.getNamaMaterial()) && filled(m.getSatuan()),"Data material belum lengkap.");
+        for (JenisMaterial x:material.findAll())if (x.getIdMaterial() != m.getIdMaterial()
+ && x.getNamaMaterial().equalsIgnoreCase(m.getNamaMaterial().trim()))throw new ValidationException("Nama material digunakan.");
     }
-
-    public void ubahMaterial(JenisMaterial material) {
-        validasiMaterial(material);
-        getMaterialOrThrow(material.getIdMaterial());
-        validasiNamaMaterialUnik(material);
-        materialRepository.update(material);
+    public void tambahMaterial(JenisMaterial m) {
+        validateMaterial(m);
+        check(m.getIdMaterial() == 0,"ID baru harus 0.");
+        material.save(m);
     }
-
-    public void hapusMaterial(int idMaterial) {
-        getMaterialOrThrow(idMaterial);
-        materialRepository.delete(idMaterial);
+    public void ubahMaterial(JenisMaterial m) {
+        validateMaterial(m);
+        cariMaterialById(m.getIdMaterial());
+        material.update(m);
     }
-
-    public JenisMaterial cariMaterialById(int idMaterial) {
-        return getMaterialOrThrow(idMaterial);
+    public void hapusMaterial(int id) {
+        cariMaterialById(id);
+        material.delete(id);
     }
-
+    public JenisMaterial cariMaterialById(int id) {
+        return material.findById(id).orElseThrow(()->new DataNotFoundException("Material tidak ditemukan."));
+    }
     public List<JenisMaterial> tampilkanSemuaMaterial() {
-        return materialRepository.findAll();
+        return material.findAll();
     }
-
-    public List<JenisMaterial> cariMaterialByNama(String nama) {
-        if (nama == null || nama.trim().isEmpty()) {
-            return materialRepository.findAll();
-        }
-        return materialRepository.findByNama(nama.trim());
+    public List<JenisMaterial> cariMaterialByNama(String n) {
+        return filled(n)?material.findByNama(n.trim()):material.findAll();
     }
-
-    // KENDARAAN
-
-    public void tambahKendaraan(Kendaraan kendaraan) {
-        validasiKendaraan(kendaraan);
-
-        if (kendaraanRepository.findById(kendaraan.getIdKendaraan()).isPresent()) {
-            throw new ValidationException("ID Kendaraan sudah digunakan.");
-        }
-
-        if (kendaraanRepository
-                .findByNomorPolisi(kendaraan.getNomorPolisi())
-                .isPresent()) {
-            throw new ValidationException("Nomor polisi sudah digunakan.");
-        }
-
-        kendaraanRepository.save(kendaraan);
+    private void validateKendaraan(Kendaraan k) {
+        check(k != null && filled(k.getJenisKendaraan()) && filled(k.getNomorPolisi()) && finite(k.getKapasitas())
+ && k.getTahunKendaraan() >= 1900 && k.getTahunKendaraan() <= java.time.LocalDate.now().getYear()+1
+ && k.getStatusKendaraan() != null,"Data kendaraan tidak valid.");
+        Optional<Kendaraan> x = kendaraan.findByNomorPolisi(k.getNomorPolisi());
+        check(!x.isPresent() || x.get().getIdKendaraan() == k.getIdKendaraan(),"Nomor polisi digunakan.");
     }
-
-    public void ubahKendaraan(Kendaraan kendaraan) {
-        validasiKendaraan(kendaraan);
-        getKendaraanOrThrow(kendaraan.getIdKendaraan());
-
-        Optional<Kendaraan> nomorSama =
-                kendaraanRepository.findByNomorPolisi(
-                        kendaraan.getNomorPolisi()
-                );
-
-        if (nomorSama.isPresent()
-                && nomorSama.get().getIdKendaraan()
-                != kendaraan.getIdKendaraan()) {
-            throw new ValidationException("Nomor polisi sudah digunakan.");
-        }
-
-        kendaraanRepository.update(kendaraan);
+    public void tambahKendaraan(Kendaraan k) {
+        validateKendaraan(k);
+        check(k.getIdKendaraan() == 0 && k.getStatusKendaraan() != StatusKendaraan.DIGUNAKAN,
+                "ID/status kendaraan baru tidak valid.");
+        kendaraan.save(k);
     }
-
-    public void hapusKendaraan(int idKendaraan) {
-        Kendaraan kendaraan = getKendaraanOrThrow(idKendaraan);
-
-        if (kendaraan.getStatusKendaraan()
-                == StatusKendaraan.DIGUNAKAN) {
-            throw new ValidationException(
-                    "Kendaraan yang sedang digunakan tidak dapat dihapus."
-            );
-        }
-
-        kendaraanRepository.delete(idKendaraan);
+    public void ubahKendaraan(Kendaraan k) {
+        validateKendaraan(k);
+        Kendaraan old = cariKendaraanById(k.getIdKendaraan());
+        check(old.getStatusKendaraan() != StatusKendaraan.DIGUNAKAN
+ || k.getStatusKendaraan() == StatusKendaraan.DIGUNAKAN,"Kendaraan sedang digunakan.");
+        check(k.getStatusKendaraan() != StatusKendaraan.DIGUNAKAN
+ || old.getStatusKendaraan() == StatusKendaraan.DIGUNAKAN,
+                "Status DIGUNAKAN hanya dari pengangkutan.");
+        kendaraan.update(k);
     }
-
-    public Kendaraan cariKendaraanById(int idKendaraan) {
-        return getKendaraanOrThrow(idKendaraan);
+    public void hapusKendaraan(int id) {
+        check(cariKendaraanById(id).getStatusKendaraan() != StatusKendaraan.DIGUNAKAN,"Kendaraan digunakan.");
+        kendaraan.delete(id);
     }
-
+    public Kendaraan cariKendaraanById(int id) {
+        return kendaraan.findById(id).orElseThrow(()->new DataNotFoundException("Kendaraan tidak ditemukan."));
+    }
     public List<Kendaraan> tampilkanSemuaKendaraan() {
-        return kendaraanRepository.findAll();
+        return kendaraan.findAll();
     }
-
-    // PARAMETER LINGKUNGAN
-
-    public void tambahParameter(ParameterLingkungan parameter) {
-        validasiParameter(parameter);
-
-        if (parameterRepository
-                .findById(parameter.getIdParameter())
-                .isPresent()) {
-            throw new ValidationException(
-                    "ID Parameter sudah digunakan."
-            );
-        }
-
-        validasiNamaParameterUnik(parameter);
-
-        parameterRepository.save(parameter);
+    private void validateParameter(ParameterLingkungan a) {
+        check(a != null && filled(a.getNamaParameter()) && filled(a.getSatuan()),"Data parameter belum lengkap.");
+        Double min = a.getBatasMinimum(), max = a.getBatasMaksimum();
+        check((min == null || Double.isFinite(min)) && (max == null || Double.isFinite(max)) && (min == null || max == null
+ || min <= max),"Batas parameter tidak valid.");
+        for (ParameterLingkungan x:parameter.findAll())if (x.getIdParameter() != a.getIdParameter()
+ && x.getNamaParameter().equalsIgnoreCase(a.getNamaParameter().trim()))throw new ValidationException("Nama parameter digunakan.");
     }
-
-    public void ubahParameter(ParameterLingkungan parameter) {
-        validasiParameter(parameter);
-        getParameterOrThrow(parameter.getIdParameter());
-        validasiNamaParameterUnik(parameter);
-        parameterRepository.update(parameter);
+    public void tambahParameter(ParameterLingkungan a) {
+        validateParameter(a);
+        check(a.getIdParameter() == 0,"ID baru harus 0.");
+        parameter.save(a);
     }
-
-    public void hapusParameter(int idParameter) {
-        getParameterOrThrow(idParameter);
-        parameterRepository.delete(idParameter);
+    public void ubahParameter(ParameterLingkungan a) {
+        validateParameter(a);
+        cariParameterById(a.getIdParameter());
+        parameter.update(a);
     }
-
-    public ParameterLingkungan cariParameterById(int idParameter) {
-        return getParameterOrThrow(idParameter);
+    public void hapusParameter(int id) {
+        cariParameterById(id);
+        parameter.delete(id);
     }
-
+    public ParameterLingkungan cariParameterById(int id) {
+        return parameter.findById(id).orElseThrow(()->new DataNotFoundException("Parameter tidak ditemukan."));
+    }
     public List<ParameterLingkungan> tampilkanSemuaParameter() {
-        return parameterRepository.findAll();
+        return parameter.findAll();
     }
-
-    public List<ParameterLingkungan> cariParameterByNama(String nama) {
-        if (nama == null || nama.trim().isEmpty()) {
-            return parameterRepository.findAll();
-        }
-        return parameterRepository.findByNama(nama.trim());
+    public List<ParameterLingkungan> cariParameterByNama(String n) {
+        return filled(n)?parameter.findByNama(n.trim()):parameter.findAll();
     }
-
-    // VALIDASI PEGAWAI
-
-    private void validasiPegawai(Pegawai pegawai) {
-        if (pegawai == null) {
-            throw new ValidationException(
-                    "Data Pegawai tidak boleh kosong."
-            );
-        }
-
-        if (pegawai.getIdPegawai() <= 0) {
-            throw new ValidationException(
-                    "ID Pegawai tidak valid."
-            );
-        }
-
-        if (kosong(pegawai.getNamaPegawai())) {
-            throw new ValidationException(
-                    "Nama Pegawai wajib diisi."
-            );
-        }
-
-        if (kosong(pegawai.getNoHp())) {
-            throw new ValidationException(
-                    "Nomor HP Pegawai wajib diisi."
-            );
-        }
-
-        if (pegawai.getTanggalMasuk() == null) {
-            throw new ValidationException(
-                    "Tanggal masuk wajib diisi."
-            );
-        }
-
-        if (pegawai.getStatusPegawai() == null) {
-            throw new ValidationException(
-                    "Status Pegawai wajib dipilih."
-            );
-        }
-    }
-
-    private void validasiDataKhususPegawai(Pegawai pegawai) {
-        if (pegawai instanceof Admin) {
-
-            Admin admin = (Admin) pegawai;
-
-            if (kosong(admin.getKodeAdmin())) {
-                throw new ValidationException(
-                        "Kode Admin wajib diisi."
-                );
-            }
-
-            if (admin.getTanggalMulaiAkses() == null) {
-                throw new ValidationException(
-                        "Tanggal mulai akses Admin wajib diisi."
-                );
-            }
-
-            if (admin.getTanggalMulaiAkses()
-                    .isBefore(admin.getTanggalMasuk())) {
-                throw new ValidationException(
-                        "Tanggal mulai akses tidak boleh sebelum tanggal masuk."
-                );
-            }
-
-        } else if (pegawai instanceof PetugasOperasional) {
-
-            PetugasOperasional operasional =
-                    (PetugasOperasional) pegawai;
-
-            if (kosong(operasional.getKodePetugasOperasional())) {
-                throw new ValidationException(
-                        "Kode Petugas Operasional wajib diisi."
-                );
-            }
-
-            if (kosong(operasional.getAreaTugas())) {
-                throw new ValidationException(
-                        "Area tugas wajib diisi."
-                );
-            }
-
-            if (operasional.getShiftKerja() == null) {
-                throw new ValidationException(
-                        "Shift kerja wajib dipilih."
-                );
-            }
-
-        } else if (pegawai instanceof PetugasHSE) {
-
-            PetugasHSE hse = (PetugasHSE) pegawai;
-
-            if (kosong(hse.getNoSertifikasiHSE())) {
-                throw new ValidationException(
-                        "Nomor sertifikasi HSE wajib diisi."
-                );
-            }
-
-            if (hse.getMasaBerlakuSertifikasi() == null) {
-                throw new ValidationException(
-                        "Masa berlaku sertifikasi HSE wajib diisi."
-                );
-            }
-
-        } else if (pegawai instanceof Manager) {
-
-            Manager manager = (Manager) pegawai;
-
-            if (kosong(manager.getKodeManager())) {
-                throw new ValidationException(
-                        "Kode Manager wajib diisi."
-                );
-            }
-
-            if (kosong(manager.getDivisiTanggungJawab())) {
-                throw new ValidationException(
-                        "Divisi tanggung jawab Manager wajib diisi."
-                );
-            }
-
-        } else if (pegawai instanceof Driver) {
-
-            Driver driver = (Driver) pegawai;
-
-            if (kosong(driver.getNoSim())) {
-                throw new ValidationException(
-                        "Nomor SIM Driver wajib diisi."
-                );
-            }
-
-            if (driver.getMasaBerlakuSim() == null) {
-                throw new ValidationException(
-                        "Masa berlaku SIM wajib diisi."
-                );
-            }
-
-            if (driver.getStatusDriver() == null) {
-                throw new ValidationException(
-                        "Status Driver wajib dipilih."
-                );
-            }
-
-        } else {
-            throw new ValidationException(
-                    "Jenis Pegawai tidak dikenali."
-            );
-        }
-    }
-
-    private void validasiKeunikanDataKhusus(Pegawai pegawai) {
-        for (Pegawai existing : pegawaiRepository.findAll()) {
-
-            if (existing.getIdPegawai() == pegawai.getIdPegawai()) {
-                continue;
-            }
-
-            if (pegawai instanceof Admin && existing instanceof Admin) {
-                Admin baru = (Admin) pegawai;
-                Admin lama = (Admin) existing;
-
-                if (sama(lama.getKodeAdmin(), baru.getKodeAdmin())) {
-                    throw new ValidationException(
-                            "Kode Admin sudah digunakan."
-                    );
-                }
-            }
-
-            if (pegawai instanceof PetugasOperasional
-                    && existing instanceof PetugasOperasional) {
-
-                PetugasOperasional baru =
-                        (PetugasOperasional) pegawai;
-
-                PetugasOperasional lama =
-                        (PetugasOperasional) existing;
-
-                if (sama(
-                        lama.getKodePetugasOperasional(),
-                        baru.getKodePetugasOperasional())) {
-                    throw new ValidationException(
-                            "Kode Petugas Operasional sudah digunakan."
-                    );
-                }
-            }
-
-            if (pegawai instanceof PetugasHSE
-                    && existing instanceof PetugasHSE) {
-
-                PetugasHSE baru = (PetugasHSE) pegawai;
-                PetugasHSE lama = (PetugasHSE) existing;
-
-                if (sama(
-                        lama.getNoSertifikasiHSE(),
-                        baru.getNoSertifikasiHSE())) {
-                    throw new ValidationException(
-                            "Nomor sertifikasi HSE sudah digunakan."
-                    );
-                }
-            }
-
-            if (pegawai instanceof Manager
-                    && existing instanceof Manager) {
-
-                Manager baru = (Manager) pegawai;
-                Manager lama = (Manager) existing;
-
-                if (sama(
-                        lama.getKodeManager(),
-                        baru.getKodeManager())) {
-                    throw new ValidationException(
-                            "Kode Manager sudah digunakan."
-                    );
-                }
-            }
-
-            if (pegawai instanceof Driver
-                    && existing instanceof Driver) {
-
-                Driver baru = (Driver) pegawai;
-                Driver lama = (Driver) existing;
-
-                if (sama(lama.getNoSim(), baru.getNoSim())) {
-                    throw new ValidationException(
-                            "Nomor SIM Driver sudah digunakan."
-                    );
-                }
-            }
-        }
-    }
-
-    // VALIDASI USER
-
-    private void validasiUser(User user) {
-        if (user == null) {
-            throw new ValidationException(
-                    "Data User tidak boleh kosong."
-            );
-        }
-
-        if (user.getIdUser() <= 0) {
-            throw new ValidationException(
-                    "ID User tidak valid."
-            );
-        }
-
-        if (user.getPegawai() == null) {
-            throw new ValidationException(
-                    "User harus terhubung dengan Pegawai."
-            );
-        }
-
-        Pegawai pegawai = getPegawaiOrThrow(user.getPegawai().getIdPegawai());
-
-        if (pegawai instanceof Driver) {
-            throw new ValidationException(
-                    "Driver tidak dapat memiliki akun aplikasi."
-            );
-        }
-
-        if (!(pegawai instanceof Admin)
-                && !(pegawai instanceof PetugasOperasional)
-                && !(pegawai instanceof PetugasHSE)
-                && !(pegawai instanceof Manager)) {
-            throw new ValidationException(
-                    "Jenis Pegawai tidak memiliki akses aplikasi."
-            );
-        }
-
-        if (pegawai.getStatusPegawai()
-                != StatusPegawai.AKTIF) {
-            throw new ValidationException(
-                    "Akun hanya dapat dibuat untuk Pegawai aktif."
-            );
-        }
-
-        if (kosong(user.getUsername())) {
-            throw new ValidationException(
-                    "Username wajib diisi."
-            );
-        }
-
-        if (kosong(user.getPassword())) {
-            throw new ValidationException(
-                    "Password wajib diisi."
-            );
-        }
-    }
-
-    // VALIDASI LOKASI
-
-    private void validasiLokasi(Lokasi lokasi) {
-        if (lokasi == null) {
-            throw new ValidationException(
-                    "Data Lokasi tidak boleh kosong."
-            );
-        }
-
-        if (lokasi.getIdLokasi() <= 0) {
-            throw new ValidationException(
-                    "ID Lokasi tidak valid."
-            );
-        }
-
-        if (kosong(lokasi.getNamaLokasi())) {
-            throw new ValidationException(
-                    "Nama Lokasi wajib diisi."
-            );
-        }
-
-        if (lokasi.getJenisLokasi() == null) {
-            throw new ValidationException(
-                    "Jenis Lokasi wajib dipilih."
-            );
-        }
-
-        if (lokasi.getStatusOperasional() == null) {
-            throw new ValidationException(
-                    "Status operasional Lokasi wajib dipilih."
-            );
-        }
-    }
-
-    private void validasiNamaLokasiUnik(Lokasi lokasi) {
-
-        for (Lokasi existing : lokasiRepository.findAll()) {
-
-            if (existing.getIdLokasi() != lokasi.getIdLokasi()
-                    && sama(
-                    existing.getNamaLokasi(),
-                    lokasi.getNamaLokasi())) {
-
-                throw new ValidationException(
-                        "Nama Lokasi sudah digunakan."
-                );
-            }
-        }
-    }
-
-    // VALIDASI MATERIAL
-
-    private void validasiMaterial(JenisMaterial material) {
-
-        if (material == null) {
-            throw new ValidationException(
-                    "Data Material tidak boleh kosong."
-            );
-        }
-
-        if (material.getIdMaterial() <= 0) {
-            throw new ValidationException(
-                    "ID Material tidak valid."
-            );
-        }
-
-        if (kosong(material.getNamaMaterial())) {
-            throw new ValidationException(
-                    "Nama Material wajib diisi."
-            );
-        }
-
-        if (kosong(material.getSatuan())) {
-            throw new ValidationException(
-                    "Satuan Material wajib diisi."
-            );
-        }
-    }
-
-    private void validasiNamaMaterialUnik(
-            JenisMaterial material) {
-
-        for (JenisMaterial existing :
-                materialRepository.findAll()) {
-
-            if (existing.getIdMaterial()
-                    != material.getIdMaterial()
-                    && sama(
-                    existing.getNamaMaterial(),
-                    material.getNamaMaterial())) {
-
-                throw new ValidationException(
-                        "Nama Material sudah digunakan."
-                );
-            }
-        }
-    }
-
-    // VALIDASI KENDARAAN
-
-    private void validasiKendaraan(Kendaraan kendaraan) {
-
-        if (kendaraan == null) {
-            throw new ValidationException(
-                    "Data Kendaraan tidak boleh kosong."
-            );
-        }
-
-        if (kendaraan.getIdKendaraan() <= 0) {
-            throw new ValidationException(
-                    "ID Kendaraan tidak valid."
-            );
-        }
-
-        if (kosong(kendaraan.getJenisKendaraan())) {
-            throw new ValidationException(
-                    "Jenis Kendaraan wajib diisi."
-            );
-        }
-
-        if (kosong(kendaraan.getNomorPolisi())) {
-            throw new ValidationException(
-                    "Nomor polisi wajib diisi."
-            );
-        }
-
-        if (kendaraan.getKapasitas() <= 0) {
-            throw new ValidationException(
-                    "Kapasitas Kendaraan harus lebih dari 0."
-            );
-        }
-
-        if (kendaraan.getTahunKendaraan() <= 0) {
-            throw new ValidationException(
-                    "Tahun Kendaraan tidak valid."
-            );
-        }
-
-        if (kendaraan.getStatusKendaraan() == null) {
-            throw new ValidationException(
-                    "Status Kendaraan wajib dipilih."
-            );
-        }
-    }
-
-    // VALIDASI PARAMETER
-
-    private void validasiParameter(
-            ParameterLingkungan parameter) {
-
-        if (parameter == null) {
-            throw new ValidationException(
-                    "Data Parameter tidak boleh kosong."
-            );
-        }
-
-        if (parameter.getIdParameter() <= 0) {
-            throw new ValidationException(
-                    "ID Parameter tidak valid."
-            );
-        }
-
-        if (kosong(parameter.getNamaParameter())) {
-            throw new ValidationException(
-                    "Nama Parameter wajib diisi."
-            );
-        }
-
-        if (kosong(parameter.getSatuan())) {
-            throw new ValidationException(
-                    "Satuan Parameter wajib diisi."
-            );
-        }
-
-        Double minimum =
-                parameter.getBatasMinimum();
-
-        Double maksimum =
-                parameter.getBatasMaksimum();
-
-        if (minimum != null
-                && maksimum != null
-                && minimum > maksimum) {
-
-            throw new ValidationException(
-                    "Batas minimum tidak boleh lebih besar dari batas maksimum."
-            );
-        }
-    }
-
-    private void validasiNamaParameterUnik(
-            ParameterLingkungan parameter) {
-
-        for (ParameterLingkungan existing :
-                parameterRepository.findAll()) {
-
-            if (existing.getIdParameter()
-                    != parameter.getIdParameter()
-                    && sama(
-                    existing.getNamaParameter(),
-                    parameter.getNamaParameter())) {
-
-                throw new ValidationException(
-                        "Nama Parameter sudah digunakan."
-                );
-            }
-        }
-    }
-
-    // HELPER FIND
-
-    private Pegawai getPegawaiOrThrow(int id) {
-        Optional<Pegawai> data =
-                pegawaiRepository.findById(id);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "Pegawai tidak ditemukan."
-            );
-        }
-
-        return data.get();
-    }
-
-    private User getUserOrThrow(int id) {
-        Optional<User> data =
-                userRepository.findById(id);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "User tidak ditemukan."
-            );
-        }
-
-        return data.get();
-    }
-
-    private Lokasi getLokasiOrThrow(int id) {
-        Optional<Lokasi> data =
-                lokasiRepository.findById(id);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "Lokasi tidak ditemukan."
-            );
-        }
-
-        return data.get();
-    }
-
-    private JenisMaterial getMaterialOrThrow(int id) {
-        Optional<JenisMaterial> data =
-                materialRepository.findById(id);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "Material tidak ditemukan."
-            );
-        }
-
-        return data.get();
-    }
-
-    private Kendaraan getKendaraanOrThrow(int id) {
-        Optional<Kendaraan> data =
-                kendaraanRepository.findById(id);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "Kendaraan tidak ditemukan."
-            );
-        }
-
-        return data.get();
-    }
-
-    private ParameterLingkungan
-            getParameterOrThrow(int id) {
-
-        Optional<ParameterLingkungan> data =
-                parameterRepository.findById(id);
-
-        if (!data.isPresent()) {
-            throw new DataNotFoundException(
-                    "Parameter Lingkungan tidak ditemukan."
-            );
-        }
-
-        return data.get();
-    }
-
-    // HELPER UMUM
-
-    private boolean kosong(String value) {
-        return value == null
-                || value.trim().isEmpty();
-    }
-
-    private boolean sama(
-            String value1,
-            String value2) {
-
-        if (value1 == null || value2 == null) {
-            return false;
-        }
-
-        return value1.trim()
-                .equalsIgnoreCase(value2.trim());
-    }
-    
     public List<Kendaraan> tampilkanKendaraanTersedia() {
-        List<Kendaraan> hasil = new ArrayList<Kendaraan>();
-
-        for (Kendaraan kendaraan : kendaraanRepository.findAll()) {
-            if (kendaraan.getStatusKendaraan() == StatusKendaraan.TERSEDIA) {
-                hasil.add(kendaraan);
-            }
-        }
-
-        return hasil;
+        List<Kendaraan> out = new ArrayList<>();
+        for (Kendaraan x:kendaraan.findAll())if (x.getStatusKendaraan() == StatusKendaraan.TERSEDIA)out.add(x);
+        return out;
     }
-    
     public List<Lokasi> tampilkanLokasiPitAktif() {
-        List<Lokasi> hasil = new ArrayList<Lokasi>();
-
-        for (Lokasi lokasi : lokasiRepository.findAll()) {
-            if (lokasi.getJenisLokasi() == JenisLokasi.PIT && lokasi.getStatusOperasional() == StatusLokasi.AKTIF) {
-                hasil.add(lokasi);
-            }
-        }
-
-        return hasil;
+        List<Lokasi> out = new ArrayList<>();
+        for (Lokasi x:lokasi.findAll())if (x.getJenisLokasi() == JenisLokasi.PIT
+ && x.getStatusOperasional() == StatusLokasi.AKTIF)out.add(x);
+        return out;
     }
-
     public List<Lokasi> tampilkanLokasiAktif() {
-        List<Lokasi> hasil = new ArrayList<Lokasi>();
-
-        for (Lokasi lokasi : lokasiRepository.findAll()) {
-
-            if (lokasi.getStatusOperasional() == StatusLokasi.AKTIF) {
-                hasil.add(lokasi);
-            }
-        }
-
-        return hasil;
+        List<Lokasi> out = new ArrayList<>();
+        for (Lokasi x:lokasi.findAll())if (x.getStatusOperasional() == StatusLokasi.AKTIF)out.add(x);
+        return out;
     }
 }

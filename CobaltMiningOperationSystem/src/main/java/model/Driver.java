@@ -4,10 +4,6 @@
  */
 package model;
 
-import enums.StatusDriver;
-import enums.StatusPegawai;
-import java.time.LocalDate;
-
 /**
  *
  * @author zefrialrizkullah
@@ -15,46 +11,53 @@ import java.time.LocalDate;
 
 public class Driver extends Pegawai {
     private String noSim;
-    private LocalDate masaBerlakuSim;
-    private StatusDriver statusDriver;
-
-    public Driver(int idPegawai, String namaPegawai, String noHp, LocalDate tanggalMasuk, StatusPegawai statusPegawai, String noSim, LocalDate masaBerlakuSim, StatusDriver statusDriver) {
+    private java.time.LocalDate masaBerlakuSim;
+    private enums.StatusDriver statusDriver;
+    
+    public Driver(int idPegawai, String namaPegawai, String noHp, java.time.LocalDate tanggalMasuk,
+            enums.StatusPegawai statusPegawai, String noSim, java.time.LocalDate masaBerlakuSim,
+            enums.StatusDriver statusDriver) {
         super(idPegawai, namaPegawai, noHp, tanggalMasuk, statusPegawai);
         this.noSim = noSim;
         this.masaBerlakuSim = masaBerlakuSim;
         this.statusDriver = statusDriver;
     }
-
+    
     public String getNoSim() {
         return noSim;
     }
-
-    public void setNoSim(String noSim) {
-        this.noSim = noSim;
+    
+    public void setNoSim(String value) {
+        this.noSim = value;
     }
-
-    public LocalDate getMasaBerlakuSim() {
+    
+    public java.time.LocalDate getMasaBerlakuSim() {
         return masaBerlakuSim;
     }
-
-    public void setMasaBerlakuSim(LocalDate masaBerlakuSim) {
-        this.masaBerlakuSim = masaBerlakuSim;
+    
+    public void setMasaBerlakuSim(java.time.LocalDate value) {
+        this.masaBerlakuSim = value;
     }
-
-    public StatusDriver getStatusDriver() {
+    
+    public enums.StatusDriver getStatusDriver() {
         return statusDriver;
     }
-
-    public void setStatusDriver(StatusDriver statusDriver) {
-        this.statusDriver = statusDriver;
+    
+    public void setStatusDriver(enums.StatusDriver value) {
+        this.statusDriver = value;
     }
-
-    public boolean isSimAktif(LocalDate tanggal) {
-        return masaBerlakuSim != null && !masaBerlakuSim.isBefore(tanggal);
-    }
-
+    
     @Override
     public String getJenisPegawai() {
         return "DRIVER";
+    }
+    
+    public boolean isSimAktif(java.time.LocalDate d) {
+        return masaBerlakuSim != null && !masaBerlakuSim.isBefore(d);
+    }
+    
+    @Override
+    public String toString() {
+        return "Driver #" + getIdPegawai();
     }
 }

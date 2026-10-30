@@ -4,9 +4,6 @@
  */
 package model;
 
-import enums.StatusPegawai;
-import java.time.LocalDate;
-
 /**
  *
  * @author zefrialrizkullah
@@ -14,36 +11,43 @@ import java.time.LocalDate;
 
 public class PetugasHSE extends Pegawai {
     private String noSertifikasiHSE;
-    private LocalDate masaBerlakuSertifikasi;
-
-    public PetugasHSE(int idPegawai, String namaPegawai, String noHp, LocalDate tanggalMasuk, StatusPegawai statusPegawai, String noSertifikasiHSE, LocalDate masaBerlakuSertifikasi) {
+    private java.time.LocalDate masaBerlakuSertifikasi;
+    
+    public PetugasHSE(int idPegawai, String namaPegawai, String noHp, java.time.LocalDate tanggalMasuk,
+            enums.StatusPegawai statusPegawai, String noSertifikasiHSE,
+            java.time.LocalDate masaBerlakuSertifikasi) {
         super(idPegawai, namaPegawai, noHp, tanggalMasuk, statusPegawai);
         this.noSertifikasiHSE = noSertifikasiHSE;
         this.masaBerlakuSertifikasi = masaBerlakuSertifikasi;
     }
-
+    
     public String getNoSertifikasiHSE() {
         return noSertifikasiHSE;
     }
-
-    public void setNoSertifikasiHSE(String noSertifikasiHSE) {
-        this.noSertifikasiHSE = noSertifikasiHSE;
+    
+    public void setNoSertifikasiHSE(String value) {
+        this.noSertifikasiHSE = value;
     }
-
-    public LocalDate getMasaBerlakuSertifikasi() {
+    
+    public java.time.LocalDate getMasaBerlakuSertifikasi() {
         return masaBerlakuSertifikasi;
     }
-
-    public void setMasaBerlakuSertifikasi(LocalDate masaBerlakuSertifikasi) {
-        this.masaBerlakuSertifikasi = masaBerlakuSertifikasi;
+    
+    public void setMasaBerlakuSertifikasi(java.time.LocalDate value) {
+        this.masaBerlakuSertifikasi = value;
     }
-
-    public boolean isSertifikasiAktif(LocalDate tanggal) {
-        return masaBerlakuSertifikasi != null && !masaBerlakuSertifikasi.isBefore(tanggal);
-    }
-
+    
     @Override
     public String getJenisPegawai() {
-        return "PETUGAS HSE";
+        return "PETUGASHSE";
+    }
+    
+    public boolean isSertifikasiAktif(java.time.LocalDate d) {
+        return masaBerlakuSertifikasi != null && !masaBerlakuSertifikasi.isBefore(d);
+    }
+    
+    @Override
+    public String toString() {
+        return "PetugasHSE #" + getIdPegawai();
     }
 }

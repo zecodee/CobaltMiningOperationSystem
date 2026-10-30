@@ -10,7 +10,11 @@ package exception;
  */
 
 public class BusinessException extends RuntimeException {
-    public BusinessException(String message) {
-        super(message);
+    public BusinessException(String m) {
+        super(m);
+    }
+    
+    public BusinessException(String m, Throwable e) {
+        super(m, e);
     }
 }
