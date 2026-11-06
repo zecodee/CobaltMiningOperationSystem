@@ -23,6 +23,14 @@ public final class MonitoringController {
         auth = a;
     }
     
+    public String statusPermintaan(int lokasi) { auth.requirePetugasHSE(); return service.statusPermintaan(lokasi); }
+    public void ajukanMonitoring(int lokasi, String alasan) { auth.requirePetugasHSE(); service.ajukanMonitoring(lokasi, alasan, auth.getCurrentPegawai().getIdPegawai()); }
+    public java.util.List<service.MonitoringService.Permintaan> permintaanMenunggu() { auth.requireManager(); return service.permintaanMenunggu(); }
+    public java.util.List<service.MonitoringService.Peringatan> peringatanManager() {auth.requireManager();return service.peringatanManager();}
+    public void tandaiPeringatanDibaca(int id) {auth.requireManager();service.tandaiPeringatanDibaca(id);}
+    public java.util.List<service.MonitoringService.Permintaan> semuaPermintaanMenunggu() {auth.requireManager();return service.permintaanMenunggu();}
+    public void setujuiMonitoring(int permintaanId) { auth.requireManager(); service.setujuiMonitoring(permintaanId,auth.getCurrentPegawai().getIdPegawai()); }
+
     public MonitoringLingkungan buatMonitoring(int lokasi, LocalDateTime tanggal, String catatan) {
         auth.requirePetugasHSE();
         return service.buatMonitoring(lokasi, (PetugasHSE)auth.getCurrentPegawai(), tanggal, catatan);
@@ -33,18 +41,15 @@ public final class MonitoringController {
         return service.tambahDetail(id, parameter, nilai, catatan);
     }
     
-    public void aturTindakLanjut(int id, String tindak) {
-        auth.requireManager();
-        service.aturTindakLanjut(id, tindak);
-    }
+
     
     public void mulaiPenanganan(int id) {
-        auth.requireManager();
+        auth.requirePetugasHSE();
         service.mulaiPenanganan(id);
     }
     
     public void selesaikanPenanganan(int id) {
-        auth.requireManager();
+        auth.requirePetugasHSE();
         service.selesaikanPenanganan(id);
     }
     

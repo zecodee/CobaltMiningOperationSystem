@@ -49,9 +49,7 @@
         </Group>
         <Group type="102" attributes="0">
             <EmptySpace min="32" pref="32" max="32" attributes="0"/>
-            <Component id="btnTindak" min="210" pref="210" max="210" attributes="0"/>
             <EmptySpace min="8" pref="8" max="8" attributes="0"/>
-            <Component id="btnMulai" min="210" pref="210" max="210" attributes="0"/>
             <EmptySpace min="8" pref="8" max="8" attributes="0"/>
             <Component id="btnSelesai" min="210" pref="210" max="210" attributes="0"/>
             <EmptySpace min="32" pref="32" max="32" attributes="0"/>
@@ -80,8 +78,6 @@
             </Group>
             <EmptySpace min="8" pref="8" max="8" attributes="0"/>
             <Group type="103" groupAlignment="0" attributes="0">
-                <Component id="btnTindak" min="42" pref="42" max="42" attributes="0"/>
-                <Component id="btnMulai" min="42" pref="42" max="42" attributes="0"/>
                 <Component id="btnSelesai" min="42" pref="42" max="42" attributes="0"/>
             </Group>
             <EmptySpace min="12" pref="12" max="12" attributes="0"/>
@@ -195,42 +191,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHapusActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnTindak">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="42" green="2b" red="1a" type="rgb"/>
-        </Property>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="SansSerif" size="12" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Tindak Lanjut"/>
-        <Property name="focusPainted" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTindakActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnMulai">
-      <Properties>
-        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="42" green="2b" red="1a" type="rgb"/>
-        </Property>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="SansSerif" size="12" style="1"/>
-        </Property>
-        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="ff" green="ff" red="ff" type="rgb"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Mulai Penanganan"/>
-        <Property name="focusPainted" type="boolean" value="false"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMulaiActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnSelesai">

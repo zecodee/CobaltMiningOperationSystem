@@ -29,6 +29,7 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        cmbFilterMonitoring = new javax.swing.JComboBox();
         lblTitle = new javax.swing.JLabel();
         lblHint = new javax.swing.JLabel();
         pnlKpi0 = new javax.swing.JPanel();
@@ -64,6 +65,9 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(214, 192, 179));
 
+        cmbFilterMonitoring.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua Hasil", "NORMAL", "PERINGATAN", "BERBAHAYA", "Belum Ada Monitoring" }));
+        cmbFilterMonitoring.addActionListener(this::cmbFilterMonitoringActionPerformed);
+
         lblTitle.setFont(new java.awt.Font("SansSerif", 1, 22)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(26, 43, 66));
         lblTitle.setText("Kondisi Lokasi Tambang");
@@ -94,9 +98,9 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
             .add(pnlKpi0Layout.createSequentialGroup()
                 .add(16, 16, 16)
                 .add(pnlKpi0Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(lblKpiTitle0, 10, 229, Short.MAX_VALUE)
-                    .add(lblKpiValue0, 10, 229, Short.MAX_VALUE)
-                    .add(lblKpiSub0, 10, 229, Short.MAX_VALUE)))
+                    .add(lblKpiTitle0, 10, 265, Short.MAX_VALUE)
+                    .add(lblKpiValue0, 10, 265, Short.MAX_VALUE)
+                    .add(lblKpiSub0, 10, 265, Short.MAX_VALUE)))
         );
         pnlKpi0Layout.setVerticalGroup(
             pnlKpi0Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -131,9 +135,9 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
             .add(pnlKpi1Layout.createSequentialGroup()
                 .add(16, 16, 16)
                 .add(pnlKpi1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(lblKpiTitle1, 10, 229, Short.MAX_VALUE)
-                    .add(lblKpiValue1, 10, 229, Short.MAX_VALUE)
-                    .add(lblKpiSub1, 10, 229, Short.MAX_VALUE)))
+                    .add(lblKpiTitle1, 10, 265, Short.MAX_VALUE)
+                    .add(lblKpiValue1, 10, 265, Short.MAX_VALUE)
+                    .add(lblKpiSub1, 10, 265, Short.MAX_VALUE)))
         );
         pnlKpi1Layout.setVerticalGroup(
             pnlKpi1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -168,9 +172,9 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
             .add(pnlKpi2Layout.createSequentialGroup()
                 .add(16, 16, 16)
                 .add(pnlKpi2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(lblKpiTitle2, 10, 229, Short.MAX_VALUE)
-                    .add(lblKpiValue2, 10, 229, Short.MAX_VALUE)
-                    .add(lblKpiSub2, 10, 229, Short.MAX_VALUE)))
+                    .add(lblKpiTitle2, 10, 266, Short.MAX_VALUE)
+                    .add(lblKpiValue2, 10, 266, Short.MAX_VALUE)
+                    .add(lblKpiSub2, 10, 266, Short.MAX_VALUE)))
         );
         pnlKpi2Layout.setVerticalGroup(
             pnlKpi2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -271,14 +275,14 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
         btnBuatMonitoring.setBackground(new java.awt.Color(209, 187, 158));
         btnBuatMonitoring.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnBuatMonitoring.setForeground(new java.awt.Color(255, 255, 255));
-        btnBuatMonitoring.setText("Buat Monitoring Lokasi Ini");
+        btnBuatMonitoring.setText("Ajukan / Mulai Monitoring");
         btnBuatMonitoring.setFocusPainted(false);
         btnBuatMonitoring.addActionListener(this::btnBuatMonitoringActionPerformed);
 
         btnInformasikan.setBackground(new java.awt.Color(167, 146, 119));
         btnInformasikan.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnInformasikan.setForeground(new java.awt.Color(255, 255, 255));
-        btnInformasikan.setText("Informasikan ke Manager");
+        btnInformasikan.setText("Info Peringatan Manager");
         btnInformasikan.setFocusPainted(false);
         btnInformasikan.addActionListener(this::btnInformasikanActionPerformed);
 
@@ -355,16 +359,17 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(lblTitle, 10, 600, Short.MAX_VALUE)
                     .add(lblHint, 10, 600, Short.MAX_VALUE)
-                    .add(layout.createSequentialGroup()
-                        .add(pnlKpi0, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(12, 65, Short.MAX_VALUE)
-                        .add(pnlKpi1, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(12, 68, Short.MAX_VALUE)
-                        .add(pnlKpi2, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(cmbFilterMonitoring, 180, 180, 180)
                     .add(layout.createSequentialGroup()
                         .add(scrollKatalog, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(pnlDetail, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .add(8, 8, Short.MAX_VALUE)
+                        .add(pnlDetail, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(pnlKpi0, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(pnlKpi1, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                        .add(pnlKpi2, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .add(24, 24, 24))
         );
         layout.setVerticalGroup(
@@ -374,6 +379,8 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
                 .add(lblTitle, 40, 40, 40)
                 .add(2, 2, 2)
                 .add(lblHint, 22, 22, 22)
+                .add(8, 8, 8)
+                .add(cmbFilterMonitoring, 32, 32, 32)
                 .add(12, 12, 12)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(pnlKpi0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -417,7 +424,7 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
 
             model.MonitoringLingkungan akhir = riwayat.isEmpty() ? null : riwayat.get(0);
 
-            if (akhir != null && akhir.getStatusMonitoring() == enums.StatusMonitoring.PERINGATAN) {
+            if (akhir != null && akhir.getStatusMonitoring() != enums.StatusMonitoring.NORMAL) {
 
                 peringatan++;
 
@@ -435,37 +442,28 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
 
 
 
-        pnlListKartu.removeAll();
-
-        pnlListKartu.setLayout(new javax.swing.BoxLayout(pnlListKartu, javax.swing.BoxLayout.PAGE_AXIS));
-
-        for (model.Lokasi l : lokasiList) {
-
-            KartuLokasiPanel kartu = new KartuLokasiPanel();
-
-            java.util.List<model.MonitoringLingkungan> riwayat = riwayatPerLokasi.get(l.getIdLokasi());
-
-            model.MonitoringLingkungan akhir = riwayat == null || riwayat.isEmpty() ? null : riwayat.get(0);
-
-            kartu.setData(l, akhir);
-
-            pasangAksiKartu(kartu, () -> pilihLokasi(l));
-
-            pnlListKartu.add(kartu);
-
-            pnlListKartu.add(javax.swing.Box.createVerticalStrut(10));
-
-        }
-
-        pnlListKartu.revalidate();
-
-        pnlListKartu.repaint();
-
-        if (!lokasiList.isEmpty())pilihLokasi(lokasiList.get(0));
-
+        tampilkanKartu();
+        if(!lokasiList.isEmpty())pilihLokasi(lokasiList.get(0));
     }
-
-
+    private void cmbFilterMonitoringActionPerformed(java.awt.event.ActionEvent evt){tampilkanKartu();}
+    private void tampilkanKartu() {
+        if(pnlListKartu==null)return;
+        pnlListKartu.removeAll();
+        pnlListKartu.setLayout(new javax.swing.BoxLayout(pnlListKartu,javax.swing.BoxLayout.PAGE_AXIS));
+        String filter= cmbFilterMonitoring==null||cmbFilterMonitoring.getSelectedItem()==null?"Semua Hasil":cmbFilterMonitoring.getSelectedItem().toString();
+        for(model.Lokasi l:lokasiList) {
+            java.util.List<model.MonitoringLingkungan> daftar=riwayatPerLokasi.get(l.getIdLokasi());
+            model.MonitoringLingkungan akhir=daftar==null||daftar.isEmpty()?null:daftar.get(0);
+            if("NORMAL".equals(filter)&&(akhir==null||akhir.getStatusMonitoring()!=enums.StatusMonitoring.NORMAL))continue;
+            if("PERINGATAN".equals(filter)&&(akhir==null||akhir.getStatusMonitoring()!=enums.StatusMonitoring.PERINGATAN))continue;
+            if("BERBAHAYA".equals(filter)&&(akhir==null||akhir.getStatusMonitoring()!=enums.StatusMonitoring.BERBAHAYA))continue;
+            if("Belum Ada Monitoring".equals(filter)&&akhir!=null)continue;
+            KartuLokasiPanel kartu=new KartuLokasiPanel();kartu.setData(l,akhir);
+            pasangAksiKartu(kartu,()->pilihLokasi(l));pnlListKartu.add(kartu);
+            pnlListKartu.add(javax.swing.Box.createVerticalStrut(10));
+        }
+        pnlListKartu.revalidate();pnlListKartu.repaint();
+    }
 
     private void pasangAksiKartu(java.awt.Component komponen, Runnable aksi) {
         komponen.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
@@ -495,6 +493,11 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
 
         model.MonitoringLingkungan akhir = monitoringTerakhir(l.getIdLokasi());
 
+        String persetujuan=AppConfig.getMonitoringController().statusPermintaan(l.getIdLokasi());
+        if("MENUNGGU".equals(persetujuan))btnBuatMonitoring.setText("Menunggu Persetujuan Manager");
+        else if("DISETUJUI".equals(persetujuan))btnBuatMonitoring.setText("Mulai Monitoring (Disetujui)");
+        else if("BERJALAN".equals(persetujuan))btnBuatMonitoring.setText("Monitoring Sedang Berjalan");
+        else btnBuatMonitoring.setText("Ajukan Monitoring Lokasi Ini");
         lblDNama.setText(l.getNamaLokasi());
         javax.swing.table.DefaultTableModel parameterModel = (javax.swing.table.DefaultTableModel)tblParameter.getModel();
         parameterModel.setRowCount(0);
@@ -522,7 +525,7 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
 
             lblDHasil.setForeground(new java.awt.Color(103, 121, 143));
 
-            lblDPenanganan.setText("Penanganan: -");
+            lblDPenanganan.setText("DISETUJUI".equals(persetujuan)?"Penanganan: BELUM DITANGANI":("MENUNGGU".equals(persetujuan)?"Menunggu persetujuan Manager":"Penanganan: -"));
 
             lblDTindakLanjut.setText("Tindak lanjut: -");
 
@@ -539,11 +542,14 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
 
                 + (akhir.getTanggalMonitoring() == null ? "-" : akhir.getTanggalMonitoring().format(fmt)));
 
+            boolean berbahaya = akhir.getStatusMonitoring() == enums.StatusMonitoring.BERBAHAYA;
             boolean peringatan = akhir.getStatusMonitoring() == enums.StatusMonitoring.PERINGATAN;
 
             lblDHasil.setText("Hasil: " + akhir.getStatusMonitoring());
 
-            lblDHasil.setForeground(peringatan ? new java.awt.Color(255,0,0) : new java.awt.Color(0,255,77));
+            lblDHasil.setForeground(berbahaya ? new java.awt.Color(255, 80, 80)
+                : peringatan ? new java.awt.Color(245, 170, 70)
+                : new java.awt.Color(0, 255, 77));
 
             lblDPenanganan.setText("Penanganan: " + akhir.getStatusPenanganan());
 
@@ -551,7 +557,8 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
 
                 + (akhir.getTindakLanjut() == null || akhir.getTindakLanjut().trim().isEmpty() ? "-" : akhir.getTindakLanjut()));
 
-            boolean perluTindak = peringatan && akhir.getStatusPenanganan() != enums.StatusPenanganan.SELESAI;
+            // BERBAHAYA tetap ditandai merah meskipun penanganan telah selesai.
+            boolean perluTindak = berbahaya;
 
             lblDBadge.setVisible(perluTindak);
 
@@ -565,56 +572,43 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
 
 
     private void btnBuatMonitoringActionPerformed(java.awt.event.ActionEvent evt) {
-
         try {
-
-            if (terpilih == null)throw new IllegalArgumentException("Pilih lokasi terlebih dahulu.");
-
-            MonitoringFormFrame f = new MonitoringFormFrame();
-
-            f.pilihLokasi(terpilih.getIdLokasi());
-
-            f.setVisible(true);
-
-            f.addWindowListener(new java.awt.event.WindowAdapter() {
-
-                @Override public void windowClosed(java.awt.event.WindowEvent e) { refreshData(); }
-
-            });
-
-        } catch (Exception ex) { FormUtil.error(this, ex); }
-
+            if(terpilih==null)throw new IllegalArgumentException("Pilih lokasi yang akan dipantau.");
+            int lokasi=terpilih.getIdLokasi();
+            String status=AppConfig.getMonitoringController().statusPermintaan(lokasi);
+            if("MENUNGGU".equals(status)) {
+                JOptionPane.showMessageDialog(this,"Permintaan monitoring sedang menunggu persetujuan Manager.","Menunggu Persetujuan",JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            if("BERJALAN".equals(status)) {
+                JOptionPane.showMessageDialog(this,"Kegiatan lokasi ini masih berlangsung. Selesaikan kegiatan terlebih dahulu.","Kegiatan Berlangsung",JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+            if("DISETUJUI".equals(status)) {
+                MonitoringFormFrame f=new MonitoringFormFrame();f.pilihLokasi(lokasi);f.setVisible(true);
+                f.addWindowListener(new java.awt.event.WindowAdapter(){@Override public void windowClosed(java.awt.event.WindowEvent e){refreshData();}});
+                return;
+            }
+            String alasan=JOptionPane.showInputDialog(this,"Jelaskan alasan monitoring untuk "+terpilih.getNamaLokasi()+":", "Ajukan Monitoring", JOptionPane.QUESTION_MESSAGE);
+            if(alasan==null)return;
+            if(JOptionPane.showConfirmDialog(this,"Kirim permintaan monitoring kepada Manager?","Kirim Permintaan",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)!=JOptionPane.YES_OPTION)return;
+            AppConfig.getMonitoringController().ajukanMonitoring(lokasi,alasan);
+            JOptionPane.showMessageDialog(this,"Permintaan terkirim. Anda dapat memulai monitoring setelah Manager menyetujuinya.","Berhasil",JOptionPane.INFORMATION_MESSAGE);
+            refreshData();
+        }catch(Exception ex){FormUtil.error(this,ex);}
     }
-
-
 
     private void btnInformasikanActionPerformed(java.awt.event.ActionEvent evt) {
-
         try {
-
-            if (terpilih == null)throw new IllegalArgumentException("Pilih lokasi terlebih dahulu.");
-
-            model.MonitoringLingkungan akhir = monitoringTerakhir(terpilih.getIdLokasi());
-
-            if (akhir == null)throw new IllegalArgumentException("Lokasi ini belum memiliki monitoring.");
-
-            if (JOptionPane.showConfirmDialog(this,
-
-                "Meneruskan informasi peringatan lokasi " + terpilih.getNamaLokasi() + " ke Manager?",
-
-                "Konfirmasi", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION)return;
-
-            AppConfig.getMonitoringController().informasikanManager(akhir.getIdMonitoring());
-
-            JOptionPane.showMessageDialog(this, "Informasi peringatan telah diteruskan ke Manager.");
-
-            refreshData();
-
-        } catch (Exception ex) { FormUtil.error(this, ex); }
-
+            if(terpilih==null)throw new IllegalArgumentException("Pilih lokasi terlebih dahulu.");
+            model.MonitoringLingkungan akhir=monitoringTerakhir(terpilih.getIdLokasi());
+            if(akhir==null||akhir.getStatusMonitoring()==enums.StatusMonitoring.NORMAL){
+                JOptionPane.showMessageDialog(this,"Belum ada peringatan untuk lokasi ini.");return;
+            }
+            JOptionPane.showMessageDialog(this,"Hasil pengukuran yang melewati ambang batas sudah masuk ke daftar peringatan Manager.\n"+
+                "Manager dapat melihat detail hasil pengukuran dan prioritas lokasi.","Informasi Peringatan",JOptionPane.INFORMATION_MESSAGE);
+        }catch(Exception ex){FormUtil.error(this,ex);}
     }
-
-
 
     private void btnKelolaActionPerformed(java.awt.event.ActionEvent evt) {
         try {
@@ -633,6 +627,7 @@ public class KondisiLokasiPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBuatMonitoring;
     private javax.swing.JButton btnInformasikan;
     private javax.swing.JButton btnKelola;
+    private javax.swing.JComboBox cmbFilterMonitoring;
     private javax.swing.JLabel lblDBadge;
     private javax.swing.JLabel lblDHasil;
     private javax.swing.JLabel lblDJenis;

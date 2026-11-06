@@ -372,7 +372,7 @@ public class DashboardHSEPanel extends javax.swing.JPanel {
                 .add(lblHint, 22, 22, 22)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(pnlFilter, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(pnlKpi0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(pnlKpi1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
@@ -382,7 +382,7 @@ public class DashboardHSEPanel extends javax.swing.JPanel {
                 .add(pnlPrioritas, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(14, 14, 14)
                 .add(pnlChart1, 200, 300, 300)
-                .add(16, 16, 16))
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -512,27 +512,18 @@ public DashboardHSEPanel(java.util.function.Consumer<String> nav) {
 
 
 
-        org.jfree.data.category.DefaultCategoryDataset ds = new org.jfree.data.category.DefaultCategoryDataset();
-
-        boolean ada = false;
-
-        for (Map.Entry<String, Integer> e : d.peringatanPerParameter.entrySet()) {
-
-            ds.addValue(e.getValue(), "Peringatan", e.getKey());
-
-            if (e.getValue() > 0)ada = true;
-
+        org.jfree.data.category.DefaultCategoryDataset ds=new org.jfree.data.category.DefaultCategoryDataset();
+        java.util.Map<String,Integer> statusHitung=new java.util.LinkedHashMap<>();
+        statusHitung.put("BELUM DIUKUR",0);
+        statusHitung.put("NORMAL",0);
+        statusHitung.put("PERINGATAN",0);
+        statusHitung.put("BERBAHAYA",0);
+        for(model.MonitoringLingkungan m:AppConfig.getMonitoringController().tampilkanSemuaMonitoring()){
+            String status=m.getDetailMonitoring().isEmpty()?"BELUM DIUKUR":m.getStatusMonitoring().name();
+            statusHitung.put(status,statusHitung.getOrDefault(status,0)+1);
         }
-
-        if (!ada) {
-
-            DashboardCharts.kosong(pnlChart1, "Tidak ada peringatan pada periode ini.");
-
-        } else {
-
-            DashboardCharts.render(pnlChart1, DashboardCharts.barHorizontal("Peringatan Berdasarkan Parameter", ds));
-
-        }
+        for(java.util.Map.Entry<String,Integer> e:statusHitung.entrySet())ds.addValue(e.getValue(),"Kegiatan",e.getKey());
+        DashboardCharts.render(pnlChart1,DashboardCharts.barHorizontal("Distribusi Hasil Monitoring Lingkungan",ds));
 
     }
 

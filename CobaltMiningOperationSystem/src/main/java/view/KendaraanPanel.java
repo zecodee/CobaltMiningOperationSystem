@@ -509,11 +509,11 @@ public class KendaraanPanel extends javax.swing.JPanel {
 
                 + "riwayat pengangkutan tetap tersimpan.",
 
-                "Konfirmasi Soft Delete", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION)return;
+                "Nonaktifkan Kendaraan", JOptionPane.YES_NO_OPTION) != JOptionPane.YES_OPTION)return;
 
             AppConfig.getMasterDataController().hapusKendaraan(item.getIdKendaraan());
 
-            JOptionPane.showMessageDialog(this, "Kendaraan dihapus secara lembut (soft delete).");
+            JOptionPane.showMessageDialog(this, "Kendaraan berhasil dinonaktifkan. Riwayat pengangkutan tetap tersimpan.");
 
             refreshData();
 

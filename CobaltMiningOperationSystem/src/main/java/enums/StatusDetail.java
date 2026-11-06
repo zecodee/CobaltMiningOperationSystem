@@ -11,5 +11,6 @@ package enums;
 
 public enum StatusDetail {
     NORMAL,
-    PERINGATAN
+    PERINGATAN,
+    BERBAHAYA
 }

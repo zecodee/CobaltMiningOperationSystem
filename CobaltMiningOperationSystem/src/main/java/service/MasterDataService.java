@@ -179,7 +179,7 @@ public final class MasterDataService {
     /** KPI kendaraan: {total tampil, tersedia, digunakan, perawatan/nonaktif}. */
     public int[] ringkasanKendaraan() {
         int[] k = new int[4];
-        for (Kendaraan x:kendaraan.findAll()) {
+        for (Kendaraan x:kendaraan.findAllDenganNonaktif()) {
             k[0]++;
             if (x.getStatusKendaraan() == StatusKendaraan.TERSEDIA)k[1]++;
             else if (x.getStatusKendaraan() == StatusKendaraan.DIGUNAKAN)k[2]++;
@@ -340,7 +340,7 @@ public final class MasterDataService {
     }
     
     public List<Kendaraan> tampilkanSemuaKendaraan() {
-        return kendaraan.findAll();
+        return kendaraan.findAllDenganNonaktif();
     }
     private void validateParameter(ParameterLingkungan a) {
         check(a != null && filled(a.getNamaParameter()) && filled(a.getSatuan()),"Data parameter belum lengkap.");

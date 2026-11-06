@@ -14,6 +14,7 @@ import java.util.function.Consumer;
 public class DashboardManagerPanel extends javax.swing.JPanel {
     private java.util.function.Consumer<String> navigate;
     private final java.util.List<Integer> prioritasIds = new java.util.ArrayList<>();
+    private final java.util.List<service.MonitoringService.Permintaan> persetujuanIds = new java.util.ArrayList<>();
 
     public DashboardManagerPanel() {
         initComponents();
@@ -26,6 +27,11 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
             btn.setBorderPainted(false);
         }
         
+        tblPrioritas.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override public void mouseClicked(java.awt.event.MouseEvent e) {
+                if(e.getClickCount()==2)lihatPrioritas();
+            }
+        });
         cmbPeriode.setSelectedIndex(2);
         choAwal.setDate(java.sql.Date.valueOf(LocalDate.now().withDayOfMonth(1)));
         choAkhir.setDate(java.sql.Date.valueOf(LocalDate.now()));
@@ -60,7 +66,6 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
         lblKpiTitle3 = new javax.swing.JLabel();
         lblKpiValue3 = new javax.swing.JLabel();
         lblKpiSub3 = new javax.swing.JLabel();
-        pnlChart1 = new javax.swing.JPanel();
         pnlChart2 = new javax.swing.JPanel();
         pnlChart3 = new javax.swing.JPanel();
         pnlChart4 = new javax.swing.JPanel();
@@ -157,9 +162,9 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
             .add(pnlKpi0Layout.createSequentialGroup()
                 .add(16, 16, 16)
                 .add(pnlKpi0Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(lblKpiTitle0, 10, 186, Short.MAX_VALUE)
-                    .add(lblKpiValue0, 10, 186, Short.MAX_VALUE)
-                    .add(lblKpiSub0, 10, 186, Short.MAX_VALUE)))
+                    .add(lblKpiTitle0, 10, 199, Short.MAX_VALUE)
+                    .add(lblKpiValue0, 10, 199, Short.MAX_VALUE)
+                    .add(lblKpiSub0, 10, 199, Short.MAX_VALUE)))
         );
         pnlKpi0Layout.setVerticalGroup(
             pnlKpi0Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -170,7 +175,7 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
                 .add(lblKpiValue0, 28, 28, 28)
                 .add(3, 3, 3)
                 .add(lblKpiSub0, 16, 16, 16)
-                .add(12, 20, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlKpi1.setBackground(new java.awt.Color(234, 216, 192));
@@ -194,9 +199,9 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
             .add(pnlKpi1Layout.createSequentialGroup()
                 .add(16, 16, 16)
                 .add(pnlKpi1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(lblKpiTitle1, 10, 186, Short.MAX_VALUE)
-                    .add(lblKpiValue1, 10, 186, Short.MAX_VALUE)
-                    .add(lblKpiSub1, 10, 186, Short.MAX_VALUE)))
+                    .add(lblKpiTitle1, 10, 199, Short.MAX_VALUE)
+                    .add(lblKpiValue1, 10, 199, Short.MAX_VALUE)
+                    .add(lblKpiSub1, 10, 199, Short.MAX_VALUE)))
         );
         pnlKpi1Layout.setVerticalGroup(
             pnlKpi1Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -207,7 +212,7 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
                 .add(lblKpiValue1, 28, 28, 28)
                 .add(3, 3, 3)
                 .add(lblKpiSub1, 16, 16, 16)
-                .add(12, 20, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlKpi2.setBackground(new java.awt.Color(234, 216, 192));
@@ -231,9 +236,9 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
             .add(pnlKpi2Layout.createSequentialGroup()
                 .add(16, 16, 16)
                 .add(pnlKpi2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(lblKpiTitle2, 10, 186, Short.MAX_VALUE)
-                    .add(lblKpiValue2, 10, 186, Short.MAX_VALUE)
-                    .add(lblKpiSub2, 10, 186, Short.MAX_VALUE)))
+                    .add(lblKpiTitle2, 10, 199, Short.MAX_VALUE)
+                    .add(lblKpiValue2, 10, 199, Short.MAX_VALUE)
+                    .add(lblKpiSub2, 10, 199, Short.MAX_VALUE)))
         );
         pnlKpi2Layout.setVerticalGroup(
             pnlKpi2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -244,7 +249,7 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
                 .add(lblKpiValue2, 28, 28, 28)
                 .add(3, 3, 3)
                 .add(lblKpiSub2, 16, 16, 16)
-                .add(12, 20, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pnlKpi3.setBackground(new java.awt.Color(234, 216, 192));
@@ -268,9 +273,9 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
             .add(pnlKpi3Layout.createSequentialGroup()
                 .add(16, 16, 16)
                 .add(pnlKpi3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(lblKpiTitle3, 10, 186, Short.MAX_VALUE)
-                    .add(lblKpiValue3, 10, 186, Short.MAX_VALUE)
-                    .add(lblKpiSub3, 10, 186, Short.MAX_VALUE)))
+                    .add(lblKpiTitle3, 10, 201, Short.MAX_VALUE)
+                    .add(lblKpiValue3, 10, 201, Short.MAX_VALUE)
+                    .add(lblKpiSub3, 10, 201, Short.MAX_VALUE)))
         );
         pnlKpi3Layout.setVerticalGroup(
             pnlKpi3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -281,10 +286,8 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
                 .add(lblKpiValue3, 28, 28, 28)
                 .add(3, 3, 3)
                 .add(lblKpiSub3, 16, 16, 16)
-                .add(12, 20, Short.MAX_VALUE))
+                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-
-        pnlChart1.setBackground(new java.awt.Color(234, 216, 192));
 
         pnlChart2.setBackground(new java.awt.Color(234, 216, 192));
 
@@ -295,14 +298,14 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
         btnTindak.setBackground(new java.awt.Color(167, 146, 119));
         btnTindak.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnTindak.setForeground(new java.awt.Color(255, 255, 255));
-        btnTindak.setText("Tindak Lanjut Peringatan Terpilih");
+        btnTindak.setText("Setujui Permintaan Terpilih");
         btnTindak.addActionListener(this::btnTindakActionPerformed);
 
         pnlPrioritas.setBackground(new java.awt.Color(73, 54, 40));
 
         lblPriTitle.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
         lblPriTitle.setForeground(new java.awt.Color(214, 192, 179));
-        lblPriTitle.setText("PRIORITAS LINGKUNGAN UNTUK MANAGER");
+        lblPriTitle.setText("PRIORITAS LINGKUNGAN");
 
         scrollPrioritas.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -344,7 +347,7 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
                 .add(14, 14, 14)
                 .add(lblPriTitle, 20, 20, 20)
                 .add(8, 8, 8)
-                .add(scrollPrioritas, 170, 177, Short.MAX_VALUE)
+                .add(scrollPrioritas, 170, 170, Short.MAX_VALUE)
                 .add(14, 14, 14))
         );
 
@@ -352,7 +355,7 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
 
         lblRekapTitle.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
         lblRekapTitle.setForeground(new java.awt.Color(214, 192, 179));
-        lblRekapTitle.setText("REKAP PRODUKSI PER LOKASI");
+        lblRekapTitle.setText("PERMINTAAN MONITORING MENUNGGU PERSETUJUAN");
 
         scrollRekap.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -364,7 +367,7 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Lokasi", "Jenis", "Produksi (ton)", "Terkirim (ton)", "Stok (ton)"
+                "Lokasi", "Jenis", "Alasan Kegiatan", "Diajukan", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -394,7 +397,7 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
                 .add(14, 14, 14)
                 .add(lblRekapTitle, 20, 20, 20)
                 .add(8, 8, 8)
-                .add(scrollRekap, 190, 197, Short.MAX_VALUE)
+                .add(scrollRekap, 190, 190, Short.MAX_VALUE)
                 .add(14, 14, 14))
         );
 
@@ -405,29 +408,27 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
             .add(layout.createSequentialGroup()
                 .add(24, 24, 24)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(btnTindak, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(lblTitle, 10, 600, Short.MAX_VALUE)
                     .add(lblHint, 10, 600, Short.MAX_VALUE)
+                    .add(pnlPrioritas, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .add(pnlRekap, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
-                        .add(pnlKpi0, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(12, 22, Short.MAX_VALUE)
-                        .add(pnlKpi1, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(12, 22, Short.MAX_VALUE)
-                        .add(pnlKpi2, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(12, 28, Short.MAX_VALUE)
-                        .add(pnlKpi3, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .add(pnlChart1, 10, 880, Short.MAX_VALUE)
+                        .add(pnlFilter, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(0, 0, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, pnlChart2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .add(layout.createSequentialGroup()
                         .add(pnlChart3, 10, 434, Short.MAX_VALUE)
                         .add(12, 12, 12)
                         .add(pnlChart4, 10, 434, Short.MAX_VALUE))
-                    .add(pnlPrioritas, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(pnlRekap, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(layout.createSequentialGroup()
-                        .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(pnlFilter, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(btnTindak, 290, 290, 290))
-                        .add(0, 0, Short.MAX_VALUE))
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, pnlChart2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                        .add(pnlKpi0, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(pnlKpi1, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(pnlKpi2, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
+                        .add(pnlKpi3, 10, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .add(24, 24, 24))
         );
         layout.setVerticalGroup(
@@ -439,27 +440,25 @@ public class DashboardManagerPanel extends javax.swing.JPanel {
                 .add(lblHint, 22, 22, 22)
                 .add(18, 18, 18)
                 .add(pnlFilter, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 13, Short.MAX_VALUE)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(pnlKpi0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(pnlKpi1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(pnlKpi2, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(pnlKpi3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, 12, Short.MAX_VALUE)
-                .add(pnlChart2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 320, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(18, 18, 18)
-                .add(pnlChart1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 240, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(pnlChart2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 320, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(18, 18, 18)
                 .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(pnlChart3, 240, 300, 300)
                     .add(pnlChart4, 240, 300, 300))
-                .add(12, 12, 12)
-                .add(btnTindak, 40, 40, 40)
-                .add(14, 14, 14)
+                .add(18, 18, 18)
                 .add(pnlPrioritas, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(12, 12, 12)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
+                .add(btnTindak, 40, 40, 40)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.UNRELATED)
                 .add(pnlRekap, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .add(16, 16, 16))
+                .add(52, 52, 52))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -552,6 +551,7 @@ public DashboardManagerPanel(java.util.function.Consumer<String> nav) {
         lblKpiValue2.setText(String.valueOf(d.penangananBelumSelesai));
 
         lblKpiValue3.setText(String.valueOf(d.lokasiPeringatan));
+        btnTindak.setText("Setujui Permintaan Terpilih");
 
 
 
@@ -572,30 +572,6 @@ public DashboardManagerPanel(java.util.function.Consumer<String> nav) {
         } else {
 
             DashboardCharts.render(pnlChart2, DashboardCharts.line("Tren Produksi", dsLine));
-
-        }
-
-
-
-        org.jfree.data.category.DefaultCategoryDataset dsBar = new org.jfree.data.category.DefaultCategoryDataset();
-
-        boolean adaPeringatan = false;
-
-        for (Map.Entry<String, Integer> e : d.peringatanPerParameter.entrySet()) {
-
-            dsBar.addValue(e.getValue(), "Peringatan", e.getKey());
-
-            if (e.getValue() > 0)adaPeringatan = true;
-
-        }
-
-        if (!adaPeringatan) {
-
-            DashboardCharts.kosong(pnlChart1, "Tidak ada peringatan pada periode ini.");
-
-        } else {
-
-            DashboardCharts.render(pnlChart1, DashboardCharts.barHorizontal("Peringatan Berdasarkan Parameter", dsBar));
 
         }
 
@@ -647,40 +623,37 @@ public DashboardManagerPanel(java.util.function.Consumer<String> nav) {
 
 
 
-        DefaultTableModel modelR = new DefaultTableModel(
-
-            new String[]{"Lokasi", "Jenis", "Produksi (ton)", "Terkirim (ton)", "Stok (ton)"}, 0) {
-
-            @Override public boolean isCellEditable(int r, int c) { return false; }
-
+        persetujuanIds.clear();
+        persetujuanIds.addAll(AppConfig.getMonitoringController().permintaanMenunggu());
+        DefaultTableModel modelR = new DefaultTableModel(new String[]{"Lokasi","Petugas HSE","Alasan Kegiatan","Diajukan","Status"},0){
+            @Override public boolean isCellEditable(int r,int c){return false;}
         };
-
-        for (service.DashboardService.RekapLokasiRow r : d.rekapLokasi) {
-
-            modelR.addRow(new Object[]{r.namaLokasi, r.jenisLokasi, r.produksi, r.terkirim, r.stok});
-
-        }
-
+        for(service.MonitoringService.Permintaan perm:persetujuanIds)
+            modelR.addRow(new Object[]{perm.lokasi,perm.pengaju,perm.alasan,perm.tanggal,perm.status});
         tblRekap.setModel(modelR);
-
         tblRekap.setAutoCreateRowSorter(true);
+        btnTindak.setEnabled(!persetujuanIds.isEmpty());
 
     }
 
     private void btnTindakActionPerformed(java.awt.event.ActionEvent evt) {
-        int row = tblPrioritas.getSelectedRow();
-        if (row < 0) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Pilih peringatan pada tabel prioritas terlebih dahulu.");
-            return;
-        }
-        try {
-            int index = tblPrioritas.convertRowIndexToModel(row);
-            MonitoringDetailFrame frame = new MonitoringDetailFrame(prioritasIds.get(index), false);
-            frame.setVisible(true);
-            frame.addWindowListener(new java.awt.event.WindowAdapter() {
-                @Override public void windowClosed(java.awt.event.WindowEvent e) { refreshData(); }
-            });
-        } catch(Exception ex) { FormUtil.error(this,ex); }
+        int row=tblRekap.getSelectedRow();
+        if(row<0){JOptionPane.showMessageDialog(this,"Pilih permintaan pada tabel terlebih dahulu.");return;}
+        int idx=tblRekap.convertRowIndexToModel(row);
+        if(idx<0||idx>=persetujuanIds.size())return;
+        service.MonitoringService.Permintaan item=persetujuanIds.get(idx);
+        String pesan="Setujui monitoring di "+item.lokasi+"?\nPetugas: "+item.pengaju+"\nAlasan: "+item.alasan;
+        if(JOptionPane.showConfirmDialog(this,pesan,"Persetujuan Monitoring",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)!=JOptionPane.YES_OPTION)return;
+        try {AppConfig.getMonitoringController().setujuiMonitoring(item.id);refreshData();
+            JOptionPane.showMessageDialog(this,"Permintaan disetujui. Petugas HSE dapat memulai kegiatan.");
+        }catch(Exception ex){FormUtil.error(this,ex);}
+    }
+    private void lihatPrioritas() {
+        int row=tblPrioritas.getSelectedRow();
+        if(row<0)return;
+        int idx=tblPrioritas.convertRowIndexToModel(row);
+        if(idx<0||idx>=prioritasIds.size())return;
+        new MonitoringDetailFrame(prioritasIds.get(idx),true).setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnTerapkan;
@@ -705,7 +678,6 @@ public DashboardManagerPanel(java.util.function.Consumer<String> nav) {
     private javax.swing.JLabel lblPriTitle;
     private javax.swing.JLabel lblRekapTitle;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JPanel pnlChart1;
     private javax.swing.JPanel pnlChart2;
     private javax.swing.JPanel pnlChart3;
     private javax.swing.JPanel pnlChart4;

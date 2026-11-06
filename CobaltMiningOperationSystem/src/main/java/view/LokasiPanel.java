@@ -266,7 +266,7 @@ public class LokasiPanel extends javax.swing.JPanel {
         lblStatus.setText("Status");
 
         cmbStatus.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
-        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua Status", "AKTIF", "DIBATASI", "DITUTUP_SEMENTARA", "NONAKTIF" }));
+        cmbStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua Status", "AKTIF", "DITUTUP_SEMENTARA", "NONAKTIF" }));
 
         org.jdesktop.layout.GroupLayout pnlFilterLayout = new org.jdesktop.layout.GroupLayout(pnlFilter);
         pnlFilter.setLayout(pnlFilterLayout);

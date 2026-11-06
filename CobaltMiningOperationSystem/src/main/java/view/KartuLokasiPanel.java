@@ -128,25 +128,24 @@ public class KartuLokasiPanel extends javax.swing.JPanel {
 
                 + (terakhir.getTanggalMonitoring() == null ? "-" : terakhir.getTanggalMonitoring().format(fmt)));
 
+            boolean berbahaya = terakhir.getStatusMonitoring() == enums.StatusMonitoring.BERBAHAYA;
             boolean peringatan = terakhir.getStatusMonitoring() == enums.StatusMonitoring.PERINGATAN;
 
             lblHasil.setText("Hasil: " + terakhir.getStatusMonitoring());
 
-            lblHasil.setForeground(peringatan ? new java.awt.Color(160, 45, 62) : new java.awt.Color(46, 125, 70));
+            lblHasil.setForeground(terakhir.getStatusMonitoring()==enums.StatusMonitoring.BERBAHAYA
+                ? new java.awt.Color(160,45,62) : terakhir.getStatusMonitoring()==enums.StatusMonitoring.PERINGATAN
+                ? new java.awt.Color(183,121,31) : new java.awt.Color(46,125,70));
 
             lblPenanganan.setText("Penanganan: " + terakhir.getStatusPenanganan());
 
-            boolean belumSelesai = terakhir.getStatusPenanganan() == enums.StatusPenanganan.BELUM_DITANGANI
-
-                || terakhir.getStatusPenanganan() == enums.StatusPenanganan.DALAM_PENANGANAN;
-
-            pnlStripe.setBackground(peringatan
-
-                ? (belumSelesai ? new java.awt.Color(160, 45, 62) : new java.awt.Color(183, 121, 31))
-
+            // Tingkat risiko menentukan warna, bukan status penyelesaian penanganan.
+            pnlStripe.setBackground(berbahaya ? new java.awt.Color(160, 45, 62)
+                : peringatan ? new java.awt.Color(183, 121, 31)
                 : new java.awt.Color(46, 125, 70));
 
-            lblBadge.setVisible(peringatan && belumSelesai);
+            // Tanda prioritas ditampilkan pada hasil BERBAHAYA.
+            lblBadge.setVisible(berbahaya);
 
         }
 

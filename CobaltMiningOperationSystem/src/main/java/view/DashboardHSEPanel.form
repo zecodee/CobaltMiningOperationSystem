@@ -51,7 +51,7 @@
               <Component id="lblHint" min="22" pref="22" max="22" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="pnlFilter" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="pnlKpi0" max="-2" attributes="0"/>
                   <Component id="pnlKpi1" max="-2" attributes="0"/>
@@ -62,7 +62,7 @@
               <Component id="pnlPrioritas" max="-2" attributes="0"/>
               <EmptySpace min="14" pref="14" max="14" attributes="0"/>
               <Component id="pnlChart1" min="200" pref="300" max="300" attributes="0"/>
-              <EmptySpace min="16" pref="16" max="16" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

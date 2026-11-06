@@ -24,20 +24,11 @@ public class MonitoringDetailFrame extends javax.swing.JFrame {
         for(DetailMonitoring d:details)model.addRow(new Object[]{d.getParameter().getNamaParameter(),d.getNilaiPengukuran(),d.getParameter().getSatuan(),d.getStatusDetail()});
         tblDetail.setModel(model);
 
-        btnTambah.setEnabled(!readOnly && AppConfig.getAuthController().isPetugasHSE());
-        btnUbah.setEnabled(!readOnly && AppConfig.getAuthController().isPetugasHSE() && !details.isEmpty());
-        btnHapus.setEnabled(!readOnly && AppConfig.getAuthController().isPetugasHSE() && !details.isEmpty());
-        boolean bolehTindak = AppConfig.getAuthController().isManager();
-        btnTindak.setEnabled(bolehTindak && data.getStatusMonitoring()==StatusMonitoring.PERINGATAN
-            && data.getStatusPenanganan()!=StatusPenanganan.SELESAI);
-        btnMulai.setEnabled(bolehTindak && data.getStatusMonitoring()==StatusMonitoring.PERINGATAN
-            && (data.getStatusPenanganan()==StatusPenanganan.BELUM_DITANGANI));
-        btnSelesai.setEnabled(bolehTindak && data.getStatusPenanganan()==StatusPenanganan.DALAM_PENANGANAN);
+        btnTambah.setEnabled(!readOnly && AppConfig.getAuthController().isPetugasHSE() && data.getStatusPenanganan()==StatusPenanganan.DALAM_PENANGANAN);
+        btnUbah.setEnabled(!readOnly && AppConfig.getAuthController().isPetugasHSE() && !details.isEmpty() && data.getStatusPenanganan()==StatusPenanganan.DALAM_PENANGANAN);
+        btnHapus.setEnabled(!readOnly && AppConfig.getAuthController().isPetugasHSE() && !details.isEmpty() && data.getStatusPenanganan()==StatusPenanganan.DALAM_PENANGANAN);
+        btnSelesai.setEnabled(AppConfig.getAuthController().isPetugasHSE() && !details.isEmpty() && data.getStatusPenanganan()==StatusPenanganan.DALAM_PENANGANAN);
 
-        if(bolehTindak && data.getStatusMonitoring()==StatusMonitoring.PERINGATAN
-                && (data.getTindakLanjut()==null||data.getTindakLanjut().trim().isEmpty())){
-            lblInfo.setText(lblInfo.getText()+"  |  Isi tindak lanjut untuk memulai penanganan.");
-        }
     }
 
     private DetailMonitoring detailTerpilih(){
@@ -55,7 +46,7 @@ public class MonitoringDetailFrame extends javax.swing.JFrame {
     public MonitoringDetailFrame() {
         initComponents();
 
-        JButton[] navButtons = {btnTambah, btnUbah, btnHapus, btnTindak, btnMulai, btnSelesai, btnTutup};
+        JButton[] navButtons = {btnTambah, btnUbah, btnHapus, btnSelesai, btnTutup};
 
         for (JButton btn : navButtons) {
             btn.setOpaque(true);
@@ -79,8 +70,6 @@ public class MonitoringDetailFrame extends javax.swing.JFrame {
         btnTambah = new javax.swing.JButton();
         btnUbah = new javax.swing.JButton();
         btnHapus = new javax.swing.JButton();
-        btnTindak = new javax.swing.JButton();
-        btnMulai = new javax.swing.JButton();
         btnSelesai = new javax.swing.JButton();
         btnTutup = new javax.swing.JButton();
 
@@ -122,19 +111,7 @@ public class MonitoringDetailFrame extends javax.swing.JFrame {
         btnHapus.setBackground(new java.awt.Color(160, 45, 62));
         btnHapus.addActionListener(this::btnHapusActionPerformed);
 
-        btnTindak.setText("Tindak Lanjut");
-        btnTindak.setFocusPainted(false);
-        btnTindak.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnTindak.setForeground(new java.awt.Color(255, 255, 255));
-        btnTindak.setBackground(new java.awt.Color(26, 43, 66));
-        btnTindak.addActionListener(this::btnTindakActionPerformed);
 
-        btnMulai.setText("Mulai Penanganan");
-        btnMulai.setFocusPainted(false);
-        btnMulai.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        btnMulai.setForeground(new java.awt.Color(255, 255, 255));
-        btnMulai.setBackground(new java.awt.Color(26, 43, 66));
-        btnMulai.addActionListener(this::btnMulaiActionPerformed);
 
         btnSelesai.setText("Selesai Penanganan");
         btnSelesai.setFocusPainted(false);
@@ -201,9 +178,6 @@ public class MonitoringDetailFrame extends javax.swing.JFrame {
             )
                 .addGroup(layout.createSequentialGroup()
                  .addGap(32, 32, 32)
-                 .addComponent(btnTindak, 210, 210, 210)
-                 .addGap(8, 8, 8)
-                 .addComponent(btnMulai, 210, 210, 210)
                  .addGap(8, 8, 8)
                  .addComponent(btnSelesai, 210, 210, 210)
                  .addGap(32, 32, 32)
@@ -231,8 +205,6 @@ public class MonitoringDetailFrame extends javax.swing.JFrame {
              )
                  .addGap(8, 8, 8)
                  .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                  .addComponent(btnTindak, 42, 42, 42)
-                  .addComponent(btnMulai, 42, 42, 42)
                   .addComponent(btnSelesai, 42, 42, 42)
              )
                  .addGap(12, 12, 12)
@@ -265,23 +237,11 @@ public class MonitoringDetailFrame extends javax.swing.JFrame {
         }catch(Exception ex){FormUtil.error(this,ex);}
     }
 
-    private void btnTindakActionPerformed(java.awt.event.ActionEvent evt){
-        String s=JOptionPane.showInputDialog(this,"Tindak lanjut:",data.getTindakLanjut()==null?"":data.getTindakLanjut());
-        if(s!=null)try{AppConfig.getMonitoringController().aturTindakLanjut(monitoringId,s);refreshData();}catch(Exception ex){FormUtil.error(this,ex);}
-    }
-
-    private void btnMulaiActionPerformed(java.awt.event.ActionEvent evt){
-        try{
-            AppConfig.getMonitoringController().mulaiPenanganan(monitoringId);
-            JOptionPane.showMessageDialog(this,"Penanganan dimulai. Status penanganan: DALAM PENANGANAN.");
-            refreshData();
-        }catch(Exception ex){FormUtil.error(this,ex);}
-    }
-
     private void btnSelesaiActionPerformed(java.awt.event.ActionEvent evt){
         try{
+            if(JOptionPane.showConfirmDialog(this,"Selesaikan kegiatan ini? Hasil pengukuran tidak dapat diubah lagi.","Selesaikan Kegiatan",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE)!=JOptionPane.YES_OPTION)return;
             AppConfig.getMonitoringController().selesaikanPenanganan(monitoringId);
-            JOptionPane.showMessageDialog(this,"Penanganan diselesaikan. Status penanganan: SELESAI.");
+            JOptionPane.showMessageDialog(this,"Kegiatan selesai. Hasil pengukuran sekarang hanya dapat dilihat.");
             refreshData();
         }catch(Exception ex){FormUtil.error(this,ex);}
     }
@@ -290,10 +250,8 @@ public class MonitoringDetailFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnHapus;
-    private javax.swing.JButton btnMulai;
     private javax.swing.JButton btnSelesai;
     private javax.swing.JButton btnTambah;
-    private javax.swing.JButton btnTindak;
     private javax.swing.JButton btnTutup;
     private javax.swing.JButton btnUbah;
     private javax.swing.JLabel lblInfo;

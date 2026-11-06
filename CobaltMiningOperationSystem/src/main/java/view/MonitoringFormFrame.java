@@ -252,7 +252,7 @@ public class MonitoringFormFrame extends javax.swing.JFrame {
                         tanggalMonitoring,
                         catatan
                 );
-                JOptionPane.showMessageDialog(this, "Data monitoring berhasil disimpan.");
+                JOptionPane.showMessageDialog(this, "Monitoring dimulai. Silakan isi hasil pengukurannya.");
             } else {
                 AppConfig.getMonitoringController().ubahMonitoring(
                         original.getIdMonitoring(),

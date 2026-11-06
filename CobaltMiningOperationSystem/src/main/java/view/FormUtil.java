@@ -32,6 +32,10 @@ public final class FormUtil {
         table.getColumnModel().getColumn(0).setPreferredWidth(56);
     }
     public static void error(java.awt.Component parent,Exception e) {
-        JOptionPane.showMessageDialog(parent,e.getMessage(),"C-MOS / Validasi",JOptionPane.ERROR_MESSAGE);
+        String pesan=e.getMessage();
+        if(pesan==null||pesan.trim().isEmpty())pesan="Terjadi kendala. Silakan coba kembali.";
+        if(e instanceof java.sql.SQLException || pesan.contains("SQLException") || pesan.contains("Communications link failure") || pesan.contains("java.sql."))
+            pesan="Data belum dapat diproses. Periksa koneksi database lalu coba kembali.";
+        JOptionPane.showMessageDialog(parent,pesan,"Periksa Data",JOptionPane.ERROR_MESSAGE);
     }
 }

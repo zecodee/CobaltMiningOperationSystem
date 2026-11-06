@@ -61,6 +61,7 @@ exception/ValidationException.class
 controller/PengangkutanController.class
 view/DashboardOperasionalPanel.class
 view/UserPanel$2.class
+service/MonitoringService$Permintaan.class
 service/DashboardService$Data.class
 view/ParameterPanel$3.class
 model/Manager.class
@@ -134,6 +135,7 @@ view/KendaraanPanel$2.class
 model/Kendaraan.class
 view/LaporanMonitoringPanel.class
 view/MainFrameHSE.class
+service/MonitoringService$Peringatan.class
 view/DataScreen.class
 view/DashboardOperasionalPanel$1.class
 view/MonitoringReadOnlyFrame.class

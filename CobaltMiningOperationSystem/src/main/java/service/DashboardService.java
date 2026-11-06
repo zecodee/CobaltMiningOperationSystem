@@ -250,10 +250,10 @@ public final class DashboardService {
             if (dalam) {
                 d.monitoringTotal++;
                 if (m.getStatusMonitoring() == StatusMonitoring.NORMAL) d.monitoringNormal++;
-                else if (m.getStatusMonitoring() == StatusMonitoring.PERINGATAN) d.monitoringPeringatan++;
+                else if (m.getStatusMonitoring() != StatusMonitoring.NORMAL) d.monitoringPeringatan++;
                 if (dalam) hitungPeringatanPerParameter(m, d.peringatanPerParameter);
             }
-            if (m.getStatusMonitoring() == StatusMonitoring.PERINGATAN
+            if (m.getStatusMonitoring() != StatusMonitoring.NORMAL
                     && (m.getStatusPenanganan() == StatusPenanganan.BELUM_DITANGANI
                     || m.getStatusPenanganan() == StatusPenanganan.DALAM_PENANGANAN)) {
                 d.penangananBelumSelesai++;      // seluruh periode
@@ -294,7 +294,7 @@ public final class DashboardService {
         }
 
         for (MonitoringLingkungan m : monitoringRepository.findAll()) {
-            if (m.getStatusMonitoring() == StatusMonitoring.PERINGATAN
+            if (m.getStatusMonitoring() != StatusMonitoring.NORMAL
                     && (m.getStatusPenanganan() == StatusPenanganan.BELUM_DITANGANI
                     || m.getStatusPenanganan() == StatusPenanganan.DALAM_PENANGANAN)) {
                 d.penangananBelumSelesai++;
@@ -313,7 +313,7 @@ public final class DashboardService {
     private void hitungPeringatanPerParameter(MonitoringLingkungan m, Map<String, Integer> target) {
         if (m.getDetailMonitoring() == null) return;
         for (DetailMonitoring dt : m.getDetailMonitoring()) {
-            if (dt.getStatusDetail() == StatusDetail.PERINGATAN && dt.getParameter() != null) {
+            if (dt.getStatusDetail() != StatusDetail.NORMAL && dt.getParameter() != null) {
                 target.merge(dt.getParameter().getNamaParameter(), 1, Integer::sum);
             }
         }
@@ -332,7 +332,7 @@ public final class DashboardService {
         }
         int jumlah = 0;
         for (MonitoringLingkungan m : terakhir.values()) {
-            if (m.getStatusMonitoring() == StatusMonitoring.PERINGATAN) jumlah++;
+            if (m.getStatusMonitoring() != StatusMonitoring.NORMAL) jumlah++;
         }
         return jumlah;
     }
@@ -346,13 +346,11 @@ public final class DashboardService {
             return b.getTanggalMonitoring().compareTo(a.getTanggalMonitoring());
         });
         for (MonitoringLingkungan m : daftar) {
-            if (m.getStatusMonitoring() != StatusMonitoring.PERINGATAN) continue;
-            if (m.getStatusPenanganan() == StatusPenanganan.SELESAI
-                    || m.getStatusPenanganan() == StatusPenanganan.TIDAK_DIPERLUKAN) continue;
+            if (m.getStatusMonitoring() == StatusMonitoring.NORMAL) continue;
             boolean adaBaris = false;
             if (m.getDetailMonitoring() != null) {
                 for (DetailMonitoring dt : m.getDetailMonitoring()) {
-                    if (dt.getStatusDetail() != StatusDetail.PERINGATAN) continue;
+                    if (dt.getStatusDetail() == StatusDetail.NORMAL) continue;
                     PrioritasRow r = new PrioritasRow();
                     r.idMonitoring = m.getIdMonitoring();
                     r.tanggal = m.getTanggalMonitoring() == null ? null : m.getTanggalMonitoring().toLocalDate();

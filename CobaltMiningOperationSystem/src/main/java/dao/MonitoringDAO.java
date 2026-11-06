@@ -168,17 +168,17 @@ public final class MonitoringDAO implements MonitoringRepository {
     
     @Override
     public List<MonitoringLingkungan> findAll() {
-        return search("SELECT * FROM monitoring_lingkungan ORDER BY tanggal_monitoring DESC", null);
+        return search("SELECT * FROM monitoring_lingkungan WHERE catatan IS NULL OR catatan NOT IN ('[CMOS_MENUNGGU]','[CMOS_DISETUJUI]') ORDER BY tanggal_monitoring DESC", null);
     }
     
     @Override
     public List<MonitoringLingkungan> findByLokasi(int id) {
-        return search("SELECT * FROM monitoring_lingkungan WHERE lokasi_id_lokasi=? ORDER BY tanggal_monitoring DESC", id);
+        return search("SELECT * FROM monitoring_lingkungan WHERE lokasi_id_lokasi=? AND (catatan IS NULL OR catatan NOT IN ('[CMOS_MENUNGGU]','[CMOS_DISETUJUI]')) ORDER BY tanggal_monitoring DESC", id);
     }
     
     @Override
     public List<MonitoringLingkungan> findByPetugasHSE(int id) {
-        return search("SELECT * FROM monitoring_lingkungan WHERE petugas_hse_id_pegawai=? ORDER BY tanggal_monitoring DESC", id);
+        return search("SELECT * FROM monitoring_lingkungan WHERE petugas_hse_id_pegawai=? AND (catatan IS NULL OR catatan NOT IN ('[CMOS_MENUNGGU]','[CMOS_DISETUJUI]')) ORDER BY tanggal_monitoring DESC", id);
     }
     
     private List<MonitoringLingkungan> search(String sql, Integer id) {

@@ -217,7 +217,7 @@ public class LokasiFormFrame extends javax.swing.JFrame {
         cmbJenis.setModel(new DefaultComboBoxModel<>(new String[]{"PIT","STOCKPILE"}));
         cmbStatus.setEnabled(false);
         cmbStatus.setToolTipText("Status otomatis dari sistem");
-        cmbStatus.setModel(new DefaultComboBoxModel<>(new String[]{"AKTIF","DIBATASI","DITUTUP_SEMENTARA"}));
+        cmbStatus.setModel(new DefaultComboBoxModel<>(new String[]{"AKTIF","DITUTUP_SEMENTARA"}));
     }
     public LokasiFormFrame(Lokasi original) {
         this();

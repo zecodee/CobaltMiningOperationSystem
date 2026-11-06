@@ -25,17 +25,18 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblTitle" min="10" pref="600" max="32767" attributes="0"/>
                   <Component id="lblHint" min="10" pref="600" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <Component id="pnlKpi0" min="10" max="32767" attributes="0"/>
-                      <EmptySpace min="12" pref="65" max="32767" attributes="0"/>
-                      <Component id="pnlKpi1" min="10" max="32767" attributes="0"/>
-                      <EmptySpace min="12" pref="68" max="32767" attributes="0"/>
-                      <Component id="pnlKpi2" min="10" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="cmbFilterMonitoring" min="180" pref="180" max="180" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="scrollKatalog" min="10" max="32767" attributes="0"/>
-                      <EmptySpace min="12" max="32767" attributes="0"/>
+                      <EmptySpace min="12" pref="8" max="32767" attributes="0"/>
                       <Component id="pnlDetail" min="10" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="pnlKpi0" min="10" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="pnlKpi1" min="10" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="pnlKpi2" min="10" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="24" pref="24" max="24" attributes="0"/>
@@ -49,6 +50,8 @@
               <Component id="lblTitle" min="40" pref="40" max="40" attributes="0"/>
               <EmptySpace min="2" pref="2" max="2" attributes="0"/>
               <Component id="lblHint" min="22" pref="22" max="22" attributes="0"/>
+              <EmptySpace min="8" pref="8" max="8" attributes="0"/>
+              <Component id="cmbFilterMonitoring" min="32" pref="32" max="32" attributes="0"/>
               <EmptySpace min="12" pref="12" max="12" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="pnlKpi0" max="-2" attributes="0"/>
@@ -66,6 +69,22 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
+    <Component class="javax.swing.JComboBox" name="cmbFilterMonitoring">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="5">
+            <StringItem index="0" value="Semua Hasil"/>
+            <StringItem index="1" value="NORMAL"/>
+            <StringItem index="2" value="PERINGATAN"/>
+            <StringItem index="3" value="BERBAHAYA"/>
+            <StringItem index="4" value="Belum Ada Monitoring"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbFilterMonitoringActionPerformed"/>
+      </Events>
+    </Component>
     <Component class="javax.swing.JLabel" name="lblTitle">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -104,9 +123,9 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="16" pref="16" max="16" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblKpiTitle0" min="10" pref="229" max="32767" attributes="0"/>
-                      <Component id="lblKpiValue0" min="10" pref="229" max="32767" attributes="0"/>
-                      <Component id="lblKpiSub0" min="10" pref="229" max="32767" attributes="0"/>
+                      <Component id="lblKpiTitle0" min="10" pref="265" max="32767" attributes="0"/>
+                      <Component id="lblKpiValue0" min="10" pref="265" max="32767" attributes="0"/>
+                      <Component id="lblKpiSub0" min="10" pref="265" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -174,9 +193,9 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="16" pref="16" max="16" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblKpiTitle1" min="10" pref="229" max="32767" attributes="0"/>
-                      <Component id="lblKpiValue1" min="10" pref="229" max="32767" attributes="0"/>
-                      <Component id="lblKpiSub1" min="10" pref="229" max="32767" attributes="0"/>
+                      <Component id="lblKpiTitle1" min="10" pref="265" max="32767" attributes="0"/>
+                      <Component id="lblKpiValue1" min="10" pref="265" max="32767" attributes="0"/>
+                      <Component id="lblKpiSub1" min="10" pref="265" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -244,9 +263,9 @@
               <Group type="102" attributes="0">
                   <EmptySpace min="16" pref="16" max="16" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="lblKpiTitle2" min="10" pref="229" max="32767" attributes="0"/>
-                      <Component id="lblKpiValue2" min="10" pref="229" max="32767" attributes="0"/>
-                      <Component id="lblKpiSub2" min="10" pref="229" max="32767" attributes="0"/>
+                      <Component id="lblKpiTitle2" min="10" pref="266" max="32767" attributes="0"/>
+                      <Component id="lblKpiValue2" min="10" pref="266" max="32767" attributes="0"/>
+                      <Component id="lblKpiSub2" min="10" pref="266" max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -560,7 +579,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Buat Monitoring Lokasi Ini"/>
+            <Property name="text" type="java.lang.String" value="Ajukan / Mulai Monitoring"/>
             <Property name="focusPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
@@ -578,7 +597,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Informasikan ke Manager"/>
+            <Property name="text" type="java.lang.String" value="Info Peringatan Manager"/>
             <Property name="focusPainted" type="boolean" value="false"/>
           </Properties>
           <Events>
