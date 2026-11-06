@@ -25,7 +25,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="lblTitle" min="10" pref="600" max="32767" attributes="0"/>
                   <Component id="lblHint" min="10" pref="600" max="32767" attributes="0"/>
-                  <Component id="pnlFilter" max="-2" attributes="0"/>
+                  <Group type="102" attributes="0">
+                      <Component id="pnlFilter" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
                   <Group type="102" attributes="0">
                       <Component id="pnlKpi0" min="10" max="32767" attributes="0"/>
                       <EmptySpace min="12" pref="22" max="32767" attributes="0"/>
@@ -35,12 +38,9 @@
                       <EmptySpace min="12" pref="24" max="32767" attributes="0"/>
                       <Component id="pnlKpi3" min="10" max="32767" attributes="0"/>
                   </Group>
-                  <Group type="102" attributes="0">
-                      <Component id="pnlChart1" min="10" pref="562" max="32767" attributes="0"/>
-                      <EmptySpace min="12" max="32767" attributes="0"/>
-                      <Component id="pnlChart2" min="10" pref="306" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="pnlChart1" min="10" pref="876" max="32767" attributes="0"/>
                   <Component id="pnlTabel" min="10" max="32767" attributes="0"/>
+                  <Component id="pnlChart2" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="24" pref="24" max="24" attributes="0"/>
           </Group>
@@ -55,18 +55,17 @@
               <Component id="lblHint" min="22" pref="22" max="22" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="pnlFilter" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="pnlKpi0" max="-2" attributes="0"/>
                   <Component id="pnlKpi1" max="-2" attributes="0"/>
                   <Component id="pnlKpi2" max="-2" attributes="0"/>
                   <Component id="pnlKpi3" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="14" pref="14" max="14" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="pnlChart1" min="200" pref="351" max="32767" attributes="0"/>
-                  <Component id="pnlChart2" min="200" pref="351" max="32767" attributes="0"/>
-              </Group>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
+              <Component id="pnlChart2" min="-2" pref="320" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+              <Component id="pnlChart1" min="-2" pref="260" max="-2" attributes="0"/>
               <EmptySpace min="14" pref="14" max="14" attributes="0"/>
               <Component id="pnlTabel" max="-2" attributes="0"/>
               <EmptySpace min="16" pref="16" max="16" attributes="0"/>

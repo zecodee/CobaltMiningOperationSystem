@@ -247,19 +247,19 @@ public class MainFrameAdmin extends javax.swing.JFrame {
         );
         pnlHeaderLayout.setVerticalGroup(
             pnlHeaderLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pnlHeaderLayout.createSequentialGroup()
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, pnlHeaderLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
                 .add(pnlHeaderLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(pnlHeaderLayout.createSequentialGroup()
-                        .add(14, 14, 14)
                         .add(lblEyebrow, 18, 18, 18)
                         .add(2, 2, 2)
                         .add(lblPageTitle, 40, 40, 40))
                     .add(pnlHeaderLayout.createSequentialGroup()
-                        .add(16, 16, 16)
+                        .add(2, 2, 2)
                         .add(lblUser, 24, 24, 24)
                         .add(3, 3, 3)
                         .add(lblRole, 20, 20, 20)))
-                .add(14, 14, 14))
+                .addContainerGap())
         );
 
         pnlContent.setBackground(new java.awt.Color(244, 247, 252));
