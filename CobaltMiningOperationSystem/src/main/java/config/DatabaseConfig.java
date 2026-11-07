@@ -22,7 +22,7 @@ public final class DatabaseConfig {
     }
     
     public static Connection getConnection() throws SQLException {
-        String url = env("CMOS_DB_URL", "jdbc:mysql://localhost:3308/cmos_db");
+        String url = env("CMOS_DB_URL", "jdbc:mysql://localhost:3306/cmos_db");
         String username = env("CMOS_DB_USER", "root");
         String password = System.getenv("CMOS_DB_PASSWORD");
         return DriverManager.getConnection(url, username, password == null ? "" : password);
