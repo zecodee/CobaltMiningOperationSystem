@@ -5,7 +5,8 @@ public final class FormUtil {
     private FormUtil() {}
     public static String text(JTextField field) { return field.getText().trim(); }
     public static int id(JComboBox<PilihanData> box) {
-        PilihanData p=(PilihanData)box.getSelectedItem();
+        Object value=box.getSelectedItem();
+        PilihanData p=value instanceof PilihanData ? (PilihanData)value : null;
         if (p==null) throw new IllegalArgumentException("Pilih data terlebih dahulu.");
         return p.id;
     }

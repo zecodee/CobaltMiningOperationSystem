@@ -12,6 +12,7 @@ view/MaterialPanel.class
 view/LokasiPanel$4.class
 view/ProduksiPanel$1.class
 view/KartuLokasiPanel.class
+view/SearchableCombo.class
 dao/PegawaiDAO.class
 view/FormUtil$1.class
 view/DashboardManagerPanel$4.class
@@ -60,6 +61,7 @@ view/DashboardManagerPanel$3.class
 exception/ValidationException.class
 controller/PengangkutanController.class
 view/DashboardOperasionalPanel.class
+view/SearchableCombo$2.class
 view/UserPanel$2.class
 service/MonitoringService$Permintaan.class
 service/DashboardService$Data.class
@@ -137,6 +139,7 @@ view/LaporanMonitoringPanel.class
 view/MainFrameHSE.class
 service/MonitoringService$Peringatan.class
 view/DataScreen.class
+view/SearchableCombo$1.class
 view/DashboardOperasionalPanel$1.class
 view/MonitoringReadOnlyFrame.class
 view/DashboardManagerPanel.class

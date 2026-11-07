@@ -32,7 +32,7 @@ public class ProduksiFormFrame extends javax.swing.JFrame {
         setResizable(false);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        try { loadOptions(); } catch(Exception ex) { FormUtil.error(this,ex); }
+        try { loadOptions(); SearchableCombo.install(cmbMaterial); SearchableCombo.install(cmbLokasi); } catch(Exception ex) { FormUtil.error(this,ex); }
 
     }
 

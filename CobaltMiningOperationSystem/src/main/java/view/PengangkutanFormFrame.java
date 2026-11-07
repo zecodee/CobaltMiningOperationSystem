@@ -35,6 +35,7 @@ public class PengangkutanFormFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         try {
             loadOptions();
+            SearchableCombo.install(cmbProduksi); SearchableCombo.install(cmbKendaraan); SearchableCombo.install(cmbDriver); SearchableCombo.install(cmbTujuan); 
             cmbProduksi.addActionListener(this::cmbProduksiActionPerformed);
             terapkanAsalProduksi();
         } catch(Exception ex) { FormUtil.error(this,ex); }

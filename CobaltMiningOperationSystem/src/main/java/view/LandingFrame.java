@@ -33,6 +33,15 @@ public class LandingFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pnlTopBar = new javax.swing.JPanel();
+        lblLogoSm = new javax.swing.JLabel();
+        lblBrandTop = new javax.swing.JLabel();
+        lblBrandTopSub = new javax.swing.JLabel();
+        lblNavTentang = new javax.swing.JLabel();
+        lblNavOperasi = new javax.swing.JLabel();
+        lblNavTim = new javax.swing.JLabel();
+        btnLoginTop = new javax.swing.JButton();
+        pnlTopAccent = new javax.swing.JPanel();
         scrollMain = new javax.swing.JScrollPane();
         pnlPage = new javax.swing.JPanel();
         pnlHero = new javax.swing.JPanel();
@@ -50,7 +59,6 @@ public class LandingFrame extends javax.swing.JFrame {
         lblTentangP2 = new javax.swing.JLabel();
         lblTentangP3 = new javax.swing.JLabel();
         imgTentang = new javax.swing.JLabel();
-        lblTentangCaption = new javax.swing.JLabel();
         pnlStat0 = new javax.swing.JPanel();
         pnlStatAccent0 = new javax.swing.JPanel();
         lblStatValue0 = new javax.swing.JLabel();
@@ -100,15 +108,6 @@ public class LandingFrame extends javax.swing.JFrame {
         lblFooter1 = new javax.swing.JLabel();
         lblFooter2 = new javax.swing.JLabel();
         lblFooter3 = new javax.swing.JLabel();
-        pnlTopBar = new javax.swing.JPanel();
-        lblLogoSm = new javax.swing.JLabel();
-        lblBrandTop = new javax.swing.JLabel();
-        lblBrandTopSub = new javax.swing.JLabel();
-        lblNavTentang = new javax.swing.JLabel();
-        lblNavOperasi = new javax.swing.JLabel();
-        lblNavTim = new javax.swing.JLabel();
-        btnLoginTop = new javax.swing.JButton();
-        pnlTopAccent = new javax.swing.JPanel();
         pnlCmos = new javax.swing.JPanel();
         lblCmosKicker = new javax.swing.JLabel();
         lblCmosTitle = new javax.swing.JLabel();
@@ -149,6 +148,110 @@ public class LandingFrame extends javax.swing.JFrame {
         setTitle("C-MOS | PT. Cobalt");
         setResizable(false);
         setSize(new java.awt.Dimension(1280, 3508));
+
+        pnlTopBar.setBackground(new java.awt.Color(73, 54, 40));
+
+        lblLogoSm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cobalt-symbol-sm.png"))); // NOI18N
+
+        lblBrandTop.setFont(new java.awt.Font("SansSerif", 1, 22)); // NOI18N
+        lblBrandTop.setForeground(new java.awt.Color(214, 192, 179));
+        lblBrandTop.setText("COBALT");
+
+        lblBrandTopSub.setFont(new java.awt.Font("SansSerif", 1, 10)); // NOI18N
+        lblBrandTopSub.setForeground(new java.awt.Color(228, 224, 225));
+        lblBrandTopSub.setText("COBALT MINING OPERATION SYSTEM");
+
+        lblNavTentang.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        lblNavTentang.setForeground(new java.awt.Color(228, 224, 225));
+        lblNavTentang.setText("Tentang");
+        lblNavTentang.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNavTentangMouseClicked(evt);
+            }
+        });
+
+        lblNavOperasi.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        lblNavOperasi.setForeground(new java.awt.Color(228, 224, 225));
+        lblNavOperasi.setText("Operasional");
+        lblNavOperasi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNavOperasiMouseClicked(evt);
+            }
+        });
+
+        lblNavTim.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
+        lblNavTim.setForeground(new java.awt.Color(228, 224, 225));
+        lblNavTim.setText("Tim Kami");
+        lblNavTim.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblNavTimMouseClicked(evt);
+            }
+        });
+
+        btnLoginTop.setBackground(new java.awt.Color(171, 136, 109));
+        btnLoginTop.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
+        btnLoginTop.setForeground(new java.awt.Color(255, 255, 255));
+        btnLoginTop.setText("MASUK");
+        btnLoginTop.setBorderPainted(false);
+        btnLoginTop.setFocusPainted(false);
+        btnLoginTop.addActionListener(this::btnLoginTopActionPerformed);
+
+        pnlTopAccent.setBackground(new java.awt.Color(171, 136, 109));
+
+        org.jdesktop.layout.GroupLayout pnlTopBarLayout = new org.jdesktop.layout.GroupLayout(pnlTopBar);
+        pnlTopBar.setLayout(pnlTopBarLayout);
+        pnlTopBarLayout.setHorizontalGroup(
+            pnlTopBarLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(40, 40, 40)
+                .add(lblLogoSm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 56, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(110, 110, 110)
+                .add(lblBrandTop, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(110, 110, 110)
+                .add(lblBrandTopSub, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 220, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(660, 660, 660)
+                .add(lblNavTentang, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 80, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(760, 760, 760)
+                .add(lblNavOperasi, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(890, 890, 890)
+                .add(lblNavTim, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 90, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(1120, 1120, 1120)
+                .add(btnLoginTop, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopAccent, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        pnlTopBarLayout.setVerticalGroup(
+            pnlTopBarLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(24, 24, 24)
+                .add(lblLogoSm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(15, 15, 15)
+                .add(lblBrandTop, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(47, 47, 47)
+                .add(lblBrandTopSub, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(32, 32, 32)
+                .add(lblNavTentang, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(32, 32, 32)
+                .add(lblNavOperasi, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(32, 32, 32)
+                .add(lblNavTim, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(22, 22, 22)
+                .add(btnLoginTop, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 44, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+            .add(pnlTopBarLayout.createSequentialGroup()
+                .add(86, 86, 86)
+                .add(pnlTopAccent, 2, 2, 2))
+        );
 
         scrollMain.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
@@ -262,11 +365,6 @@ public class LandingFrame extends javax.swing.JFrame {
         lblTentangP3.setText("<html>Melalui digitalisasi proses operasional, PT. Cobalt mendukung prinsip pertambangan yang bertanggung jawab penuh yang sejalan dengan <b>SDG 8.</b> (Pekerjaan Layak dan Pertumbuhan Ekonomi), <b>SDG 12.</b> (Konsumsi dan Produksi yang Bertanggung Jawab), serta <b>SDG 13.</b> (Penanganan Perubahan Iklim).</html>");
 
         imgTentang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/landing/tentang_display.png"))); // NOI18N
-
-        lblTentangCaption.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
-        lblTentangCaption.setForeground(new java.awt.Color(148, 133, 124));
-        lblTentangCaption.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTentangCaption.setText("Tim operasional memverifikasi rencana kerja di area tambang");
 
         pnlStat0.setBackground(new java.awt.Color(234, 216, 192));
 
@@ -479,9 +577,6 @@ public class LandingFrame extends javax.swing.JFrame {
                         .add(672, 672, 672)
                         .add(imgTentang, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 530, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(pnlTentangLayout.createSequentialGroup()
-                        .add(672, 672, 672)
-                        .add(lblTentangCaption, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 530, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(pnlTentangLayout.createSequentialGroup()
                         .add(70, 70, 70)
                         .add(pnlStat0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(pnlTentangLayout.createSequentialGroup()
@@ -493,7 +588,7 @@ public class LandingFrame extends javax.swing.JFrame {
                     .add(pnlTentangLayout.createSequentialGroup()
                         .add(934, 934, 934)
                         .add(pnlStat3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
         pnlTentangLayout.setVerticalGroup(
             pnlTentangLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -501,7 +596,6 @@ public class LandingFrame extends javax.swing.JFrame {
                 .add(pnlTentangLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
                     .add(pnlStat0, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(pnlStat1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(pnlStat2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(pnlTentangLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                         .add(pnlTentangLayout.createSequentialGroup()
                             .add(60, 60, 60)
@@ -523,13 +617,14 @@ public class LandingFrame extends javax.swing.JFrame {
                             .add(lblTentangP3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 116, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                         .add(pnlTentangLayout.createSequentialGroup()
                             .add(60, 60, 60)
-                            .add(imgTentang, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 398, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(pnlTentangLayout.createSequentialGroup()
-                            .add(464, 464, 464)
-                            .add(lblTentangCaption, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(pnlTentangLayout.createSequentialGroup()
-                            .add(540, 540, 540)
-                            .add(pnlStat3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
+                            .add(imgTentang, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 440, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(pnlTentangLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                                .add(pnlTentangLayout.createSequentialGroup()
+                                    .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(pnlStat2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                                .add(pnlTentangLayout.createSequentialGroup()
+                                    .add(40, 40, 40)
+                                    .add(pnlStat3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
 
@@ -799,10 +894,9 @@ public class LandingFrame extends javax.swing.JFrame {
                     .add(imgFooterLogo, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 46, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                     .add(pnlFooterLayout.createSequentialGroup()
                         .add(62, 62, 62)
-                        .add(lblFooter1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 620, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(pnlFooterLayout.createSequentialGroup()
-                        .add(62, 62, 62)
-                        .add(lblFooter2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 620, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
+                        .add(pnlFooterLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                            .add(lblFooter1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 620, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                            .add(lblFooter2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 620, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .add(lblFooter3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 182, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                 .add(57, 57, 57))
@@ -823,110 +917,6 @@ public class LandingFrame extends javax.swing.JFrame {
                         .add(lblFooter3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
                         .add(11, 11, 11)))
                 .addContainerGap(41, Short.MAX_VALUE))
-        );
-
-        pnlTopBar.setBackground(new java.awt.Color(73, 54, 40));
-
-        lblLogoSm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/cobalt-symbol-sm.png"))); // NOI18N
-
-        lblBrandTop.setFont(new java.awt.Font("SansSerif", 1, 22)); // NOI18N
-        lblBrandTop.setForeground(new java.awt.Color(214, 192, 179));
-        lblBrandTop.setText("C-MOS");
-
-        lblBrandTopSub.setFont(new java.awt.Font("SansSerif", 1, 10)); // NOI18N
-        lblBrandTopSub.setForeground(new java.awt.Color(228, 224, 225));
-        lblBrandTopSub.setText("COBALT MINING SYSTEM");
-
-        lblNavTentang.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
-        lblNavTentang.setForeground(new java.awt.Color(228, 224, 225));
-        lblNavTentang.setText("Tentang");
-        lblNavTentang.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblNavTentangMouseClicked(evt);
-            }
-        });
-
-        lblNavOperasi.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
-        lblNavOperasi.setForeground(new java.awt.Color(228, 224, 225));
-        lblNavOperasi.setText("Operasional");
-        lblNavOperasi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblNavOperasiMouseClicked(evt);
-            }
-        });
-
-        lblNavTim.setFont(new java.awt.Font("SansSerif", 0, 13)); // NOI18N
-        lblNavTim.setForeground(new java.awt.Color(228, 224, 225));
-        lblNavTim.setText("Tim Kami");
-        lblNavTim.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                lblNavTimMouseClicked(evt);
-            }
-        });
-
-        btnLoginTop.setBackground(new java.awt.Color(171, 136, 109));
-        btnLoginTop.setFont(new java.awt.Font("SansSerif", 1, 13)); // NOI18N
-        btnLoginTop.setForeground(new java.awt.Color(255, 255, 255));
-        btnLoginTop.setText("MASUK");
-        btnLoginTop.setBorderPainted(false);
-        btnLoginTop.setFocusPainted(false);
-        btnLoginTop.addActionListener(this::btnLoginTopActionPerformed);
-
-        pnlTopAccent.setBackground(new java.awt.Color(171, 136, 109));
-
-        org.jdesktop.layout.GroupLayout pnlTopBarLayout = new org.jdesktop.layout.GroupLayout(pnlTopBar);
-        pnlTopBar.setLayout(pnlTopBarLayout);
-        pnlTopBarLayout.setHorizontalGroup(
-            pnlTopBarLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(40, 40, 40)
-                .add(lblLogoSm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 56, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(110, 110, 110)
-                .add(lblBrandTop, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 150, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(110, 110, 110)
-                .add(lblBrandTopSub, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 220, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(660, 660, 660)
-                .add(lblNavTentang, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 80, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(760, 760, 760)
-                .add(lblNavOperasi, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 110, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(890, 890, 890)
-                .add(lblNavTim, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 90, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(1120, 1120, 1120)
-                .add(btnLoginTop, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 120, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopAccent, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        pnlTopBarLayout.setVerticalGroup(
-            pnlTopBarLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(24, 24, 24)
-                .add(lblLogoSm, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 40, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(15, 15, 15)
-                .add(lblBrandTop, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 30, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(47, 47, 47)
-                .add(lblBrandTopSub, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(32, 32, 32)
-                .add(lblNavTentang, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(32, 32, 32)
-                .add(lblNavOperasi, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(32, 32, 32)
-                .add(lblNavTim, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 24, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(22, 22, 22)
-                .add(btnLoginTop, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 44, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-            .add(pnlTopBarLayout.createSequentialGroup()
-                .add(86, 86, 86)
-                .add(pnlTopAccent, 2, 2, 2))
         );
 
         pnlCmos.setBackground(new java.awt.Color(45, 34, 26));
@@ -1334,12 +1324,13 @@ public class LandingFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(pnlTopBar, 0, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .add(scrollMain, 0, 1280, Short.MAX_VALUE)
+            .add(scrollMain, 0, 1281, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(layout.createSequentialGroup()
                 .add(pnlTopBar, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                .add(0, 0, 0)
                 .add(scrollMain, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 3330, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -1475,7 +1466,6 @@ public class LandingFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblStatValue1;
     private javax.swing.JLabel lblStatValue2;
     private javax.swing.JLabel lblStatValue3;
-    private javax.swing.JLabel lblTentangCaption;
     private javax.swing.JLabel lblTentangKicker;
     private javax.swing.JLabel lblTentangLead;
     private javax.swing.JLabel lblTentangP1;

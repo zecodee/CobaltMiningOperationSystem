@@ -295,11 +295,11 @@ public class KendaraanPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "No.", "Jenis", "No Polisi", "Kapasitas", "Status"
+                "No.", "Jenis", "No Polisi", "Kapasitas", "Tahun", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -380,7 +380,7 @@ public class KendaraanPanel extends javax.swing.JPanel {
 
         DefaultTableModel model = new DefaultTableModel(
 
-            new String[]{"No.", "Jenis", "No Polisi", "Kapasitas", "Status"}, 0) {
+            new String[]{"No.", "Jenis", "No Polisi", "Kapasitas", "Tahun", "Status"}, 0) {
 
             @Override public boolean isCellEditable(int r, int c) { return false; }
 
@@ -390,7 +390,7 @@ public class KendaraanPanel extends javax.swing.JPanel {
 
             model.addRow(new Object[]{model.getRowCount() + 1, k.getJenisKendaraan(),
 
-                k.getNomorPolisi(), k.getKapasitas(), k.getStatusKendaraan()});
+                k.getNomorPolisi(), k.getKapasitas(), k.getTahunKendaraan(), k.getStatusKendaraan()});
 
         }
 
@@ -439,7 +439,7 @@ public class KendaraanPanel extends javax.swing.JPanel {
 
         int pilihStatus = cmbStatus.getSelectedIndex();
 
-        if (pilihStatus > 0)aturan.add(javax.swing.RowFilter.regexFilter("^" + java.util.regex.Pattern.quote(String.valueOf(cmbStatus.getSelectedItem())) + "$", 4));
+        if (pilihStatus > 0)aturan.add(javax.swing.RowFilter.regexFilter("^" + java.util.regex.Pattern.quote(String.valueOf(cmbStatus.getSelectedItem())) + "$", 5));
 
         sorter.setRowFilter(aturan.isEmpty() ? null : javax.swing.RowFilter.andFilter(aturan));
 

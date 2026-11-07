@@ -1,4 +1,5 @@
-<?xml version='1.0' encoding='UTF-8'?>
+<?xml version="1.0" encoding="UTF-8" ?>
+
 <Form version="1.9" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
@@ -26,194 +27,200 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="pnlTopBar" min="0" max="32767" attributes="0"/><Component id="scrollMain" min="0" pref="1280" max="32767" attributes="0"/>
+          <Component id="pnlTopBar" min="0" max="32767" attributes="0"/>
+          <Component id="scrollMain" min="0" pref="1281" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" alignment="0" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0"><Component id="pnlTopBar" min="-2" max="-2" attributes="0"/><Component id="scrollMain" pref="3330" max="32767" attributes="0"/></Group></Group>
+          <Group type="102" attributes="0">
+              <Component id="pnlTopBar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              <Component id="scrollMain" pref="3330" max="32767" attributes="0"/>
+          </Group>
+      </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
     <Container class="javax.swing.JPanel" name="pnlTopBar">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="36" red="49" type="rgb"/>
-                </Property>
-              </Properties>
+      <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="28" green="36" red="49" type="rgb"/>
+        </Property>
+      </Properties>
 
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                          <Component id="lblLogoSm" min="-2" pref="56" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
-                          <Component id="lblBrandTop" min="-2" pref="150" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
-                          <Component id="lblBrandTopSub" min="-2" pref="220" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="660" max="-2" attributes="0"/>
-                          <Component id="lblNavTentang" min="-2" pref="80" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="760" max="-2" attributes="0"/>
-                          <Component id="lblNavOperasi" min="-2" pref="110" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="890" max="-2" attributes="0"/>
-                          <Component id="lblNavTim" min="-2" pref="90" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="1120" max="-2" attributes="0"/>
-                          <Component id="btnLoginTop" min="-2" pref="120" max="-2" attributes="0"/>
-                      </Group>
-                      <Component id="pnlTopAccent" min="0" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                          <Component id="lblLogoSm" min="-2" pref="40" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                          <Component id="lblBrandTop" min="-2" pref="30" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                          <Component id="lblBrandTopSub" min="-2" pref="16" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="lblNavTentang" min="-2" pref="24" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="lblNavOperasi" min="-2" pref="24" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="lblNavTim" min="-2" pref="24" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                          <Component id="btnLoginTop" min="-2" pref="44" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
-                          <Component id="pnlTopAccent" min="2" pref="2" max="2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
-              <SubComponents>
-                <Component class="javax.swing.JLabel" name="lblLogoSm">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/images/cobalt-symbol-sm.png"/>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblBrandTop">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SansSerif" size="22" style="1"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="b3" green="c0" red="d6" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="C-MOS"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblBrandTopSub">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SansSerif" size="10" style="1"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e1" green="e0" red="e4" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="COBALT MINING SYSTEM"/>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblNavTentang">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SansSerif" size="13" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e1" green="e0" red="e4" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Tentang"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblNavTentangMouseClicked"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblNavOperasi">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SansSerif" size="13" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e1" green="e0" red="e4" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Operasional"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblNavOperasiMouseClicked"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblNavTim">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SansSerif" size="13" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="e1" green="e0" red="e4" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="Tim Kami"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblNavTimMouseClicked"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JButton" name="btnLoginTop">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="6d" green="88" red="ab" type="rgb"/>
-                    </Property>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SansSerif" size="13" style="1"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                    </Property>
-                    <Property name="text" type="java.lang.String" value="MASUK"/>
-                    <Property name="borderPainted" type="boolean" value="false"/>
-                    <Property name="focusPainted" type="boolean" value="false"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoginTopActionPerformed"/>
-                  </Events>
-                </Component>
-                <Component class="javax.swing.JPanel" name="pnlTopAccent">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="6d" green="88" red="ab" type="rgb"/>
-                    </Property>
-                  </Properties>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JScrollPane" name="scrollMain">
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                  <Component id="lblLogoSm" min="-2" pref="56" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                  <Component id="lblBrandTop" min="-2" pref="150" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="110" max="-2" attributes="0"/>
+                  <Component id="lblBrandTopSub" min="-2" pref="220" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="660" max="-2" attributes="0"/>
+                  <Component id="lblNavTentang" min="-2" pref="80" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="760" max="-2" attributes="0"/>
+                  <Component id="lblNavOperasi" min="-2" pref="110" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="890" max="-2" attributes="0"/>
+                  <Component id="lblNavTim" min="-2" pref="90" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="1120" max="-2" attributes="0"/>
+                  <Component id="btnLoginTop" min="-2" pref="120" max="-2" attributes="0"/>
+              </Group>
+              <Component id="pnlTopAccent" min="0" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <Component id="lblLogoSm" min="-2" pref="40" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
+                  <Component id="lblBrandTop" min="-2" pref="30" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                  <Component id="lblBrandTopSub" min="-2" pref="16" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="lblNavTentang" min="-2" pref="24" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="lblNavOperasi" min="-2" pref="24" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="lblNavTim" min="-2" pref="24" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <Component id="btnLoginTop" min="-2" pref="44" max="-2" attributes="0"/>
+              </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                  <Component id="pnlTopAccent" min="2" pref="2" max="2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="lblLogoSm">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/images/cobalt-symbol-sm.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblBrandTop">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="22" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="b3" green="c0" red="d6" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="COBALT"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblBrandTopSub">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="10" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e1" green="e0" red="e4" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="COBALT MINING OPERATION SYSTEM"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblNavTentang">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="13" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e1" green="e0" red="e4" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Tentang"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblNavTentangMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblNavOperasi">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="13" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e1" green="e0" red="e4" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Operasional"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblNavOperasiMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="lblNavTim">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="13" style="0"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="e1" green="e0" red="e4" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Tim Kami"/>
+          </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblNavTimMouseClicked"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnLoginTop">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="6d" green="88" red="ab" type="rgb"/>
+            </Property>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="13" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="MASUK"/>
+            <Property name="borderPainted" type="boolean" value="false"/>
+            <Property name="focusPainted" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLoginTopActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JPanel" name="pnlTopAccent">
+          <Properties>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="6d" green="88" red="ab" type="rgb"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JScrollPane" name="scrollMain">
       <Properties>
         <Property name="horizontalScrollBarPolicy" type="int" value="31"/>
       </Properties>
@@ -252,7 +259,7 @@
                       <Component id="pnlTim" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="30" pref="30" max="32767" attributes="0"/>
                       <Component id="pnlFooter" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                  </Group>
               </Group>
             </DimensionLayout>
           </Layout>
@@ -339,7 +346,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="6d" green="88" red="ab" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="◆  SISTEM INFORMASI MANAJEMEN OPERASIONAL PERTAMBANGAN"/>
+                    <Property name="text" type="java.lang.String" value="&#x25c6;  SISTEM INFORMASI MANAJEMEN OPERASIONAL PERTAMBANGAN"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblHeroTitle">
@@ -375,7 +382,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="MASUK KE SISTEM »"/>
+                    <Property name="text" type="java.lang.String" value="MASUK KE SISTEM &#xbb;"/>
                     <Property name="borderPainted" type="boolean" value="false"/>
                     <Property name="focusPainted" type="boolean" value="false"/>
                   </Properties>
@@ -452,10 +459,6 @@
                                   <Component id="imgTentang" min="-2" pref="530" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="672" max="-2" attributes="0"/>
-                                  <Component id="lblTentangCaption" min="-2" pref="530" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="70" max="-2" attributes="0"/>
                                   <Component id="pnlStat0" max="-2" attributes="0"/>
                               </Group>
@@ -472,7 +475,7 @@
                                   <Component id="pnlStat3" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace max="32767" attributes="0"/>
+                          <EmptySpace pref="84" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -482,7 +485,6 @@
                           <Group type="103" groupAlignment="1" attributes="0">
                               <Component id="pnlStat0" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Component id="pnlStat1" alignment="1" min="-2" max="-2" attributes="0"/>
-                              <Component id="pnlStat2" alignment="1" min="-2" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
@@ -508,17 +510,19 @@
                                       <EmptySpace min="-2" pref="424" max="-2" attributes="0"/>
                                       <Component id="lblTentangP3" min="-2" pref="116" max="-2" attributes="0"/>
                                   </Group>
-                                  <Group type="102" alignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                      <Component id="imgTentang" min="-2" pref="398" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="464" max="-2" attributes="0"/>
-                                      <Component id="lblTentangCaption" min="-2" pref="20" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <EmptySpace min="-2" pref="540" max="-2" attributes="0"/>
-                                      <Component id="pnlStat3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="imgTentang" min="-2" pref="440" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace max="32767" attributes="0"/>
+                                              <Component id="pnlStat2" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                              <Component id="pnlStat3" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
@@ -536,7 +540,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="6d" green="88" red="ab" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="◆  TENTANG PERUSAHAAN"/>
+                    <Property name="text" type="java.lang.String" value="&#x25c6;  TENTANG PERUSAHAAN"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblTentangTitle">
@@ -599,18 +603,6 @@
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                       <Image iconType="3" name="/images/landing/tentang_display.png"/>
                     </Property>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JLabel" name="lblTentangCaption">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="SansSerif" size="11" style="0"/>
-                    </Property>
-                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="7c" green="85" red="94" type="rgb"/>
-                    </Property>
-                    <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Tim operasional memverifikasi rencana kerja di area tambang"/>
                   </Properties>
                 </Component>
                 <Container class="javax.swing.JPanel" name="pnlStat0">
@@ -778,7 +770,7 @@
                           <Color blue="8f" green="79" red="67" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="text" type="java.lang.String" value="Produksi · Pengangkutan · Monitoring"/>
+                        <Property name="text" type="java.lang.String" value="Produksi &#xb7; Pengangkutan &#xb7; Monitoring"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -863,7 +855,7 @@
                           <Color blue="8f" green="79" red="67" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="text" type="java.lang.String" value="Admin · Operasional · HSE · Manager"/>
+                        <Property name="text" type="java.lang.String" value="Admin &#xb7; Operasional &#xb7; HSE &#xb7; Manager"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -941,7 +933,7 @@
                           <Color blue="8f" green="79" red="67" type="rgb"/>
                         </Property>
                         <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="text" type="java.lang.String" value="8 · 12 · 13"/>
+                        <Property name="text" type="java.lang.String" value="8 &#xb7; 12 &#xb7; 13"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JLabel" name="lblStatSub3">
@@ -1040,7 +1032,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="6d" green="88" red="ab" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="◆  TIM PENGEMBANG"/>
+                    <Property name="text" type="java.lang.String" value="&#x25c6;  TIM PENGEMBANG"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblTimTitle">
@@ -1413,13 +1405,12 @@
                           <EmptySpace min="-2" pref="68" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="imgFooterLogo" alignment="0" min="-2" pref="46" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                                  <Component id="lblFooter1" min="-2" pref="620" max="-2" attributes="0"/>
-                              </Group>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
-                                  <Component id="lblFooter2" min="-2" pref="620" max="-2" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="62" pref="62" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="lblFooter1" alignment="0" min="-2" pref="620" max="-2" attributes="0"/>
+                                      <Component id="lblFooter2" alignment="0" min="-2" pref="620" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -1468,7 +1459,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="b3" green="c0" red="d6" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="© 2026 C-MOS - Cobalt Mining Operation System · Kelompok 13 COBALT"/>
+                    <Property name="text" type="java.lang.String" value="&#xa9; 2026 C-MOS - Cobalt Mining Operation System &#xb7; Kelompok 13 COBALT"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblFooter2">
@@ -1479,7 +1470,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="7c" green="85" red="94" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Program Studi Sistem Informasi · Fakultas Teknik · Universitas Mulawarman"/>
+                    <Property name="text" type="java.lang.String" value="Program Studi Sistem Informasi &#xb7; Fakultas Teknik &#xb7; Universitas Mulawarman"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblFooter3">
@@ -1582,7 +1573,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="6d" green="88" red="ab" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="◆  APLIKASI C-MOS"/>
+                    <Property name="text" type="java.lang.String" value="&#x25c6;  APLIKASI C-MOS"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblCmosTitle">
@@ -1852,7 +1843,7 @@
                     <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="6d" green="88" red="ab" type="rgb"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="◆  KEGIATAN OPERASIONAL"/>
+                    <Property name="text" type="java.lang.String" value="&#x25c6;  KEGIATAN OPERASIONAL"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="lblOpsTitle">
@@ -1971,7 +1962,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="6d" green="88" red="ab" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="MODUL 01 · PRODUKSI"/>
+                        <Property name="text" type="java.lang.String" value="MODUL 01 &#xb7; PRODUKSI"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -2070,7 +2061,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="6d" green="88" red="ab" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="MODUL 02 · PENGANGKUTAN"/>
+                        <Property name="text" type="java.lang.String" value="MODUL 02 &#xb7; PENGANGKUTAN"/>
                       </Properties>
                     </Component>
                   </SubComponents>
@@ -2169,7 +2160,7 @@
                         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="6d" green="88" red="ab" type="rgb"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="MODUL 03 · MONITORING HSE"/>
+                        <Property name="text" type="java.lang.String" value="MODUL 03 &#xb7; MONITORING HSE"/>
                       </Properties>
                     </Component>
                   </SubComponents>
