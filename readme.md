@@ -2247,7 +2247,7 @@ Proyek C-MOS dikembangkan sebagai tugas kelompok. Isi nama dan NIM seluruh anggo
 
 > **Gambar 55. Konsultasi Pertama PBO x SBD**
 
-![Gambar 55 - Konsultasi Pertama PBO x SBD](images/konsul-pboxsbd-1.png)
+![Gambar 55 - Konsultasi Pertama PBO x SBD](images/konsul-pboxsbd-1.jpeg)
 
 
 
