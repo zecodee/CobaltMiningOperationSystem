@@ -1651,11 +1651,11 @@ Buka proyek Maven melalui NetBeans. Pastikan `pom.xml` terbaca dan package `app`
 
 Periksa bagian Tentang, Operasi, dan Tim melalui navigasi landing jika tampil. Tekan tombol masuk pada header atau area utama. Kedua aksi mengarah ke form login.
 
-> **Gambar 8. Navigasi landing dan tombol login**
+> **Gambar 8. Landing Page**
 
-![Gambar 8 - Navigasi landing dan tombol login](images/023_Navigasi_landing_dan_tombol_login.png)
+![Gambar 8 - Landing Page](images/023_Navigasi_landing_dan_tombol_login.png)
 
-*Halaman landing C-MOS dengan navigasi bagian Tentang, Operasi, dan Tim. Tombol masuk tersedia di area header dan bagian utama halaman. Menekan tombol ini akan membuka form login sebagai langkah selanjutnya dalam alur autentikasi.*
+*Halaman landing C-MOS dengan navigasi bagian Tentang, Operasi, dan Tim. Tombol masuk tersedia di area header dan bagian utama halaman. Halaman landing page ini merupakan tampilan awal untuk membranding sebuah perusahaan.*
 
 
 #### Form login dan validasi
