@@ -179,7 +179,7 @@ public class DashboardOperasionalPanel extends javax.swing.JPanel {
 
         lblKpiSub1.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         lblKpiSub1.setForeground(new java.awt.Color(103, 121, 143));
-        lblKpiSub1.setText("saldo terkini, tanpa filter periode");
+        lblKpiSub1.setText("stok saat ini (tanpa filter)");
 
         org.jdesktop.layout.GroupLayout pnlKpi1Layout = new org.jdesktop.layout.GroupLayout(pnlKpi1);
         pnlKpi1.setLayout(pnlKpi1Layout);

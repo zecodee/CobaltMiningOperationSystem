@@ -55,6 +55,7 @@ public class LoadingFrame extends javax.swing.JFrame {
         progress.setBorderPainted(false);
 
         lblPercent.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        lblPercent.setForeground(new java.awt.Color(214, 192, 179));
         lblPercent.setText("0 %");
 
         lblStatus.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
@@ -83,10 +84,9 @@ public class LoadingFrame extends javax.swing.JFrame {
                         .add(lblTagline, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 700, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(pnlBackgroundLayout.createSequentialGroup()
                         .add(230, 230, 230)
-                        .add(progress, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 452, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(pnlBackgroundLayout.createSequentialGroup()
-                        .add(690, 690, 690)
-                        .add(lblPercent, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 64, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
+                        .add(progress, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 452, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
+                        .add(16, 16, 16)
+                        .add(lblPercent, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 56, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
                     .add(pnlBackgroundLayout.createSequentialGroup()
                         .add(110, 110, 110)
                         .add(lblStatus, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 700, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
