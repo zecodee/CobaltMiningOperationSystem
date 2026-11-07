@@ -270,7 +270,7 @@ Seluruh diagram flowchart disediakan melalui QR Code berikut agar pembaca dapat 
 
 > **Gambar 2. QR Code Flowchart Cobalt Mining Operation System**
 
-![Gambar 2 - QR Code Flowchart C-MOS](images/QR_Flowchart_CMOS.png)
+![Gambar 2 - QR Code Flowchart C-MOS](images/flowchart.png)
 
 **Keterangan:** Pindai QR Code untuk mengakses seluruh diagram flowchart C-MOS.
 
