@@ -1423,6 +1423,8 @@ Package `view` menyimpan JFrame dan JPanel antarmuka. Berkas `.form` yang menyer
 
 `MainFrameRouter` mengarahkan pengguna ke halaman utama berdasarkan jenis pegawai. Setiap `MainFrame...` menyediakan navigasi untuk peran terkait. `...Panel` menyajikan halaman daftar, dashboard, atau laporan. `...FormFrame` menyediakan formulir tambah dan ubah data.
 
+---
+
 ## 7. Penerapan Empat Pilar OOP
 
 ### 7.1 Encapsulation
@@ -1619,12 +1621,7 @@ Selain itu, `repository.CrudRepository` dan repository khusus menggunakan interf
 
 Penerapan empat pilar OOP tidak berdiri sendiri. Model memanfaatkan encapsulation, inheritance, polymorphism, dan abstraction. Service menggunakan objek model serta kontrak repository untuk menjalankan aturan bisnis. Controller meneruskan permintaan dari view ke service. DAO berkomunikasi dengan database melalui JDBC. Pemisahan ini memudahkan pengujian dan perubahan logika tanpa mencampurkan seluruh proses ke dalam satu JFrame.
 
-
-## 8. Panduan Penggunaan dan Alur Hasil Program
-
-Bagian ini mengikuti **source proyek `CobaltMiningOperationSystem(4).zip`**, khususnya `app.Main`, seluruh `MainFrame*`, panel dan form pada package `view`, serta method pada `controller` dan `service`. Alur dibagi berdasarkan empat akun login. **Driver bukan pengguna login**. Gambar adalah slot dokumentasi yang harus diisi screenshot aplikasi nyata, bukan gambar hasil rekaan.
-
-**Cara membaca panduan:** setiap langkah memuat tindakan pengguna, hasil yang diharapkan, lokasi class, dan arahan screenshot. Screenshot diambil sesudah tindakan berhasil, kecuali langkah yang khusus mendokumentasikan validasi. Data contoh dalam penjelasan tidak menggantikan data database Anda.
+---
 
 ### 8.1 Persiapan dan Menjalankan Aplikasi
 
@@ -1636,27 +1633,8 @@ Buka proyek Maven melalui NetBeans. Pastikan `pom.xml` terbaca dan package `app`
 
 ![Gambar 18 - Struktur proyek di NetBeans](images/018_Struktur_proyek_di_NetBeans.png)
 
-**Arahan screenshot:** Buka tab Projects di NetBeans, perluas Source Packages. **Yang harus terlihat:** Nama proyek dan seluruh package utama.
+*Tampilan tab Projects di NetBeans IDE dengan seluruh package utama proyek C-MOS dalam kondisi terbuka. Struktur ini memastikan semua komponen tersedia sebelum aplikasi dijalankan, termasuk file `pom.xml` untuk konfigurasi Maven dan dependency library eksternal.*
 
-#### Konfigurasi database MySQL
-
-Siapkan MySQL dan impor `DATABASE_ASLI_DBCobaltCMOS.sql` sesuai panduan proyek. Periksa `config/DatabaseConfig.java` dan `config/AppConfig.java`. File `MIGRASI_DML_TANPA_PERUBAHAN_STRUKTUR.sql` disertakan proyek sebagai skrip penyesuaian data. Gunakan hanya sesuai petunjuk migrasi dan setelah mencadangkan database.
-
-> **Gambar 19. Konfigurasi database MySQL**
-
-![Gambar 19 - Konfigurasi database MySQL](images/019_Konfigurasi_database_MySQL.png)
-
-**Arahan screenshot:** Ambil screenshot daftar tabel dari aplikasi pengelola MySQL. **Yang harus terlihat:** Nama database, tabel utama, dan status koneksi tanpa memperlihatkan password.
-
-#### Menjalankan Main Java
-
-Jalankan entry point `app.Main`. Aplikasi melakukan inisialisasi sebelum menampilkan layar awal. Jika koneksi database gagal, aplikasi dapat menampilkan dialog kesalahan dan proses tidak dilanjutkan.
-
-> **Gambar 20. Menjalankan Main Java**
-
-![Gambar 20 - Menjalankan Main Java](images/020_Menjalankan_Main_Java.png)
-
-**Arahan screenshot:** Klik Run Project atau jalankan `app.Main`. **Yang harus terlihat:** Jendela aplikasi saat pertama kali dibuka.
 
 #### Loading aplikasi
 
@@ -1666,17 +1644,8 @@ Jalankan entry point `app.Main`. Aplikasi melakukan inisialisasi sebelum menampi
 
 ![Gambar 21 - Loading aplikasi](images/021_Loading_aplikasi.png)
 
-**Arahan screenshot:** Ambil gambar ketika loading masih berjalan. **Yang harus terlihat:** Logo/animasi loading dan indikator progress.
+*Layar loading C-MOS yang tampil setelah `app.Main` dijalankan. `view.LoadingFrame` menjalankan animasi progress dan proses inisialisasi koneksi database di latar belakang. Layar ini hanya muncul sementara dan akan berpindah otomatis ke Landing Page setelah inisialisasi selesai.*
 
-#### Landing page C-MOS
-
-Setelah loading berhasil, `view.LandingFrame` menampilkan pengenalan C-MOS. Halaman ini menyediakan navigasi informasi dan tombol untuk masuk ke login.
-
-> **Gambar 22. Landing page C-MOS**
-
-![Gambar 22 - Landing page C-MOS](images/022_Landing_page_C_MOS.png)
-
-**Arahan screenshot:** Tampilkan halaman landing pada ukuran jendela normal. **Yang harus terlihat:** Identitas C-MOS, tombol login, dan konten pengenalan.
 
 #### Navigasi landing dan tombol login
 
@@ -1686,7 +1655,8 @@ Periksa bagian Tentang, Operasi, dan Tim melalui navigasi landing jika tampil. T
 
 ![Gambar 23 - Navigasi landing dan tombol login](images/023_Navigasi_landing_dan_tombol_login.png)
 
-**Arahan screenshot:** Ambil screenshot sebelum menekan login, lalu setelah form login terbuka. **Yang harus terlihat:** Tombol navigasi landing dan perpindahan ke login.
+*Halaman landing C-MOS dengan navigasi bagian Tentang, Operasi, dan Tim. Tombol masuk tersedia di area header dan bagian utama halaman. Menekan tombol ini akan membuka form login sebagai langkah selanjutnya dalam alur autentikasi.*
+
 
 #### Form login dan validasi
 
@@ -1696,33 +1666,8 @@ Periksa bagian Tentang, Operasi, dan Tim melalui navigasi landing jika tampil. T
 
 ![Gambar 24 - Form login dan validasi](images/024_Form_login_dan_validasi.png)
 
-**Arahan screenshot:** Ambil screenshot form login tanpa menampilkan password asli. **Yang harus terlihat:** Kolom username, password, tombol masuk, dan opsi tampilkan password.
+*Form login C-MOS yang diproses oleh `view.LoginFrame`. Pengguna mengisi username dan password, kemudian sistem memvalidasi kredensial melalui `AuthController` dan `AuthService`. Jika autentikasi gagal karena username tidak ditemukan, password salah, atau akun nonaktif, sistem menampilkan pesan kesalahan dan login tidak dilanjutkan. Jika berhasil, sistem menentukan jenis pegawai dan mengarahkan pengguna ke halaman utama yang sesuai.*
 
-#### Percabangan hak akses setelah login
-
-Setelah autentikasi berhasil, `view.MainFrameRouter` membuka salah satu dari `MainFrameAdmin`, `MainFrameOperasional`, `MainFrameHSE`, atau `MainFrameManager` sesuai subtype Pegawai. Driver tidak mempunyai jalur login.
-
-> **Gambar 25. Percabangan hak akses setelah login**
-
-![Gambar 25 - Percabangan hak akses setelah login](images/025_Percabangan_hak_akses_setelah_login.png)
-
-**Arahan screenshot:** Buat bagan sederhana percabangan login dan empat peran, atau screenshot empat halaman utama secara terpisah. **Yang harus terlihat:** Login → pemeriksaan akun → Admin/Operasional/HSE/Manager.
-
-**Alur ringkas:** `Main` → `LoadingFrame` → `LandingFrame` → `LoginFrame` → `AuthController` → `AuthService` → `MainFrameRouter` → halaman utama sesuai peran. Untuk setiap peran, logout mengakhiri sesi dan mengembalikan pengguna ke alur autentikasi aplikasi.
-
-### 8.2 Alur A. Administrator
-
-**Tujuan:** menjaga konsistensi data master dan akun. **Menu nyata pada `MainFrameAdmin`:** Dashboard, Data Pegawai, Akun Pengguna, Lokasi Tambang, Jenis Material, Kendaraan, Parameter Lingkungan, Ubah Akun, Keluar Akun. Admin tidak menjalankan produksi, perjalanan, atau pengukuran HSE.
-
-#### Login sebagai Admin
-
-Masuk dengan akun milik subtype Admin. Sistem membuka `view.MainFrameAdmin`. Perhatikan identitas pengguna dan menu yang berbeda dari peran lain.
-
-> **Gambar 26. Login sebagai Admin**
-
-![Gambar 26 - Login sebagai Admin](images/026_Login_sebagai_Admin.png)
-
-**Arahan screenshot:** Login memakai akun Admin uji. **Yang harus terlihat:** Nama pengguna, peran Admin, sidebar dan judul halaman.
 
 #### Dashboard Administrator
 
@@ -1732,7 +1677,8 @@ Masuk dengan akun milik subtype Admin. Sistem membuka `view.MainFrameAdmin`. Per
 
 ![Gambar 27 - Dashboard Administrator](images/027_Dashboard_Administrator.png)
 
-**Arahan screenshot:** Buka Dashboard. **Yang harus terlihat:** Kartu KPI, panel perhatian, distribusi pegawai, dan ringkasan data master.
+*Dashboard Administrator yang ditampilkan setelah Admin berhasil login melalui `MainFrameAdmin`. Halaman ini memuat kartu KPI berisi ringkasan jumlah pegawai, akun, dan kondisi yang perlu diperhatikan, serta grafik distribusi pegawai berdasarkan jenisnya. Dari dashboard ini Admin dapat langsung menuju modul pengelolaan data master.*
+
 
 #### Daftar Data Pegawai
 
@@ -1742,7 +1688,8 @@ Buka Data Pegawai. `PegawaiPanel` menampilkan data seluruh subtype Pegawai, fitu
 
 ![Gambar 28 - Daftar Data Pegawai](images/028_Daftar_Data_Pegawai.png)
 
-**Arahan screenshot:** Buka Data Pegawai dan tampilkan beberapa baris. **Yang harus terlihat:** Judul, kolom nomor, filter, pencarian dan tombol CRUD.
+*Halaman daftar pegawai pada `PegawaiPanel`. Tabel menampilkan seluruh pegawai dari semua jenis (Admin, Petugas Operasional, Petugas HSE, Manager, Driver) beserta informasi utamanya. Tersedia fitur pencarian, filter berdasarkan jenis pegawai, serta tombol Tambah, Ubah, dan Hapus untuk pengelolaan data. Nomor urut pada tabel merupakan nomor tampilan, bukan ID database.*
+
 
 #### Form tambah Pegawai dan pilihan subtype
 
@@ -1752,7 +1699,8 @@ Tekan Tambah Data. Pada `PegawaiFormFrame`, pilih jenis pegawai: Admin, Petugas 
 
 ![Gambar 29 - Form tambah Pegawai dan pilihan subtype](images/029_Form_tambah_Pegawai_dan_pilihan_subtype.png)
 
-**Arahan screenshot:** Buka form tanpa memilih subtype lalu pilih salah satu subtype. **Yang harus terlihat:** Form awal dan combo jenis pegawai.
+*Form tambah pegawai pada `PegawaiFormFrame` sebelum jenis pegawai dipilih. Combo pilihan jenis pegawai (Admin, Petugas Operasional, Petugas HSE, Manager, Driver) menentukan field tambahan yang akan muncul. Sebelum jenis dipilih, hanya field data umum yang tersedia.*
+
 
 #### Form Pegawai jenis Admin
 
@@ -1762,7 +1710,8 @@ Pilih subtype **Admin** pada combo jenis pegawai. Isian khusus kode admin dan ta
 
 ![Gambar 30 - Form Pegawai jenis Admin](images/030_Form_Pegawai_jenis_Admin.png)
 
-**Arahan screenshot:** Pilih Admin di form Pegawai. **Yang harus terlihat:** Field khusus yang muncul sesuai subtype, tanpa field subtype lain.
+*Form pegawai dengan subtype Admin terpilih. Selain field data umum pegawai, muncul field khusus `kode_admin` dan `tanggal_mulai_akses`. Field ini hanya tampil untuk jenis Admin dan tidak muncul pada subtype lain, mencerminkan penerapan konsep inheritance dalam antarmuka.*
+
 
 #### Form Pegawai jenis Petugas Operasional
 
@@ -1772,7 +1721,8 @@ Pilih subtype **Petugas Operasional** pada combo jenis pegawai. Isian khusus shi
 
 ![Gambar 31 - Form Pegawai jenis Petugas Operasional](images/031_Form_Pegawai_jenis_Petugas_Operasional.png)
 
-**Arahan screenshot:** Pilih Petugas Operasional di form Pegawai. **Yang harus terlihat:** Field khusus yang muncul sesuai subtype, tanpa field subtype lain.
+*Form pegawai dengan subtype Petugas Operasional terpilih. Field khusus yang muncul adalah `shift_kerja` yang menunjukkan gilir kerja petugas. Field ini berbeda dari subtype lain karena setiap jenis pegawai memiliki atribut yang berbeda sesuai tanggung jawabnya.*
+
 
 #### Form Pegawai jenis Petugas HSE
 
@@ -1782,7 +1732,8 @@ Pilih subtype **Petugas HSE** pada combo jenis pegawai. Isian nomor sertifikasi 
 
 ![Gambar 32 - Form Pegawai jenis Petugas HSE](images/032_Form_Pegawai_jenis_Petugas_HSE.png)
 
-**Arahan screenshot:** Pilih Petugas HSE di form Pegawai. **Yang harus terlihat:** Field khusus yang muncul sesuai subtype, tanpa field subtype lain.
+*Form pegawai dengan subtype Petugas HSE terpilih. Field khusus yang muncul adalah `no_sertifikasi_HSE` dan `masa_berlaku_sertifikasi`. Kedua atribut ini dibutuhkan karena Petugas HSE bertugas melakukan monitoring lingkungan yang memerlukan sertifikasi resmi.*
+
 
 #### Form Pegawai jenis Manager
 
@@ -1792,7 +1743,8 @@ Pilih subtype **Manager** pada combo jenis pegawai. Isian divisi tanggung jawab.
 
 ![Gambar 33 - Form Pegawai jenis Manager](images/033_Form_Pegawai_jenis_Manager.png)
 
-**Arahan screenshot:** Pilih Manager di form Pegawai. **Yang harus terlihat:** Field khusus yang muncul sesuai subtype, tanpa field subtype lain.
+*Form pegawai dengan subtype Manager terpilih. Field khusus yang muncul adalah `divisi_tanggung_jawab` yang menunjukkan divisi yang dikelola oleh Manager bersangkutan.*
+
 
 #### Form Pegawai jenis Driver
 
@@ -1802,7 +1754,8 @@ Pilih subtype **Driver** pada combo jenis pegawai. Isian nomor SIM, masa berlaku
 
 ![Gambar 34 - Form Pegawai jenis Driver](images/034_Form_Pegawai_jenis_Driver.png)
 
-**Arahan screenshot:** Pilih Driver di form Pegawai. **Yang harus terlihat:** Field khusus yang muncul sesuai subtype, tanpa field subtype lain.
+*Form pegawai dengan subtype Driver terpilih. Field khusus yang muncul adalah `no_SIM`, `masa_berlaku_SIM`, dan `status_driver`. Informasi SIM digunakan sistem untuk memvalidasi kelayakan driver sebelum ditugaskan dalam pengangkutan. Driver tidak mendapatkan akun login.*
+
 
 #### Simpan, ubah, batal, dan validasi Pegawai
 
@@ -1812,7 +1765,8 @@ Simpan data pegawai yang valid lalu periksa baris baru. Pilih data dan tekan Uba
 
 ![Gambar 35 - Simpan, ubah, batal, dan validasi Pegawai](images/035_Simpan_ubah_batal_dan_validasi_Pegawai.png)
 
-**Arahan screenshot:** Dokumentasikan empat kondisi secara terpisah jika memungkinkan. **Yang harus terlihat:** Data tersimpan, form edit, tombol Batal, dan contoh pesan validasi.
+*Demonstrasi operasi CRUD pada data pegawai: (1) data berhasil disimpan dan muncul di tabel, (2) form ubah dengan data pegawai terpilih, (3) tombol Batal menutup form tanpa menyimpan perubahan, dan (4) contoh pesan validasi ketika field wajib tidak diisi atau format tidak sesuai ketentuan.*
+
 
 #### Daftar Akun Pengguna
 
@@ -1822,27 +1776,8 @@ Buka Akun Pengguna. `UserPanel` menampilkan akun terhubung dengan Pegawai. Pegaw
 
 ![Gambar 36 - Daftar Akun Pengguna](images/036_Daftar_Akun_Pengguna.png)
 
-**Arahan screenshot:** Buka menu Akun Pengguna. **Yang harus terlihat:** Tabel akun, filter/status, dan tombol pengelolaan.
+*Halaman daftar akun pengguna pada `UserPanel`. Tabel menampilkan akun yang terhubung dengan data pegawai beserta status aksesnya. Hanya pegawai berjenis Admin, Petugas Operasional, Petugas HSE, dan Manager yang dapat memiliki akun. Driver tidak ditampilkan sebagai kandidat akun karena tidak menggunakan aplikasi secara langsung.*
 
-#### Tambah akun dan menghubungkan Pegawai
-
-Buka `UserFormFrame`. Pilih pegawai yang berhak login, isi username serta kredensial sesuai form, lalu simpan. Periksa hasil pada tabel. Data password harus diproses melalui `PasswordUtil`, bukan disimpan sebagai teks biasa.
-
-> **Gambar 37. Tambah akun dan menghubungkan Pegawai**
-
-![Gambar 37 - Tambah akun dan menghubungkan Pegawai](images/037_Tambah_akun_dan_menghubungkan_Pegawai.png)
-
-**Arahan screenshot:** Ambil screenshot combo pegawai dan form sebelum menyimpan, tutup informasi rahasia. **Yang harus terlihat:** Pilihan pegawai, username, status akun, dan tombol Simpan/Batal.
-
-#### Ubah akun dan pemeriksaan akses
-
-Pilih akun lalu lakukan pembaruan yang diizinkan. Periksa status aktif/nonaktif dan hubungan dengan pegawai. Jika dashboard menunjukkan akun perlu diperiksa, buka halaman ini untuk meninjau data terkait.
-
-> **Gambar 38. Ubah akun dan pemeriksaan akses**
-
-![Gambar 38 - Ubah akun dan pemeriksaan akses](images/038_Ubah_akun_dan_pemeriksaan_akses.png)
-
-**Arahan screenshot:** Pilih baris akun uji dan buka Ubah. **Yang harus terlihat:** Data akun terpilih dan opsi pengelolaan.
 
 #### Daftar Lokasi Tambang
 
@@ -1852,7 +1787,8 @@ Buka menu Lokasi Tambang. Halaman tabel menampilkan daftar data master dan fasil
 
 ![Gambar 39 - Daftar Lokasi Tambang](images/039_Daftar_Lokasi_Tambang.png)
 
-**Arahan screenshot:** Buka menu Lokasi Tambang. **Yang harus terlihat:** Judul, tabel, nomor urut, tombol tambah/ubah/hapus, dan filter.
+*Halaman daftar lokasi tambang. Tabel menampilkan seluruh lokasi yang telah didaftarkan beserta jenis lokasi (PIT atau STOCKPILE), status operasional, dan keterangan. Data lokasi ini digunakan sebagai pilihan pada form produksi, pengangkutan, dan monitoring lingkungan.*
+
 
 #### Tambah dan ubah Lokasi Tambang
 
@@ -1862,7 +1798,8 @@ Buka `view/LokasiFormFrame.java` melalui tombol Tambah atau Ubah. Isi nama lokas
 
 ![Gambar 40 - Tambah dan ubah Lokasi Tambang](images/040_Tambah_dan_ubah_Lokasi_Tambang.png)
 
-**Arahan screenshot:** Buka form tambah dan edit Lokasi Tambang. **Yang harus terlihat:** Field lengkap, pilihan combo, tombol Simpan/Batal, dan hasil pada tabel.
+*Form tambah dan ubah lokasi tambang pada `LokasiFormFrame`. Admin mengisi nama lokasi, memilih jenis lokasi (PIT/STOCKPILE), status operasional, dan keterangan. Validasi dilakukan sebelum data disimpan ke database.*
+
 
 #### Daftar Jenis Material
 
@@ -1872,7 +1809,8 @@ Buka menu Jenis Material. Halaman tabel menampilkan daftar data master dan fasil
 
 ![Gambar 41 - Daftar Jenis Material](images/041_Daftar_Jenis_Material.png)
 
-**Arahan screenshot:** Buka menu Jenis Material. **Yang harus terlihat:** Judul, tabel, nomor urut, tombol tambah/ubah/hapus, dan filter.
+*Halaman daftar jenis material. Tabel menampilkan katalog material yang dapat digunakan dalam pencatatan produksi tambang, lengkap dengan satuan dan deskripsi. Data ini tidak menyimpan jumlah stok; jumlah material tersedia berasal dari pencatatan produksi.*
+
 
 #### Tambah dan ubah Jenis Material
 
@@ -1882,7 +1820,8 @@ Buka `view/MaterialFormFrame.java` melalui tombol Tambah atau Ubah. Isi nama mat
 
 ![Gambar 42 - Tambah dan ubah Jenis Material](images/042_Tambah_dan_ubah_Jenis_Material.png)
 
-**Arahan screenshot:** Buka form tambah dan edit Jenis Material. **Yang harus terlihat:** Field lengkap, pilihan combo, tombol Simpan/Batal, dan hasil pada tabel.
+*Form tambah dan ubah jenis material pada `MaterialFormFrame`. Admin mengisi nama material, satuan pengukuran, dan deskripsi. Data yang tersimpan akan tersedia sebagai pilihan pada form produksi.*
+
 
 #### Daftar Kendaraan
 
@@ -1892,7 +1831,8 @@ Buka menu Kendaraan. Halaman tabel menampilkan daftar data master dan fasilitas 
 
 ![Gambar 43 - Daftar Kendaraan](images/043_Daftar_Kendaraan.png)
 
-**Arahan screenshot:** Buka menu Kendaraan. **Yang harus terlihat:** Judul, tabel, nomor urut, tombol tambah/ubah/hapus, dan filter.
+*Halaman daftar kendaraan operasional. Tabel menampilkan armada yang tersedia beserta jenis, nomor polisi, kapasitas muatan, tahun, dan status kendaraan. Data kapasitas digunakan untuk memvalidasi jumlah muatan sebelum pengangkutan dibuat.*
+
 
 #### Tambah dan ubah Kendaraan
 
@@ -1902,7 +1842,8 @@ Buka `view/KendaraanFormFrame.java` melalui tombol Tambah atau Ubah. Isi jenis k
 
 ![Gambar 44 - Tambah dan ubah Kendaraan](images/044_Tambah_dan_ubah_Kendaraan.png)
 
-**Arahan screenshot:** Buka form tambah dan edit Kendaraan. **Yang harus terlihat:** Field lengkap, pilihan combo, tombol Simpan/Batal, dan hasil pada tabel.
+*Form tambah dan ubah kendaraan pada `KendaraanFormFrame`. Admin mengisi jenis kendaraan, nomor polisi, kapasitas (dalam satuan ton), tahun kendaraan, dan status operasional. Setelah tersimpan, kendaraan dapat dipilih oleh Petugas Operasional pada proses pengangkutan.*
+
 
 #### Daftar Parameter Lingkungan
 
@@ -1912,7 +1853,8 @@ Buka menu Parameter Lingkungan. Halaman tabel menampilkan daftar data master dan
 
 ![Gambar 45 - Daftar Parameter Lingkungan](images/045_Daftar_Parameter_Lingkungan.png)
 
-**Arahan screenshot:** Buka menu Parameter Lingkungan. **Yang harus terlihat:** Judul, tabel, nomor urut, tombol tambah/ubah/hapus, dan filter.
+*Halaman daftar parameter lingkungan. Tabel menampilkan parameter pengukuran yang digunakan sebagai acuan monitoring, lengkap dengan satuan, batas minimum, dan batas maksimum. Parameter ini digunakan oleh Petugas HSE untuk membandingkan hasil pengukuran lapangan dengan standar yang ditetapkan.*
+
 
 #### Tambah dan ubah Parameter Lingkungan
 
@@ -1922,7 +1864,8 @@ Buka `view/ParameterFormFrame.java` melalui tombol Tambah atau Ubah. Isi nama pa
 
 ![Gambar 46 - Tambah dan ubah Parameter Lingkungan](images/046_Tambah_dan_ubah_Parameter_Lingkungan.png)
 
-**Arahan screenshot:** Buka form tambah dan edit Parameter Lingkungan. **Yang harus terlihat:** Field lengkap, pilihan combo, tombol Simpan/Batal, dan hasil pada tabel.
+*Form tambah dan ubah parameter lingkungan pada `ParameterFormFrame`. Admin mengisi nama parameter, satuan, batas minimum, batas maksimum, dan keterangan. Nilai batas ini yang akan dibandingkan sistem saat Petugas HSE memasukkan hasil pengukuran monitoring.*
+
 
 #### Ubah Akun Admin
 
@@ -1932,7 +1875,8 @@ Gunakan menu Ubah Akun yang membuka `UbahAkunFrame`. Ikuti validasi yang tersedi
 
 ![Gambar 47 - Ubah Akun Admin](images/047_Ubah_Akun_Admin.png)
 
-**Arahan screenshot:** Buka menu Ubah Akun. **Yang harus terlihat:** Form pengubahan akun tanpa menampilkan password.
+*Form ubah akun melalui menu Ubah Akun pada `UbahAkunFrame`. Admin dapat memperbarui kredensial akunnya sendiri sesuai validasi yang berlaku. Password diproses melalui `PasswordUtil` dan tidak disimpan sebagai teks biasa.*
+
 
 #### Logout Admin
 
@@ -1942,7 +1886,9 @@ Tekan Keluar Akun. Pastikan sesi Admin berakhir sebelum login menggunakan peran 
 
 ![Gambar 48 - Logout Admin](images/048_Logout_Admin.png)
 
-**Arahan screenshot:** Ambil gambar saat logout atau saat kembali ke login. **Yang harus terlihat:** Tombol Keluar Akun dan halaman autentikasi.
+*Proses logout Admin melalui menu Keluar Akun. Sesi Admin diakhiri dan aplikasi kembali ke halaman autentikasi. Langkah ini diperlukan sebelum login menggunakan akun peran lain.*
+
+
 
 ### 8.3 Alur B. Petugas Operasional
 
@@ -1956,7 +1902,8 @@ Login dengan akun Petugas Operasional. `MainFrameRouter` membuka `MainFrameOpera
 
 ![Gambar 49 - Login Petugas Operasional](images/049_Login_Petugas_Operasional.png)
 
-**Arahan screenshot:** Masuk sebagai Petugas Operasional. **Yang harus terlihat:** Sidebar Operasional dan identitas pengguna.
+*Tampilan halaman utama setelah login sebagai Petugas Operasional. `MainFrameRouter` mendeteksi subtype pegawai dan membuka `MainFrameOperasional` dengan sidebar berisi menu Dashboard, Produksi Tambang, Pengangkutan, Ubah Akun, dan Keluar Akun.*
+
 
 #### Dashboard produksi dan filter periode
 
@@ -1966,7 +1913,8 @@ Login dengan akun Petugas Operasional. `MainFrameRouter` membuka `MainFrameOpera
 
 ![Gambar 50 - Dashboard produksi dan filter periode](images/050_Dashboard_produksi_dan_filter_periode.png)
 
-**Arahan screenshot:** Buka Dashboard dan ubah filter periode. **Yang harus terlihat:** Combo periode, input tanggal khusus, empat KPI dan tombol Terapkan.
+*Dashboard Petugas Operasional pada `DashboardOperasionalPanel`. Menampilkan empat KPI utama: Total Produksi, Stok Saat Ini, Produksi Tercatat, dan Lokasi Berproduksi. Filter periode (Hari Ini, 7 Hari Terakhir, Bulan Ini, Tahun Ini, Semua Periode, atau Rentang Kustom) mengubah data KPI produksi. Stok Saat Ini selalu mencerminkan saldo terkini tanpa terpengaruh filter.*
+
 
 #### Grafik produksi per lokasi dan tren
 
@@ -1976,7 +1924,8 @@ Dashboard menampilkan visualisasi produksi per lokasi dan tren produksi, serta t
 
 ![Gambar 51 - Grafik produksi per lokasi dan tren](images/051_Grafik_produksi_per_lokasi_dan_tren.png)
 
-**Arahan screenshot:** Ambil bagian tengah dan bawah Dashboard. **Yang harus terlihat:** Grafik produksi, grafik tren, dan daftar produksi terbaru.
+*Bagian bawah Dashboard Operasional yang menampilkan visualisasi data: grafik produksi per lokasi PIT (bar chart) untuk membandingkan hasil produksi antar lokasi, dan grafik tren produksi (line chart) untuk menampilkan perkembangan produksi berdasarkan periode. Di bawahnya tersedia tabel Produksi Terbaru sebagai referensi cepat.*
+
 
 #### Halaman Produksi Tambang
 
@@ -1986,7 +1935,8 @@ Buka Produksi Tambang. `ProduksiPanel` menampilkan ringkasan catatan, total prod
 
 ![Gambar 52 - Halaman Produksi Tambang](images/052_Halaman_Produksi_Tambang.png)
 
-**Arahan screenshot:** Buka menu Produksi Tambang. **Yang harus terlihat:** KPI halaman produksi, filter dan tabel.
+*Halaman Produksi Tambang pada `ProduksiPanel`. Bagian atas menampilkan KPI ringkasan halaman (total catatan, total produksi, stok tersedia, jumlah lokasi berproduksi). Tabel di bawahnya menampilkan seluruh catatan produksi dengan fitur pencarian, filter status, dan tombol operasi CRUD.*
+
 
 #### Tambah catatan produksi
 
@@ -1996,17 +1946,8 @@ Klik Tambah Data untuk membuka `ProduksiFormFrame`. Pilih lokasi PIT dan jenis m
 
 ![Gambar 53 - Tambah catatan produksi](images/053_Tambah_catatan_produksi.png)
 
-**Arahan screenshot:** Buka form Tambah Produksi. **Yang harus terlihat:** Combo lokasi, combo material, tanggal, tonase, tombol Simpan/Batal.
+*Form tambah catatan produksi pada `ProduksiFormFrame`. Petugas Operasional memilih lokasi PIT dari data master, memilih jenis material, mengisi tanggal produksi, jumlah produksi, dan catatan. Setelah disimpan, data produksi ini menjadi sumber material yang dapat dipilih dalam proses pengangkutan.*
 
-#### Validasi produksi dan simpan
-
-Uji jumlah produksi tidak valid, data kosong, atau pilihan lokasi yang tidak sesuai. Setelah valid, simpan dan periksa total produksi serta stok pada tabel/dashboard.
-
-> **Gambar 54. Validasi produksi dan simpan**
-
-![Gambar 54 - Validasi produksi dan simpan](images/054_Validasi_produksi_dan_simpan.png)
-
-**Arahan screenshot:** Ambil pesan validasi dan kemudian hasil simpan. **Yang harus terlihat:** Validasi dan baris produksi baru.
 
 #### Ubah, hapus, cari, dan filter produksi
 
@@ -2016,7 +1957,8 @@ Pilih catatan lalu tekan Ubah atau Hapus sesuai aturan bisnis. Perhatikan keterk
 
 ![Gambar 55 - Ubah, hapus, cari, dan filter produksi](images/055_Ubah_hapus_cari_dan_filter_produksi.png)
 
-**Arahan screenshot:** Buka form ubah, konfirmasi hapus, dan hasil filter. **Yang harus terlihat:** Tombol operasi dan perubahan tabel.
+*Demonstrasi operasi lanjutan pada data produksi: form ubah catatan yang sudah ada, dialog konfirmasi hapus, hasil pencarian berdasarkan kata kunci, dan tabel setelah filter diterapkan. Produksi yang telah digunakan sebagai sumber pengangkutan memiliki batasan operasi sesuai aturan bisnis.*
+
 
 #### Halaman Pengangkutan dan KPI kesiapan
 
@@ -2026,7 +1968,8 @@ Buka Pengangkutan. `PengangkutanPanel` menampilkan total pengangkutan, Dijadwalk
 
 ![Gambar 56 - Halaman Pengangkutan dan KPI kesiapan](images/056_Halaman_Pengangkutan_dan_KPI_kesiapan.png)
 
-**Arahan screenshot:** Buka menu Pengangkutan. **Yang harus terlihat:** Enam KPI, filter status, daftar perjalanan dan detail.
+*Halaman Pengangkutan pada `PengangkutanPanel`. Bagian atas menampilkan enam KPI: Total Pengangkutan, Dijadwalkan, Dalam Perjalanan, Selesai, Kendaraan Tersedia, dan Driver Tersedia. Informasi ketersediaan kendaraan dan driver diperbarui secara dinamis berdasarkan status pengangkutan aktif. Di bawahnya tersedia tabel daftar pengangkutan dengan filter status dan panel detail.*
+
 
 #### Membuat jadwal pengangkutan
 
@@ -2036,57 +1979,8 @@ Tekan Tambah untuk membuka `PengangkutanFormFrame`. Pilih produksi tersedia, ken
 
 ![Gambar 57 - Membuat jadwal pengangkutan](images/057_Membuat_jadwal_pengangkutan.png)
 
-**Arahan screenshot:** Buka form Pengangkutan. **Yang harus terlihat:** Combo produksi/kendaraan/driver, asal otomatis, tujuan, tanggal, muatan.
+*Form buat pengangkutan pada `PengangkutanFormFrame`. Petugas memilih produksi sebagai sumber material (lokasi asal ditentukan otomatis), kendaraan tersedia, driver tersedia, lokasi tujuan, tanggal, dan jumlah muatan. Sistem akan memvalidasi kapasitas kendaraan, ketersediaan stok, status driver, masa berlaku SIM, dan potensi benturan jadwal sebelum menyimpan.*
 
-#### Memeriksa kapasitas dan stok sebelum penjadwalan
-
-Pastikan jumlah muatan tidak melebihi kapasitas kendaraan maupun material produksi yang masih dapat dialokasikan. Pengangkutan harus memiliki sumber produksi, kendaraan, driver dan tujuan yang valid. Uji muatan berlebih sebagai bukti validasi.
-
-> **Gambar 58. Memeriksa kapasitas dan stok sebelum penjadwalan**
-
-![Gambar 58 - Memeriksa kapasitas dan stok sebelum penjadwalan](images/058_Memeriksa_kapasitas_dan_stok_sebelum_penjadwalan.png)
-
-**Arahan screenshot:** Isi muatan melebihi kapasitas pada data uji. **Yang harus terlihat:** Pesan validasi yang muncul tanpa menyimpan data salah.
-
-#### Jadwal tersimpan dan status Dijadwalkan
-
-Simpan pengangkutan valid. Periksa status DIJADWALKAN di tabel, data detail, dan ringkasan. Pada tahap ini perjalanan belum dimulai.
-
-> **Gambar 59. Jadwal tersimpan dan status Dijadwalkan**
-
-![Gambar 59 - Jadwal tersimpan dan status Dijadwalkan](images/059_Jadwal_tersimpan_dan_status_Dijadwalkan.png)
-
-**Arahan screenshot:** Simpan jadwal uji. **Yang harus terlihat:** Baris status DIJADWALKAN dan panel detail.
-
-#### Memulai perjalanan
-
-Pilih jadwal lalu tekan Mulai Perjalanan. Sistem menjalankan `PengangkutanService.mulaiPengangkutan`, mengubah status menjadi DALAM_PERJALANAN serta menandai kendaraan dan driver sedang bertugas sesuai aturan sistem.
-
-> **Gambar 60. Memulai perjalanan**
-
-![Gambar 60 - Memulai perjalanan](images/060_Memulai_perjalanan.png)
-
-**Arahan screenshot:** Pilih jadwal dan tekan Mulai Perjalanan. **Yang harus terlihat:** Status DALAM_PERJALANAN dan perubahan informasi kesiapan.
-
-#### Menyelesaikan pengangkutan
-
-Pilih perjalanan aktif lalu tekan Selesaikan. `PengangkutanService.selesaikanPengangkutan` menyelesaikan perjalanan dan memperbarui stok produksi. Periksa waktu selesai, status SELESAI, dan sisa stok produksi pada panel detail.
-
-> **Gambar 61. Menyelesaikan pengangkutan**
-
-![Gambar 61 - Menyelesaikan pengangkutan](images/061_Menyelesaikan_pengangkutan.png)
-
-**Arahan screenshot:** Selesaikan satu perjalanan uji. **Yang harus terlihat:** Status SELESAI, waktu selesai, dan stok setelah pengangkutan.
-
-#### Membatalkan pengangkutan
-
-Untuk pengangkutan yang dapat dibatalkan, pilih data dan tekan Batalkan. Konfirmasi tindakan. Pengangkutan yang dibatalkan tidak mengurangi stok produksi. Periksa status DIBATALKAN.
-
-> **Gambar 62. Membatalkan pengangkutan**
-
-![Gambar 62 - Membatalkan pengangkutan](images/062_Membatalkan_pengangkutan.png)
-
-**Arahan screenshot:** Batalkan jadwal uji yang diizinkan. **Yang harus terlihat:** Dialog konfirmasi dan status DIBATALKAN.
 
 #### Filter dan detail Pengangkutan
 
@@ -2096,21 +1990,14 @@ Gunakan filter Semua Status, DIJADWALKAN, DALAM_PERJALANAN, SELESAI atau DIBATAL
 
 ![Gambar 63 - Filter dan detail Pengangkutan](images/063_Filter_dan_detail_Pengangkutan.png)
 
-**Arahan screenshot:** Pilih beberapa status dan klik satu baris. **Yang harus terlihat:** Hasil filter dan panel Detail Pengangkutan lengkap.
+*Demonstrasi filter status pengangkutan dan panel Detail Pengangkutan. Filter dapat dipilih antara Semua Status, DIJADWALKAN, DALAM_PERJALANAN, SELESAI, atau DIBATALKAN. Memilih satu baris menampilkan detail lengkap di panel kanan: sumber produksi, material, lokasi asal dan tujuan, jumlah muatan, kendaraan, nomor polisi, driver, petugas pencatat, waktu, dan sisa stok produksi.*
 
-#### Ubah Akun dan Logout Operasional
 
-Gunakan Ubah Akun jika perlu memperbarui kredensial. Tekan Keluar Akun untuk mengakhiri sesi.
 
-> **Gambar 64. Ubah Akun dan Logout Operasional**
-
-![Gambar 64 - Ubah Akun dan Logout Operasional](images/064_Ubah_Akun_dan_Logout_Operasional.png)
-
-**Arahan screenshot:** Buka Ubah Akun lalu logout. **Yang harus terlihat:** Form akun dan halaman setelah logout.
-
-### 8.4 Alur C. Petugas HSE
+### 8.4 Alur Petugas HSE
 
 **Tujuan:** mengajukan dan melaksanakan monitoring lingkungan, mengukur parameter, mencatat hasil serta penanganan. **Menu nyata pada `MainFrameHSE`:** Dashboard, Kondisi Lokasi, Riwayat Monitoring, Ubah Akun, Keluar Akun. **Catatan penting:** source terbaru memuat persetujuan Manager sebelum monitoring tertentu dapat dimulai. Status hasil mencakup NORMAL, PERINGATAN, dan BERBAHAYA.
+
 
 #### Login Petugas HSE
 
@@ -2120,7 +2007,8 @@ Login menggunakan akun Petugas HSE untuk membuka `MainFrameHSE`.
 
 ![Gambar 65 - Login Petugas HSE](images/065_Login_Petugas_HSE.png)
 
-**Arahan screenshot:** Masuk dengan akun HSE. **Yang harus terlihat:** Sidebar HSE, identitas dan menu.
+*Tampilan halaman utama setelah login sebagai Petugas HSE. `MainFrameRouter` membuka `MainFrameHSE` dengan sidebar berisi menu Dashboard, Kondisi Lokasi, Riwayat Monitoring, Ubah Akun, dan Keluar Akun.*
+
 
 #### Dashboard HSE dan filter periode
 
@@ -2130,7 +2018,8 @@ Login menggunakan akun Petugas HSE untuk membuka `MainFrameHSE`.
 
 ![Gambar 66 - Dashboard HSE dan filter periode](images/066_Dashboard_HSE_dan_filter_periode.png)
 
-**Arahan screenshot:** Buka Dashboard HSE dan ubah periode. **Yang harus terlihat:** KPI, filter periode, tabel prioritas dan grafik.
+*Dashboard Petugas HSE pada `DashboardHSEPanel`. Menampilkan empat KPI: Total Monitoring, Hasil Normal, Monitoring Peringatan, dan Penanganan Belum Selesai. Filter periode mengubah data pemeriksaan, sementara penanganan yang belum selesai tetap ditampilkan lintas periode. Tersedia pula tabel prioritas dan grafik frekuensi peringatan per parameter.*
+
 
 #### Prioritas penanganan dan detail baca saja
 
@@ -2140,7 +2029,8 @@ Tabel prioritas menunjukkan monitoring yang membutuhkan perhatian. Tombol Lihat 
 
 ![Gambar 67 - Prioritas penanganan dan detail baca saja](images/067_Prioritas_penanganan_dan_detail_baca_saja.png)
 
-**Arahan screenshot:** Pilih satu baris prioritas. **Yang harus terlihat:** Lokasi/parameter bermasalah dan detail baca saja.
+*Tabel prioritas pada dashboard HSE yang menampilkan monitoring yang membutuhkan perhatian segera. Tombol Lihat Detail Pengukuran membuka `MonitoringReadOnlyFrame` untuk meninjau nilai parameter dan status pengukuran tanpa kemampuan mengubah data, sebagai alat tinjauan cepat sebelum menangani masalah.*
+
 
 #### Kondisi Lokasi Tambang
 
@@ -2150,17 +2040,8 @@ Buka `KondisiLokasiPanel`. Halaman menampilkan kartu lokasi PIT/stockpile, ringk
 
 ![Gambar 68 - Kondisi Lokasi Tambang](images/068_Kondisi_Lokasi_Tambang.png)
 
-**Arahan screenshot:** Buka Kondisi Lokasi. **Yang harus terlihat:** Kartu lokasi, filter, KPI dan panel detail.
+*Halaman Kondisi Lokasi pada `KondisiLokasiPanel`. Menampilkan kartu untuk setiap lokasi tambang (PIT/STOCKPILE) dengan status monitoring terbaru. Filter tersedia untuk menyaring lokasi berdasarkan hasil (NORMAL, PERINGATAN, BERBAHAYA, atau Belum Ada Monitoring). Memilih kartu lokasi menampilkan detail di panel kanan.*
 
-#### Memilih lokasi dan memeriksa pengukuran terakhir
-
-Klik satu kartu lokasi. Panel detail menampilkan nama lokasi, jenis, status operasional, monitoring terakhir, hasil, status penanganan, tindak lanjut, serta tabel parameter pengukuran terakhir.
-
-> **Gambar 69. Memilih lokasi dan memeriksa pengukuran terakhir**
-
-![Gambar 69 - Memilih lokasi dan memeriksa pengukuran terakhir](images/069_Memilih_lokasi_dan_memeriksa_pengukuran_terakhir.png)
-
-**Arahan screenshot:** Pilih lokasi yang sudah pernah dimonitoring. **Yang harus terlihat:** Kartu aktif dan detail parameter lokasi.
 
 #### Mengajukan monitoring ke Manager
 
@@ -2170,37 +2051,8 @@ Tekan Ajukan Monitoring Lokasi Ini pada lokasi yang belum memiliki persetujuan a
 
 ![Gambar 70 - Mengajukan monitoring ke Manager](images/070_Mengajukan_monitoring_ke_Manager.png)
 
-**Arahan screenshot:** Pilih lokasi, tekan ajukan dan isi alasan. **Yang harus terlihat:** Dialog alasan, notifikasi berhasil, dan status menunggu persetujuan.
+*Alur pengajuan monitoring ke Manager. Petugas HSE memilih lokasi lalu menekan tombol Ajukan Monitoring Lokasi Ini. Sistem meminta alasan monitoring, kemudian menyimpan permintaan dengan status MENUNGGU. Tombol pada lokasi tersebut berubah menjadi Menunggu Persetujuan Manager dan monitoring tidak dapat dimulai sampai Manager menyetujui.*
 
-#### Monitoring menunggu persetujuan
-
-Selama status MENUNGGU, tombol menunjukkan Menunggu Persetujuan Manager dan monitoring tidak langsung dimulai. Proses dilanjutkan setelah Manager menyetujui permintaan.
-
-> **Gambar 71. Monitoring menunggu persetujuan**
-
-![Gambar 71 - Monitoring menunggu persetujuan](images/071_Monitoring_menunggu_persetujuan.png)
-
-**Arahan screenshot:** Buka kembali lokasi yang telah diajukan. **Yang harus terlihat:** Label/tombol status MENUNGGU.
-
-#### Memulai monitoring setelah disetujui
-
-Setelah Manager menyetujui, tombol berubah menjadi Mulai Monitoring (Disetujui). Tekan tombol untuk membuka `MonitoringFormFrame`, pilih tanggal melalui komponen kalender, periksa lokasi dan isi catatan.
-
-> **Gambar 72. Memulai monitoring setelah disetujui**
-
-![Gambar 72 - Memulai monitoring setelah disetujui](images/072_Memulai_monitoring_setelah_disetujui.png)
-
-**Arahan screenshot:** Login kembali sebagai HSE setelah persetujuan, buka lokasi. **Yang harus terlihat:** Tombol mulai, form tanggal/lokasi/catatan.
-
-#### Menyimpan kegiatan monitoring
-
-Simpan form monitoring. Sistem membuat kegiatan yang dapat dilanjutkan dengan pengisian hasil pengukuran. Batal menutup form tanpa menyimpan.
-
-> **Gambar 73. Menyimpan kegiatan monitoring**
-
-![Gambar 73 - Menyimpan kegiatan monitoring](images/073_Menyimpan_kegiatan_monitoring.png)
-
-**Arahan screenshot:** Tekan Simpan pada data uji valid. **Yang harus terlihat:** Pesan “Monitoring dimulai” dan data kegiatan.
 
 #### Membuka Detail Monitoring
 
@@ -2210,67 +2062,8 @@ Tekan Lihat / Kelola Pengukuran pada lokasi terpilih untuk membuka `MonitoringDe
 
 ![Gambar 74 - Membuka Detail Monitoring](images/074_Membuka_Detail_Monitoring.png)
 
-**Arahan screenshot:** Pilih lokasi dengan monitoring aktif dan buka detail. **Yang harus terlihat:** Judul, tabel parameter, tombol tindakan.
+*`MonitoringDetailFrame` dalam mode pengelolaan HSE, dibuka dari lokasi yang memiliki monitoring aktif. Halaman ini menampilkan informasi kegiatan monitoring (lokasi, tanggal, petugas, status), tabel hasil pengukuran per parameter, dan tombol tindakan: Tambah Pengukuran, Ubah Pengukuran, Hapus Pengukuran, dan Selesai Penanganan sesuai kondisi kegiatan.*
 
-#### Menambah hasil pengukuran parameter
-
-Tekan Tambah Pengukuran untuk membuka `DetailMonitoringFormFrame`. Pilih parameter dari data master, isi nilai pengukuran dan catatan. Sistem membandingkan nilai dengan batas minimum/maksimum yang dikonfigurasi.
-
-> **Gambar 75. Menambah hasil pengukuran parameter**
-
-![Gambar 75 - Menambah hasil pengukuran parameter](images/075_Menambah_hasil_pengukuran_parameter.png)
-
-**Arahan screenshot:** Buka form Tambah Pengukuran. **Yang harus terlihat:** Combo parameter, nilai, satuan/batas jika tampil, dan catatan.
-
-#### Hasil Normal, Peringatan dan Berbahaya
-
-Simpan hasil pengukuran valid lalu periksa status yang dihitung sistem. Bedakan NORMAL, PERINGATAN, dan BERBAHAYA sesuai logika pada source. Jangan menganggap penanganan selesai otomatis mengubah hasil pengukuran lama menjadi normal.
-
-> **Gambar 76. Hasil Normal, Peringatan dan Berbahaya**
-
-![Gambar 76 - Hasil Normal, Peringatan dan Berbahaya](images/076_Hasil_Normal_Peringatan_dan_Berbahaya.png)
-
-**Arahan screenshot:** Gunakan data uji parameter dalam batas dan di luar batas. **Yang harus terlihat:** Tabel hasil dengan status dan warna sesuai kondisi.
-
-#### Mengubah atau menghapus detail pengukuran
-
-Selama kegiatan mengizinkan perubahan, pilih detail lalu gunakan Ubah Pengukuran atau Hapus Pengukuran. Periksa validasi dan perhitungan ulang status.
-
-> **Gambar 77. Mengubah atau menghapus detail pengukuran**
-
-![Gambar 77 - Mengubah atau menghapus detail pengukuran](images/077_Mengubah_atau_menghapus_detail_pengukuran.png)
-
-**Arahan screenshot:** Pilih detail uji dan tampilkan form ubah/konfirmasi hapus. **Yang harus terlihat:** Tombol pengelolaan dan hasil perubahan tabel.
-
-#### Menginformasikan peringatan kepada Manager
-
-Pada Kondisi Lokasi, tombol Info Peringatan Manager digunakan untuk memastikan hasil pengukuran bermasalah masuk daftar informasi Manager. Gunakan pada lokasi yang memenuhi kondisi peringatan.
-
-> **Gambar 78. Menginformasikan peringatan kepada Manager**
-
-![Gambar 78 - Menginformasikan peringatan kepada Manager](images/078_Menginformasikan_peringatan_kepada_Manager.png)
-
-**Arahan screenshot:** Pilih lokasi berstatus peringatan/berbahaya lalu tekan tombol informasi. **Yang harus terlihat:** Tombol Info Peringatan Manager dan notifikasi.
-
-#### Menangani monitoring bermasalah
-
-Ikuti alur penanganan melalui MonitoringDetailFrame dan service: status belum ditangani, dalam penanganan, hingga selesai. Catat tindak lanjut dan perbarui detail sesuai hak akses HSE.
-
-> **Gambar 79. Menangani monitoring bermasalah**
-
-![Gambar 79 - Menangani monitoring bermasalah](images/079_Menangani_monitoring_bermasalah.png)
-
-**Arahan screenshot:** Buka detail monitoring bermasalah. **Yang harus terlihat:** Status penanganan dan data tindak lanjut.
-
-#### Menyelesaikan penanganan
-
-Tekan Selesai Penanganan ketika syarat pengukuran dan status kegiatan terpenuhi. Periksa perubahan status dan dashboard. Penyelesaian tindak lanjut bukan bukti bahwa pengukuran historis telah menjadi normal.
-
-> **Gambar 80. Menyelesaikan penanganan**
-
-![Gambar 80 - Menyelesaikan penanganan](images/080_Menyelesaikan_penanganan.png)
-
-**Arahan screenshot:** Selesaikan satu kasus uji. **Yang harus terlihat:** Tombol selesai, status penanganan baru dan perubahan KPI.
 
 #### Riwayat Monitoring
 
@@ -2280,7 +2073,8 @@ Buka `MonitoringPanel` melalui Riwayat Monitoring. Halaman ini memuat seluruh ca
 
 ![Gambar 81 - Riwayat Monitoring](images/081_Riwayat_Monitoring.png)
 
-**Arahan screenshot:** Buka Riwayat Monitoring. **Yang harus terlihat:** KPI, tabel, pencarian, filter, tombol Lihat Pengukuran/Hapus.
+*Halaman Riwayat Monitoring pada `MonitoringPanel`. Menampilkan seluruh catatan monitoring yang pernah dilakukan beserta KPI riwayat. Tersedia fitur pencarian, filter status, tombol Lihat Pengukuran untuk membuka detail, dan tombol Hapus sesuai aturan sistem. Pembuatan monitoring baru dilakukan melalui Kondisi Lokasi, bukan dari halaman ini.*
+
 
 #### Memeriksa dan menghapus riwayat
 
@@ -2290,21 +2084,14 @@ Pilih catatan, tekan Lihat Pengukuran untuk memeriksa rincian. Hapus hanya jika 
 
 ![Gambar 82 - Memeriksa dan menghapus riwayat](images/082_Memeriksa_dan_menghapus_riwayat.png)
 
-**Arahan screenshot:** Buka satu detail riwayat dan konfirmasi hapus data uji. **Yang harus terlihat:** Detail dan dialog konfirmasi.
+*Detail pengukuran dari satu catatan riwayat monitoring, dibuka melalui tombol Lihat Pengukuran. Menampilkan seluruh nilai parameter yang tercatat pada kegiatan tersebut beserta statusnya. Dialog konfirmasi hapus muncul sebelum data riwayat dihapus untuk mencegah penghapusan tidak disengaja.*
 
-#### Ubah Akun dan Logout HSE
 
-Buka Ubah Akun bila perlu, lalu Keluar Akun untuk mengakhiri sesi HSE.
 
-> **Gambar 83. Ubah Akun dan Logout HSE**
-
-![Gambar 83 - Ubah Akun dan Logout HSE](images/083_Ubah_Akun_dan_Logout_HSE.png)
-
-**Arahan screenshot:** Ambil gambar menu Ubah Akun dan logout. **Yang harus terlihat:** Perubahan halaman setelah keluar.
-
-### 8.5 Alur D. Manager
+### 8.5 Alur Petugas Manager
 
 **Tujuan:** melihat hasil produksi, stok, laporan monitoring, prioritas lingkungan, dan memberi persetujuan permintaan monitoring. **Menu nyata pada `MainFrameManager`:** Dashboard, Laporan Produksi, Laporan Monitoring, Ubah Akun, Keluar Akun. `LaporanPengangkutanPanel` ada pada source, tetapi **tidak tercantum sebagai menu tersendiri pada `MainFrameManager` versi ZIP ini**; jangan mendokumentasikannya seolah-olah menu tersebut pasti tampil. Manager dapat menyetujui permintaan monitoring, tetapi tidak menambah/mengubah detail pengukuran HSE.
+
 
 #### Login Manager
 
@@ -2314,7 +2101,8 @@ Masuk dengan akun subtype Manager. Sistem membuka `MainFrameManager` dengan menu
 
 ![Gambar 84 - Login Manager](images/084_Login_Manager.png)
 
-**Arahan screenshot:** Login sebagai Manager. **Yang harus terlihat:** Sidebar Manager dan identitas akun.
+*Tampilan halaman utama setelah login sebagai Manager. `MainFrameRouter` membuka `MainFrameManager` dengan sidebar berisi menu Dashboard, Laporan Produksi, Laporan Monitoring, Ubah Akun, dan Keluar Akun. Manager tidak memiliki akses ke modul pencatatan operasional.*
+
 
 #### Dashboard Manager dan filter periode
 
@@ -2324,7 +2112,8 @@ Masuk dengan akun subtype Manager. Sistem membuka `MainFrameManager` dengan menu
 
 ![Gambar 85 - Dashboard Manager dan filter periode](images/085_Dashboard_Manager_dan_filter_periode.png)
 
-**Arahan screenshot:** Buka dashboard dan pilih filter periode. **Yang harus terlihat:** Filter, empat KPI dan label cakupan waktu.
+*Dashboard Manager pada `DashboardManagerPanel`. Menampilkan empat KPI: Produksi Periode, Stok Saat Ini, Peringatan Belum Selesai, dan Lokasi Peringatan. Filter periode diterapkan pada data produksi, sementara Stok Saat Ini dan penanganan terbuka memiliki cakupan waktu tersendiri. Tersedia pula tabel Permintaan Monitoring yang menunggu persetujuan.*
+
 
 #### Grafik dan evaluasi kondisi operasional
 
@@ -2334,7 +2123,8 @@ Periksa grafik produksi dan lingkungan yang tersedia serta ringkasan prioritas. 
 
 ![Gambar 86 - Grafik dan evaluasi kondisi operasional](images/086_Grafik_dan_evaluasi_kondisi_operasional.png)
 
-**Arahan screenshot:** Ambil bagian grafik dashboard Manager. **Yang harus terlihat:** Judul grafik, sumbu, nilai dan periode.
+*Bagian grafik pada Dashboard Manager yang menyajikan visualisasi untuk evaluasi kondisi operasional. Grafik produksi menampilkan perbandingan atau tren hasil produksi, sementara grafik monitoring lingkungan membantu mengidentifikasi parameter yang sering menghasilkan peringatan. Informasi ini digunakan Manager sebagai dasar pertimbangan keputusan operasional.*
+
 
 #### Prioritas lingkungan untuk keputusan
 
@@ -2344,7 +2134,8 @@ Tabel Prioritas Lingkungan menampilkan monitoring bermasalah. Pilih baris untuk 
 
 ![Gambar 87 - Prioritas lingkungan untuk keputusan](images/087_Prioritas_lingkungan_untuk_keputusan.png)
 
-**Arahan screenshot:** Pilih baris pada Prioritas Lingkungan. **Yang harus terlihat:** Daftar prioritas dan detail tanpa tombol edit aktif.
+*Tabel Prioritas Lingkungan pada dashboard Manager yang menampilkan monitoring bermasalah dari seluruh lokasi. Memilih satu baris membuka `MonitoringDetailFrame` dengan `readOnly=true` sehingga Manager dapat memeriksa nilai parameter dan status penanganan tanpa dapat mengubah data. Informasi ini menjadi dasar keputusan tindakan yang perlu diambil.*
+
 
 #### Permintaan monitoring menunggu persetujuan
 
@@ -2354,17 +2145,8 @@ Dashboard Manager memiliki tabel Permintaan Monitoring Menunggu Persetujuan. Per
 
 ![Gambar 88 - Permintaan monitoring menunggu persetujuan](images/088_Permintaan_monitoring_menunggu_persetujuan.png)
 
-**Arahan screenshot:** Tampilkan tabel permintaan dari akun Manager. **Yang harus terlihat:** Permintaan, alasan/keterangan dan tombol Setujui Permintaan Terpilih.
+*Tabel Permintaan Monitoring Menunggu Persetujuan pada dashboard Manager. Setiap permintaan berasal dari Petugas HSE melalui halaman Kondisi Lokasi. Manager dapat memeriksa lokasi dan alasan pengajuan sebelum menekan tombol Setujui Permintaan Terpilih. Setelah disetujui, Petugas HSE dapat memulai kegiatan monitoring pada lokasi tersebut.*
 
-#### Menyetujui permintaan monitoring HSE
-
-Pilih satu permintaan, tekan Setujui Permintaan Terpilih, lalu konfirmasi. `MonitoringController.setujuiMonitoring` mengubah status permintaan sehingga HSE dapat memulai monitoring. Persetujuan ini bukan pengisian nilai parameter oleh Manager.
-
-> **Gambar 89. Menyetujui permintaan monitoring HSE**
-
-![Gambar 89 - Menyetujui permintaan monitoring HSE](images/089_Menyetujui_permintaan_monitoring_HSE.png)
-
-**Arahan screenshot:** Pilih permintaan uji lalu tekan Setujui. **Yang harus terlihat:** Dialog konfirmasi dan pesan permintaan disetujui.
 
 #### Laporan Produksi
 
@@ -2374,7 +2156,8 @@ Buka `LaporanProduksiPanel` melalui Laporan Produksi. Tentukan rentang tanggal l
 
 ![Gambar 90 - Laporan Produksi](images/090_Laporan_Produksi.png)
 
-**Arahan screenshot:** Buka Laporan Produksi, pilih tanggal awal/akhir. **Yang harus terlihat:** Filter tanggal, tombol Tampilkan, ringkasan dan tabel.
+*Halaman Laporan Produksi pada `LaporanProduksiPanel`. Manager menentukan rentang tanggal lalu menekan Tampilkan untuk memuat data. Halaman menyajikan ringkasan total produksi, jumlah catatan, dan distribusi per lokasi, dilengkapi tabel detail yang dapat digunakan untuk evaluasi hasil kegiatan penambangan.*
+
 
 #### Laporan Monitoring Lingkungan
 
@@ -2384,7 +2167,8 @@ Buka `LaporanMonitoringPanel` melalui Laporan Monitoring. Pilih rentang tanggal 
 
 ![Gambar 91 - Laporan Monitoring Lingkungan](images/091_Laporan_Monitoring_Lingkungan.png)
 
-**Arahan screenshot:** Buka Laporan Monitoring. **Yang harus terlihat:** Filter tanggal, KPI dan tabel laporan.
+*Halaman Laporan Monitoring Lingkungan pada `LaporanMonitoringPanel`. Manager memilih rentang tanggal lalu menekan Tampilkan. KPI menampilkan Total Monitoring, Hasil Normal, dan Peringatan dalam periode tersebut. Tabel riwayat di bawahnya memuat seluruh kegiatan monitoring yang sesuai dengan filter.*
+
 
 #### Detail Pengukuran dari Laporan Monitoring
 
@@ -2394,89 +2178,9 @@ Pilih monitoring dan tekan Detail Pengukuran. Manager hanya melihat hasil penguk
 
 ![Gambar 92 - Detail Pengukuran dari Laporan Monitoring](images/092_Detail_Pengukuran_dari_Laporan_Monitoring.png)
 
-**Arahan screenshot:** Pilih baris laporan dan buka detail. **Yang harus terlihat:** Rincian nilai parameter dalam mode baca saja.
+*Detail pengukuran dari laporan monitoring yang dibuka Manager melalui tombol Detail Pengukuran. Halaman menampilkan nilai tiap parameter, status hasil (NORMAL/PERINGATAN/BERBAHAYA), dan informasi penanganan dalam mode baca saja. Manager tidak memiliki kewenangan menambah, mengubah, atau menghapus data pengukuran.*
 
-#### Tinjauan informasi pengangkutan
-
-Source menyediakan `LaporanPengangkutanPanel`, tetapi menu Manager pada versi ini tidak menautkannya langsung. Jika halaman tersebut diakses melalui alur lain yang memang ada saat dijalankan, dokumentasikan sesuai hasil aktual; jangan menambah menu fiktif dalam screenshot.
-
-> **Gambar 93. Tinjauan informasi pengangkutan**
-
-![Gambar 93 - Tinjauan informasi pengangkutan](images/093_Tinjauan_informasi_pengangkutan.png)
-
-**Arahan screenshot:** Periksa menu Manager pada aplikasi versi ZIP ini. **Yang harus terlihat:** Menu yang benar-benar tampil, tanpa menu Pengangkutan tambahan.
-
-#### Ubah Akun dan Logout Manager
-
-Gunakan Ubah Akun bila perlu, lalu Keluar Akun. Sesi Manager berakhir dan pengguna kembali ke alur autentikasi.
-
-> **Gambar 94. Ubah Akun dan Logout Manager**
-
-![Gambar 94 - Ubah Akun dan Logout Manager](images/094_Ubah_Akun_dan_Logout_Manager.png)
-
-**Arahan screenshot:** Buka menu akun lalu logout. **Yang harus terlihat:** Form Ubah Akun dan halaman setelah logout.
-
-### 8.6 Skenario Pengujian Lintas Peran
-
-#### Admin menyiapkan master data
-
-Admin memastikan lokasi PIT, material, kendaraan, driver, parameter, dan akun pegawai operasional/HSE/Manager telah tersedia. Data tersebut menjadi sumber pilihan pada form peran lain.
-
-> **Gambar 95. Admin menyiapkan master data**
-
-![Gambar 95 - Admin menyiapkan master data](images/095_Admin_menyiapkan_master_data.png)
-
-**Arahan screenshot:** Buka halaman data master Admin. **Yang harus terlihat:** Data referensi yang nanti dipakai dalam produksi dan monitoring.
-
-#### Operasional membuat produksi dan pengangkutan
-
-Operasional mencatat produksi pada lokasi PIT dan material yang dibuat Admin, kemudian membuat jadwal pengangkutan memakai kendaraan dan driver tersedia.
-
-> **Gambar 96. Operasional membuat produksi dan pengangkutan**
-
-![Gambar 96 - Operasional membuat produksi dan pengangkutan](images/096_Operasional_membuat_produksi_dan_pengangkutan.png)
-
-**Arahan screenshot:** Tampilkan data produksi lalu form pengangkutan. **Yang harus terlihat:** Relasi produksi, kendaraan, driver dan lokasi.
-
-#### Perubahan stok setelah perjalanan selesai
-
-Selesaikan perjalanan dan bandingkan sisa stok sebelum serta sesudah. Pastikan pengangkutan batal tidak mengurangi stok.
-
-> **Gambar 97. Perubahan stok setelah perjalanan selesai**
-
-![Gambar 97 - Perubahan stok setelah perjalanan selesai](images/097_Perubahan_stok_setelah_perjalanan_selesai.png)
-
-**Arahan screenshot:** Ambil dua screenshot data stok sebelum dan sesudah. **Yang harus terlihat:** Nilai stok dan status pengangkutan.
-
-#### HSE mengajukan monitoring dan Manager menyetujui
-
-HSE memilih lokasi, mengajukan alasan monitoring, lalu Manager membuka permintaan dan menyetujuinya. Setelah itu HSE dapat memulai monitoring.
-
-> **Gambar 98. HSE mengajukan monitoring dan Manager menyetujui**
-
-![Gambar 98 - HSE mengajukan monitoring dan Manager menyetujui](images/098_HSE_mengajukan_monitoring_dan_Manager_menyetujui.png)
-
-**Arahan screenshot:** Ambil layar HSE sebelum dan setelah persetujuan serta layar Manager. **Yang harus terlihat:** Status MENUNGGU → DISETUJUI → monitoring dimulai.
-
-#### HSE mengisi parameter dan Manager meninjau
-
-HSE memasukkan nilai parameter. Monitoring berstatus peringatan/berbahaya terlihat pada prioritas dan laporan Manager. Manager membuka detail baca saja tanpa mengubah pengukuran.
-
-> **Gambar 99. HSE mengisi parameter dan Manager meninjau**
-
-![Gambar 99 - HSE mengisi parameter dan Manager meninjau](images/099_HSE_mengisi_parameter_dan_Manager_meninjau.png)
-
-**Arahan screenshot:** Tampilkan hasil pengukuran HSE dan detail Manager. **Yang harus terlihat:** Status dan nilai parameter yang konsisten lintas peran.
-
-#### Filter dan pembatasan akses
-
-Uji filter periode, status, pencarian, tombol Batal, serta percobaan akses fitur yang bukan hak pengguna.
-
-> **Gambar 100. Filter dan pembatasan akses**
-
-![Gambar 100 - Filter dan pembatasan akses](images/100_Filter_dan_pembatasan_akses.png)
-
-**Arahan screenshot:** Ambil screenshot filter sebelum/sesudah dan validasi. **Yang harus terlihat:** Hasil yang berubah sesuai filter dan tidak ada aksi terlarang.
+---
 
 ## 9. Kontributor
 
