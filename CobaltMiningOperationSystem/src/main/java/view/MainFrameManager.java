@@ -37,6 +37,7 @@ public class MainFrameManager extends javax.swing.JFrame {
         titles.put("LaporanProduksi", "Laporan Produksi");
         buttons.put("LaporanMonitoring", btnLaporanMonitoring);
         titles.put("LaporanMonitoring", "Laporan Monitoring");
+        installSidebarEffects();
         onMenu("Dashboard");
     }
 
@@ -80,39 +81,64 @@ public class MainFrameManager extends javax.swing.JFrame {
         lblNavTitle.setForeground(new java.awt.Color(228, 224, 225));
         lblNavTitle.setText("NAVIGASI  /  MANAGER");
 
-        btnDashboard.setBackground(new java.awt.Color(171, 136, 109));
+        btnDashboard.setBackground(new java.awt.Color(73, 54, 40));
         btnDashboard.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnDashboard.setForeground(new java.awt.Color(255, 255, 255));
+        btnDashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sidebar/dashboard.png"))); // NOI18N
+        btnDashboard.setIconTextGap(12);
         btnDashboard.setText("Dashboard");
         btnDashboard.setFocusPainted(false);
+        btnDashboard.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnDashboard.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 16, 0, 8));
+        btnDashboard.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnDashboard.addActionListener(this::btnDashboardActionPerformed);
 
-        btnLaporanProduksi.setBackground(new java.awt.Color(171, 136, 109));
+        btnLaporanProduksi.setBackground(new java.awt.Color(73, 54, 40));
         btnLaporanProduksi.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnLaporanProduksi.setForeground(new java.awt.Color(255, 255, 255));
+        btnLaporanProduksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sidebar/laporan.png"))); // NOI18N
+        btnLaporanProduksi.setIconTextGap(12);
         btnLaporanProduksi.setText("Laporan Produksi");
         btnLaporanProduksi.setFocusPainted(false);
+        btnLaporanProduksi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnLaporanProduksi.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 16, 0, 8));
+        btnLaporanProduksi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLaporanProduksi.addActionListener(this::btnLaporanProduksiActionPerformed);
 
-        btnLaporanMonitoring.setBackground(new java.awt.Color(171, 136, 109));
+        btnLaporanMonitoring.setBackground(new java.awt.Color(73, 54, 40));
         btnLaporanMonitoring.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnLaporanMonitoring.setForeground(new java.awt.Color(255, 255, 255));
+        btnLaporanMonitoring.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sidebar/laporan.png"))); // NOI18N
+        btnLaporanMonitoring.setIconTextGap(12);
         btnLaporanMonitoring.setText("Laporan Monitoring");
         btnLaporanMonitoring.setFocusPainted(false);
+        btnLaporanMonitoring.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnLaporanMonitoring.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 16, 0, 8));
+        btnLaporanMonitoring.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLaporanMonitoring.addActionListener(this::btnLaporanMonitoringActionPerformed);
 
-        btnUbahAkun.setBackground(new java.awt.Color(171, 136, 109));
+        btnUbahAkun.setBackground(new java.awt.Color(73, 54, 40));
         btnUbahAkun.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnUbahAkun.setForeground(new java.awt.Color(255, 255, 255));
+        btnUbahAkun.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sidebar/akun.png"))); // NOI18N
+        btnUbahAkun.setIconTextGap(12);
         btnUbahAkun.setText("Ubah Akun");
         btnUbahAkun.setFocusPainted(false);
+        btnUbahAkun.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnUbahAkun.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 16, 0, 8));
+        btnUbahAkun.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnUbahAkun.addActionListener(this::btnUbahAkunActionPerformed);
 
-        btnLogout.setBackground(new java.awt.Color(171, 136, 109));
+        btnLogout.setBackground(new java.awt.Color(73, 54, 40));
         btnLogout.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         btnLogout.setForeground(new java.awt.Color(255, 255, 255));
+        btnLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/images/sidebar/logout.png"))); // NOI18N
+        btnLogout.setIconTextGap(12);
         btnLogout.setText("Keluar Akun");
         btnLogout.setFocusPainted(false);
+        btnLogout.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        btnLogout.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 16, 0, 8));
+        btnLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnLogout.addActionListener(this::btnLogoutActionPerformed);
 
         org.jdesktop.layout.GroupLayout pnlSidebarLayout = new org.jdesktop.layout.GroupLayout(pnlSidebar);
@@ -268,6 +294,39 @@ public class MainFrameManager extends javax.swing.JFrame {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private String activeSidebarMenu = "Dashboard";
+    private final java.awt.Color sidebarIdle = new java.awt.Color(73, 54, 40);
+    private final java.awt.Color sidebarHover = new java.awt.Color(105, 79, 60);
+    private final java.awt.Color sidebarActive = new java.awt.Color(171, 136, 109);
+    private void installSidebarEffects() {
+        java.util.List<javax.swing.JButton> all = new java.util.ArrayList<>(buttons.values());
+        all.add(btnUbahAkun);
+        all.add(btnLogout);
+        for (javax.swing.JButton button : all) {
+            button.setOpaque(true);
+            button.setContentAreaFilled(true);
+            button.setBorderPainted(false);
+            button.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+            button.setCursor(java.awt.Cursor.getPredefinedCursor(java.awt.Cursor.HAND_CURSOR));
+            button.addMouseListener(new java.awt.event.MouseAdapter() {
+                @Override public void mouseEntered(java.awt.event.MouseEvent e) {
+                    if (!button.equals(buttons.get(activeSidebarMenu))) button.setBackground(sidebarHover);
+                }
+                @Override public void mouseExited(java.awt.event.MouseEvent e) {
+                    button.setBackground(button.equals(buttons.get(activeSidebarMenu)) ? sidebarActive : sidebarIdle);
+                }
+            });
+        }
+        refreshSidebarEffects();
+    }
+    private void refreshSidebarEffects() {
+        for (javax.swing.JButton button : buttons.values()) {
+            button.setBackground(button.equals(buttons.get(activeSidebarMenu)) ? sidebarActive : sidebarIdle);
+        }
+        btnUbahAkun.setBackground(sidebarIdle);
+        btnLogout.setBackground(sidebarIdle);
+    }
+
     private void onMenu(String menu) {
 
         if ("Logout".equals(menu)) {
@@ -303,6 +362,8 @@ public class MainFrameManager extends javax.swing.JFrame {
         if (!buttons.containsKey(menu)) return;
 
         lblPageTitle.setText(titles.getOrDefault(menu, menu));
+        activeSidebarMenu = menu;
+        refreshSidebarEffects();
 
         JPanel page = ViewFactory.create(menu, "Manager", this::onMenu);
 

@@ -24,6 +24,7 @@ exception/DataNotFoundException.class
 view/DataScreen$1.class
 enums/StatusPengangkutan.class
 view/DashboardManagerPanel$5.class
+view/MainFrameAdmin$1.class
 service/DashboardService$PrioritasRow.class
 view/FormUtil.class
 view/PegawaiPanel$5.class
@@ -93,6 +94,7 @@ repository/ParameterRepository.class
 view/DashboardManagerPanel$1.class
 view/UserPanel$4.class
 model/Pegawai.class
+view/MainFrameOperasional$1.class
 view/LoadingFrame$1.class
 view/ParameterPanel$1.class
 view/KendaraanPanel$4.class
@@ -156,6 +158,7 @@ view/LaporanPengangkutanPanel.class
 model/ParameterLingkungan.class
 view/PilihanData.class
 view/ParameterPanel$4.class
+view/MainFrameManager$1.class
 view/LokasiPanel.class
 enums/StatusDriver.class
 view/PengangkutanPanel$5.class
@@ -179,6 +182,7 @@ view/PegawaiPanel$4.class
 view/LokasiPanel$3.class
 view/MaterialPanel$2.class
 config/AppConfig.class
+view/MainFrameHSE$1.class
 view/MaterialPanel$5.class
 view/MaterialPanel$4.class
 view/LandingFrame$1.class
