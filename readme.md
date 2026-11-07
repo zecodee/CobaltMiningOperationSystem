@@ -426,33 +426,15 @@ Sistem menampilkan halaman utama sesuai hak aksesnya. Petugas dapat mengakses in
 
 ##### A. Pencatatan Produksi Tambang
 
-Pencatatan produksi digunakan untuk menyimpan informasi hasil kegiatan penambangan.
+Pencatatan produksi digunakan untuk menyimpan informasi hasil kegiatan penambangan. Petugas Operasional membuka halaman Produksi Tambang dan memilih proses penambahan data. Sistem menampilkan form produksi. Petugas mengisi tanggal produksi, memilih lokasi PIT, menentukan jenis material, memasukkan jumlah produksi, dan melengkapi informasi yang diperlukan.
 
-Petugas Operasional membuka halaman Produksi Tambang dan memilih proses penambahan data.
+Data lokasi dan jenis material diambil dari data master yang sebelumnya dikelola Administrator. Sistem memvalidasi data produksi sebelum melakukan penyimpanan. Validasi bertujuan memastikan bahwa data yang dimasukkan sesuai dengan ketentuan.
 
-Sistem menampilkan form produksi.
-
-Petugas mengisi tanggal produksi, memilih lokasi PIT, menentukan jenis material, memasukkan jumlah produksi, dan melengkapi informasi yang diperlukan.
-
-Data lokasi dan jenis material diambil dari data master yang sebelumnya dikelola Administrator.
-
-Sistem memvalidasi data produksi sebelum melakukan penyimpanan.
-
-Validasi bertujuan memastikan bahwa data yang dimasukkan sesuai dengan ketentuan.
-
-Contohnya, jumlah produksi harus bernilai positif dan lokasi yang dipilih harus sesuai dengan kebutuhan pencatatan produksi.
-
-Setelah data valid, sistem menyimpan hasil produksi ke database.
-
-Data produksi yang berhasil disimpan menjadi sumber material yang dapat digunakan dalam proses pengangkutan.
+Contohnya, jumlah produksi harus bernilai positif dan lokasi yang dipilih harus sesuai dengan kebutuhan pencatatan produksi. Setelah data valid, sistem menyimpan hasil produksi ke database. Data produksi yang berhasil disimpan menjadi sumber material yang dapat digunakan dalam proses pengangkutan.
 
 ##### B. Pengelolaan Stok Material
 
-Stok material dalam C-MOS berasal dari hasil pencatatan produksi tambang.
-
-Setiap produksi memiliki jumlah produksi dan jumlah material yang masih tersedia.
-
-Jumlah tersedia digunakan untuk mengetahui sisa material yang dapat diangkut.
+Stok material dalam C-MOS berasal dari hasil pencatatan produksi tambang. Setiap produksi memiliki jumlah produksi dan jumlah material yang masih tersedia. Jumlah tersedia digunakan untuk mengetahui sisa material yang dapat diangkut.
 
 Sebagai contoh:
 
@@ -473,25 +455,13 @@ Sisa Material
 100 - 30 = 70 Ton
 ```
 
-Contoh tersebut menunjukkan hubungan antara produksi dan pengangkutan.
-
-Jumlah material tersedia akan berkurang ketika proses pengangkutan dinyatakan selesai sesuai aturan bisnis C-MOS.
-
-Dengan mekanisme tersebut, sistem membantu mencegah pengangkutan material yang melebihi jumlah stok yang tersedia.
+Contoh tersebut menunjukkan hubungan antara produksi dan pengangkutan. Jumlah material tersedia akan berkurang ketika proses pengangkutan dinyatakan selesai sesuai aturan bisnis C-MOS. Dengan mekanisme tersebut, sistem membantu mencegah pengangkutan material yang melebihi jumlah stok yang tersedia.
 
 ##### C. Perencanaan Pengangkutan
 
-Pengangkutan merupakan proses pemindahan material hasil produksi dari lokasi asal menuju lokasi tujuan.
+Pengangkutan merupakan proses pemindahan material hasil produksi dari lokasi asal menuju lokasi tujuan. Petugas Operasional membuka halaman Pengangkutan dan memilih proses penambahan kegiatan. Sistem menampilkan form pengangkutan. 
 
-Petugas Operasional membuka halaman Pengangkutan dan memilih proses penambahan kegiatan.
-
-Sistem menampilkan form pengangkutan.
-
-Petugas memilih data produksi yang akan diangkut, kendaraan yang digunakan, Driver yang bertugas, lokasi tujuan, dan jumlah muatan.
-
-Data produksi, kendaraan, Driver, serta lokasi berasal dari database.
-
-Sebelum pengangkutan disimpan, sistem melakukan validasi operasional.
+Petugas memilih data produksi yang akan diangkut, kendaraan yang digunakan, Driver yang bertugas, lokasi tujuan, dan jumlah muatan. Data produksi, kendaraan, Driver, serta lokasi berasal dari database. Sebelum pengangkutan disimpan, sistem melakukan validasi operasional.
 
 Validasi meliputi:
 
@@ -503,9 +473,7 @@ Validasi meliputi:
 6. Driver harus memenuhi ketentuan penugasan.
 7. Lokasi asal dan tujuan harus sesuai dengan aturan pengangkutan.
 
-Jika terdapat data yang tidak memenuhi ketentuan, sistem menolak proses dan menampilkan informasi kesalahan.
-
-Jika seluruh data valid, kegiatan pengangkutan dapat dicatat.
+Jika terdapat data yang tidak memenuhi ketentuan, sistem menolak proses dan menampilkan informasi kesalahan. Jika seluruh data valid, kegiatan pengangkutan dapat dicatat.
 
 ##### D. Pelaksanaan dan Perubahan Status Pengangkutan
 
@@ -518,17 +486,15 @@ Status pengangkutan dalam konsep C-MOS meliputi:
 - Selesai.
 - Dibatalkan.
 
-Status Dijadwalkan menunjukkan bahwa kegiatan pengangkutan telah direncanakan.
+**Status Dijadwalkan** menunjukkan bahwa kegiatan pengangkutan telah direncanakan.
 
-Status Dalam Perjalanan menunjukkan bahwa kendaraan dan Driver sedang menjalankan pengangkutan.
+**Status Dalam Perjalanan** menunjukkan bahwa kendaraan dan Driver sedang menjalankan pengangkutan.
 
-Status Selesai menunjukkan bahwa pengangkutan telah diselesaikan.
+**Status Selesai** menunjukkan bahwa pengangkutan telah diselesaikan.
 
-Status Dibatalkan menunjukkan bahwa kegiatan pengangkutan tidak dilanjutkan.
+**Status Dibatalkan** menunjukkan bahwa kegiatan pengangkutan tidak dilanjutkan.
 
-Perubahan status memiliki pengaruh terhadap informasi operasional.
-
-Contohnya, kendaraan dan Driver yang sedang digunakan tidak boleh dianggap tersedia untuk penugasan lain yang bertabrakan.
+Perubahan status memiliki pengaruh terhadap informasi operasional. Contohnya, kendaraan dan Driver yang sedang digunakan tidak boleh dianggap tersedia untuk penugasan lain yang bertabrakan.
 
 Ketika pengangkutan selesai, sistem memperbarui informasi yang berkaitan dengan penyelesaian kegiatan, termasuk stok material sesuai aturan bisnis.
 
@@ -536,13 +502,9 @@ Dengan demikian, proses pengangkutan tidak hanya menyimpan catatan perjalanan, t
 
 ##### E. Riwayat Produksi dan Pengangkutan
 
-Petugas Operasional dapat melihat data produksi dan pengangkutan yang telah tercatat.
+Petugas Operasional dapat melihat data produksi dan pengangkutan yang telah tercatat. Riwayat digunakan untuk memeriksa kegiatan sebelumnya, mencari informasi tertentu, dan mengetahui perkembangan proses operasional.
 
-Riwayat digunakan untuk memeriksa kegiatan sebelumnya, mencari informasi tertentu, dan mengetahui perkembangan proses operasional.
-
-Data produksi menunjukkan hasil pencatatan material tambang.
-
-Sementara itu, data pengangkutan menunjukkan proses pemindahan material beserta kendaraan, Driver, jumlah muatan, dan statusnya.
+Data produksi menunjukkan hasil pencatatan material tambang. Sementara itu, data pengangkutan menunjukkan proses pemindahan material beserta kendaraan, Driver, jumlah muatan, dan statusnya.
 
 Kedua data tersebut saling terhubung sehingga informasi asal material dapat ditelusuri melalui data produksi.
 
@@ -552,47 +514,21 @@ Petugas HSE bertanggung jawab melakukan monitoring lingkungan dan mengelola tind
 
 Proses monitoring digunakan untuk mengetahui kondisi lingkungan pada lokasi pertambangan berdasarkan parameter yang telah ditentukan.
 
-Setelah login, Petugas HSE dapat membuka halaman monitoring lingkungan.
-
-Sistem menampilkan informasi kondisi lingkungan dan kegiatan monitoring yang tersedia.
+Setelah login, Petugas HSE dapat membuka halaman monitoring lingkungan. Sistem menampilkan informasi kondisi lingkungan dan kegiatan monitoring yang tersedia.
 
 ##### A. Pemilihan Lokasi Monitoring
 
-Proses monitoring dimulai dengan menentukan lokasi yang akan diperiksa.
-
-Petugas HSE memilih lokasi dari data master yang tersedia.
-
-Lokasi tersebut dapat berupa PIT atau lokasi lain yang menjadi objek pemantauan lingkungan.
-
-Pemilihan lokasi penting karena setiap hasil monitoring harus memiliki informasi lokasi yang jelas.
-
-Dengan demikian, hasil pengukuran dapat dihubungkan dengan kondisi lingkungan pada lokasi tertentu.
+Proses monitoring dimulai dengan menentukan lokasi yang akan diperiksa. Petugas HSE memilih lokasi dari data master yang tersedia. Lokasi tersebut dapat berupa PIT atau lokasi lain yang menjadi objek pemantauan lingkungan. Pemilihan lokasi penting karena setiap hasil monitoring harus memiliki informasi lokasi yang jelas. Dengan demikian, hasil pengukuran dapat dihubungkan dengan kondisi lingkungan pada lokasi tertentu.
 
 ##### B. Pembuatan Kegiatan Monitoring
 
-Setelah menentukan lokasi, Petugas HSE membuat kegiatan monitoring.
-
-Data yang dicatat mencakup tanggal monitoring, lokasi, dan informasi kegiatan yang diperlukan.
-
-Sistem menyimpan kegiatan monitoring sebagai data utama sebelum hasil pengukuran parameter dicatat.
-
-Satu kegiatan monitoring dapat memiliki beberapa detail pengukuran.
-
-Hubungan tersebut memungkinkan Petugas HSE mencatat berbagai parameter lingkungan dalam satu kegiatan pemeriksaan.
+Setelah menentukan lokasi, Petugas HSE membuat kegiatan monitoring. Data yang dicatat mencakup tanggal monitoring, lokasi, dan informasi kegiatan yang diperlukan. Sistem menyimpan kegiatan monitoring sebagai data utama sebelum hasil pengukuran parameter dicatat. Satu kegiatan monitoring dapat memiliki beberapa detail pengukuran. Hubungan tersebut memungkinkan Petugas HSE mencatat berbagai parameter lingkungan dalam satu kegiatan pemeriksaan.
 
 ##### C. Pencatatan Hasil Pengukuran Parameter
 
-Setelah kegiatan monitoring dibuat, Petugas HSE memasukkan hasil pengukuran parameter lingkungan.
+Setelah kegiatan monitoring dibuat, Petugas HSE memasukkan hasil pengukuran parameter lingkungan. Parameter dipilih dari katalog yang telah dikelola Administrator. Setiap detail pengukuran memiliki informasi parameter, nilai hasil pengukuran, status hasil, dan catatan.
 
-Parameter dipilih dari katalog yang telah dikelola Administrator.
-
-Setiap detail pengukuran memiliki informasi parameter, nilai hasil pengukuran, status hasil, dan catatan.
-
-Sistem membandingkan nilai pengukuran dengan batas minimum dan maksimum yang ditetapkan pada parameter.
-
-Apabila hasil pengukuran berada dalam batas yang ditentukan, hasil dapat dikategorikan sebagai normal atau aman.
-
-Apabila hasil pengukuran berada di luar batas yang ditentukan, sistem memberikan status peringatan sesuai aturan bisnis.
+Sistem membandingkan nilai pengukuran dengan batas minimum dan maksimum yang ditetapkan pada parameter. Apabila hasil pengukuran berada dalam batas yang ditentukan, hasil dapat dikategorikan sebagai normal atau aman. Apabila hasil pengukuran berada di luar batas yang ditentukan, sistem memberikan status peringatan sesuai aturan bisnis.
 
 Sebagai contoh:
 
@@ -610,11 +546,7 @@ Angka pada contoh merupakan ilustrasi mekanisme validasi, bukan penetapan standa
 
 ##### D. Penentuan Status Monitoring
 
-Status monitoring menunjukkan hasil keseluruhan dari kegiatan pengukuran lingkungan.
-
-Jika seluruh parameter memenuhi batas yang ditetapkan, monitoring dapat dikategorikan sebagai NORMAL.
-
-Jika terdapat satu atau lebih parameter yang berada di luar batas, monitoring dapat dikategorikan sebagai PERINGATAN.
+Status monitoring menunjukkan hasil keseluruhan dari kegiatan pengukuran lingkungan. Jika seluruh parameter memenuhi batas yang ditetapkan, monitoring dapat dikategorikan sebagai **NORMAL**. Jika terdapat satu atau lebih parameter yang berada di luar batas, monitoring dapat dikategorikan sebagai **PERINGATAN**, dan jika terdapat beberapa parameter memiliki angka tinggi jauh diatas standar parameter yang ditetapkan statusnya dikategorikan sebagai **BERBAHAYA**.
 
 Contohnya:
 
@@ -631,51 +563,19 @@ Status Monitoring:
 PERINGATAN
 ```
 
-Meskipun hanya satu parameter yang menghasilkan peringatan, hasil monitoring secara keseluruhan menunjukkan bahwa terdapat kondisi yang perlu diperhatikan.
-
-Status tersebut membantu Petugas HSE mengetahui lokasi yang membutuhkan pemeriksaan atau tindak lanjut.
+Meskipun hanya satu parameter yang menghasilkan peringatan, hasil monitoring secara keseluruhan menunjukkan bahwa terdapat kondisi yang perlu diperhatikan. Status tersebut membantu Petugas HSE mengetahui lokasi yang membutuhkan pemeriksaan atau tindak lanjut.
 
 ##### E. Pengelolaan Tindak Lanjut
 
-Apabila hasil monitoring menunjukkan peringatan, Petugas HSE dapat melakukan tindak lanjut.
-
-Tindak lanjut digunakan untuk mencatat langkah penanganan terhadap kondisi lingkungan yang ditemukan.
-
-Status penanganan dapat menunjukkan apakah masalah belum ditangani, sedang ditangani, atau telah selesai ditangani.
-
-Informasi tersebut membantu memantau perkembangan penanganan masalah lingkungan.
-
-Perlu dibedakan antara status hasil monitoring dan status penanganan.
-
-Status monitoring menunjukkan hasil pengukuran lingkungan.
-
-Status penanganan menunjukkan perkembangan tindakan terhadap hasil tersebut.
-
-Dengan demikian, penanganan yang selesai tidak otomatis mengubah hasil monitoring sebelumnya menjadi normal.
-
-Kondisi lingkungan terbaru harus didasarkan pada hasil pemeriksaan atau monitoring berikutnya.
+Apabila hasil monitoring menunjukkan peringatan, Petugas HSE dapat melakukan tindak lanjut. Tindak lanjut digunakan untuk mencatat langkah penanganan terhadap kondisi lingkungan yang ditemukan. Status penanganan dapat menunjukkan apakah masalah belum ditangani, sedang ditangani, atau telah selesai ditangani. Informasi tersebut membantu memantau perkembangan penanganan masalah lingkungan. Perlu dibedakan antara status hasil monitoring dan status penanganan. Status monitoring menunjukkan hasil pengukuran lingkungan. Status penanganan menunjukkan perkembangan tindakan terhadap hasil tersebut. Dengan demikian, penanganan yang selesai tidak otomatis mengubah hasil monitoring sebelumnya menjadi normal. Kondisi lingkungan terbaru harus didasarkan pada hasil pemeriksaan atau monitoring berikutnya.
 
 ##### F. Monitoring Ulang
 
-Monitoring ulang dilakukan untuk mengetahui kondisi lingkungan setelah tindakan penanganan.
-
-Petugas HSE dapat melakukan pemeriksaan kembali pada lokasi yang sebelumnya menghasilkan peringatan.
-
-Hasil pengukuran baru dicatat sebagai kegiatan monitoring sehingga riwayat kondisi lingkungan tetap dapat ditelusuri.
-
-Melalui proses tersebut, sistem dapat menyimpan informasi perubahan kondisi lingkungan dari waktu ke waktu.
+Monitoring ulang dilakukan untuk mengetahui kondisi lingkungan setelah tindakan penanganan. Petugas HSE dapat melakukan pemeriksaan kembali pada lokasi yang sebelumnya menghasilkan peringatan. Hasil pengukuran baru dicatat sebagai kegiatan monitoring sehingga riwayat kondisi lingkungan tetap dapat ditelusuri. Melalui proses tersebut, sistem dapat menyimpan informasi perubahan kondisi lingkungan dari waktu ke waktu.
 
 ##### G. Informasi Status Operasional Lokasi
 
-Hasil monitoring lingkungan juga dapat digunakan sebagai bahan pertimbangan terhadap status operasional lokasi.
-
-Apabila ditemukan kondisi yang memerlukan perhatian, informasi tersebut dapat menjadi dasar evaluasi lebih lanjut.
-
-Namun, status PERINGATAN tidak otomatis menghentikan produksi atau pengangkutan.
-
-Keputusan terhadap kegiatan operasional tetap perlu mempertimbangkan hasil monitoring dan kewenangan pengguna yang bertanggung jawab.
-
-Hal ini sesuai dengan konsep C-MOS yang menggunakan monitoring lingkungan sebagai informasi pendukung pengambilan keputusan.
+Hasil monitoring lingkungan juga dapat digunakan sebagai bahan pertimbangan terhadap status operasional lokasi. Apabila ditemukan kondisi yang memerlukan perhatian, informasi tersebut dapat menjadi dasar evaluasi lebih lanjut. Namun, status PERINGATAN tidak otomatis menghentikan produksi atau pengangkutan. Keputusan terhadap kegiatan operasional tetap perlu mempertimbangkan hasil monitoring dan kewenangan pengguna yang bertanggung jawab. Hal ini sesuai dengan konsep C-MOS yang menggunakan monitoring lingkungan sebagai informasi pendukung pengambilan keputusan.
 
 #### 5.1.6 Alur Manager
 
@@ -687,13 +587,7 @@ Setelah login, Manager diarahkan menuju halaman utama yang menyediakan dashboard
 
 ##### A. Dashboard Manager
 
-Dashboard Manager digunakan untuk menampilkan ringkasan kondisi operasional pertambangan.
-
-Informasi yang disajikan dapat mencakup produksi tambang, material tersedia, pengangkutan, dan kondisi lingkungan.
-
-Dashboard membantu Manager memahami keadaan operasional berdasarkan data yang telah dicatat oleh pengguna lain.
-
-Informasi tersebut dapat ditampilkan melalui angka, tabel, dan grafik sesuai kebutuhan analisis.
+Dashboard Manager digunakan untuk menampilkan ringkasan kondisi operasional pertambangan. Informasi yang disajikan dapat mencakup produksi tambang, material tersedia, pengangkutan, dan kondisi lingkungan. Dashboard membantu Manager memahami keadaan operasional berdasarkan data yang telah dicatat oleh pengguna lain. Informasi tersebut dapat ditampilkan melalui angka, tabel, dan grafik sesuai kebutuhan analisis.
 
 ##### B. Pemantauan Produksi Tambang
 
@@ -721,25 +615,13 @@ Melalui informasi tersebut, Manager dapat mengetahui lokasi yang membutuhkan per
 
 ##### E. Laporan dan Statistik
 
-Manager dapat mengakses laporan yang menyajikan informasi produksi, pengangkutan, dan monitoring lingkungan.
-
-Laporan membantu Manager melakukan evaluasi berdasarkan data yang telah tercatat.
-
-Visualisasi grafik dapat digunakan untuk memperjelas perbandingan dan perkembangan informasi.
-
-Contohnya, grafik produksi dapat menunjukkan perbandingan hasil produksi antarperiode.
-
-Sementara itu, grafik monitoring dapat membantu mengidentifikasi parameter lingkungan yang sering menghasilkan peringatan.
+Manager dapat mengakses laporan yang menyajikan informasi produksi, pengangkutan, dan monitoring lingkungan. Laporan membantu Manager melakukan evaluasi berdasarkan data yang telah tercatat. Visualisasi grafik dapat digunakan untuk memperjelas perbandingan dan perkembangan informasi. Contohnya, grafik produksi dapat menunjukkan perbandingan hasil produksi antarperiode. Sementara itu, grafik monitoring dapat membantu mengidentifikasi parameter lingkungan yang sering menghasilkan peringatan.
 
 ##### F. Pengambilan Keputusan
 
-Informasi dari dashboard dan laporan digunakan sebagai dasar pertimbangan Manager.
+Informasi dari dashboard dan laporan digunakan sebagai dasar pertimbangan Manager. Contohnya, apabila hasil monitoring menunjukkan adanya peringatan pada suatu lokasi, Manager dapat memeriksa hasil pengukuran dan informasi penanganan sebelum menentukan tindakan yang diperlukan.
 
-Contohnya, apabila hasil monitoring menunjukkan adanya peringatan pada suatu lokasi, Manager dapat memeriksa hasil pengukuran dan informasi penanganan sebelum menentukan tindakan yang diperlukan.
-
-Manager dapat memberikan keputusan sesuai kewenangannya, tetapi tidak menggantikan tugas Petugas HSE dalam memasukkan hasil pengukuran atau mencatat detail monitoring.
-
-Dengan pembagian tersebut, tanggung jawab setiap pengguna tetap jelas.
+Manager dapat memberikan keputusan sesuai kewenangannya, tetapi tidak menggantikan tugas Petugas HSE dalam memasukkan hasil pengukuran atau mencatat detail monitoring. Dengan pembagian tersebut, tanggung jawab setiap pengguna tetap jelas.
 
 #### 5.1.7 Hubungan Alur Antar Pengguna
 
@@ -749,37 +631,23 @@ Hubungan tersebut dapat dijelaskan melalui tahapan berikut.
 
 **Tahap 1. Administrator menyiapkan data master.**
 
-Admin mencatat pegawai, akun pengguna, lokasi, jenis material, kendaraan, dan parameter lingkungan.
-
-Data tersebut menjadi dasar bagi proses operasional dan monitoring.
+Admin mencatat pegawai, akun pengguna, lokasi, jenis material, kendaraan, dan parameter lingkungan. Data tersebut menjadi dasar bagi proses operasional dan monitoring.
 
 **Tahap 2. Petugas Operasional mencatat produksi.**
 
-Petugas Operasional menggunakan data lokasi dan material untuk mencatat hasil produksi tambang.
-
-Hasil pencatatan tersebut menghasilkan informasi jumlah produksi dan material yang tersedia.
+Petugas Operasional menggunakan data lokasi dan material untuk mencatat hasil produksi tambang. Hasil pencatatan tersebut menghasilkan informasi jumlah produksi dan material yang tersedia.
 
 **Tahap 3. Petugas Operasional mengelola pengangkutan.**
 
-Petugas memilih produksi yang akan diangkut, kendaraan, Driver, tujuan, dan jumlah muatan.
-
-Sistem melakukan validasi berdasarkan data produksi dan kapasitas kendaraan.
-
-Setelah pengangkutan selesai, informasi stok material diperbarui sesuai aturan sistem.
+Petugas memilih produksi yang akan diangkut, kendaraan, Driver, tujuan, dan jumlah muatan. Sistem melakukan validasi berdasarkan data produksi dan kapasitas kendaraan. Setelah pengangkutan selesai, informasi stok material diperbarui sesuai aturan sistem.
 
 **Tahap 4. Petugas HSE melakukan monitoring lingkungan.**
 
-Petugas HSE menggunakan data lokasi dan parameter lingkungan untuk melakukan pengukuran.
-
-Hasil monitoring menunjukkan kondisi normal atau peringatan.
-
-Apabila terdapat peringatan, Petugas HSE dapat melakukan tindak lanjut.
+Petugas HSE menggunakan data lokasi dan parameter lingkungan untuk melakukan pengukuran. Hasil monitoring menunjukkan kondisi normal atau peringatan. Apabila terdapat peringatan, Petugas HSE dapat melakukan tindak lanjut.
 
 **Tahap 5. Manager memantau hasil kegiatan.**
 
-Manager melihat informasi produksi, pengangkutan, dan monitoring lingkungan melalui dashboard serta laporan.
-
-Informasi tersebut digunakan untuk melakukan evaluasi dan mendukung pengambilan keputusan.
+Manager melihat informasi produksi, pengangkutan, dan monitoring lingkungan melalui dashboard serta laporan. Informasi tersebut digunakan untuk melakukan evaluasi dan mendukung pengambilan keputusan.
 
 ---
 
@@ -825,9 +693,7 @@ Admin melakukan autentikasi untuk memperoleh akses ke halaman Administrator.
 
 **Kelola Akun User**
 
-Admin mengelola akun yang digunakan oleh pegawai untuk masuk ke aplikasi.
-
-Proses ini berkaitan dengan pembuatan akun, pengelolaan informasi akun, dan pengaturan status akses.
+Admin mengelola akun yang digunakan oleh pegawai untuk masuk ke aplikasi. Proses ini berkaitan dengan pembuatan akun, pengelolaan informasi akun, dan pengaturan status akses.
 
 **Kelola Data Master**
 
@@ -845,11 +711,7 @@ Pengelolaan data master menjadi tanggung jawab utama Administrator.
 
 **Lihat Data Operasional**
 
-Pada Use Case Diagram terdapat aktivitas melihat data operasional yang terhubung dengan Admin.
-
-Aktivitas ini perlu dibedakan dari akses laporan Manager.
-
-Melihat data operasional dalam konteks administrasi tidak berarti Admin memiliki kewenangan mengakses laporan analisis produksi, pengangkutan, atau monitoring lingkungan yang menjadi tanggung jawab Manager.
+Pada Use Case Diagram terdapat aktivitas melihat data operasional yang terhubung dengan Admin. Aktivitas ini perlu dibedakan dari akses laporan Manager. Melihat data operasional dalam konteks administrasi tidak berarti Admin memiliki kewenangan mengakses laporan analisis produksi, pengangkutan, atau monitoring lingkungan yang menjadi tanggung jawab Manager.
 
 Dalam pembagian hak akses C-MOS, Admin berfokus pada pengelolaan data master dan akun pengguna.
 
@@ -889,47 +751,33 @@ Hubungan tersebut menunjukkan bahwa pengelolaan pengangkutan membutuhkan informa
 
 **Melihat Jadwal Pengangkutan**
 
-Petugas melihat kegiatan pengangkutan yang telah direncanakan.
-
-Informasi ini membantu mengetahui jadwal kegiatan yang tersedia.
+Petugas melihat kegiatan pengangkutan yang telah direncanakan. Informasi ini membantu mengetahui jadwal kegiatan yang tersedia.
 
 **Memilih Kendaraan**
 
-Petugas memilih kendaraan yang akan digunakan untuk mengangkut material.
-
-Pemilihan kendaraan mempertimbangkan ketersediaan dan kapasitas muatan.
+Petugas memilih kendaraan yang akan digunakan untuk mengangkut material. Pemilihan kendaraan mempertimbangkan ketersediaan dan kapasitas muatan.
 
 **Memilih Driver**
 
-Petugas menentukan Driver yang bertugas menjalankan pengangkutan.
-
-Driver dipilih dari data pegawai yang memiliki jenis Driver.
+Petugas menentukan Driver yang bertugas menjalankan pengangkutan. Driver dipilih dari data pegawai yang memiliki jenis Driver.
 
 **Menentukan Lokasi Asal dan Tujuan**
 
-Petugas menentukan lokasi sumber material dan lokasi tujuan pengangkutan.
-
-Informasi ini digunakan untuk mencatat arah pemindahan material.
+Petugas menentukan lokasi sumber material dan lokasi tujuan pengangkutan. Informasi ini digunakan untuk mencatat arah pemindahan material.
 
 **Menentukan Jumlah Muatan**
 
-Petugas memasukkan jumlah material yang akan diangkut.
-
-Pada diagram, aktivitas ini memiliki hubungan dengan proses melihat material tersedia.
+Petugas memasukkan jumlah material yang akan diangkut. Pada diagram, aktivitas ini memiliki hubungan dengan proses melihat material tersedia.
 
 Hubungan tersebut menunjukkan bahwa penentuan jumlah muatan harus mempertimbangkan stok material yang berasal dari hasil produksi.
 
 **Update Status Pengangkutan**
 
-Petugas memperbarui status kegiatan pengangkutan sesuai perkembangan proses.
-
-Status digunakan untuk menunjukkan apakah kegiatan masih dijadwalkan, sedang berlangsung, selesai, atau dibatalkan.
+Petugas memperbarui status kegiatan pengangkutan sesuai perkembangan proses. Status digunakan untuk menunjukkan apakah kegiatan masih dijadwalkan, sedang berlangsung, selesai, atau dibatalkan.
 
 **Melihat Histori Produksi dan Pengangkutan**
 
-Petugas dapat melihat kembali kegiatan produksi dan pengangkutan yang telah tercatat.
-
-Riwayat tersebut membantu proses pencarian dan pemeriksaan data operasional.
+Petugas dapat melihat kembali kegiatan produksi dan pengangkutan yang telah tercatat. Riwayat tersebut membantu proses pencarian dan pemeriksaan data operasional.
 
 #### 5.2.4 Use Case Petugas HSE
 
@@ -948,49 +796,33 @@ Use case yang ditampilkan meliputi:
 
 **Membuat Kegiatan Monitoring**
 
-Petugas HSE membuat kegiatan pemeriksaan lingkungan pada lokasi tertentu.
-
-Pada diagram, aktivitas ini memiliki hubungan `<<include>>` dengan pemilihan lokasi dan pemasukan hasil parameter.
+Petugas HSE membuat kegiatan pemeriksaan lingkungan pada lokasi tertentu. Pada diagram, aktivitas ini memiliki hubungan `<<include>>` dengan pemilihan lokasi dan pemasukan hasil parameter.
 
 **Memilih Lokasi Monitoring**
 
-Petugas menentukan lokasi yang akan diperiksa.
-
-Lokasi dipilih dari data yang telah tersedia dalam sistem.
+Petugas menentukan lokasi yang akan diperiksa. Lokasi dipilih dari data yang telah tersedia dalam sistem.
 
 **Memasukkan Hasil Parameter**
 
-Petugas mencatat hasil pengukuran parameter lingkungan.
-
-Setiap hasil pengukuran dibandingkan dengan batas parameter yang telah ditentukan.
+Petugas mencatat hasil pengukuran parameter lingkungan. Setiap hasil pengukuran dibandingkan dengan batas parameter yang telah ditentukan.
 
 **Melihat Hasil Normal atau Peringatan**
 
-Sistem menampilkan hasil monitoring berdasarkan nilai pengukuran.
-
-Hasil tersebut membantu Petugas HSE mengetahui apakah kondisi yang diperiksa berada dalam batas yang ditetapkan.
+Sistem menampilkan hasil monitoring berdasarkan nilai pengukuran. Hasil tersebut membantu Petugas HSE mengetahui apakah kondisi yang diperiksa berada dalam batas yang ditetapkan.
 
 **Kelola Tindak Lanjut**
 
-Petugas HSE mencatat tindakan penanganan terhadap hasil monitoring yang memerlukan perhatian.
-
-Informasi tindak lanjut digunakan untuk memantau perkembangan penanganan.
+Petugas HSE mencatat tindakan penanganan terhadap hasil monitoring yang memerlukan perhatian. Informasi tindak lanjut digunakan untuk memantau perkembangan penanganan.
 
 **Melakukan Monitoring Ulang**
 
-Monitoring ulang digunakan untuk memeriksa kondisi lingkungan setelah tindakan penanganan.
-
-Hasil monitoring ulang dicatat sebagai informasi pemeriksaan baru.
+Monitoring ulang digunakan untuk memeriksa kondisi lingkungan setelah tindakan penanganan. Hasil monitoring ulang dicatat sebagai informasi pemeriksaan baru.
 
 **Mengubah Status Operasional Lokasi**
 
 Pada Use Case Diagram terdapat aktivitas perubahan status operasional lokasi yang berkaitan dengan tindak lanjut monitoring.
 
-Dalam konsep C-MOS, perubahan status lokasi harus mengikuti kewenangan dan aturan bisnis yang ditetapkan.
-
-Hasil monitoring berstatus PERINGATAN tidak secara otomatis menghentikan kegiatan produksi atau pengangkutan.
-
-Informasi monitoring digunakan sebagai bahan evaluasi dan pertimbangan tindakan lebih lanjut.
+Dalam konsep C-MOS, perubahan status lokasi harus mengikuti kewenangan dan aturan bisnis yang ditetapkan. Hasil monitoring berstatus PERINGATAN tidak secara otomatis menghentikan kegiatan produksi atau pengangkutan. Informasi monitoring digunakan sebagai bahan evaluasi dan pertimbangan tindakan lebih lanjut.
 
 #### 5.2.5 Use Case Manager
 
@@ -1008,27 +840,19 @@ Use case yang ditampilkan meliputi:
 
 **Dashboard**
 
-Manager mengakses dashboard yang menampilkan ringkasan informasi operasional.
-
-Dashboard menggabungkan informasi dari kegiatan produksi, pengangkutan, dan monitoring lingkungan.
+Manager mengakses dashboard yang menampilkan ringkasan informasi operasional. Dashboard menggabungkan informasi dari kegiatan produksi, pengangkutan, dan monitoring lingkungan.
 
 **Melihat Produksi dan Material Tersedia**
 
-Manager dapat mengetahui jumlah produksi serta material yang masih tersedia.
-
-Informasi ini membantu mengevaluasi hasil kegiatan penambangan.
+Manager dapat mengetahui jumlah produksi serta material yang masih tersedia. Informasi ini membantu mengevaluasi hasil kegiatan penambangan.
 
 **Melihat Monitoring Lingkungan dan Status Lokasi**
 
-Manager dapat memeriksa kondisi lingkungan berdasarkan hasil monitoring yang dicatat Petugas HSE.
-
-Informasi tersebut membantu mengetahui lokasi yang memiliki hasil normal atau peringatan.
+Manager dapat memeriksa kondisi lingkungan berdasarkan hasil monitoring yang dicatat Petugas HSE. Informasi tersebut membantu mengetahui lokasi yang memiliki hasil normal atau peringatan.
 
 **Melihat Statistik**
 
-Manager dapat melihat informasi dalam bentuk angka dan grafik.
-
-Statistik digunakan untuk mempermudah pemahaman terhadap data operasional.
+Manager dapat melihat informasi dalam bentuk angka dan grafik. Statistik digunakan untuk mempermudah pemahaman terhadap data operasional.
 
 **Melihat Histori**
 
@@ -1036,11 +860,7 @@ Manager dapat melihat data historis kegiatan untuk mengetahui informasi yang tel
 
 **Melihat Laporan**
 
-Manager dapat mengakses laporan produksi, pengangkutan, dan monitoring lingkungan.
-
-Laporan digunakan untuk mendukung evaluasi dan pengambilan keputusan.
-
-Manager tidak bertugas mengelola data master, mencatat produksi, atau memasukkan hasil parameter monitoring.
+Manager dapat mengakses laporan produksi, pengangkutan, dan monitoring lingkungan. Laporan digunakan untuk mendukung evaluasi dan pengambilan keputusan. Manager tidak bertugas mengelola data master, mencatat produksi, atau memasukkan hasil parameter monitoring.
 
 ---
 
@@ -1135,9 +955,7 @@ Driver memiliki atribut khusus:
 
 Atribut tersebut digunakan untuk mencatat informasi pengemudi yang dapat ditugaskan pada kegiatan pengangkutan.
 
-Penggunaan subtype membuat data pegawai lebih terstruktur karena atribut umum disimpan pada Pegawai, sedangkan atribut khusus disimpan pada jenis pegawai masing-masing.
-
-Konsep ini juga mendukung penerapan Inheritance dalam pemrograman berorientasi objek.
+Penggunaan subtype membuat data pegawai lebih terstruktur karena atribut umum disimpan pada Pegawai, sedangkan atribut khusus disimpan pada jenis pegawai masing-masing. Konsep ini juga mendukung penerapan Inheritance dalam pemrograman berorientasi objek.
 
 ##### B. Entitas User
 
@@ -1153,15 +971,9 @@ Atribut utamanya meliputi:
 
 User memiliki hubungan dengan Pegawai.
 
-Hubungan tersebut digunakan untuk mengetahui pegawai yang memiliki akun aplikasi.
+Hubungan tersebut digunakan untuk mengetahui pegawai yang memiliki akun aplikasi. Dalam konsep C-MOS, User tidak menyimpan role sebagai atribut tersendiri. Jenis pengguna ditentukan berdasarkan subtype Pegawai yang terhubung dengan akun.
 
-Dalam konsep C-MOS, User tidak menyimpan role sebagai atribut tersendiri.
-
-Jenis pengguna ditentukan berdasarkan subtype Pegawai yang terhubung dengan akun.
-
-Dengan demikian, satu akun dapat diidentifikasi sebagai akun Admin, Petugas Operasional, Petugas HSE, atau Manager berdasarkan jenis pegawainya.
-
-Driver tidak memiliki akun login.
+Dengan demikian, satu akun dapat diidentifikasi sebagai akun Admin, Petugas Operasional, Petugas HSE, atau Manager berdasarkan jenis pegawainya. Driver tidak memiliki akun login.
 
 ##### C. Entitas Lokasi
 
@@ -1177,15 +989,7 @@ Atributnya meliputi:
 | `status_operasional` | Status operasional lokasi. |
 | `keterangan` | Informasi tambahan lokasi. |
 
-Lokasi memiliki hubungan dengan kegiatan produksi, pengangkutan, dan monitoring lingkungan.
-
-Dalam produksi, lokasi digunakan untuk menentukan tempat material dihasilkan.
-
-Dalam pengangkutan, lokasi digunakan untuk menentukan asal dan tujuan material.
-
-Dalam monitoring lingkungan, lokasi digunakan untuk menentukan tempat pengukuran dilakukan.
-
-Dengan demikian, satu data lokasi dapat digunakan oleh beberapa proses yang berbeda.
+Lokasi memiliki hubungan dengan kegiatan produksi, pengangkutan, dan monitoring lingkungan. Dalam produksi, lokasi digunakan untuk menentukan tempat material dihasilkan. Dalam pengangkutan, lokasi digunakan untuk menentukan asal dan tujuan material. Dalam monitoring lingkungan, lokasi digunakan untuk menentukan tempat pengukuran dilakukan. Dengan demikian, satu data lokasi dapat digunakan oleh beberapa proses yang berbeda.
 
 ##### D. Entitas Jenis Material
 
@@ -1200,13 +1004,7 @@ Atributnya meliputi:
 | `satuan` | Satuan pengukuran material. |
 | `deskripsi` | Keterangan material. |
 
-Jenis Material memiliki hubungan dengan Produksi Tambang.
-
-Satu jenis material dapat digunakan dalam banyak catatan produksi.
-
-Sebaliknya, setiap catatan produksi menggunakan satu jenis material tertentu.
-
-Hubungan ini membantu menjaga konsistensi penamaan material.
+Jenis Material memiliki hubungan dengan Produksi Tambang. Satu jenis material dapat digunakan dalam banyak catatan produksi. Sebaliknya, setiap catatan produksi menggunakan satu jenis material tertentu. Hubungan ini membantu menjaga konsistensi penamaan material.
 
 ##### E. Entitas Kendaraan
 
@@ -1223,13 +1021,7 @@ Atributnya meliputi:
 | `tahun_kendaraan` | Tahun kendaraan. |
 | `status_kendaraan` | Status kendaraan. |
 
-Kendaraan memiliki hubungan dengan Pengangkutan.
-
-Satu kendaraan dapat digunakan pada banyak kegiatan pengangkutan dalam waktu yang berbeda.
-
-Namun, setiap kegiatan pengangkutan menggunakan satu kendaraan tertentu.
-
-Data kapasitas kendaraan digunakan sebagai dasar validasi jumlah muatan.
+Kendaraan memiliki hubungan dengan Pengangkutan. Satu kendaraan dapat digunakan pada banyak kegiatan pengangkutan dalam waktu yang berbeda. Namun, setiap kegiatan pengangkutan menggunakan satu kendaraan tertentu. Data kapasitas kendaraan digunakan sebagai dasar validasi jumlah muatan.
 
 ##### F. Entitas Produksi Tambang
 
@@ -1275,21 +1067,15 @@ Pengangkutan memiliki hubungan dengan beberapa entitas utama.
 
 **Hubungan dengan Produksi Tambang**
 
-Pengangkutan menggunakan material dari hasil produksi yang telah tercatat.
-
-Hubungan ini memungkinkan sistem mengetahui sumber material yang diangkut.
+Pengangkutan menggunakan material dari hasil produksi yang telah tercatat. Hubungan ini memungkinkan sistem mengetahui sumber material yang diangkut.
 
 **Hubungan dengan Kendaraan**
 
-Setiap pengangkutan menggunakan kendaraan tertentu.
-
-Informasi kendaraan digunakan untuk memeriksa kapasitas muatan dan ketersediaan armada.
+Setiap pengangkutan menggunakan kendaraan tertentu. Informasi kendaraan digunakan untuk memeriksa kapasitas muatan dan ketersediaan armada.
 
 **Hubungan dengan Driver**
 
-Setiap pengangkutan memiliki Driver yang bertugas.
-
-Driver dapat terlibat dalam beberapa pengangkutan pada waktu yang berbeda.
+Setiap pengangkutan memiliki Driver yang bertugas. Driver dapat terlibat dalam beberapa pengangkutan pada waktu yang berbeda.
 
 **Hubungan dengan Petugas Operasional**
 
@@ -1297,9 +1083,7 @@ Petugas Operasional bertanggung jawab mengelola pencatatan dan perkembangan kegi
 
 **Hubungan dengan Lokasi**
 
-Pengangkutan memiliki informasi lokasi asal dan tujuan.
-
-Hubungan tersebut memungkinkan sistem mengetahui dari mana material berasal dan ke mana material dipindahkan.
+Pengangkutan memiliki informasi lokasi asal dan tujuan. Hubungan tersebut memungkinkan sistem mengetahui dari mana material berasal dan ke mana material dipindahkan.
 
 ##### H. Entitas Monitoring Lingkungan
 
@@ -1316,13 +1100,7 @@ Atributnya meliputi:
 | `status_penanganan` | Perkembangan penanganan hasil monitoring. |
 | `catatan` | Keterangan tambahan kegiatan monitoring. |
 
-Monitoring Lingkungan memiliki hubungan dengan Petugas HSE, Lokasi, dan Detail Monitoring.
-
-Petugas HSE bertanggung jawab melakukan kegiatan monitoring.
-
-Lokasi menunjukkan tempat monitoring dilakukan.
-
-Detail Monitoring menyimpan hasil pengukuran parameter pada kegiatan tersebut.
+Monitoring Lingkungan memiliki hubungan dengan Petugas HSE, Lokasi, dan Detail Monitoring. Petugas HSE bertanggung jawab melakukan kegiatan monitoring. Lokasi menunjukkan tempat monitoring dilakukan. Detail Monitoring menyimpan hasil pengukuran parameter pada kegiatan tersebut.
 
 ##### I. Entitas Parameter Lingkungan
 
@@ -1339,11 +1117,7 @@ Atributnya meliputi:
 | `batas_maksimum` | Nilai batas maksimum. |
 | `keterangan` | Informasi tambahan parameter. |
 
-Parameter Lingkungan memiliki hubungan dengan Detail Monitoring.
-
-Satu parameter dapat digunakan pada banyak detail pengukuran.
-
-Hubungan tersebut memungkinkan parameter yang sama digunakan dalam kegiatan monitoring pada lokasi dan waktu yang berbeda.
+Parameter Lingkungan memiliki hubungan dengan Detail Monitoring. Satu parameter dapat digunakan pada banyak detail pengukuran. Hubungan tersebut memungkinkan parameter yang sama digunakan dalam kegiatan monitoring pada lokasi dan waktu yang berbeda.
 
 ##### J. Entitas Detail Monitoring
 
@@ -1358,15 +1132,7 @@ Atributnya meliputi:
 | `status_detail` | Status hasil pengukuran parameter. |
 | `catatan` | Informasi tambahan hasil pengukuran. |
 
-Detail Monitoring menghubungkan kegiatan Monitoring Lingkungan dengan Parameter Lingkungan.
-
-Satu kegiatan monitoring dapat memiliki banyak detail pengukuran.
-
-Sebaliknya, setiap detail pengukuran mengacu pada satu kegiatan monitoring dan satu parameter tertentu.
-
-Sebagai contoh, satu kegiatan monitoring dapat mencatat hasil pH Air, TSS, PM10, Kebisingan, dan Kadar Kobalt dalam Air.
-
-Melalui hubungan tersebut, sistem dapat mengetahui parameter yang menghasilkan kondisi normal atau peringatan.
+Detail Monitoring menghubungkan kegiatan Monitoring Lingkungan dengan Parameter Lingkungan. Satu kegiatan monitoring dapat memiliki banyak detail pengukuran. Sebaliknya, setiap detail pengukuran mengacu pada satu kegiatan monitoring dan satu parameter tertentu. Sebagai contoh, satu kegiatan monitoring dapat mencatat hasil pH Air, TSS, PM10, Kebisingan, dan Kadar Kobalt dalam Air. Melalui hubungan tersebut, sistem dapat mengetahui parameter yang menghasilkan kondisi normal atau peringatan.
 
 #### 5.3.2 Hubungan Antarentitas pada Logical Model
 
@@ -1403,11 +1169,7 @@ Begitu juga monitoring lingkungan tidak dapat dipisahkan dari lokasi karena seti
 
 #### 5.3.3 Relational Data Model
 
-Relational Data Model merupakan rancangan yang menggambarkan penerapan Logical Model menjadi struktur tabel database.
-
-Pada tahap ini, setiap entitas diterjemahkan menjadi tabel yang memiliki kolom, tipe data, Primary Key, dan Foreign Key.
-
-Relational Model digunakan sebagai dasar implementasi database MySQL pada aplikasi C-MOS.
+Relational Data Model merupakan rancangan yang menggambarkan penerapan Logical Model menjadi struktur tabel database. Pada tahap ini, setiap entitas diterjemahkan menjadi tabel yang memiliki kolom, tipe data, Primary Key, dan Foreign Key. Relational Model digunakan sebagai dasar implementasi database MySQL pada aplikasi C-MOS.
 
 > **Gambar 5. Relational Data Model Cobalt Mining Operation System**
 
@@ -1462,13 +1224,9 @@ Sebagai contoh, dua pegawai dapat memiliki nama yang sama, tetapi tetap dibedaka
 
 ##### C. Foreign Key
 
-Foreign Key merupakan kolom yang digunakan untuk menghubungkan suatu tabel dengan tabel lainnya.
+Foreign Key merupakan kolom yang digunakan untuk menghubungkan suatu tabel dengan tabel lainnya. Dalam C-MOS, Foreign Key digunakan untuk menjaga hubungan antarentitas.
 
-Dalam C-MOS, Foreign Key digunakan untuk menjaga hubungan antarentitas.
-
-Contohnya, tabel Produksi Tambang memiliki hubungan dengan Lokasi, Jenis Material, dan Petugas Operasional.
-
-Hubungan tersebut memungkinkan sistem mengetahui lokasi produksi, material yang dihasilkan, dan petugas yang mencatat produksi.
+Contohnya, tabel Produksi Tambang memiliki hubungan dengan Lokasi, Jenis Material, dan Petugas Operasional. Hubungan tersebut memungkinkan sistem mengetahui lokasi produksi, material yang dihasilkan, dan petugas yang mencatat produksi.
 
 Contoh lainnya adalah tabel Pengangkutan yang terhubung dengan Produksi Tambang, Kendaraan, Driver, Petugas Operasional, dan Lokasi.
 
@@ -1476,13 +1234,9 @@ Melalui hubungan tersebut, sistem dapat menelusuri asal material, kendaraan yang
 
 ##### D. Implementasi Supertype dan Subtype
 
-Pada Relational Model, hubungan Supertype dan Subtype diterapkan menggunakan tabel terpisah.
+Pada Relational Model, hubungan Supertype dan Subtype diterapkan menggunakan tabel terpisah. Tabel Pegawai menyimpan atribut umum.
 
-Tabel Pegawai menyimpan atribut umum.
-
-Sementara itu, tabel Admin, Petugas Operasional, Petugas HSE, Manager, dan Driver menyimpan atribut khusus masing-masing.
-
-Setiap tabel subtype menggunakan identitas pegawai sebagai penghubung dengan tabel Pegawai.
+Sementara itu, tabel Admin, Petugas Operasional, Petugas HSE, Manager, dan Driver menyimpan atribut khusus masing-masing. Setiap tabel subtype menggunakan identitas pegawai sebagai penghubung dengan tabel Pegawai.
 
 Dengan demikian, identitas pegawai tetap konsisten meskipun atribut khususnya berada pada tabel berbeda.
 
@@ -1512,13 +1266,7 @@ Pada implementasi subtype, identitas pegawai juga dapat digunakan sebagai bagian
 
 ##### E. Relasi Produksi dan Pengangkutan
 
-Salah satu hubungan terpenting dalam C-MOS adalah relasi antara Produksi Tambang dan Pengangkutan.
-
-Produksi Tambang menyimpan informasi material yang dihasilkan.
-
-Pengangkutan menggunakan material dari produksi tersebut.
-
-Hubungan yang digunakan adalah satu produksi dapat menjadi sumber banyak kegiatan pengangkutan.
+Salah satu hubungan terpenting dalam C-MOS adalah relasi antara Produksi Tambang dan Pengangkutan. Produksi Tambang menyimpan informasi material yang dihasilkan. Pengangkutan menggunakan material dari produksi tersebut. Hubungan yang digunakan adalah satu produksi dapat menjadi sumber banyak kegiatan pengangkutan.
 
 Contoh:
 
@@ -1540,43 +1288,19 @@ Total Diangkut : 75 Ton
 Sisa Material  : 25 Ton
 ```
 
-Contoh tersebut menunjukkan bahwa satu catatan produksi dapat digunakan dalam beberapa pengangkutan.
-
-Hubungan ini mendukung pengelolaan stok material agar jumlah yang diangkut tidak melebihi material yang tersedia.
+Contoh tersebut menunjukkan bahwa satu catatan produksi dapat digunakan dalam beberapa pengangkutan. Hubungan ini mendukung pengelolaan stok material agar jumlah yang diangkut tidak melebihi material yang tersedia.
 
 ##### F. Relasi Kendaraan dan Pengangkutan
 
-Tabel Kendaraan memiliki hubungan dengan Pengangkutan.
-
-Satu kendaraan dapat digunakan dalam banyak kegiatan pengangkutan pada waktu yang berbeda.
-
-Namun, setiap kegiatan pengangkutan menggunakan satu kendaraan.
-
-Hubungan tersebut digunakan untuk mengetahui riwayat penggunaan kendaraan dan mendukung validasi kapasitas muatan.
-
-Sebagai contoh, kendaraan dengan kapasitas 20 ton tidak boleh digunakan untuk pengangkutan dengan jumlah muatan 30 ton.
-
-Validasi tersebut dilakukan pada logika aplikasi menggunakan data kapasitas kendaraan yang tersimpan dalam database.
+Tabel Kendaraan memiliki hubungan dengan Pengangkutan. Satu kendaraan dapat digunakan dalam banyak kegiatan pengangkutan pada waktu yang berbeda. Namun, setiap kegiatan pengangkutan menggunakan satu kendaraan. Hubungan tersebut digunakan untuk mengetahui riwayat penggunaan kendaraan dan mendukung validasi kapasitas muatan. Sebagai contoh, kendaraan dengan kapasitas 20 ton tidak boleh digunakan untuk pengangkutan dengan jumlah muatan 30 ton. Validasi tersebut dilakukan pada logika aplikasi menggunakan data kapasitas kendaraan yang tersimpan dalam database.
 
 ##### G. Relasi Driver dan Pengangkutan
 
-Driver memiliki hubungan langsung dengan Pengangkutan.
-
-Satu Driver dapat menjalankan banyak kegiatan pengangkutan pada waktu yang berbeda.
-
-Setiap kegiatan pengangkutan menggunakan satu Driver yang ditugaskan.
-
-Hubungan ini digunakan untuk mengetahui siapa yang mengemudikan kendaraan dalam kegiatan pengangkutan.
-
-Driver tidak memiliki hubungan langsung dengan Produksi Tambang karena Driver tidak bertugas mencatat atau menghasilkan produksi.
-
-Tanggung jawab Driver berada pada kegiatan pengangkutan.
+Driver memiliki hubungan langsung dengan Pengangkutan. Satu Driver dapat menjalankan banyak kegiatan pengangkutan pada waktu yang berbeda. Setiap kegiatan pengangkutan menggunakan satu Driver yang ditugaskan. Hubungan ini digunakan untuk mengetahui siapa yang mengemudikan kendaraan dalam kegiatan pengangkutan. Driver tidak memiliki hubungan langsung dengan Produksi Tambang karena Driver tidak bertugas mencatat atau menghasilkan produksi. Tanggung jawab Driver berada pada kegiatan pengangkutan.
 
 ##### H. Relasi Monitoring dan Detail Monitoring
 
-Monitoring Lingkungan memiliki hubungan satu-ke-banyak dengan Detail Monitoring.
-
-Satu kegiatan monitoring dapat memiliki beberapa detail hasil pengukuran.
+Monitoring Lingkungan memiliki hubungan satu-ke-banyak dengan Detail Monitoring. Satu kegiatan monitoring dapat memiliki beberapa detail hasil pengukuran.
 
 Setiap detail mengacu pada satu parameter lingkungan.
 
@@ -1612,17 +1336,7 @@ Hubungan ini memungkinkan satu kegiatan monitoring menyimpan banyak hasil penguk
 
 ##### I. Relasi Parameter dan Detail Monitoring
 
-Parameter Lingkungan memiliki hubungan satu-ke-banyak dengan Detail Monitoring.
-
-Satu parameter dapat digunakan pada banyak kegiatan pengukuran.
-
-Sebagai contoh, parameter pH Air dapat digunakan untuk monitoring PIT Utara, PIT Selatan, dan STOCKPILE pada tanggal yang berbeda.
-
-Dengan demikian, data batas parameter cukup dikelola melalui tabel Parameter Lingkungan.
-
-Sementara itu, nilai pengukuran disimpan pada Detail Monitoring.
-
-Pemisahan ini membantu menjaga konsistensi data acuan dan data hasil pemeriksaan.
+Parameter Lingkungan memiliki hubungan satu-ke-banyak dengan Detail Monitoring. Satu parameter dapat digunakan pada banyak kegiatan pengukuran. Sebagai contoh, parameter pH Air dapat digunakan untuk monitoring PIT Utara, PIT Selatan, dan STOCKPILE pada tanggal yang berbeda. Dengan demikian, data batas parameter cukup dikelola melalui tabel Parameter Lingkungan. Sementara itu, nilai pengukuran disimpan pada Detail Monitoring. Pemisahan ini membantu menjaga konsistensi data acuan dan data hasil pemeriksaan.
 
 #### 5.3.5 Penerapan Kardinalitas Relasi
 
